@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'Pretendard-Black'; /* 사용할 폰트의 이름을 정의 */
+  src: url('@/components/fonts/Pretendard-Black.woff'); /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'Pretendard-Bold';
+  src: url('@/components/fonts/Pretendard-Bold.woff');
+}
+@font-face {
+  font-family: 'Pretendard-ExtraBold';
+  src: url('@/components/fonts/Pretendard-ExtraBold.woff');
+}
+@font-face {
+  font-family: 'Pretendard-ExtraLight';
+  src: url('@/components/fonts/Pretendard-ExtraLight.woff');
+}
+@font-face {
+  font-family: 'Pretendard-Light';
+  src: url('@/components/fonts/Pretendard-Light.woff');
+}
+@font-face {
+  font-family: 'Pretendard-Medium';
+  src: url('@/components/fonts/Pretendard-Medium.woff');
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('@/components/fonts/Pretendard-Regular.woff');
+}
+
+@font-face {
+  font-family: 'Pretendard-SemiBold';
+  src: url('@/components/fonts/Pretendard-SemiBold.woff');
+}
+
+@font-face {
+  font-family: 'Pretendard-Thin';
+  src: url('@/components/fonts/Pretendard-Thin.woff');
+}
+
+body {
+  font-family: 'Pretendard-Regular'; /*기본 폰트 설정*/
+}
