@@ -42,3 +42,8 @@
 body {
   font-family: 'Pretendard-Regular'; /*기본 폰트 설정*/
 }
+
+.full-height {
+  /* 모바일 뷰포트 높이 설정 */
+  height: calc(var(--vh, 1vh) * 100);
+}
