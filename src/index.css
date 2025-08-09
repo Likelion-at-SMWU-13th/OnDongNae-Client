@@ -1,49 +1,93 @@
 @font-face {
-  font-family: 'Pretendard-Black'; /* 사용할 폰트의 이름을 정의 */
-  src: url('@/components/fonts/Pretendard-Black.woff'); /* 폰트 파일의 위치 */
+  font-family: 'Pretendard';
+  font-weight: 100; /* Thin */
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Pretendard-Thin.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Pretendard-Bold';
-  src: url('@/components/fonts/Pretendard-Bold.woff');
-}
-@font-face {
-  font-family: 'Pretendard-ExtraBold';
-  src: url('@/components/fonts/Pretendard-ExtraBold.woff');
-}
-@font-face {
-  font-family: 'Pretendard-ExtraLight';
-  src: url('@/components/fonts/Pretendard-ExtraLight.woff');
-}
-@font-face {
-  font-family: 'Pretendard-Light';
-  src: url('@/components/fonts/Pretendard-Light.woff');
-}
-@font-face {
-  font-family: 'Pretendard-Medium';
-  src: url('@/components/fonts/Pretendard-Medium.woff');
+  font-family: 'Pretendard';
+  font-weight: 200; /* ExtraLight */
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Pretendard-ExtraLight.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('@/components/fonts/Pretendard-Regular.woff');
+  font-family: 'Pretendard';
+  font-weight: 300; /* Light */
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Pretendard-Light.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Pretendard-SemiBold';
-  src: url('@/components/fonts/Pretendard-SemiBold.woff');
+  font-family: 'Pretendard';
+  font-weight: 400; /* Regular */
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Pretendard-Thin';
-  src: url('@/components/fonts/Pretendard-Thin.woff');
+  font-family: 'Pretendard';
+  font-weight: 500; /* Medium */
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 600; /* SemiBold */
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 700; /* Bold */
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Pretendard-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 800; /* ExtraBold */
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Pretendard-ExtraBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 900; /* Black */
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Pretendard-Black.woff2') format('woff2');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pretendard';
+}
+
+html,
 body {
-  font-family: 'Pretendard-Regular'; /*기본 폰트 설정*/
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
 }
 
-.full-height {
-  /* 모바일 뷰포트 높이 설정 */
+/*.full-height {
+  // 모바일 뷰포트 높이 설정 
   height: calc(var(--vh, 1vh) * 100);
-}
+} */
