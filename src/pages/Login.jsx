@@ -43,7 +43,7 @@ const Login = () => {
       <ButtonContainer>
         <LargeOrangeButton label='로그인' />
         <Line></Line>
-        <LargeWhiteButton label='회원가입' onBtnClick={() => navigate('/signup')} />
+        <LargeWhiteButton label='회원가입' onBtnClick={() => navigate('/signup/info')} />
       </ButtonContainer>
     </PageContainer>
   )
