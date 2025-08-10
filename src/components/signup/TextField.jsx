@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const Container = styled.form`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -29,11 +29,18 @@ const Input = styled.input`
   }
 `
 
-const TextField = () => {
+function TextField({ label, placeholder = '' }) {
+  const [value, setValue] = useState('')
   return (
     <Container>
-      <Text>이름</Text>
-      <Input type='text' placeholder='아이디' required></Input>
+      <Text>{label}</Text>
+      <Input
+        type='text'
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        required
+      ></Input>
     </Container>
   )
 }

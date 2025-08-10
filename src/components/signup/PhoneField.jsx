@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const Container = styled.form`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;

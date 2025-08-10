@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
 import Login from './pages/Login'
-import SignupUser from './pages/SignupUser.jsx'
+import SignupUserInfo from './pages/SignupUserInfo.jsx'
+import SignupAccountInfo from './pages/SignupAccountInfo.jsx'
 
 const router = createBrowserRouter([
   {
@@ -10,8 +11,12 @@ const router = createBrowserRouter([
     children: [
       { path: 'login', element: <Login /> },
       {
-        path: 'signup/user',
-        element: <SignupUser />,
+        path: 'signup/userinfo',
+        element: <SignupUserInfo />,
+      },
+      {
+        path: 'signup/accountinfo',
+        element: <SignupAccountInfo />,
       },
     ],
   },

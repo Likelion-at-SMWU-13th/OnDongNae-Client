@@ -10,19 +10,19 @@ const Button = styled.button`
   font-weight: 600;
   line-height: normal;
   border-radius: 10px;
-  background-color: ${({ $bgcolor = '#f08e67' }) => $bgcolor};
+  background-color: #f08e67;
   color: #ffffff;
   border: none;
   cursor: pointer;
   margin: 0 auto;
 `
 
-function SmallButton({ label, onBtnClick, bgcolor }) {
+function SmallOrangeButton({ type, label, onBtnClick = undefined }) {
   return (
-    <Button $bgcolor={bgcolor} onClick={onBtnClick}>
+    <Button type={type} onClick={onBtnClick ? onBtnClick : undefined}>
       {label}
     </Button>
   )
 }
 
-export default SmallButton
+export default SmallOrangeButton
