@@ -16,8 +16,8 @@ const Button = styled.button`
   margin: 0 auto;
 `
 
-function LargeOrangeButton({ label }) {
-  return <Button>{label}</Button>
+function LargeOrangeButton({ label, onBtnClick }) {
+  return <Button onClick={onBtnClick}>{label}</Button>
 }
 
 export default LargeOrangeButton
