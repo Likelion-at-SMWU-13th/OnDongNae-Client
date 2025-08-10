@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const Button = styled.button`
   width: 82.56%;
@@ -16,8 +17,8 @@ const Button = styled.button`
   margin: 0 auto;
 `
 
-function LargeWhiteButton({ label }) {
-  return <Button>{label}</Button>
+function LargeWhiteButton({ label, onBtnClick }) {
+  return <Button onClick={onBtnClick}>{label}</Button>
 }
 
 export default LargeWhiteButton

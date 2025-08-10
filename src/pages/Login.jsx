@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import PageContainer from '@/components/common/PageContainer'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -32,6 +33,8 @@ const Line = styled.div`
 `
 
 const Login = () => {
+  const navigate = useNavigate()
+
   return (
     <PageContainer>
       <Header img={backIcon} title={'로그인'} showImg={true}></Header>
@@ -40,7 +43,7 @@ const Login = () => {
       <ButtonContainer>
         <LargeOrangeButton label='로그인' />
         <Line></Line>
-        <LargeWhiteButton label='회원가입' />
+        <LargeWhiteButton label='회원가입' onBtnClick={() => navigate('/signup')} />
       </ButtonContainer>
     </PageContainer>
   )
