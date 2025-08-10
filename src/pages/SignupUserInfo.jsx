@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PageContainer from '@/components/common/PageContainer'
 
@@ -41,6 +41,9 @@ const ButtonContainer = styled.div`
 `
 
 const Signup = () => {
+  const [name, setName] = useState('')
+  const [phoneNum, setPhoneNum] = useState('')
+
   const navigate = useNavigate()
 
   return (
@@ -53,12 +56,16 @@ const Signup = () => {
           <FormContainer
             onSubmit={(e) => {
               e.preventDefault() // 새로고침 방지
-              navigate('/signup/accountinfo')
+              navigate('/signup/accountinfo', { state: { name, phoneNum } })
             }}
           >
-            <TextField label='이름' placeholder='김멋사'></TextField>
-            <PhoneField></PhoneField>
-
+            <TextField
+              label='이름'
+              placeholder='김멋사'
+              value={name}
+              onChange={setName}
+            ></TextField>
+            <PhoneField value={phoneNum} onChange={setPhoneNum} />
             <ButtonContainer>
               <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
               <SmallOrangeButton type='submit' label='다음' />

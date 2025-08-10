@@ -29,10 +29,8 @@ const Input = styled.input`
   }
 `
 
-function PhoneField() {
-  const [phone, setPhone] = useState('')
-
-  // 숫자만 남기고 11자리까지 → 3-4-4로 하이픈
+function PhoneField({ value = '', onChange = (v) => {} }) {
+  // 3-4-4로 하이픈
   const formatPhone = (v) => {
     const d = v.replace(/\D/g, '').slice(0, 11) // 숫자만, 최대 11자리
     if (d.length <= 3) return d
@@ -40,8 +38,10 @@ function PhoneField() {
     return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`
   }
 
-  const handleChange = (e) => setPhone(formatPhone(e.target.value))
-
+  const handleChange = (e) => {
+    const formatted = formatPhone(e.target.value)
+    onChange(formatted) // 부모 setter 호출
+  }
   return (
     <Container>
       <Text>휴대폰 번호</Text>
@@ -49,9 +49,9 @@ function PhoneField() {
         type='tel'
         inputMode='numeric' // 모바일 숫자 키패드
         placeholder='010-0000-0000'
-        value={phone}
+        value={value}
         onChange={handleChange}
-        maxLength={13} // 010-1234-5678
+        maxLength={13} // 13자리
         required
       />
     </Container>

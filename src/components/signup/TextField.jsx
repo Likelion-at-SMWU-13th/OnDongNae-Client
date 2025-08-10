@@ -29,8 +29,7 @@ const Input = styled.input`
   }
 `
 
-function TextField({ label, placeholder = '' }) {
-  const [value, setValue] = useState('')
+function TextField({ label, placeholder = '', value, onChange }) {
   return (
     <Container>
       <Text>{label}</Text>
@@ -38,7 +37,7 @@ function TextField({ label, placeholder = '' }) {
         type='text'
         placeholder={placeholder}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => onChange?.(e.target.value)}
         required
       ></Input>
     </Container>

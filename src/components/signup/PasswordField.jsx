@@ -58,11 +58,14 @@ const VisibleErrorMessage = styled(ErrorMessage)`
   visibility: visible;
 `
 
-function PasswordField() {
-  const [pw, setPw] = useState('')
-  const [confirm, setConfirm] = useState('')
-
-  const showError = confirm.length > 0 && pw !== confirm
+function PasswordField({
+  value1 = '',
+  value2 = '',
+  onChange1 = (e1) => {},
+  onChange2 = (e2) => {},
+}) {
+  // 빨간 에러 뜨는 경우
+  const showError = value2.length > 0 && value1 !== value2
 
   return (
     <Container>
@@ -71,22 +74,23 @@ function PasswordField() {
         <Input
           type='password'
           placeholder='숫자/특수문자 혼합, 4자'
-          value={pw}
-          onChange={(e) => setPw(e.target.value)}
+          value={value1}
+          onChange={(e) => onChange1(e.target.value)}
           required
         />
         <Input
           type='password'
           placeholder='비밀번호를 한 번 더 입력해주세요.'
-          value={confirm}
-          onChange={(e) => setConfirm(e.target.value)}
+          value={value2}
+          onChange={(e) => onChange2(e.target.value)}
           required
         />
       </PasswordContainer>
+      {/* show/hide 대신 항상 같은 높이 유지 */}
       {showError ? (
         <VisibleErrorMessage>비밀번호가 일치하지 않습니다.</VisibleErrorMessage>
       ) : (
-        <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>
+        <ErrorMessage />
       )}{' '}
     </Container>
   )

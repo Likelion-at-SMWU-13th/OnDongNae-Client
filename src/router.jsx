@@ -3,6 +3,7 @@ import App from './App'
 import Login from './pages/Login'
 import SignupUserInfo from './pages/SignupUserInfo.jsx'
 import SignupAccountInfo from './pages/SignupAccountInfo.jsx'
+import SignupTerms from './pages/SignupTerms'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: 'signup/accountinfo',
         element: <SignupAccountInfo />,
+      },
+      {
+        path: 'signup/terms',
+        element: <SignupTerms />,
       },
     ],
   },
