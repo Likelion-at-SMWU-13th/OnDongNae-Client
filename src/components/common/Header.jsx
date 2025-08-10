@@ -6,7 +6,7 @@ const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 15px 10px 15px 0;
+  padding: 15px 0;
   border-bottom: 1px solid #f1f1f1;
 `
 const Img = styled.img`
