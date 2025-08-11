@@ -107,7 +107,7 @@ const SignupAccountInfo = () => {
               <SmallOrangeButton
                 type='submit'
                 label='다음'
-                onBtnClick={() => navigate('/signup/terms')}
+                onBtnClick={() => navigate('/signup/terms')} // 확인용 -> 연동 후 삭제
               />
             </ButtonContainer>
           </FormContainer>

@@ -14,11 +14,14 @@ const Button = styled.button`
   color: #ffffff;
   border: none;
   cursor: pointer;
-  margin: 0 auto;
 `
 
-function SmallGrayButton({ label, onBtnClick }) {
-  return <Button onClick={onBtnClick}>{label}</Button>
+function SmallGrayButton({ type, label, onBtnClick }) {
+  return (
+    <Button type={type} onClick={onBtnClick}>
+      {label}
+    </Button>
+  )
 }
 
 export default SmallGrayButton
