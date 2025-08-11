@@ -12,6 +12,7 @@ import Title from '@/components/signup/Title'
 import InputField from '@/components/signup/InputField'
 import SmallOrangeButton from '@/components/common/SmallOrangeButton'
 import SmallGrayButton from '@/components/common/SmallGrayButton'
+import SkipButton from '@/components/signup/SkipButton'
 
 const Detail = styled.p`
   font-size: 18px;
@@ -33,23 +34,20 @@ const StorePhonePage = () => {
   }
   return (
     <>
-      <Header img={backIcon} title={'회원가입'} showImg={false}></Header>
+      <Header img={backIcon} title={'회원가입'} showImg={false} />
       <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
       <S.Container>
         <S.TextContainer>
-          <Title text={'가게 전화번호를  입력해주세요'}></Title>
+          <Title text={'가게 전화번호를  입력해주세요'} />
           <Detail>전화번호가 없으면 건너뛰기를 눌러주세요.</Detail>
           <S.FormContainer>
-            <InputField
-              placeholder='02-0000-0000'
-              value={phoneNum}
-              onChange={setPhoneNum}
-            ></InputField>
+            <InputField placeholder='02-0000-0000' value={phoneNum} onChange={setPhoneNum} />
             <S.ButtonContainer>
               <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
               <SmallOrangeButton type='submit' label='다음' onBtnClick={handleSubmit} />
             </S.ButtonContainer>
           </S.FormContainer>
+          <SkipButton />
         </S.TextContainer>
       </S.Container>
     </>

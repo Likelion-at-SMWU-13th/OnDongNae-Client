@@ -73,15 +73,10 @@ const Login = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'로그인'} showImg={true}></Header>
+      <Header img={backIcon} title={'로그인'} showImg={true} />
 
       <Logo>GoruGoru</Logo>
-      <LoginForm
-        id={id}
-        password={password}
-        onChangeId={setId}
-        onChangePassword={setPassword}
-      ></LoginForm>
+      <LoginForm id={id} password={password} onChangeId={setId} onChangePassword={setPassword} />
       <ButtonContainer>
         <LargeOrangeButton label='로그인' onBtnClick={handleSubmit} />
         <Line></Line>
