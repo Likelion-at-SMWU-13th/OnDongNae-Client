@@ -10,7 +10,7 @@ export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 50px 44px 0 30px;
-  gap: 30px;
+  gap: 15px;
 `
 export const FormContainer = styled.form`
   display: flex;
@@ -22,6 +22,6 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 48px;
-  margin-top: 281px;
+  margin-top: 244px;
   margin-left: 14px;
 `

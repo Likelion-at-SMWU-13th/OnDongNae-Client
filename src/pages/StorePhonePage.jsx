@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import * as S from '@/styles/signup/StoreAddressPage.styles.js'
-
+import * as S from '@/styles/signup/StorePhonePage.styles'
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
@@ -14,10 +13,17 @@ import InputField from '@/components/signup/InputField'
 import SmallOrangeButton from '@/components/common/SmallOrangeButton'
 import SmallGrayButton from '@/components/common/SmallGrayButton'
 
-const StoreAddressPage = () => {
-  const [address, setAddress] = useState('')
+const Detail = styled.p`
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-bottom: 16px;
+`
 
+const StorePhonePage = () => {
   const navigate = useNavigate()
+  const [phoneNum, setPhoneNum] = useState('')
 
   const handleSubmit = () => {
     // 연동
@@ -31,12 +37,13 @@ const StoreAddressPage = () => {
       <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
       <S.Container>
         <S.TextContainer>
-          <Title text={'가게 주소를 입력해주세요.'}></Title>
+          <Title text={'가게 전화번호를  입력해주세요'}></Title>
+          <Detail>전화번호가 없으면 건너뛰기를 눌러주세요.</Detail>
           <S.FormContainer>
             <InputField
-              placeholder='서울특별시 용산구 멋사로 08-03'
-              value={address}
-              onChange={setAddress}
+              placeholder='02-0000-0000'
+              value={phoneNum}
+              onChange={setPhoneNum}
             ></InputField>
             <S.ButtonContainer>
               <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
@@ -49,4 +56,4 @@ const StoreAddressPage = () => {
   )
 }
 
-export default StoreAddressPage
+export default StorePhonePage
