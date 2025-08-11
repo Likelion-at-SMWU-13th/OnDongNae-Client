@@ -51,32 +51,32 @@ const SignupAccountInfo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    navigate('/signup/terms')
+    // 연동
+    // axios
+    //   .post(
+    //     'http://127.0.0.1:8000/auth/signup/user',
+    //     { name, phoneNum, loginId, password1: pw1, password2: pw2 },
+    //     { headers: { 'Content-Type': 'application/json' } },
+    //   )
+    //   .then((response) => {
+    //     const { success, message, userId } = response.data || {}
 
-    // 회원가입
-    axios
-      .post(
-        'http://127.0.0.1:8000/auth/signup/user',
-        { name, phoneNum, loginId, password1: pw1, password2: pw2 },
-        { headers: { 'Content-Type': 'application/json' } },
-      )
-      .then((response) => {
-        const { success, message, userId } = response.data || {}
+    //     if (!success) {
+    //       alert(message)
+    //     }
+    //     if (!userId) {
+    //       alert(message)
+    //     }
 
-        if (!success) {
-          alert(message)
-        }
-        if (!userId) {
-          alert(message)
-        }
+    //     // 토큰 저장..?
 
-        // 토큰 저장..?
-
-        // 다음 회원가입 단계로 (userId 포함해서 이동해야 하는 것?)
-        navigate('signup/terms')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    //     // 다음 회원가입 단계로 (userId 포함해서 이동해야 하는 것?)
+    //     navigate('signup/terms')
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
   }
 
   return (
@@ -103,11 +103,7 @@ const SignupAccountInfo = () => {
 
             <ButtonContainer>
               <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
-              <SmallOrangeButton
-                type='submit'
-                label='다음'
-                onBtnClick={() => navigate('/signup/terms')} // 확인용 -> 연동 후 삭제
-              />
+              <SmallOrangeButton type='submit' label='다음' onBtnClick={handleSubmit} />
             </ButtonContainer>
           </FormContainer>
         </TextContainer>

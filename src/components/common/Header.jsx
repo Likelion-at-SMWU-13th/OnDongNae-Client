@@ -15,6 +15,7 @@ const HeaderContainer = styled.div`
 const Img = styled.img`
   position: absolute; /* 항상 왼쪽에 고정 */
   left: 10px;
+  cursor: pointer;
 `
 
 const Title = styled.p`
