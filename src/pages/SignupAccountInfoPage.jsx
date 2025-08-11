@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-//import PageContainer from '@/components/common/PageContainer'
 import axios from 'axios'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -12,7 +11,7 @@ import TextField from '@/components/signup/TextField'
 import PasswordField from '@/components/signup/PasswordField'
 
 import SmallOrangeButton from '@/components/common/SmallOrangeButton'
-import SmallGrayButton from '@/components/common/smallGrayButton'
+import SmallGrayButton from '@/components/common/SmallGrayButton'
 
 const Container = styled.div`
   display: flex;

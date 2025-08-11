@@ -15,7 +15,7 @@ const Text = styled.p`
 `
 
 const Input = styled.input`
-  width: 304px;
+  width: 100%;
   height: 49px;
   color: black;
   border-radius: 10px;

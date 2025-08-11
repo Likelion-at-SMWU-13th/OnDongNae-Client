@@ -10,7 +10,7 @@ import Title from '@/components/signup/Title'
 import TextField from '@/components/signup/TextField'
 import PhoneField from '@/components/signup/PhoneField'
 import SmallOrangeButton from '@/components/common/SmallOrangeButton'
-import SmallGrayButton from '@/components/common/smallGrayButton'
+import SmallGrayButton from '@/components/common/SmallGrayButton'
 
 const Container = styled.div`
   display: flex;
