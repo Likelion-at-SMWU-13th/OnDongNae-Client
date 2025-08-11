@@ -28,11 +28,21 @@ const Input = styled.input`
   }
 `
 
-function LoginForm() {
+function LoginForm({ id, password, onChangeId, onChangePassword }) {
   return (
     <LoginContainer>
-      <Input type='text' placeholder='아이디' />
-      <Input type='password' placeholder='비밀번호' />
+      <Input
+        type='text'
+        placeholder='아이디'
+        value={id}
+        onChange={(e) => onChangeId(e.target.value)}
+      />
+      <Input
+        type='password'
+        placeholder='비밀번호'
+        value={password}
+        onChange={(e) => onChangePassword(e.target.value)}
+      />
     </LoginContainer>
   )
 }
