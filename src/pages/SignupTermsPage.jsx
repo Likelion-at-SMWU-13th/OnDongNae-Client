@@ -47,7 +47,7 @@ const SignupTerms = () => {
       return
     }
     // TODO: 다음 페이지 이동
-    navigate('/signup/next-step')
+    navigate('/signup/select-market')
   }
 
   return (

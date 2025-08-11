@@ -1,27 +1,32 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
-import Login from './pages/Login'
-import SignupUserInfo from './pages/SignupUserInfo.jsx'
-import SignupAccountInfo from './pages/SignupAccountInfo.jsx'
-import SignupTerms from './pages/SignupTerms'
+import LoginPage from './pages/LoginPage'
+import SignupUserInfoPage from './pages/SignupUserInfoPage.jsx'
+import SignupAccountInfoPage from './pages/SignupAccountInfoPage.jsx'
+import SignupTermsPage from './pages/SignupTermsPage'
+import SelectMarketPage from './pages/SelectMarketPage'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      { path: 'login', element: <Login /> },
+      { path: 'login', element: <LoginPage /> },
       {
         path: 'signup/userinfo',
-        element: <SignupUserInfo />,
+        element: <SignupUserInfoPage />,
       },
       {
         path: 'signup/accountinfo',
-        element: <SignupAccountInfo />,
+        element: <SignupAccountInfoPage />,
       },
       {
         path: 'signup/terms',
-        element: <SignupTerms />,
+        element: <SignupTermsPage />,
+      },
+      {
+        path: 'signup/select-market',
+        element: <SelectMarketPage />,
       },
     ],
   },
