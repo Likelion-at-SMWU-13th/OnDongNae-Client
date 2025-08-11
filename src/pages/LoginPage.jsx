@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import PageContainer from '@/components/common/PageContainer'
+// import PageContainer from '@/components/common/PageContainer'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import LoginForm from '@/components/login/LoginForm'
@@ -74,7 +74,7 @@ const Login = () => {
   }
 
   return (
-    <PageContainer>
+    <>
       <Header img={backIcon} title={'로그인'} showImg={true}></Header>
       <Logo>GoruGoru</Logo>
       <LoginForm
@@ -88,7 +88,7 @@ const Login = () => {
         <Line></Line>
         <LargeWhiteButton label='회원가입' onBtnClick={() => navigate('/signup/userinfo')} />
       </ButtonContainer>
-    </PageContainer>
+    </>
   )
 }
 

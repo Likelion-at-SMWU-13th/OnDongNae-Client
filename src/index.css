@@ -77,9 +77,16 @@
   font-family: 'Pretendard';
 }
 
-html,
-body {
-  height: 100%;
+#root {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: 'Pretendard';
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,7 +94,12 @@ body {
   background-color: #fafafa;
 }
 
-/*.full-height {
-  // 모바일 뷰포트 높이 설정 
-  height: calc(var(--vh, 1vh) * 100);
-} */
+body {
+  width: 100%;
+  max-width: 390px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: rgba(255, 255, 255, 1);
+  position: relative;
+  height: calc(var(--vh, 1vh) * 100); /* 모바일 주소창 높이 변화 대응 */
+}

@@ -29,7 +29,7 @@ const Input = styled.input`
   }
 `
 
-function TextField({ label, placeholder = '', value, onChange }) {
+function TextField({ label = '', placeholder = '', value, onChange }) {
   return (
     <Container>
       <Text>{label}</Text>

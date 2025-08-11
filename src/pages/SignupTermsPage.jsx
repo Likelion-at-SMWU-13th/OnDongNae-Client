@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PageContainer from '@/components/common/PageContainer'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
@@ -51,12 +50,12 @@ const SignupTerms = () => {
   }
 
   return (
-    <PageContainer>
+    <>
       <Header img={backIcon} title={'회원가입'} showImg={false}></Header>
       <ProgressBar currentStep={3} totalSteps={6} logoImg={smallDragon} />
       <Container>
         <TextContainer>
-          <Title text={'가입을 위한 약관에 동의해주세요'}></Title>
+          <Title text={'가입을 위한 약관에 동의해주세요.'}></Title>
           <FormContainer>
             {/* 필수 동의 항목 체크 */}
             <TermsAgreement onRequiredChange={setRequiredOK}></TermsAgreement>
@@ -67,7 +66,7 @@ const SignupTerms = () => {
           </FormContainer>
         </TextContainer>
       </Container>
-    </PageContainer>
+    </>
   )
 }
 
