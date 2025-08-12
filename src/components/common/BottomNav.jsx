@@ -66,7 +66,9 @@ const BottomNav = () => {
     <Bar>
       {NAVS.map(({ to, label, icon, iconActive }) => (
         <Link key={to} to={to} end>
-          {({ isActive }) => (
+          {(
+            { isActive }, //링크가 활성화 상태인지 알려줌, 활성 상태일 때만 actice 클래스 줌
+          ) => (
             <Item className={isActive ? 'active' : ''}>
               <img src={isActive ? iconActive : icon} alt='' aria-hidden />
               <span>{label}</span>
