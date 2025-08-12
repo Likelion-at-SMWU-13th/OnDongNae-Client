@@ -66,7 +66,7 @@ function PhoneField({
   }
   return (
     <Container>
-      <Text>{label}</Text>
+      {label && <Text>{label}</Text>}
       <Input
         type='tel'
         inputMode='numeric' // 모바일 숫자 키패드

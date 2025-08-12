@@ -11,24 +11,7 @@ import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
 import SelectButton from '@/components/signup/SelectButton'
-import SmallOrangeButton from '@/components/common/SmallOrangeButton'
-import SmallGrayButton from '@/components/common/SmallGrayButton'
-
-// 레이아웃 컴포넌트
-const Main = styled.main`
-  height: calc(var(--vh, 1vh) * 100);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
-`
+import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const SelectSubcategoryPage = () => {
   const navigate = useNavigate()
@@ -84,7 +67,7 @@ const SelectSubcategoryPage = () => {
   }, [major?.id])
 
   // 다음 버튼 클릭 시
-  const handleNext = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     // 대분류 정보 없으면 첫 단계로
@@ -111,8 +94,8 @@ const SelectSubcategoryPage = () => {
       {/* 상단 헤더 */}
       <Header img={backIcon} title={'회원가입'} showImg={false} />
 
-      <Main>
-        <Scroll className='scrollable'>
+      <S.Main>
+        <S.Scroll className='scrollable'>
           <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
 
           <S.Container>
@@ -121,20 +104,17 @@ const SelectSubcategoryPage = () => {
               <Title text={'가게의 세부 업종을 골라주세요'} />
 
               {/* 선택 폼 영역 */}
-              <S.FormContainer onSubmit={handleNext}>
+              <S.FormContainer onSubmit={handleSubmit}>
                 {/* 소분류 리스트 */}
                 <SelectButton options={minorOptions} value={selectedId} onChange={setSelectedId} />
 
-                {/* 하단 버튼 */}
-                <S.ButtonContainer>
-                  <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
-                  <SmallOrangeButton type='submit' label='다음' />
-                </S.ButtonContainer>
+                {/* 하단 버튼: 이전 / 다음 */}
               </S.FormContainer>
             </S.TextContainer>
+            <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
-        </Scroll>
-      </Main>
+        </S.Scroll>
+      </S.Main>
     </>
   )
 }

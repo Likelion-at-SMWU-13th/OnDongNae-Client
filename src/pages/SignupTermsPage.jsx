@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import * as S from '@/styles/signup/SignupTermsPage.styles'
+
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
@@ -7,40 +8,13 @@ import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
 import TermsAgreement from '@/components/signup/TermsAgreement'
-import SmallOrangeButton from '@/components/common/SmallOrangeButton'
-import SmallGrayButton from '@/components/common/SmallGrayButton'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 109px;
-`
-
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 50px 19px 0 30px;
-  gap: 60px;
-`
-
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 55px;
-`
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 48px;
-  margin-left: 14px;
-`
+import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const SignupTerms = () => {
   const navigate = useNavigate()
   const [requiredOK, setRequiredOK] = useState(false) // 필수 약관 동의 완료 여부
 
-  const handleNext = () => {
+  const handleSubmit = () => {
     if (!requiredOK) {
       alert('필수 약관에 모두 동의해 주세요.')
       return
@@ -52,20 +26,21 @@ const SignupTerms = () => {
   return (
     <>
       <Header img={backIcon} title={'회원가입'} showImg={false} />
-      <ProgressBar currentStep={3} totalSteps={6} logoImg={smallDragon} />
-      <Container>
-        <TextContainer>
-          <Title text={'가입을 위한 약관에 동의해주세요.'} />
-          <FormContainer>
-            {/* 필수 동의 항목 체크 */}
-            <TermsAgreement onRequiredChange={setRequiredOK} />
-            <ButtonContainer>
-              <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
-              <SmallOrangeButton type='submit' label='다음' onBtnClick={handleNext} />
-            </ButtonContainer>
-          </FormContainer>
-        </TextContainer>
-      </Container>
+      <S.Main>
+        <S.Scroll className='scrollable'>
+          <ProgressBar currentStep={3} totalSteps={6} logoImg={smallDragon} />
+          <S.Container>
+            <S.TextContainer>
+              <Title text={'가입을 위한 약관에 동의해주세요.'} />
+              <S.FormContainer>
+                {/* 필수 동의 항목 체크 */}
+                <TermsAgreement onRequiredChange={setRequiredOK} />
+              </S.FormContainer>
+            </S.TextContainer>
+            <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
+          </S.Container>
+        </S.Scroll>
+      </S.Main>
     </>
   )
 }

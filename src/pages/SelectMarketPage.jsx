@@ -9,26 +9,7 @@ import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
 import SelectButton from '@/components/signup/SelectButton'
-
-import SmallOrangeButton from '@/components/common/SmallOrangeButton'
-import SmallGrayButton from '@/components/common/SmallGrayButton'
-
-const Main = styled.main`
-  height: calc(var(--vh, 1vh) * 100); /* 화면 높이 채우기 */
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-
-const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1; /* 남은 공간을 차지 */
-  min-height: 0; /* 내부에 overflow가 먹히게 하는 핵심 */
-  /* overflow-y는 전역 .scrollable에서 적용됨 */
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
-`
+import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const SelectMarketPage = () => {
   const navigate = useNavigate()
@@ -56,8 +37,8 @@ const SelectMarketPage = () => {
   return (
     <>
       <Header img={backIcon} title={'회원가입'} showImg={false} />
-      <Main>
-        <Scroll className='scrollable'>
+      <S.Main>
+        <S.Scroll className='scrollable'>
           <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
@@ -65,15 +46,12 @@ const SelectMarketPage = () => {
 
               <S.FormContainer>
                 <SelectButton options={markets} value={selectedId} onChange={setSelectedId} />
-                <S.ButtonContainer>
-                  <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
-                  <SmallOrangeButton type='submit' label='다음' onBtnClick={handleSubmit} />
-                </S.ButtonContainer>
               </S.FormContainer>
             </S.TextContainer>
+            <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
-        </Scroll>
-      </Main>
+        </S.Scroll>
+      </S.Main>
     </>
   )
 }

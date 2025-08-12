@@ -9,26 +9,7 @@ import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
 import SelectButton from '@/components/signup/SelectButton'
-import SmallOrangeButton from '@/components/common/SmallOrangeButton'
-import SmallGrayButton from '@/components/common/SmallGrayButton'
-
-// 메인 레이아웃 컨테이너
-const Main = styled.main`
-  height: calc(var(--vh, 1vh) * 100);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-
-// 스크롤 영역
-const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
-`
+import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const StoreCategoryMainPage = () => {
   const navigate = useNavigate()
@@ -45,7 +26,7 @@ const StoreCategoryMainPage = () => {
   ]
 
   // 다음 버튼 클릭 시 실행
-  const handleNext = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     if (!selectedId) {
       alert('업종을 선택해주세요.')
@@ -69,8 +50,8 @@ const StoreCategoryMainPage = () => {
       {/* 상단 헤더 */}
       <Header img={backIcon} title={'회원가입'} showImg={false} />
       {/* 스크롤 영역 */}
-      <Main>
-        <Scroll className='scrollable'>
+      <S.Main>
+        <S.Scroll className='scrollable'>
           <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
 
           <S.Container>
@@ -79,20 +60,17 @@ const StoreCategoryMainPage = () => {
               <Title text={'가게의 업종을 골라주세요'} />
 
               {/* 선택 폼 영역 */}
-              <S.FormContainer onSubmit={handleNext}>
+              <S.FormContainer onSubmit={handleSubmit}>
                 {/* SelectButton: options 리스트, 선택값, 변경 핸들러 전달 */}
                 <SelectButton options={categories} value={selectedId} onChange={setSelectedId} />
 
                 {/* 하단 버튼: 이전 / 다음 */}
-                <S.ButtonContainer>
-                  <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
-                  <SmallOrangeButton type='submit' label='다음' />
-                </S.ButtonContainer>
               </S.FormContainer>
             </S.TextContainer>
+            <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
-        </Scroll>
-      </Main>
+        </S.Scroll>
+      </S.Main>
     </>
   )
 }

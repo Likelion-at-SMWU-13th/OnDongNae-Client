@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import * as S from '@/styles/signup/SignupAccountInfoPage.styles'
+
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
@@ -9,36 +11,7 @@ import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
 import TextField from '@/components/signup/TextField'
 import PasswordField from '@/components/signup/PasswordField'
-
-import SmallOrangeButton from '@/components/common/SmallOrangeButton'
-import SmallGrayButton from '@/components/common/SmallGrayButton'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 109px;
-`
-
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 50px 44px 0 30px;
-  gap: 60px;
-`
-
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-`
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 48px;
-  margin-top: 12px;
-  margin-left: 14px;
-`
+import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const SignupAccountInfo = () => {
   const navigate = useNavigate()
@@ -82,27 +55,27 @@ const SignupAccountInfo = () => {
   return (
     <>
       <Header img={backIcon} title={'회원가입'} showImg={false} />
-      <ProgressBar currentStep={2} totalSteps={6} logoImg={smallDragon} />
+      <S.Main>
+        <S.Scroll className='scrollable'>
+          <ProgressBar currentStep={2} totalSteps={6} logoImg={smallDragon} />
 
-      <Container>
-        <TextContainer>
-          <Title text={'가입을 위한 정보를 입력해주세요.'} />
-          <FormContainer onSubmit={handleSubmit}>
-            <TextField
-              label='아이디'
-              placeholder='영문/숫자, 4~12자'
-              value={loginId}
-              onChange={setloginId}
-            />
-            <PasswordField value1={pw1} value2={pw2} onChange1={setPw1} onChange2={setPw2} />
-
-            <ButtonContainer>
-              <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
-              <SmallOrangeButton type='submit' label='다음' onBtnClick={handleSubmit} />
-            </ButtonContainer>
-          </FormContainer>
-        </TextContainer>
-      </Container>
+          <S.Container>
+            <S.TextContainer>
+              <Title text={'가입을 위한 정보를 입력해주세요.'} />
+              <S.FormContainer onSubmit={handleSubmit}>
+                <TextField
+                  label='아이디'
+                  placeholder='영문/숫자, 4~12자'
+                  value={loginId}
+                  onChange={setloginId}
+                />
+                <PasswordField value1={pw1} value2={pw2} onChange1={setPw1} onChange2={setPw2} />
+              </S.FormContainer>
+            </S.TextContainer>
+            <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
+          </S.Container>
+        </S.Scroll>
+      </S.Main>
     </>
   )
 }

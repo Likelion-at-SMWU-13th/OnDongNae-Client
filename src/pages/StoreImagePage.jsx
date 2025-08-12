@@ -1,10 +1,3 @@
-// 사진 업로드 단계 페이지
-// - 최대 4장까지 선택 가능
-// - 각 사진은 썸네일로 표시되고 X 버튼으로 제거
-// - 남은 칸은 업로드 타일(첫 칸은 큰 + 아이콘, 이후는 '갤러리에서 사진 선택')
-// - 건너뛰기 가능
-// - 다음 버튼 시 선택한 사진(또는 없음)을 다음 단계로 전달
-
 import styled from 'styled-components'
 import * as S from '@/styles/signup/StoreImagePage.styles'
 import React, { useEffect, useRef, useState } from 'react'
@@ -16,30 +9,9 @@ import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
 import SubTitle from '@/components/signup/SubTitle'
-import SmallOrangeButton from '@/components/common/SmallOrangeButton'
-import SmallGrayButton from '@/components/common/SmallGrayButton'
-import SkipButton from '@/components/signup/SkipButton'
+import SmallButtonContainerSkip from '@/components/common/SmallButtonContainerSkip'
 import addImg from '@/assets/button-add-picture.svg'
 import deleteImg from '@/assets/button-delete-picture.svg'
-
-// 메인 레이아웃 컨테이너: 화면 높이 100vh(모바일 주소창 보정용 CSS 변수 사용)
-const Main = styled.main`
-  height: calc(var(--vh, 1vh) * 100);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-
-// 스크롤 영역: 내부 콘텐츠만 스크롤되도록 구성
-const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  -webkit-overflow-scrolling: touch;
-  /* iOS 화면 하단 세이프 에어리어 + 버튼 높이 만큼 여유 */
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
-`
 
 const StoreImagePage = () => {
   const navigate = useNavigate()
@@ -120,8 +92,8 @@ const StoreImagePage = () => {
       {/* 상단 헤더*/}
       <Header img={backIcon} title={'회원가입'} showImg={false} />
       {/* 스크롤 가능 영역*/}
-      <Main>
-        <Scroll className='scrollable'>
+      <S.Main>
+        <S.Scroll className='scrollable'>
           <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
 
           <S.Container>
@@ -180,18 +152,12 @@ const StoreImagePage = () => {
                   onChange={onFilesSelected}
                   style={{ display: 'none' }}
                 />
-
-                <S.ButtonContainer>
-                  <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
-                  <SmallOrangeButton type='submit' label='다음' />
-                </S.ButtonContainer>
               </S.FormContainer>
-              {/* 건너뛰기 버튼 */}
-              <SkipButton onClick={handleSkip} />
             </S.TextContainer>
+            <SmallButtonContainerSkip handleSubmit={handleSubmit}></SmallButtonContainerSkip>
           </S.Container>
-        </Scroll>
-      </Main>
+        </S.Scroll>
+      </S.Main>
     </>
   )
 }

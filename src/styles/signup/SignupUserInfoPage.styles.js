@@ -3,21 +3,30 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 109px;
 `
 
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px 40px 0 40px;
-  gap: 30px;
+  margin: 50px 44px 0 30px;
+  gap: 60px;
 `
+
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 50px;
 `
 
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 77.43%;
+  gap: 12.3%;
+  margin: 0 auto;
+`
 export const Main = styled.main`
   height: calc(var(--vh, 1vh) * 100); /* 화면 높이 채우기 */
   display: flex;
