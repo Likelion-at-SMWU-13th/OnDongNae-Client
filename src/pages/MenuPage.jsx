@@ -28,7 +28,7 @@ function MenuPage() {
       <RegisterMenuSection>
         <Title text={'메뉴판을 등록해주세요'}></Title>
         <RegisterOptions
-          onUploadClick={() => navigate('/menu/upload-photo')} // 메뉴판 사진 올리기
+          onUploadClick={() => navigate('/menu/upload')} // 메뉴판 사진 올리기
           onManualClick={() => navigate('/menu/manual')} // 직접 입력하기
         />
       </RegisterMenuSection>

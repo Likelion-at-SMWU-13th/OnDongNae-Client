@@ -16,6 +16,7 @@ import SignupLoadingPage from './pages/SignupLoadingPage'
 import SignupCompletePage from './pages/SignupCompletePage'
 import MenuPage from './pages/MenuPage'
 import MenuMenualPage from './pages/MenuManualPage'
+import MenuUploadPage from './pages/MenuUploadPage'
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: 'menu/manual',
         element: <MenuMenualPage />,
+      },
+      {
+        path: 'menu/upload',
+        element: <MenuUploadPage />,
       },
     ],
   },
