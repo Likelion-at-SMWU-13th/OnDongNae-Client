@@ -13,6 +13,7 @@ import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const SelectMarketPage = () => {
   const navigate = useNavigate()
+  const { state } = useLocation() // 이전 값 넘겨받기
   const [selectedId, setSelectedId] = useState(null)
 
   const markets = [
@@ -30,8 +31,9 @@ const SelectMarketPage = () => {
       alert('시장을 선택해주세요.')
       return
     }
-    // 다음 페이지로
-    navigate('/signup/store-address')
+    // 공백 제외 후, 다음 페이지로
+    const marketName = (markets.find((m) => m.id === selectedId)?.name ?? '').replace(/\s+/g, '')
+    navigate('/signup/store-address', { state: { ...state, marketName } })
   }
 
   return (

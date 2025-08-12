@@ -23,6 +23,17 @@ const SignupAccountInfo = () => {
   const [pw2, setPw2] = useState('')
 
   const handleSubmit = (e) => {
+    if (!loginId) {
+      alert('아이디를 입력해 주세요.')
+      return
+    }
+    if (!pw1 || !pw2) {
+      alert('비밀번호를 입력해 주세요.')
+      return
+    }
+    if (pw1 !== pw2) {
+      return
+    }
     e.preventDefault()
     navigate('/signup/terms')
     // 연동

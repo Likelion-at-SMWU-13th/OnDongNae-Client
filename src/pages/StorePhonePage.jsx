@@ -14,13 +14,17 @@ import SmallButtonContainerSkip from '@/components/common/SmallButtonContainerSk
 
 const StorePhonePage = () => {
   const navigate = useNavigate()
+  const { state } = useLocation()
   const [phoneNum, setPhoneNum] = useState('')
 
-  const handleSubmit = () => {
-    // 연동
-
-    // 다음 페이지로 이동
-    navigate('/signup/store-category-main')
+  const handleSubmit = (action) => {
+    // skip 버튼인 경우
+    if (action === 'skip') {
+      navigate('/signup/store-category-main', { state: { ...state, phoneNum: '' } })
+      return
+    }
+    // 다음 버튼인 경우
+    navigate('/signup/store-category-main', { state: { ...state, phoneNum } })
   }
   return (
     <>

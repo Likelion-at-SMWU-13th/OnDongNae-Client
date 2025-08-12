@@ -20,6 +20,14 @@ const Signup = () => {
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
+    if (!name) {
+      alert('이름을 입력해 주세요.')
+      return
+    }
+    if (!phoneNum) {
+      alert('휴대폰 번호를 입력해 주세요.')
+      return
+    }
     e.preventDefault()
     navigate('/signup/accountinfo', { state: { name, phoneNum } })
   }

@@ -15,16 +15,16 @@ import deleteImg from '@/assets/button-delete-picture.svg'
 
 const StoreImagePage = () => {
   const navigate = useNavigate()
-  // 이전 스텝에서 넘어온 상태를 이어받고 싶을 때 사용 (없어도 동작)
   const { state } = useLocation()
 
   // 숨겨진 <input type="file">에 접근하기 위한 ref
   const fileInputRef = useRef(null)
 
   // 업로드 이미지 상태
-  // - id: 리스트 키 및 삭제 식별자
-  // - file: 원본 File 객체 (서버 업로드 시 사용)
-  // - url: 미리보기용 Object URL (img src로 사용)
+  /* id: 리스트 키 및 삭제 식별자 
+  file: 원본 File 객체 (서버 업로드 시 사용) 
+  url: 미리보기용 Object URL (img src로 사용)
+  */
   const [photos, setPhotos] = useState([])
 
   // 파일 선택창 열기 (버튼/타일 클릭 → 숨겨진 input click)
@@ -74,17 +74,17 @@ const StoreImagePage = () => {
     }
   }, [])
 
-  // "건너뛰기" 클릭: 사진 없이 다음 단계로 이동
-  const handleSkip = () => {
-    navigate('/signup/store-keyword1', { state: { ...state, photos: [] } })
-  }
-
-  // "다음" 클릭
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    // 페이지 이동
-    navigate('/signup/store-keyword1', { state: { ...state, photos } })
+  // 다음 또는 건너뛰기 선택
+  const handleSubmit = (action) => {
+    // 건너뛰기 선택 시 빈 배열
+    if (action === 'skip') {
+      navigate('/signup/store-keyword1', { state: { ...state, image: [] } })
+      return
+    }
+    // file 객체 배열만 넘겨두고, 전송은 마지막 페이지에서 FormData로 처리
+    navigate('/signup/store-keyword1', {
+      state: { ...state, image: photos.map((p) => p.file) },
+    })
   }
 
   return (

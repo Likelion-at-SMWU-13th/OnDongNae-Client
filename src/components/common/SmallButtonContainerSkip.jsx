@@ -28,9 +28,9 @@ function SmallButtonContainer({ handleSubmit }) {
       <RowAlign>
         <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
 
-        <SmallOrangeButton type='button' label='다음' onBtnClick={handleSubmit} />
+        <SmallOrangeButton type='button' label='다음' onBtnClick={() => handleSubmit('next')} />
       </RowAlign>
-      <SkipButton onClick={handleSubmit} />
+      <SkipButton onClick={() => handleSubmit('skip')} />
     </ButtonContainer>
   )
 }

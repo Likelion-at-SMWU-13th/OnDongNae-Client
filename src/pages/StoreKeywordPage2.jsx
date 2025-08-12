@@ -17,12 +17,12 @@ const StoreKeywordPage2 = () => {
   const { state } = useLocation()
   const [recommendation, setRecommendation] = useState('')
 
-  // "다음" 클릭
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    // 페이지 이동
-    navigate('/signup/store-keyword2', { state: { ...state, recommendation } })
+  const handleSubmit = (action) => {
+    if (action === 'skip') {
+      navigate('/signup/loading', { state: { ...state, recommendation: '' } })
+      return
+    }
+    navigate('/signup/loading', { state: { ...state, recommendation } })
   }
 
   return (

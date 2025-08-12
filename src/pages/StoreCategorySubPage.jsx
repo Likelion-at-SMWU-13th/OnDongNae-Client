@@ -84,9 +84,8 @@ const SelectSubcategoryPage = () => {
     }
 
     const minor = minorOptions.find((m) => m.id === selectedId)
-
     // 다음 페이지로 이동
-    navigate('/signup/store-image', { state: { major, minor } })
+    navigate('/signup/store-image', { state: { ...state, subCategory: minor.id } })
   }
 
   return (

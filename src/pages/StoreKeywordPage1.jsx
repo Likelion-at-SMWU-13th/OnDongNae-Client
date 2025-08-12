@@ -17,11 +17,12 @@ const StoreKeywordPage1 = () => {
   const { state } = useLocation()
   const [strength, setStrength] = useState('')
 
-  // "다음" 클릭
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    // 페이지 이동
+  // 다음 또는 건너뛰기 클릭
+  const handleSubmit = (action) => {
+    if (action === 'skip') {
+      navigate('/signup/store-keyword2', { state: { ...state, strength: '' } })
+      return
+    }
     navigate('/signup/store-keyword2', { state: { ...state, strength } })
   }
 

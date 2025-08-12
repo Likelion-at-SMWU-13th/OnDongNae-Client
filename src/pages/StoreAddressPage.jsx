@@ -13,15 +13,19 @@ import InputField from '@/components/signup/InputField'
 import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const StoreAddressPage = () => {
+  const navigate = useNavigate()
+  const { state } = useLocation()
   const [address, setAddress] = useState('')
 
-  const navigate = useNavigate()
-
   const handleSubmit = () => {
+    if (!address) {
+      alert('주소를 입력해주세요.')
+      return
+    }
     // 연동
 
     // 다음 페이지로 이동
-    navigate('/signup/store-phone')
+    navigate('/signup/store-phone', { state: { ...state, address } })
   }
   return (
     <>
