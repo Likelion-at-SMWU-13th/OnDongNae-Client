@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const Input = styled.input`
-  width: 304px;
+  width: 100%;
   height: 49px;
   color: black;
   border-radius: 10px;
   border: 2px solid #b3b3b3;
   background: #fff;
-  padding: 14px 0 14px 20px;
+  padding: 14px 20px;
   font-size: 18px;
 
   &::placeholder {

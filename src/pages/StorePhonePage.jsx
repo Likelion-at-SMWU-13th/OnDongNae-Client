@@ -1,27 +1,27 @@
 import styled from 'styled-components'
-import * as S from '@/styles/signup/StoreAddressPage.styles.js'
+import * as S from '@/styles/signup/StorePhonePage.styles'
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
-
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
-import InputField from '@/components/signup/InputField'
-import SmallButtonContainer from '@/components/common/SmallButtonContainer'
+import SubTitle from '@/components/signup/SubTitle'
+import PhoneField from '@/components/signup/PhoneField'
+import SmallButtonContainerSkip from '@/components/common/SmallButtonContainerSkip'
+import { ButtonContainer } from '@/styles/signup/SignupUserInfoPage.styles'
 
-const StoreAddressPage = () => {
-  const [address, setAddress] = useState('')
-
+const StorePhonePage = () => {
   const navigate = useNavigate()
+  const [phoneNum, setPhoneNum] = useState('')
 
   const handleSubmit = () => {
     // 연동
 
     // 다음 페이지로 이동
-    navigate('/signup/store-phone')
+    navigate('/signup/store-category-main')
   }
   return (
     <>
@@ -31,16 +31,13 @@ const StoreAddressPage = () => {
           <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
-              <Title text={'가게 주소를 입력해주세요.'} />
+              <Title text={'가게 전화번호를  입력해주세요'} />
+              <SubTitle text={'전화번호가 없으면 건너뛰기를 눌러주세요.'} />
               <S.FormContainer>
-                <InputField
-                  placeholder='서울특별시 용산구 멋사로 08-03'
-                  value={address}
-                  onChange={setAddress}
-                />
+                <PhoneField placeholder='02-000-0000' value={phoneNum} onChange={setPhoneNum} />
               </S.FormContainer>
             </S.TextContainer>
-            <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
+            <SmallButtonContainerSkip handleSubmit={handleSubmit}></SmallButtonContainerSkip>
           </S.Container>
         </S.Scroll>
       </S.Main>
@@ -48,4 +45,4 @@ const StoreAddressPage = () => {
   )
 }
 
-export default StoreAddressPage
+export default StorePhonePage

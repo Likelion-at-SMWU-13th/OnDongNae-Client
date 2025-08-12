@@ -6,7 +6,12 @@ import SignupAccountInfoPage from './pages/SignupAccountInfoPage.jsx'
 import SignupTermsPage from './pages/SignupTermsPage'
 import SelectMarketPage from './pages/SelectMarketPage'
 import StoreAddressPage from './pages/StoreAddressPage'
+import StorePhonePage from './pages/StorePhonePage'
+import StoreCategoryMainPage from './pages/StoreCategoryMainPage'
+import StoreCategorySubPage from './pages/StoreCategorySubPage'
+import StoreImagePage from './pages/StoreImagePage'
 import MenuPage from './pages/MenuPage'
+
 
 const router = createBrowserRouter([
   {
@@ -35,6 +40,22 @@ const router = createBrowserRouter([
         element: <StoreAddressPage />,
       },
       {
+        path: 'signup/store-phone',
+        element: <StorePhonePage />,
+      },
+      {
+        path: 'signup/store-category-main',
+        element: <StoreCategoryMainPage />,
+      },
+      {
+        path: 'signup/store-category-sub',
+        element: <StoreCategorySubPage />,
+      },
+      {
+        path: 'signup/store-image',
+        element: <StoreImagePage />,
+      },
+        {
         path: 'menu',
         element: <MenuPage />,
       },

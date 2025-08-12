@@ -6,6 +6,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: flex-start;
 `
 
 const Text = styled.p`
@@ -16,9 +17,9 @@ const Text = styled.p`
 
 // 비밀번호 / 확인 입력창을 감싸는 박스
 const PasswordContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 304px;
   border: 2px solid #b3b3b3;
   border-radius: 10px;
   overflow: hidden;

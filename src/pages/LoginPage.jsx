@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-// import PageContainer from '@/components/common/PageContainer'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import LoginForm from '@/components/login/LoginForm'
@@ -37,8 +37,6 @@ const Login = () => {
   const navigate = useNavigate()
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
 
   const handleSubmit = () => {
     // 로그인 요청
@@ -75,14 +73,10 @@ const Login = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'로그인'} showImg={true}></Header>
+      <Header img={backIcon} title={'로그인'} showImg={true} />
+
       <Logo>GoruGoru</Logo>
-      <LoginForm
-        id={id}
-        password={password}
-        onChangeId={setId}
-        onChangePassword={setPassword}
-      ></LoginForm>
+      <LoginForm id={id} password={password} onChangeId={setId} onChangePassword={setPassword} />
       <ButtonContainer>
         <LargeOrangeButton label='로그인' onBtnClick={handleSubmit} />
         <Line></Line>
