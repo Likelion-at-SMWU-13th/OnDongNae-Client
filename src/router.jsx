@@ -6,6 +6,7 @@ import SignupAccountInfoPage from './pages/SignupAccountInfoPage.jsx'
 import SignupTermsPage from './pages/SignupTermsPage'
 import SelectMarketPage from './pages/SelectMarketPage'
 import StoreAddressPage from './pages/StoreAddressPage'
+import MenuPage from './pages/MenuPage'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: 'signup/store-address',
         element: <StoreAddressPage />,
+      },
+      {
+        path: 'menu',
+        element: <MenuPage />,
       },
     ],
   },
