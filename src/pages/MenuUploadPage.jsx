@@ -6,17 +6,20 @@ import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import DoubleTitle from '@/components/common/DoubleTitle'
-import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 import BottomNav from '@/components/common/BottomNav'
 
+import BtnUpload from '@/assets/icon-upload-photo.svg'
+
+const Img = styled.img`
+  margin-top: 90px;
+`
+
+const ImgContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
 const MenuUploadPage = () => {
-  const navigate = useNavigate()
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    navigate('/menu/upload', { state: {} })
-  }
-
   return (
     <div>
       <Header img={backIcon} title={'메뉴 관리'} showImg={true} />
@@ -24,7 +27,9 @@ const MenuUploadPage = () => {
         title='메뉴판 사진을 올려주세요'
         subtitle='가게의 메뉴판이 잘 보이는 사진을 올려주세요'
       />
-      <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
+      <ImgContainer>
+        <Img src={BtnUpload} alt='사진 업로드' style={{ cursor: 'pointer' }} />
+      </ImgContainer>
       <BottomNav />
     </div>
   )

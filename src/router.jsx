@@ -17,7 +17,8 @@ import SignupCompletePage from './pages/SignupCompletePage'
 import MenuPage from './pages/MenuPage'
 import MenuMenualPage from './pages/MenuManualPage'
 import MenuUploadPage from './pages/MenuUploadPage'
-
+import MenuUploadPreviewPage from './pages/MenuUploadPreviewPage'
+import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -87,6 +88,14 @@ const router = createBrowserRouter([
       {
         path: 'menu/upload',
         element: <MenuUploadPage />,
+      },
+      {
+        path: 'menu/upload/preview',
+        element: <MenuUploadPreviewPage />,
+      },
+      {
+        path: '/menu/extract/loading',
+        element: <MenuExtractLoadingPage />,
       },
     ],
   },
