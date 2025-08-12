@@ -13,6 +13,12 @@ const RegisterMenuSection = styled.section`
   padding: 38px 30px 50px 30px;
   gap: 17px;
 `
+const MenuList = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 0px 30px 0pc 30px;
+  gap: 35px;
+`
 function MenuPage() {
   const navigate = useNavigate()
 
@@ -26,6 +32,9 @@ function MenuPage() {
           onManualClick={() => navigate('/menu/manual')} // 직접 입력하기
         />
       </RegisterMenuSection>
+      <MenuList>
+        <Title text={'등록된 메뉴'}></Title>
+      </MenuList>
     </>
   )
 }
