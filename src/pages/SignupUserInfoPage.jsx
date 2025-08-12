@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PageContainer from '@/components/common/PageContainer'
 
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -47,7 +46,7 @@ const Signup = () => {
   const navigate = useNavigate()
 
   return (
-    <PageContainer>
+    <>
       <Header img={backIcon} title={'회원가입'} showImg={true}></Header>
       <ProgressBar currentStep={2} totalSteps={6} logoImg={smallDragon} />
       <Container>
@@ -73,7 +72,7 @@ const Signup = () => {
           </FormContainer>
         </TextContainer>
       </Container>
-    </PageContainer>
+    </>
   )
 }
 

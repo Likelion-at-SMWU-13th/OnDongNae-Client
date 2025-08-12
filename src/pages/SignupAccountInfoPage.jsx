@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import PageContainer from '@/components/common/PageContainer'
+//import PageContainer from '@/components/common/PageContainer'
 import axios from 'axios'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -81,7 +81,7 @@ const SignupAccountInfo = () => {
   }
 
   return (
-    <PageContainer>
+    <>
       <Header img={backIcon} title={'회원가입'} showImg={false}></Header>
       <ProgressBar currentStep={2} totalSteps={6} logoImg={smallDragon} />
 
@@ -107,13 +107,13 @@ const SignupAccountInfo = () => {
               <SmallOrangeButton
                 type='submit'
                 label='다음'
-                onBtnClick={() => navigate('/signup/terms')}
+                onBtnClick={() => navigate('/signup/terms')} // 확인용 -> 연동 후 삭제
               />
             </ButtonContainer>
           </FormContainer>
         </TextContainer>
       </Container>
-    </PageContainer>
+    </>
   )
 }
 export default SignupAccountInfo

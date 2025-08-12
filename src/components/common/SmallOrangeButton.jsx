@@ -14,7 +14,6 @@ const Button = styled.button`
   color: #ffffff;
   border: none;
   cursor: pointer;
-  margin: 0 auto;
 `
 
 function SmallOrangeButton({ type, label, onBtnClick = undefined }) {
