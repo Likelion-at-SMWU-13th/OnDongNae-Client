@@ -11,7 +11,7 @@ import StoreCategoryMainPage from './pages/StoreCategoryMainPage'
 import StoreCategorySubPage from './pages/StoreCategorySubPage'
 import StoreImagePage from './pages/StoreImagePage'
 import MenuPage from './pages/MenuPage'
-
+import MenuMenualPage from './pages/MenuManualPage'
 
 const router = createBrowserRouter([
   {
@@ -55,9 +55,13 @@ const router = createBrowserRouter([
         path: 'signup/store-image',
         element: <StoreImagePage />,
       },
-        {
+      {
         path: 'menu',
         element: <MenuPage />,
+      },
+      {
+        path: 'menu/manual',
+        element: <MenuMenualPage />,
       },
     ],
   },
