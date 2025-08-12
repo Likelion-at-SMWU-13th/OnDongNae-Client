@@ -19,6 +19,8 @@ import MenuMenualPage from './pages/MenuManualPage'
 import MenuUploadPage from './pages/MenuUploadPage'
 import MenuUploadPreviewPage from './pages/MenuUploadPreviewPage'
 import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
+import MenuExtractFailPage from './pages/MenuExtractFailPage'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -96,6 +98,10 @@ const router = createBrowserRouter([
       {
         path: '/menu/extract/loading',
         element: <MenuExtractLoadingPage />,
+      },
+      {
+        path: '/menu/extract/fail',
+        element: <MenuExtractFailPage />,
       },
     ],
   },
