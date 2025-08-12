@@ -9,7 +9,7 @@ import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
-import InputField from '@/components/signup/InputField'
+import PhoneField from '@/components/signup/PhoneField'
 import SmallOrangeButton from '@/components/common/SmallOrangeButton'
 import SmallGrayButton from '@/components/common/SmallGrayButton'
 import SkipButton from '@/components/signup/SkipButton'
@@ -30,7 +30,7 @@ const StorePhonePage = () => {
     // 연동
 
     // 다음 페이지로 이동
-    navigate('/signup/store-phone')
+    navigate('/signup/store-category-main')
   }
   return (
     <>
@@ -41,13 +41,13 @@ const StorePhonePage = () => {
           <Title text={'가게 전화번호를  입력해주세요'} />
           <Detail>전화번호가 없으면 건너뛰기를 눌러주세요.</Detail>
           <S.FormContainer>
-            <InputField placeholder='02-0000-0000' value={phoneNum} onChange={setPhoneNum} />
+            <PhoneField placeholder='02-000-0000' value={phoneNum} onChange={setPhoneNum} />
             <S.ButtonContainer>
               <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
               <SmallOrangeButton type='submit' label='다음' onBtnClick={handleSubmit} />
             </S.ButtonContainer>
           </S.FormContainer>
-          <SkipButton />
+          <SkipButton onClick={handleSubmit} />
         </S.TextContainer>
       </S.Container>
     </>

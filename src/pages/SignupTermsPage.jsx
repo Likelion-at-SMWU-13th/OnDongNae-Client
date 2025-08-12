@@ -51,14 +51,14 @@ const SignupTerms = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'회원가입'} showImg={false}></Header>
+      <Header img={backIcon} title={'회원가입'} showImg={false} />
       <ProgressBar currentStep={3} totalSteps={6} logoImg={smallDragon} />
       <Container>
         <TextContainer>
-          <Title text={'가입을 위한 약관에 동의해주세요.'}></Title>
+          <Title text={'가입을 위한 약관에 동의해주세요.'} />
           <FormContainer>
             {/* 필수 동의 항목 체크 */}
-            <TermsAgreement onRequiredChange={setRequiredOK}></TermsAgreement>
+            <TermsAgreement onRequiredChange={setRequiredOK} />
             <ButtonContainer>
               <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
               <SmallOrangeButton type='submit' label='다음' onBtnClick={handleNext} />

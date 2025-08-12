@@ -27,17 +27,17 @@ const StoreAddressPage = () => {
   }
   return (
     <>
-      <Header img={backIcon} title={'회원가입'} showImg={false}></Header>
+      <Header img={backIcon} title={'회원가입'} showImg={false} />
       <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
       <S.Container>
         <S.TextContainer>
-          <Title text={'가게 주소를 입력해주세요.'}></Title>
+          <Title text={'가게 주소를 입력해주세요.'} />
           <S.FormContainer>
             <InputField
               placeholder='서울특별시 용산구 멋사로 08-03'
               value={address}
               onChange={setAddress}
-            ></InputField>
+            />
             <S.ButtonContainer>
               <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
               <SmallOrangeButton type='submit' label='다음' onBtnClick={handleSubmit} />

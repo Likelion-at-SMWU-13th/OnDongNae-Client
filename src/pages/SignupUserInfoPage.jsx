@@ -47,24 +47,25 @@ const Signup = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'회원가입'} showImg={true}></Header>
+      <Header img={backIcon} title={'회원가입'} showImg={true} />
       <ProgressBar currentStep={2} totalSteps={6} logoImg={smallDragon} />
       <Container>
         <TextContainer>
-          <Title text={'가입을 위한 정보를 입력해주세요.'}></Title>
+          <Title text={'가입을 위한 정보를 입력해주세요.'} />
           <FormContainer
             onSubmit={(e) => {
               e.preventDefault() // 새로고침 방지
               navigate('/signup/accountinfo', { state: { name, phoneNum } })
             }}
           >
-            <TextField
-              label='이름'
-              placeholder='김멋사'
-              value={name}
-              onChange={setName}
-            ></TextField>
-            <PhoneField value={phoneNum} onChange={setPhoneNum} />
+            <TextField label='이름' placeholder='김멋사' value={name} onChange={setName} />
+            <PhoneField
+              label='휴대폰 번호'
+              placeholder='010-0000-0000'
+              value={phoneNum}
+              onChange={setPhoneNum}
+              required
+            />
             <ButtonContainer>
               <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
               <SmallOrangeButton type='submit' label='다음' />

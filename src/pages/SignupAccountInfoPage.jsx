@@ -81,25 +81,20 @@ const SignupAccountInfo = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'회원가입'} showImg={false}></Header>
+      <Header img={backIcon} title={'회원가입'} showImg={false} />
       <ProgressBar currentStep={2} totalSteps={6} logoImg={smallDragon} />
 
       <Container>
         <TextContainer>
-          <Title text={'가입을 위한 정보를 입력해주세요.'}></Title>
+          <Title text={'가입을 위한 정보를 입력해주세요.'} />
           <FormContainer onSubmit={handleSubmit}>
             <TextField
               label='아이디'
               placeholder='영문/숫자, 4~12자'
               value={loginId}
               onChange={setloginId}
-            ></TextField>
-            <PasswordField
-              value1={pw1}
-              value2={pw2}
-              onChange1={setPw1}
-              onChange2={setPw2}
-            ></PasswordField>
+            />
+            <PasswordField value1={pw1} value2={pw2} onChange1={setPw1} onChange2={setPw2} />
 
             <ButtonContainer>
               <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />

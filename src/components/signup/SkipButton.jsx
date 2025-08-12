@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import skipIcon from '@/assets/button-skip.svg'
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   align-items: center;
   justify-content: end;
   cursor: pointer;
+  margin-left: auto;
 `
 const Text = styled.p`
   color: #7c7c7c;
@@ -19,7 +19,7 @@ const Text = styled.p`
 
 const Img = styled.img``
 
-const SkipButton = (onClick) => {
+const SkipButton = ({ onClick }) => {
   return (
     <Container onClick={onClick}>
       <Text>건너뛰기</Text>
