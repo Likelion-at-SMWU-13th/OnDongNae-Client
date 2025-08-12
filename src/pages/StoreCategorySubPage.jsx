@@ -33,11 +33,11 @@ const Scroll = styled.div`
 const SelectSubcategoryPage = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
-  const major = state?.major // { id: number, name: string }
+  const major = state?.major
 
   const [selectedId, setSelectedId] = useState(null) // 소분류 선택값 저장
 
-  // ✅ 대분류별 소분류 목록 매핑 (각 그룹 내에서 1,2,3...로 부여)
+  // 대분류별 소분류 목록 매핑
   const minorOptions = useMemo(() => {
     const map = {
       1: [
@@ -78,7 +78,7 @@ const SelectSubcategoryPage = () => {
         { id: 3, name: '공예품' },
         { id: 4, name: '소품점' },
       ],
-      6: [], // 서비스 / 기타 → 소분류 없음(여기까지 오지 않게 처리됨)
+      6: [], // 서비스 / 기타 -> 여기는 이 페이지로 넘어오지 않음
     }
     return map[major?.id] || []
   }, [major?.id])
@@ -89,21 +89,21 @@ const SelectSubcategoryPage = () => {
 
     // 대분류 정보 없으면 첫 단계로
     if (!major) {
-      alert('대분류 선택 정보가 없습니다. 처음부터 다시 진행해주세요.')
+      alert('업종 선택 정보가 없습니다. 처음부터 다시 진행해주세요.')
       navigate('/signup/store-category')
       return
     }
 
     // 선택값 없으면 경고
     if (!selectedId) {
-      alert('세부 업종(소분류)을 선택해주세요.')
+      alert('세부 업종을 선택해주세요.')
       return
     }
 
     const minor = minorOptions.find((m) => m.id === selectedId)
 
-    // 다음 페이지(주소 입력 등)로 이동
-    navigate('/signup/store-address', { state: { major, minor } })
+    // 다음 페이지로 이동
+    navigate('/signup/store-image', { state: { major, minor } })
   }
 
   return (
@@ -113,8 +113,7 @@ const SelectSubcategoryPage = () => {
 
       <Main>
         <Scroll className='scrollable'>
-          {/* 진행 상태 바 */}
-          <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
+          <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
 
           <S.Container>
             <S.TextContainer>

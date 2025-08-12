@@ -56,7 +56,7 @@ const StoreCategoryMainPage = () => {
 
     // 가게 이미지 등록 페이지로 이동
     if (selectedId === 6) {
-      navigate('/signup/store-address', { state: { major, minor: null } })
+      navigate('/signup/store-image', { state: { major, minor: null } })
       return
     }
 
@@ -71,7 +71,7 @@ const StoreCategoryMainPage = () => {
       {/* 스크롤 영역 */}
       <Main>
         <Scroll className='scrollable'>
-          <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
+          <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
 
           <S.Container>
             <S.TextContainer>

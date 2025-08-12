@@ -9,6 +9,7 @@ import StoreAddressPage from './pages/StoreAddressPage'
 import StorePhonePage from './pages/StorePhonePage'
 import StoreCategoryMainPage from './pages/StoreCategoryMainPage'
 import StoreCategorySubPage from './pages/StoreCategorySubPage'
+import StoreImagePage from './pages/StoreImagePage'
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: 'signup/store-category-sub',
         element: <StoreCategorySubPage />,
+      },
+      {
+        path: 'signup/store-image',
+        element: <StoreImagePage />,
       },
     ],
   },
