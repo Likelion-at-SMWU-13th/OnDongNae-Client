@@ -12,6 +12,8 @@ import StoreCategorySubPage from './pages/StoreCategorySubPage'
 import StoreImagePage from './pages/StoreImagePage'
 import StoreKeywordPage1 from './pages/StoreKeywordPage1'
 import StoreKeywordPage2 from './pages/StoreKeywordPage2'
+import SignupLoadingPage from './pages/SignupLoadingPage'
+import SignupCompletePage from './pages/SignupCompletePage'
 import MenuPage from './pages/MenuPage'
 
 const router = createBrowserRouter([
@@ -63,6 +65,14 @@ const router = createBrowserRouter([
       {
         path: 'signup/store-keyword2',
         element: <StoreKeywordPage2 />,
+      },
+      {
+        path: 'signup/loading',
+        element: <SignupLoadingPage />,
+      },
+      {
+        path: 'signup/complete',
+        element: <SignupCompletePage />,
       },
       {
         path: 'menu',
