@@ -65,7 +65,7 @@ const BottomNav = () => {
   return (
     <Bar>
       {NAVS.map(({ to, label, icon, iconActive }) => (
-        <Link key={to} to={to} end>
+        <Link key={to} to={to}>
           {(
             { isActive }, //링크가 활성화 상태인지 알려줌, 활성 상태일 때만 actice 클래스 줌
           ) => (
