@@ -1,9 +1,24 @@
 import React, { useState } from 'react'
+import styled, { css } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import MenuFormRow from '@/components/menuManagement/MenuFormRow'
 import LargeLightOrangeButton from '@/components/common/LargeLightOrangeButton'
 import SmallGrayButton from '@/components/common/SmallGrayButton'
 import SmallOrangeButton from '../common/SmallOrangeButton'
+
+const ButtonContainer = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+`
+const SaveBtnContainer = styled.div`
+  margin-top: 130px;
+  display: flex;
+  flex-direction: row;
+  gap: 21px;
+  justify-content: center;
+`
 const MenuForm = () => {
   const [items, setItems] = useState([
     { id: 1, nameKo: '', priceKrw: 0 },
@@ -38,9 +53,13 @@ const MenuForm = () => {
           onChangePrice={(val) => updateRow(item.id, 'priceKrw', Number(val))}
         />
       ))}
-      <LargeLightOrangeButton label='메뉴 추가' onBtnClick={addRow} />
-      <SmallGrayButton type='button' label='취소' onBtnClick={handleBack} />
-      <SmallOrangeButton type='submit' label='저장' onBtnClick={handleSave} />
+      <ButtonContainer>
+        <LargeLightOrangeButton label='메뉴 추가' onBtnClick={addRow} />
+        <SaveBtnContainer>
+          <SmallGrayButton type='button' label='취소' onBtnClick={handleBack} />
+          <SmallOrangeButton type='submit' label='저장' onBtnClick={handleSave} />
+        </SaveBtnContainer>
+      </ButtonContainer>
     </div>
   )
 }
