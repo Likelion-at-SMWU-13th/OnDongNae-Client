@@ -42,12 +42,12 @@ const SelectMarketPage = () => {
           <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
-              <Title text={'가게 주소를 입력해주세요.'} />
-
-              <S.FormContainer>
-                <SelectButton options={markets} value={selectedId} onChange={setSelectedId} />
-              </S.FormContainer>
+              <Title text={'가게가 위치한 시장을 선택해주세요'} />
             </S.TextContainer>
+            <S.ButtonContainer>
+              <SelectButton options={markets} value={selectedId} onChange={setSelectedId} />
+            </S.ButtonContainer>
+
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
         </S.Scroll>

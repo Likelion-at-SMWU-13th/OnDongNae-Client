@@ -11,7 +11,7 @@ const List = styled.div`
 
 // 개별 버튼 (선택 / 기본 스타일은 클래스명으로 구분)
 const Button = styled.button`
-  width: 100%;
+  width: 80.51%;
   padding: 14px;
   border-radius: 10px;
   border: 2px solid #e4e4e4;

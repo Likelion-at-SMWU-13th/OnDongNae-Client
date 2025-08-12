@@ -4,19 +4,18 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 49px;
 `
 
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px 44px 0 30px;
+  margin: 40px 44px 32px 30px;
   gap: 15px;
 `
-export const FormContainer = styled.form`
+export const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
-  padding-top: 16px;
+  margin: 0 36px 49px 36px;
 `
 
 export const Main = styled.main`

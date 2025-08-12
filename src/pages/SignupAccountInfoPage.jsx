@@ -62,16 +62,17 @@ const SignupAccountInfo = () => {
           <S.Container>
             <S.TextContainer>
               <Title text={'가입을 위한 정보를 입력해주세요.'} />
-              <S.FormContainer onSubmit={handleSubmit}>
-                <TextField
-                  label='아이디'
-                  placeholder='영문/숫자, 4~12자'
-                  value={loginId}
-                  onChange={setloginId}
-                />
-                <PasswordField value1={pw1} value2={pw2} onChange1={setPw1} onChange2={setPw2} />
-              </S.FormContainer>
             </S.TextContainer>
+            <S.InputContainer>
+              <TextField
+                label='아이디'
+                placeholder='영문/숫자, 4~12자'
+                value={loginId}
+                onChange={setloginId}
+              />
+              <PasswordField value1={pw1} value2={pw2} onChange1={setPw1} onChange2={setPw2} />
+            </S.InputContainer>
+
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
         </S.Scroll>

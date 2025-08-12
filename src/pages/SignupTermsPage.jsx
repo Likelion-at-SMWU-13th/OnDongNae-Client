@@ -32,11 +32,12 @@ const SignupTerms = () => {
           <S.Container>
             <S.TextContainer>
               <Title text={'가입을 위한 약관에 동의해주세요.'} />
-              <S.FormContainer>
-                {/* 필수 동의 항목 체크 */}
-                <TermsAgreement onRequiredChange={setRequiredOK} />
-              </S.FormContainer>
             </S.TextContainer>
+            <S.FormContainer>
+              {/* 필수 동의 항목 체크 */}
+              <TermsAgreement onRequiredChange={setRequiredOK} />
+            </S.FormContainer>
+
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
         </S.Scroll>

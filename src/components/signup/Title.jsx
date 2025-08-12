@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const Text = styled.p`
   font-size: 23px;
   font-weight: 600;
+  white-space: pre-line;
 `
 
 function Title({ text }) {

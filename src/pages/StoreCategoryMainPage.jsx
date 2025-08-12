@@ -57,16 +57,16 @@ const StoreCategoryMainPage = () => {
           <S.Container>
             <S.TextContainer>
               {/* 페이지 타이틀 */}
-              <Title text={'가게의 업종을 골라주세요'} />
-
-              {/* 선택 폼 영역 */}
-              <S.FormContainer onSubmit={handleSubmit}>
-                {/* SelectButton: options 리스트, 선택값, 변경 핸들러 전달 */}
-                <SelectButton options={categories} value={selectedId} onChange={setSelectedId} />
-
-                {/* 하단 버튼: 이전 / 다음 */}
-              </S.FormContainer>
+              <Title text={'가게의 업종을 골라주세요.'} />
             </S.TextContainer>
+            {/* 선택 폼 영역 */}
+            <S.ButtonContainer>
+              {/* SelectButton: options 리스트, 선택값, 변경 핸들러 전달 */}
+              <SelectButton options={categories} value={selectedId} onChange={setSelectedId} />
+
+              {/* 하단 버튼: 이전 / 다음 */}
+            </S.ButtonContainer>
+
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
         </S.Scroll>

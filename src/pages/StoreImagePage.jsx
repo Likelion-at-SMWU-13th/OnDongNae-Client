@@ -76,15 +76,15 @@ const StoreImagePage = () => {
 
   // "건너뛰기" 클릭: 사진 없이 다음 단계로 이동
   const handleSkip = () => {
-    navigate('/signup/store-category-main', { state: { ...state, photos: [] } })
+    navigate('/signup/store-keyword1', { state: { ...state, photos: [] } })
   }
 
-  // "다음" 클릭(폼 submit)
+  // "다음" 클릭
   const handleSubmit = (e) => {
     e.preventDefault()
 
     // 페이지 이동
-    navigate('/signup/store-category-main', { state: { ...state, photos } })
+    navigate('/signup/store-keyword1', { state: { ...state, photos } })
   }
 
   return (
@@ -99,61 +99,64 @@ const StoreImagePage = () => {
           <S.Container>
             <S.TextContainer>
               {/* 큰 제목 */}
-              <Title text={'가게의 대표 사진을 올려주세요'} />
+              <Title text={'가게의 대표 사진을 올려주세요.'} />
               {/* 작은 제목 */}
               <SubTitle text={'사진은 최대 4장까지 올릴 수 있어요. \n 건너뛰기 해도 괜찮아요.'} />
-
-              {/* 하단 버튼 영역: form submit으로 묶어 엔터/IME 제출 대응 */}
-              <S.FormContainer onSubmit={handleSubmit}>
-                {/* 사진 영역 */}
-                {photos.length === 0 ? (
-                  // 사진이 하나도 없으면
-                  <S.AddImage
-                    src={addImg}
-                    alt='사진 추가'
-                    onClick={openPicker} // 파일 픽커 띄우기
-                    role='button' //스크린리더에 버튼처럼 읽히게
-                  />
-                ) : (
-                  // 사진 있으면
-                  <S.Grid>
-                    {/* 썸네일: 업로드한 파일 썸네일 보여주기 */}
-                    {photos.map((p) => (
-                      <S.Thumb key={p.id}>
-                        <img src={p.url} alt='썸네일' />
-                        <S.RemoveBtn onClick={() => removePhoto(p.id)}>
-                          <S.RemoveIcon src={deleteImg} alt='삭제' />{' '}
-                        </S.RemoveBtn>
-                      </S.Thumb>
-                    ))}
-
-                    {/* 오렌지 배경: 갤러리에서 사진 선택 */}
-                    {photos.length < 4 && (
-                      <S.AddTile type='button' onClick={openPicker}>
-                        갤러리에서 사진 선택
-                      </S.AddTile>
-                    )}
-
-                    {/* 투명 배경: 2*2 자리 맞추기 위함 */}
-                    {Array.from({
-                      length: Math.max(0, 4 - (photos.length + (photos.length < 4 ? 1 : 0))),
-                    }).map((_, i) => (
-                      <S.Spacer key={`sp-${i}`} aria-hidden />
-                    ))}
-                  </S.Grid>
-                )}
-
-                {/* 숨겨진 파일 입력창 (실제로는 이걸 클릭해서 업로드) */}
-                <input
-                  ref={fileInputRef}
-                  type='file'
-                  accept='image/*'
-                  multiple
-                  onChange={onFilesSelected}
-                  style={{ display: 'none' }}
-                />
-              </S.FormContainer>
             </S.TextContainer>
+            {/* 하단 버튼 영역: form submit으로 묶어 엔터/IME 제출 대응 */}
+
+            {/* 사진 영역 */}
+            <S.ImgContainer>
+              {photos.length === 0 ? (
+                // 사진이 하나도 없으면
+                <S.AddImage
+                  src={addImg}
+                  alt='사진 추가'
+                  onClick={openPicker} // 파일 픽커 띄우기
+                  role='button' //스크린리더에 버튼처럼 읽히게
+                />
+              ) : (
+                // 사진 있으면
+                <S.Grid>
+                  {/* 썸네일: 업로드한 파일 썸네일 보여주기 */}
+                  {photos.map((p) => (
+                    <S.Thumb key={p.id}>
+                      <img src={p.url} alt='썸네일' />
+                      <S.RemoveBtn onClick={() => removePhoto(p.id)}>
+                        <S.RemoveIcon src={deleteImg} alt='삭제' />{' '}
+                      </S.RemoveBtn>
+                    </S.Thumb>
+                  ))}
+
+                  {/* 오렌지 배경: 갤러리에서 사진 선택 */}
+                  {photos.length < 4 && (
+                    <S.AddTile type='button' onClick={openPicker}>
+                      갤러리에서
+                      <br />
+                      사진 선택
+                    </S.AddTile>
+                  )}
+
+                  {/* 투명 배경: 2*2 자리 맞추기 위함 */}
+                  {Array.from({
+                    length: Math.max(0, 4 - (photos.length + (photos.length < 4 ? 1 : 0))),
+                  }).map((_, i) => (
+                    <S.Spacer key={`sp-${i}`} aria-hidden />
+                  ))}
+                </S.Grid>
+              )}
+            </S.ImgContainer>
+
+            {/* 숨겨진 파일 입력창 (실제로는 이걸 클릭해서 업로드) */}
+            <input
+              ref={fileInputRef}
+              type='file'
+              accept='image/*'
+              multiple
+              onChange={onFilesSelected}
+              style={{ display: 'none' }}
+            />
+
             <SmallButtonContainerSkip handleSubmit={handleSubmit}></SmallButtonContainerSkip>
           </S.Container>
         </S.Scroll>

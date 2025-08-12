@@ -33,22 +33,18 @@ const Signup = () => {
           <S.Container>
             <S.TextContainer>
               <Title text={'가입을 위한 정보를 입력해주세요.'} />
-              <S.FormContainer
-                onSubmit={(e) => {
-                  e.preventDefault() // 새로고침 방지
-                  navigate('/signup/accountinfo', { state: { name, phoneNum } })
-                }}
-              >
-                <TextField label='이름' placeholder='김멋사' value={name} onChange={setName} />
-                <PhoneField
-                  label='휴대폰 번호'
-                  placeholder='010-0000-0000'
-                  value={phoneNum}
-                  onChange={setPhoneNum}
-                  required
-                />
-              </S.FormContainer>
             </S.TextContainer>
+            <S.InputContainer>
+              <TextField label='이름' placeholder='김멋사' value={name} onChange={setName} />
+              <PhoneField
+                label='휴대폰 번호'
+                placeholder='010-0000-0000'
+                value={phoneNum}
+                onChange={setPhoneNum}
+                required
+              />
+            </S.InputContainer>
+
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
         </S.Scroll>

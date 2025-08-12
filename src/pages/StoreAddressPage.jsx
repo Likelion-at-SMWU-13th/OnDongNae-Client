@@ -32,14 +32,15 @@ const StoreAddressPage = () => {
           <S.Container>
             <S.TextContainer>
               <Title text={'가게 주소를 입력해주세요.'} />
-              <S.FormContainer>
-                <InputField
-                  placeholder='서울특별시 용산구 멋사로 08-03'
-                  value={address}
-                  onChange={setAddress}
-                />
-              </S.FormContainer>
             </S.TextContainer>
+            <S.InputContainer>
+              <InputField
+                placeholder='서울특별시 용산구 멋사로 08-03'
+                value={address}
+                onChange={setAddress}
+              />
+            </S.InputContainer>
+
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
         </S.Scroll>

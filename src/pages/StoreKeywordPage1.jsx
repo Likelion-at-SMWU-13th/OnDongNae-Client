@@ -38,14 +38,15 @@ const StoreKeywordPage1 = () => {
               <Title text={'가게만의 특별한 매력이나 장점을\n알려주세요.'} />
               {/* 작은 제목 */}
               <SubTitle text={'건너뛰기 해도 괜찮아요.'} />
-              <S.FormContainer>
-                <TextAreaField
-                  placeholder='직접 양념하고 숙성한 떡볶이 소스'
-                  value={strength}
-                  onChange={setStrength}
-                />
-              </S.FormContainer>
             </S.TextContainer>
+            <S.InputContainer>
+              <TextAreaField
+                placeholder='직접 양념하고 숙성한 떡볶이 소스'
+                value={strength}
+                onChange={setStrength}
+              />
+            </S.InputContainer>
+
             <SmallButtonContainerSkip handleSubmit={handleSubmit}></SmallButtonContainerSkip>
           </S.Container>
         </S.Scroll>
