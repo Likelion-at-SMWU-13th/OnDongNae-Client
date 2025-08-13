@@ -25,6 +25,11 @@ import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
 import MenuExtractFailPage from './pages/MenuExtractFailPage'
 import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
 import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
+// description
+import DescriptionPage from './pages/store/description/DescriptionPage'
+import SummaryEditPage from './pages/store/description/SummaryEditPage'
+import DetailEditPage from './pages/store/description/DetailEditPage'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -118,6 +123,18 @@ const router = createBrowserRouter([
       {
         path: '/menu/allergens/fail',
         element: <MenuAllergensFailPage />,
+      },
+      {
+        path: '/store/description',
+        element: <DescriptionPage />,
+      },
+      {
+        path: '/store/description/summary-edit',
+        element: <SummaryEditPage />,
+      },
+      {
+        path: '/store/description/detail-edit',
+        element: <DetailEditPage />,
       },
     ],
   },

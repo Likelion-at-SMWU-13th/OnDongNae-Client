@@ -64,10 +64,12 @@ const Login = () => {
         axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`
 
         // 소상공인 홈 화면 이동 navigate 함수 추가
+        navigate('store/home')
       })
       .catch((error) => {
         console.log(error)
         alert('로그인에 실패했습니다.')
+        navigate('/store/home') // 삭제 해야 됨!!!!
       })
   }
 
@@ -75,7 +77,7 @@ const Login = () => {
     <>
       <Header img={backIcon} title={'로그인'} showImg={true} />
 
-      <Logo>GORU GORU</Logo>
+      <Logo>GoruGoru</Logo>
       <LoginForm id={id} password={password} onChangeId={setId} onChangePassword={setPassword} />
       <ButtonContainer>
         <LargeOrangeButton label='로그인' onBtnClick={handleSubmit} />
