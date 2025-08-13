@@ -15,6 +15,7 @@ import StoreKeywordPage2 from './pages/StoreKeywordPage2'
 import SignupLoadingPage from './pages/SignupLoadingPage'
 import SignupCompletePage from './pages/SignupCompletePage'
 import MenuPage from './pages/MenuPage'
+import MenuMenualPage from './pages/MenuManualPage'
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: 'menu',
         element: <MenuPage />,
+      },
+      {
+        path: 'menu/manual',
+        element: <MenuMenualPage />,
       },
     ],
   },
