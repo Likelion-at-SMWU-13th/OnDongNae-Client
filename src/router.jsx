@@ -16,7 +16,12 @@ import SignupLoadingPage from './pages/SignupLoadingPage'
 import SignupCompletePage from './pages/SignupCompletePage'
 import MenuPage from './pages/MenuPage'
 import MenuMenualPage from './pages/MenuManualPage'
-
+import MenuUploadPage from './pages/MenuUploadPage'
+import MenuUploadPreviewPage from './pages/MenuUploadPreviewPage'
+import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
+import MenuExtractFailPage from './pages/MenuExtractFailPage'
+import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
+import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -82,6 +87,30 @@ const router = createBrowserRouter([
       {
         path: 'menu/manual',
         element: <MenuMenualPage />,
+      },
+      {
+        path: 'menu/upload',
+        element: <MenuUploadPage />,
+      },
+      {
+        path: 'menu/upload/preview',
+        element: <MenuUploadPreviewPage />,
+      },
+      {
+        path: '/menu/extract/loading',
+        element: <MenuExtractLoadingPage />,
+      },
+      {
+        path: '/menu/extract/fail',
+        element: <MenuExtractFailPage />,
+      },
+      {
+        path: '/menu/allergens/loading',
+        element: <MenuAllergensLoadingPage />,
+      },
+      {
+        path: '/menu/allergens/fail',
+        element: <MenuAllergensFailPage />,
       },
     ],
   },
