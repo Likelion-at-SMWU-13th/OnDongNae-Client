@@ -16,7 +16,7 @@ const BigTermRow = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  padding-bottom: 11px;
+  padding-bottom: 12px;
   font-size: 20px;
   font-weight: 400;
 `

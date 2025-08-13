@@ -8,28 +8,29 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 41px;
 `
 
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px 44px 0 30px;
+  margin: 40px 44px 32px 30px;
   gap: 15px;
 `
 
-export const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding-top: 32px;
-  gap: 41px;
-`
+// 같은 파일의 styled-components에 추가
+export const ImgContainer = styled.div`
+  /* 타일, 갭, 행 수를 변수화 */
+  --tile: 120px;
+  --gap: 20px;
+  --rows: 2;
 
-export const ButtonContainer = styled.div`
+  /* 2행 그리드가 차지하는 고정 높이 */
+  height: calc(var(--rows) * var(--tile) + (var(--rows) - 1) * var(--gap));
+  /* 가로 가운데 정렬 */
   display: flex;
-  flex-direction: row;
-  gap: 48px;
-  margin-left: 14px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 41px;
 `
 
 // 아무 이미지도 없을 때 이미지 추가
@@ -113,7 +114,7 @@ export const AddTile = styled.button`
   cursor: pointer;
 `
 
-/* ✅ 빈 칸 채워서 2×2 유지하는 스페이서(투명) */
+/* 빈 칸 채워서 2×2 유지하는 스페이서(투명) */
 export const Spacer = styled.div`
   width: 120px;
   height: 120px;

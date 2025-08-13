@@ -75,7 +75,7 @@ const Login = () => {
     <>
       <Header img={backIcon} title={'로그인'} showImg={true} />
 
-      <Logo>GoruGoru</Logo>
+      <Logo>GORU GORU</Logo>
       <LoginForm id={id} password={password} onChangeId={setId} onChangePassword={setPassword} />
       <ButtonContainer>
         <LargeOrangeButton label='로그인' onBtnClick={handleSubmit} />

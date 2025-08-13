@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import * as S from '@/styles/signup/StoreCategoryPage.styles'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -13,6 +13,7 @@ import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const StoreCategoryMainPage = () => {
   const navigate = useNavigate()
+  const { state } = useLocation()
   const [selectedId, setSelectedId] = useState(null) // 선택한 대분류 id
 
   // 대분류 카테고리
@@ -34,15 +35,14 @@ const StoreCategoryMainPage = () => {
     }
 
     const major = categories.find((c) => c.id === selectedId)
+    const nextState = { ...state, mainCategory: major.id }
 
-    // 가게 이미지 등록 페이지로 이동
+    // 기타 선택 시, 소분류 페이지 뜨지 않음
     if (selectedId === 6) {
-      navigate('/signup/store-image', { state: { major, minor: null } })
-      return
+      navigate('/signup/store-image', { state: nextState })
+    } else {
+      navigate('/signup/store-category-sub', { state: { ...nextState, major } })
     }
-
-    // 그 외는 소분류 선택 페이지로 이동
-    navigate('/signup/store-category-sub', { state: { major } })
   }
 
   return (
@@ -57,16 +57,16 @@ const StoreCategoryMainPage = () => {
           <S.Container>
             <S.TextContainer>
               {/* 페이지 타이틀 */}
-              <Title text={'가게의 업종을 골라주세요'} />
-
-              {/* 선택 폼 영역 */}
-              <S.FormContainer onSubmit={handleSubmit}>
-                {/* SelectButton: options 리스트, 선택값, 변경 핸들러 전달 */}
-                <SelectButton options={categories} value={selectedId} onChange={setSelectedId} />
-
-                {/* 하단 버튼: 이전 / 다음 */}
-              </S.FormContainer>
+              <Title text={'가게의 업종을 골라주세요.'} />
             </S.TextContainer>
+            {/* 선택 폼 영역 */}
+            <S.ButtonContainer>
+              {/* SelectButton: options 리스트, 선택값, 변경 핸들러 전달 */}
+              <SelectButton options={categories} value={selectedId} onChange={setSelectedId} />
+
+              {/* 하단 버튼: 이전 / 다음 */}
+            </S.ButtonContainer>
+
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
         </S.Scroll>

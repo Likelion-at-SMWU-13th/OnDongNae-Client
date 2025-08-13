@@ -3,19 +3,17 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 48px;
 `
 
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px 40px 0 40px;
-  gap: 30px;
+  margin: 40px 0 30px 30px;
 `
-export const FormContainer = styled.form`
+export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  margin-bottom: 48px;
 `
 
 export const Main = styled.main`

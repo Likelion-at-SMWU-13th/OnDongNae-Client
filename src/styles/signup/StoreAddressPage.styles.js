@@ -3,19 +3,18 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 311px;
 `
 
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px 44px 0 30px;
+  margin: 40px 56px 30px 30px;
   gap: 30px;
 `
-export const FormContainer = styled.form`
+export const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  margin: 0 56px 311px 30px;
 `
 export const Main = styled.main`
   height: calc(var(--vh, 1vh) * 100); /* 화면 높이 채우기 */

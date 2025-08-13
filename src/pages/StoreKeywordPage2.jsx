@@ -1,44 +1,50 @@
 import styled from 'styled-components'
-import * as S from '@/styles/signup/StorePhonePage.styles'
-import React, { useState } from 'react'
+import * as S from '@/styles/signup/StoreKeywordPage.styles'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import axios from 'axios'
+
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
 import SubTitle from '@/components/signup/SubTitle'
-import PhoneField from '@/components/signup/PhoneField'
+import TextAreaField from '@/components/signup/TextAreaField'
 import SmallButtonContainerSkip from '@/components/common/SmallButtonContainerSkip'
 
-const StorePhonePage = () => {
+const StoreKeywordPage2 = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
-  const [phoneNum, setPhoneNum] = useState('')
+  const [recommendation, setRecommendation] = useState('')
 
   const handleSubmit = (action) => {
-    // skip 버튼인 경우
     if (action === 'skip') {
-      navigate('/signup/store-category-main', { state: { ...state, phoneNum: '' } })
+      navigate('/signup/loading', { state: { ...state, recommendation: '' } })
       return
     }
-    // 다음 버튼인 경우
-    navigate('/signup/store-category-main', { state: { ...state, phoneNum } })
+    navigate('/signup/loading', { state: { ...state, recommendation } })
   }
+
   return (
     <>
+      {/* 상단 헤더*/}
       <Header img={backIcon} title={'회원가입'} showImg={false} />
+      {/* 스크롤 가능 영역*/}
       <S.Main>
-        <S.Scroll>
-          <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
+        <S.Scroll className='scrollable'>
+          <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
-              <Title text={'가게 전화번호를 입력해주세요.'} />
-              <SubTitle text={'전화번호가 없으면 건너뛰기를 눌러주세요.'} />
+              <Title text={'외국인 방문객에게\n추천하고 싶은 것이 있나요?'} />
+              {/* 작은 제목 */}
+              <SubTitle text={'건너뛰기 해도 괜찮아요.'} />
             </S.TextContainer>
             <S.InputContainer>
-              <PhoneField placeholder='02-000-0000' value={phoneNum} onChange={setPhoneNum} />
+              <TextAreaField
+                placeholder='옛날떡볶이와 순대세트'
+                value={recommendation}
+                onChange={setRecommendation}
+              />
             </S.InputContainer>
 
             <SmallButtonContainerSkip handleSubmit={handleSubmit}></SmallButtonContainerSkip>
@@ -49,4 +55,4 @@ const StorePhonePage = () => {
   )
 }
 
-export default StorePhonePage
+export default StoreKeywordPage2

@@ -84,9 +84,8 @@ const SelectSubcategoryPage = () => {
     }
 
     const minor = minorOptions.find((m) => m.id === selectedId)
-
     // 다음 페이지로 이동
-    navigate('/signup/store-image', { state: { major, minor } })
+    navigate('/signup/store-image', { state: { ...state, subCategory: minor.id } })
   }
 
   return (
@@ -101,16 +100,16 @@ const SelectSubcategoryPage = () => {
           <S.Container>
             <S.TextContainer>
               {/* 페이지 타이틀 */}
-              <Title text={'가게의 세부 업종을 골라주세요'} />
-
-              {/* 선택 폼 영역 */}
-              <S.FormContainer onSubmit={handleSubmit}>
-                {/* 소분류 리스트 */}
-                <SelectButton options={minorOptions} value={selectedId} onChange={setSelectedId} />
-
-                {/* 하단 버튼: 이전 / 다음 */}
-              </S.FormContainer>
+              <Title text={'가게의 세부 업종을 골라주세요.'} />
             </S.TextContainer>
+            {/* 선택 폼 영역 */}
+            <S.ButtonContainer>
+              {/* 소분류 리스트 */}
+              <SelectButton options={minorOptions} value={selectedId} onChange={setSelectedId} />
+
+              {/* 하단 버튼: 이전 / 다음 */}
+            </S.ButtonContainer>
+
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
         </S.Scroll>

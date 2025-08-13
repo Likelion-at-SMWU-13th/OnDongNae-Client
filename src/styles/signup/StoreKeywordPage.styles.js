@@ -1,22 +1,21 @@
+// StoreKeywordPage1, StoreKeywordPage2 공통 사용
 import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0;
 `
 
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 40px 56px 60px 30px;
+  margin: 40px 44px 32px 30px;
+  gap: 15px;
 `
-
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 29px;
-  margin: 0 56px 43px 30px;
+  margin: 0 36px 49px 36px;
 `
 
 export const Main = styled.main`
