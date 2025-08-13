@@ -7,7 +7,17 @@ import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import BottomNav from '@/components/common/BottomNav'
 import Warning from '@/assets/icon-warning.svg'
+import SmallLightOrangeButton from '@/components/common/SmallLightOrangeButton'
 import SmallOrangeButton from '@/components/common/SmallOrangeButton'
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 77.43%;
+  gap: 12.3%;
+  margin: 0 auto;
+`
 const ComponentContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -35,7 +45,14 @@ const MenuAllergensFailPage = () => {
         <WarningIcon src={Warning} alt='로딩중' />
         <FailureMsg>{`인공지능 분석이 실패했어요
 나중에 다시 시도해주세요`}</FailureMsg>
-        <SmallOrangeButton type='' label='건너뛰기' onBtnClick={handleBack} />
+        <ButtonContainer>
+          <SmallLightOrangeButton
+            type='button'
+            label='건너뛰기'
+            onBtnClick={() => navigate('/menu/allergens/loading')}
+          />
+          <SmallOrangeButton type='button' label='다시 시도' onBtnClick={handleBack} />
+        </ButtonContainer>
       </ComponentContainer>
       <BottomNav />
     </div>
