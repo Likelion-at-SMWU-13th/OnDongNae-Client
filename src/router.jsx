@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
+//onboarding
+import SelectLanguagePage from './pages/onboarding/SelectLanguagePage'
 // signup
 import LoginPage from './pages/store/signup/LoginPage'
 import SignupUserInfoPage from './pages/store/signup/SignupUserInfoPage.jsx'
@@ -30,6 +32,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
+      { index: true, element: <SelectLanguagePage /> },
       { path: 'login', element: <LoginPage /> },
       {
         path: 'signup/userinfo',
