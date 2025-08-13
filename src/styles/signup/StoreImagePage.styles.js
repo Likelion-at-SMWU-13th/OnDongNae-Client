@@ -1,8 +1,3 @@
-// 사진 업로드 페이지 전용 스타일 컴포넌트
-// - 시안 기준 최대 가로폭 420px 내에서 중앙 정렬
-// - 2열 그리드, 정사각형 타일(1:1)
-// - 삭제(X) 버튼은 우상단 원형
-
 import styled from 'styled-components'
 
 export const Container = styled.div`

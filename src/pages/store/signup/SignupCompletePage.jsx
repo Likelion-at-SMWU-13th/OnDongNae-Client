@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
@@ -55,6 +55,11 @@ const Button = styled.button`
 `
 
 const SignupCompletePage = () => {
+  const navigate = useNavigate()
+
+  const handleSubmit = () => {
+    navigate('/store/home')
+  }
   return (
     <>
       <Header img={backIcon} title={'회원가입'} showImg={false} />
@@ -69,7 +74,7 @@ const SignupCompletePage = () => {
             가게 프로필을 등록해주세요!
           </Text>
         </Context>
-        <Button>확인</Button>
+        <Button onClick={handleSubmit}>확인</Button>
       </Container>
     </>
   )

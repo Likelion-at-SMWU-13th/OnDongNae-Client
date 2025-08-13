@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 15px 0 14px 0;
+  padding: 17.5px 0 18.5px 0;
   border-bottom: 1px solid #f1f1f1;
 `
 const Img = styled.img`
