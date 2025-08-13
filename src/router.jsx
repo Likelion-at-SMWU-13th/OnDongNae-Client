@@ -6,6 +6,7 @@ import SignupUserInfoPage from './pages/store/signup/SignupUserInfoPage.jsx'
 import SignupAccountInfoPage from './pages/store/signup/SignupAccountInfoPage.jsx'
 import SignupTermsPage from './pages/store/signup/SignupTermsPage'
 import SelectMarketPage from './pages/store/signup/SelectMarketPage'
+import StoreNamePage from './pages/store/signup/StoreNamePage'
 import StoreAddressPage from './pages/store/signup/StoreAddressPage'
 import StorePhonePage from './pages/store/signup/StorePhonePage'
 import StoreCategoryMainPage from './pages/store/signup/StoreCategoryMainPage'
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: 'signup/select-market',
         element: <SelectMarketPage />,
+      },
+      {
+        path: 'signup/store-name',
+        element: <StoreNamePage />,
       },
       {
         path: 'signup/store-address',
