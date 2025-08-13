@@ -21,7 +21,7 @@ import MenuUploadPreviewPage from './pages/MenuUploadPreviewPage'
 import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
 import MenuExtractFailPage from './pages/MenuExtractFailPage'
 import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
-
+import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -107,6 +107,10 @@ const router = createBrowserRouter([
       {
         path: '/menu/allergens/loading',
         element: <MenuAllergensLoadingPage />,
+      },
+      {
+        path: '/menu/allergens/fail',
+        element: <MenuAllergensFailPage />,
       },
     ],
   },
