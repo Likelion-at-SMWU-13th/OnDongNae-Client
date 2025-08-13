@@ -64,7 +64,7 @@ const OnboardingPage = () => {
       </S.Main>
       {selectedId && (
         <S.ContinueButton type='button' onClick={handleContinue}>
-          {t('footer.continue', { lng: langCode || 'en' })}
+          {t('button.continue', { lng: langCode || 'en' })}
         </S.ContinueButton>
       )}
     </S.Wrapper>
