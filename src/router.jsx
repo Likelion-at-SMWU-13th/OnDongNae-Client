@@ -20,6 +20,7 @@ import MenuUploadPage from './pages/MenuUploadPage'
 import MenuUploadPreviewPage from './pages/MenuUploadPreviewPage'
 import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
 import MenuExtractFailPage from './pages/MenuExtractFailPage'
+import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
       {
         path: '/menu/extract/fail',
         element: <MenuExtractFailPage />,
+      },
+      {
+        path: '/menu/allergens/loading',
+        element: <MenuAllergensLoadingPage />,
       },
     ],
   },
