@@ -13,8 +13,9 @@ const MainMapPage = () => {
   return (
     <>
       <Header img={backIcon} title={t('bottomNav.map')} showImg={false} />
-      <CustomerBottomNav></CustomerBottomNav>
+
       <KakaoMap />
+      <CustomerBottomNav />
     </>
   )
 }
