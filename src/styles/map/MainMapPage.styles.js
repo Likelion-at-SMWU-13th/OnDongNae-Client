@@ -12,7 +12,7 @@ export const Overlay = styled.div`
   top: 15px; /* 상단 여백 */
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10; /* 지도보다 위 */
+  z-index: 10; /* 지도보다 위, ScrollArea보다 아래 */
   display: flex;
   flex-direction: column;
   justify-content: center;

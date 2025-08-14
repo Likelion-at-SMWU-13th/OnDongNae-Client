@@ -77,7 +77,7 @@ const dummyData = {
       {
         id: 18,
         name: 'Egg & Flower',
-        isOpen: false,
+        isOpen: true,
         subCategories: ['International Cuisine'],
         address: '35, Sinheung-ro 26-gil, Yongsan-gu, Seoul',
         phone: '0507-1328-7681',
@@ -94,7 +94,7 @@ const dummyData = {
       },
       {
         id: 12,
-        name: 'Egg and Flower',
+        name: 'Ondongnae',
         isOpen: false,
         subCategories: ['Meat & Livestock', 'Fruits & Vegetables'],
         address: '35, Sinheung-ro 26-gil, Yongsan-gu, Seoul',

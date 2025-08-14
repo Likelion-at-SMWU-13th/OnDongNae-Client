@@ -11,6 +11,7 @@ import SearchBar from '@/components/map/SearchBar'
 import DropDown from '@/components/map/DropDown'
 import MainCategories from '@/components/map/MainCategories'
 import SubCategories from '@/components/map/SubCategories'
+import ScrollArea from '@/components/map/ScrollArea'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import KakaoMap from '@/components/map/KakaoMap'
 
@@ -33,12 +34,11 @@ const MainMapPage = () => {
     setRandomStores(dummyData.data.randomStores)
   }, [])
 
-  // ✅ 시장이 바뀌면 대/소분류 선택 초기화
+  // 시장이 바뀌면 대/소분류 선택 초기화
   const handleChangeMarket = (opt) => {
     setMarket(opt) // opt = { label, value }
     setSelectedMainId(null) // 대분류 초기화
     setSubCategories([]) // 소분류 초기화
-    // TODO: 시장 기준으로 가게 리스트 재호출이 필요하면 여기서
   }
 
   // 대분류 클릭 시 소분류 세팅
@@ -64,6 +64,16 @@ const MainMapPage = () => {
       <S.MapContainer>
         {/* 카카오 지도 */}
         <KakaoMap />
+        {/* 스크롤 영역 */}
+        <ScrollArea
+          title='Stores'
+          randomStores={dummyData.data.randomStores} // 선택 없을 때 노출
+          categories={categories}
+          selectedMainId={selectedMainId}
+          selectedSubIds={selectedSubIds}
+          onStoreClick={(id) => console.log('store click:', id)}
+        />
+
         {/*지도 위 오버레이 영역 */}
         <S.Overlay>
           {/* 검색창 */}
@@ -92,8 +102,6 @@ const MainMapPage = () => {
               onToggleSub={handleToggleSub}
             />
           )}
-
-          {/* 스크롤 영역 */}
         </S.Overlay>
       </S.MapContainer>
       {/* 하단바 */}
