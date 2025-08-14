@@ -1,4 +1,12 @@
 {
   "button": { "continue": "继续", "search": "搜索" },
-  "bottomNav": { "overview": "概述", "map": "地图", "course": "推荐", "rates": "汇率" }
+  "bottomNav": { "overview": "概述", "map": "地图", "course": "推荐", "rates": "汇率" },
+  "dropdown": {
+    "select": "请选择一个市场",
+    "yongmun": "龙山区龙门市场",
+    "itaewon": "梨泰院市场",
+    "huam": "厚岩集市",
+    "manly": "万里市场",
+    "haebangchon": "解放村新兴市场"
+  }
 }

@@ -48,26 +48,30 @@ const OnboardingPage = () => {
     navigate('user/map')
   }
   return (
-    <S.Wrapper>
-      <S.Img src={globalIcon} alt='Global' />
-      <S.Main>
-        <S.TextContainer>
-          <S.Title>Select Language</S.Title>
-          <S.Title>选择语言</S.Title>
-          <S.Title>言語を選択</S.Title>
-        </S.TextContainer>
-        <LanguageButton options={language} value={selectedId} onChange={setSelectedId} />
-        <S.Navigation type='button' onClick={handleStore}>
-          <S.Icon src={navigationIcon} alt='' />
-          <S.Text>소상공인으로 계속하기</S.Text>
-        </S.Navigation>
-      </S.Main>
-      {selectedId && (
-        <S.ContinueButton type='button' onClick={handleContinue}>
-          {t('button.continue', { lng: langCode || 'en' })}
-        </S.ContinueButton>
-      )}
-    </S.Wrapper>
+    <S.Container>
+      <S.Scroll className='scrollable'>
+        <S.Wrapper>
+          <S.Img src={globalIcon} alt='Global' />
+          <S.Main>
+            <S.TextContainer>
+              <S.Title>Select Language</S.Title>
+              <S.Title>选择语言</S.Title>
+              <S.Title>言語を選択</S.Title>
+            </S.TextContainer>
+            <LanguageButton options={language} value={selectedId} onChange={setSelectedId} />
+            <S.Navigation type='button' onClick={handleStore}>
+              <S.Icon src={navigationIcon} alt='' />
+              <S.Text>소상공인으로 계속하기</S.Text>
+            </S.Navigation>
+          </S.Main>
+          {selectedId && (
+            <S.ContinueButton type='button' onClick={handleContinue}>
+              {t('button.continue', { lng: langCode || 'en' })}
+            </S.ContinueButton>
+          )}
+        </S.Wrapper>
+      </S.Scroll>
+    </S.Container>
   )
 }
 

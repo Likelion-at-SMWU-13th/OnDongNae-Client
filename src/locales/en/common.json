@@ -1,4 +1,12 @@
 {
   "button": { "continue": "continue", "search": "Search" },
-  "bottomNav": { "overview": "Overview", "map": "Map", "course": "Course", "rates": "Rates" }
+  "bottomNav": { "overview": "Overview", "map": "Map", "course": "Course", "rates": "Rates" },
+  "dropdown": {
+    "select": "Select Market",
+    "yongmun": "Yongsan Yongmun market",
+    "itaewon": "Itaewon Market",
+    "huam": "Huam Traditional Market",
+    "manly": "Manly Market",
+    "haebangchon": "Haebangchon Shinheung Market"
+  }
 }

@@ -1,4 +1,12 @@
 {
   "button": { "continue": "続ける", "search": "検索" },
-  "bottomNav": { "overview": "概要", "map": "地図", "course": "コース", "rates": "レート" }
+  "bottomNav": { "overview": "概要", "map": "地図", "course": "コース", "rates": "レート" },
+  "dropdown": {
+    "select": "市場を選んでください",
+    "yongmun": "ヨンサン(龍山)ヨンムン(龍門)市場",
+    "itaewon": "イテウォン（梨泰院）市場",
+    "huam": "フアム（厚岩）伝統市場",
+    "manly": "マンニ（万里）市場",
+    "haebangchon": "カイホウソン(解放村)シンコウ市場"
+  }
 }

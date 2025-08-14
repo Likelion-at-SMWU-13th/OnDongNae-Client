@@ -8,12 +8,13 @@ const InputContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 350px; /* 최대 350px까지만 */
+  width: 90%; /* 최대 350px까지만 */
   height: 48px;
   border-radius: 10px;
   border: 2px solid #f08e67;
   background: #fff;
 `
+
 const Icon = styled.img`
   position: absolute;
   left: 20px;
@@ -27,7 +28,7 @@ const Input = styled.input`
   width: 100%;
   height: 100%;
   color: #000;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 22px;
   margin: 0 20px 0 50px;
