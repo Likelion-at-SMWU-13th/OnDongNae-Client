@@ -7,12 +7,14 @@ import axios from 'axios'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
+import KakaoMap from '@/components/map/KakaoMap'
 const MainMapPage = () => {
   const { t } = useTranslation()
   return (
     <>
       <Header img={backIcon} title={t('bottomNav.map')} showImg={false} />
       <CustomerBottomNav></CustomerBottomNav>
+      <KakaoMap />
     </>
   )
 }
