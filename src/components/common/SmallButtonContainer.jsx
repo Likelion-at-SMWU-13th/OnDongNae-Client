@@ -12,13 +12,13 @@ const ButtonContainer = styled.div`
   gap: 12.3%;
   margin: 0 auto;
 `
-function SmallButtonContainer({ handleSubmit }) {
+function SmallButtonContainer({ handleSubmit, prevLabel = '이전', nextLabel = '다음' }) {
   const navigate = useNavigate()
 
   return (
     <ButtonContainer>
-      <SmallGrayButton type='button' label='이전' onBtnClick={() => navigate(-1)} />
-      <SmallOrangeButton type='button' label='다음' onBtnClick={handleSubmit} />
+      <SmallGrayButton type='button' label={prevLabel} onBtnClick={() => navigate(-1)} />
+      <SmallOrangeButton type='button' label={nextLabel} onBtnClick={handleSubmit} />
     </ButtonContainer>
   )
 }
