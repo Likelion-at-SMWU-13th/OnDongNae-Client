@@ -1,19 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
-import LoginPage from './pages/LoginPage'
-import SignupUserInfoPage from './pages/SignupUserInfoPage.jsx'
-import SignupAccountInfoPage from './pages/SignupAccountInfoPage.jsx'
-import SignupTermsPage from './pages/SignupTermsPage'
-import SelectMarketPage from './pages/SelectMarketPage'
-import StoreAddressPage from './pages/StoreAddressPage'
-import StorePhonePage from './pages/StorePhonePage'
-import StoreCategoryMainPage from './pages/StoreCategoryMainPage'
-import StoreCategorySubPage from './pages/StoreCategorySubPage'
-import StoreImagePage from './pages/StoreImagePage'
-import StoreKeywordPage1 from './pages/StoreKeywordPage1'
-import StoreKeywordPage2 from './pages/StoreKeywordPage2'
-import SignupLoadingPage from './pages/SignupLoadingPage'
-import SignupCompletePage from './pages/SignupCompletePage'
+import LoginPage from './pages/store/signup/LoginPage'
+import SignupUserInfoPage from './pages/store/signup/SignupUserInfoPage.jsx'
+import SignupAccountInfoPage from './pages/store/signup/SignupAccountInfoPage.jsx'
+import SignupTermsPage from './pages/store/signup/SignupTermsPage'
+import SelectMarketPage from './pages/store/signup/SelectMarketPage'
+import StoreAddressPage from './pages/store/signup/StoreAddressPage'
+import StorePhonePage from './pages/store/signup/StorePhonePage'
+import StoreCategoryMainPage from './pages/store/signup/StoreCategoryMainPage'
+import StoreCategorySubPage from './pages/store/signup/StoreCategorySubPage'
+import StoreImagePage from './pages/store/signup/StoreImagePage'
+import StoreKeywordPage1 from './pages/store/signup/StoreKeywordPage1'
+import StoreKeywordPage2 from './pages/store/signup/StoreKeywordPage2'
+import SignupLoadingPage from './pages/store/signup/SignupLoadingPage'
+import SignupCompletePage from './pages/store/signup/SignupCompletePage'
 import MenuPage from './pages/MenuPage'
 import MenuMenualPage from './pages/MenuManualPage'
 import MenuUploadPage from './pages/MenuUploadPage'
@@ -22,6 +22,7 @@ import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
 import MenuExtractFailPage from './pages/MenuExtractFailPage'
 import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
 import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
+import HoursPage from './pages/store/hours/HoursPage.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
       {
         path: '/menu/allergens/fail',
         element: <MenuAllergensFailPage />,
+      },
+      {
+        path: '/hours',
+        element: <HoursPage />,
       },
     ],
   },

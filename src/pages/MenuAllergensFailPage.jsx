@@ -40,7 +40,7 @@ const MenuAllergensFailPage = () => {
   const handleBack = () => navigate(-1)
   return (
     <div>
-      <Header img={backIcon} title='메뉴 관리' showImg />
+      <Header img={backIcon} title='메뉴 관리' showImg={true} />
       <ComponentContainer>
         <WarningIcon src={Warning} alt='로딩중' />
         <FailureMsg>{`인공지능 분석이 실패했어요

@@ -24,7 +24,7 @@ const Bar = styled.section`
   transform: translateX(-50%);
   bottom: 0;
   z-index: 100;
-  display: inline-flex;
+  display: flex;
   gap: 48px;
   padding: 17px 25px 26px 25px;
   border-top: 1px solid #f2f2f5;
