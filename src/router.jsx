@@ -1,11 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
+//onboarding
+import SelectLanguagePage from './pages/onboarding/SelectLanguagePage'
 // signup
 import LoginPage from './pages/store/signup/LoginPage'
 import SignupUserInfoPage from './pages/store/signup/SignupUserInfoPage.jsx'
 import SignupAccountInfoPage from './pages/store/signup/SignupAccountInfoPage.jsx'
 import SignupTermsPage from './pages/store/signup/SignupTermsPage'
 import SelectMarketPage from './pages/store/signup/SelectMarketPage'
+import StoreNamePage from './pages/store/signup/StoreNamePage'
 import StoreAddressPage from './pages/store/signup/StoreAddressPage'
 import StorePhonePage from './pages/store/signup/StorePhonePage'
 import StoreCategoryMainPage from './pages/store/signup/StoreCategoryMainPage'
@@ -25,11 +28,19 @@ import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
 import MenuExtractFailPage from './pages/MenuExtractFailPage'
 import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
 import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
+// description
+import DescriptionPage from './pages/store/description/DescriptionPage'
+import SummaryEditPage from './pages/store/description/SummaryEditPage'
+import DetailEditPage from './pages/store/description/DetailEditPage'
+
+// map
+import MainMapPage from './pages/customer/map/MainMapPage'
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
+      { index: true, element: <SelectLanguagePage /> },
       { path: 'login', element: <LoginPage /> },
       {
         path: 'signup/userinfo',
@@ -46,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: 'signup/select-market',
         element: <SelectMarketPage />,
+      },
+      {
+        path: 'signup/store-name',
+        element: <StoreNamePage />,
       },
       {
         path: 'signup/store-address',
@@ -118,6 +133,22 @@ const router = createBrowserRouter([
       {
         path: '/menu/allergens/fail',
         element: <MenuAllergensFailPage />,
+      },
+      {
+        path: '/store/description',
+        element: <DescriptionPage />,
+      },
+      {
+        path: '/store/description/summary-edit',
+        element: <SummaryEditPage />,
+      },
+      {
+        path: '/store/description/detail-edit',
+        element: <DetailEditPage />,
+      },
+      {
+        path: '/user/map',
+        element: <MainMapPage />,
       },
     ],
   },

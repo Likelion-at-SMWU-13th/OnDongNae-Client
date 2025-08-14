@@ -1,38 +1,43 @@
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
-
-import icMenu from '@/assets/icon-bottomNav-menu.svg'
-import icMenuActive from '@/assets/icon-bottomNav-menu-active.svg'
-import icTime from '@/assets/icon-bottomNav-clock.svg'
-import icTimeActive from '@/assets/icon-bottomNav-clock-active.svg'
-import icAbout from '@/assets/icon-bottomNav-storeInfo.svg'
-import icAboutActive from '@/assets/icon-bottomNav-storeInfo-active.svg'
-import icMy from '@/assets/icon-bottomNav-myStore.svg'
-import icMyActive from '@/assets/icon-bottomNav-myStore-active.svg'
+import { useTranslation } from 'react-i18next'
+import icOverview from '@/assets/icon-overview.svg'
+import icOverviewActive from '@/assets/icon-overview-active.svg'
+import icMap from '@/assets/icon-map.svg'
+import icMapActive from '@/assets/icon-map-active.svg'
+import icCourse from '@/assets/icon-course.svg'
+import icCourseActive from '@/assets/icon-course-active.svg'
+import icRates from '@/assets/icon-rates.svg'
+import icRatesActive from '@/assets/icon-rates-active.svg'
 
 const NAVS = [
-  { to: '/menu', label: '메뉴관리', icon: icMenu, iconActive: icMenuActive },
-  { to: '/hours', label: '영업시간', icon: icTime, iconActive: icTimeActive },
-  { to: '/store/description', label: '가게설명', icon: icAbout, iconActive: icAboutActive },
-  { to: '/mypage', label: '나의가게', icon: icMy, iconActive: icMyActive },
+  {
+    to: '/user/overview',
+    label: 'bottomNav.overview',
+    icon: icOverview,
+    iconActive: icOverviewActive,
+  },
+  { to: '/user/map', label: 'bottomNav.map', icon: icMap, iconActive: icMapActive },
+  { to: '/user/course', label: 'bottomNav.course', icon: icCourse, iconActive: icCourseActive },
+  { to: '/user/rates', label: 'bottomNav.rates', icon: icRates, iconActive: icRatesActive },
 ]
 
 const Bar = styled.section`
+  width: 390px;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
   z-index: 100;
   display: inline-flex;
-  gap: 48px;
-  padding: 17px 25px 26px 25px;
+  justify-content: center;
+  gap: 13%;
+  padding: 17px 0 25px 0;
   border-top: 1px solid #f2f2f5;
   background: #fff;
 `
 const Item = styled.div`
-  height: 56px;
-  width: 49px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,6 +67,7 @@ const Link = styled(NavLink)`
 `
 
 const BottomNav = () => {
+  const { t } = useTranslation()
   return (
     <Bar>
       {NAVS.map(({ to, label, icon, iconActive }) => (
@@ -71,7 +77,7 @@ const BottomNav = () => {
           ) => (
             <Item className={isActive ? 'active' : ''}>
               <img src={isActive ? iconActive : icon} alt='' aria-hidden />
-              <span>{label}</span>
+              <span>{t(label)}</span>
             </Item>
           )}
         </Link>
