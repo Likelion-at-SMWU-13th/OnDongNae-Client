@@ -23,6 +23,7 @@ import MenuExtractFailPage from './pages/MenuExtractFailPage'
 import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
 import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
 import HoursPage from './pages/store/hours/HoursPage.jsx'
+import HoursEditPage from './pages/store/hours/HoursEditPage.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: '/hours',
         element: <HoursPage />,
+      },
+      {
+        path: '/hours/edit',
+        element: <HoursEditPage />,
       },
     ],
   },
