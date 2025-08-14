@@ -7,6 +7,7 @@ const KakaoMap = () => {
       center={{ lat: 37.5326, lng: 126.9905 }}
       level={6}
       style={{
+        width: '100%',
         height: 'calc(100dvh - 155px)',
         display: 'flex',
         flexDirection: 'column',

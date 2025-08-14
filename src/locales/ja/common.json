@@ -1,4 +1,4 @@
 {
-  "button": { "continue": "続ける" },
+  "button": { "continue": "続ける", "search": "検索" },
   "bottomNav": { "overview": "概要", "map": "地図", "course": "コース", "rates": "レート" }
 }

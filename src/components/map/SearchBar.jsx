@@ -1,0 +1,47 @@
+import React from 'react'
+import styled from 'styled-components'
+import iconSearch from '@/assets/icon-search.svg'
+
+const InputContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 350px; /* 최대 350px까지만 */
+  height: 48px;
+  border-radius: 10px;
+  border: 2px solid #f08e67;
+  background: #fff;
+`
+const Icon = styled.img`
+  position: absolute;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+`
+const Input = styled.input`
+  width: 100%;
+  height: 100%;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0 20px 0 50px;
+  border: none;
+  outline: none;
+`
+
+const SearchBar = ({ value, onChange, placeholder }) => {
+  return (
+    <InputContainer>
+      <Icon src={iconSearch} alt='' />
+      <Input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
+    </InputContainer>
+  )
+}
+
+export default SearchBar
