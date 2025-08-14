@@ -1,10 +1,6 @@
-// components/map/MajorCategoryChips.jsx
 import React from 'react'
 import styled from 'styled-components'
 
-/* ===============================
-   칩 레이아웃 / 스타일 (MainMapPage와 동일)
-   =============================== */
 const PillsRow = styled.div`
   width: 90%;
   display: flex;

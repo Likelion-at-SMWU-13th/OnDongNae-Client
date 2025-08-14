@@ -66,7 +66,7 @@ const MainMapPage = () => {
         <KakaoMap />
         {/* 스크롤 영역 */}
         <ScrollArea
-          title='Stores'
+          title={t('dropdown.stores')}
           randomStores={dummyData.data.randomStores} // 선택 없을 때 노출
           categories={categories}
           selectedMainId={selectedMainId}

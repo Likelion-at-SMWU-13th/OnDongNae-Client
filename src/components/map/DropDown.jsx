@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import iconArrow from '@/assets/icon-arrow-down.svg'
 
 const Wrap = styled.div`
   margin-top: 13px;
@@ -9,6 +10,9 @@ const Wrap = styled.div`
 
 const Trigger = styled.button`
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   align-items: center;
   width: 100%;
   padding: 8px 20px;
@@ -16,7 +20,6 @@ const Trigger = styled.button`
   border: 1px solid #f08e67;
   background: #fff;
   box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.4);
 
   font-size: 16px;
   font-weight: 400;
@@ -29,6 +32,16 @@ const Text = styled.span`
   text-overflow: ellipsis;
   overflow: hidden;
   width: 100%;
+  color: rgba(0, 0, 0, 0.4);
+
+  &.selected {
+    color: #000;
+  }
+`
+
+const Icon = styled.img`
+  width: 13px;
+  height: 13px;
 `
 
 const ItemList = styled.ul`
@@ -72,12 +85,15 @@ function DropDown({ value, onChange, placeholder, options = [] }) {
     onChange?.(opt) // { label, value } 그대로 돌려줌
     setOpen(false)
   }
+
+  const isSelected = !!value //
   const displayLabel = value?.label || placeholder
 
   return (
     <Wrap>
       <Trigger type='button' onClick={() => setOpen(!open)}>
-        <Text>{displayLabel}</Text>
+        <Text className={isSelected ? 'selected' : ''}>{displayLabel}</Text>
+        <Icon src={iconArrow} alt='' />
       </Trigger>
 
       {open && (

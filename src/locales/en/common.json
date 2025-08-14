@@ -7,6 +7,8 @@
     "itaewon": "Itaewon Market",
     "huam": "Huam Traditional Market",
     "manly": "Manly Market",
-    "haebangchon": "Haebangchon Shinheung Market"
-  }
+    "haebangchon": "Haebangchon Shinheung Market",
+    "stores": "Stores"
+  },
+  "text": { "notice": "No stores found" }
 }

@@ -1,26 +1,181 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
+
 import iconLocation from '@/assets/icon-location.svg'
 import iconPhone from '@/assets/icon-phone-call.svg'
 import defaultStoreImg from '@/assets/img-defaultStoreImg.svg'
 
-// 전체 ScrollArea
+// 카테고리 배열 만들기
+function activeSubcategoryNames(categories, selectedMainId, selectedSubIds) {
+  if (!selectedMainId) return []
+  const main = categories.find((c) => String(c.mainCategoryId) === String(selectedMainId))
+  if (!main) return []
+  if (Array.isArray(selectedSubIds) && selectedSubIds.length > 0) {
+    const set = new Set(selectedSubIds.map(String))
+    return (main.subCategories || [])
+      .filter((s) => set.has(String(s.id)))
+      .map((s) => String(s.name).trim())
+  }
+  return (main.subCategories || []).map((s) => String(s.name).trim())
+}
+
+// 스크롤 영역 계산
+const getVH = () => window.visualViewport?.height || window.innerHeight
+const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+const nearest = (v, arr) =>
+  arr.reduce((p, c) => (Math.abs(c - v) < Math.abs(p - v) ? c : p), arr[0])
+
+const ScrollArea = ({
+  title = 'Stores',
+  stores = [],
+  randomStores = [],
+  categories = [],
+  selectedMainId = null,
+  selectedSubIds = [],
+  onStoreClick,
+  // 스크롤 영역 높이
+  initialHeightPct = 20, // 초기 높이
+  snapPoints = [12, 20, 65], // 스냅 포인트
+  bottomOffset = 0, // 하단 오프셋
+}) => {
+  const { t } = useTranslation()
+
+  // 리스트 필터링
+  const isAnythingSelected =
+    !!selectedMainId || (Array.isArray(selectedSubIds) && selectedSubIds.length > 0)
+
+  const list = useMemo(() => {
+    if (!isAnythingSelected) return randomStores || []
+    const activeNames = activeSubcategoryNames(categories, selectedMainId, selectedSubIds)
+    if (activeNames.length === 0) return []
+    const set = new Set(activeNames.map((n) => String(n).trim()))
+    return (stores || []).filter(
+      (s) =>
+        Array.isArray(s.subCategories) && s.subCategories.some((n) => set.has(String(n).trim())),
+    )
+  }, [isAnythingSelected, randomStores, stores, categories, selectedMainId, selectedSubIds])
+
+  /* ---- 스냅만으로 범위 결정 ---- */
+  const snaps = useMemo(() => {
+    const arr = (snapPoints && snapPoints.length ? snapPoints : [20, 65])
+      .slice()
+      .sort((a, b) => a - b)
+    return arr
+  }, [snapPoints])
+
+  const minSnap = snaps[0]
+  const maxSnap = snaps[snaps.length - 1]
+
+  const [heightPct, setHeightPct] = useState(() => clamp(initialHeightPct, minSnap, maxSnap))
+
+  const dragRef = useRef({ startY: 0, startH: heightPct, dragging: false })
+
+  const onPointerDown = (e) => {
+    const y = e.clientY ?? e.touches?.[0]?.clientY
+    if (y == null) return
+    dragRef.current = { startY: y, startH: heightPct, dragging: true }
+    window.addEventListener('pointermove', onPointerMove, { passive: false })
+    window.addEventListener('pointerup', onPointerUp, { passive: true })
+  }
+
+  const onPointerMove = (e) => {
+    if (!dragRef.current.dragging) return
+    e.preventDefault()
+    const y = e.clientY ?? e.touches?.[0]?.clientY
+    if (y == null) return
+    const deltaPct = ((dragRef.current.startY - y) / getVH()) * 100
+    setHeightPct(clamp(dragRef.current.startH + deltaPct, minSnap, maxSnap))
+  }
+
+  const onPointerUp = () => {
+    if (!dragRef.current.dragging) return
+    dragRef.current.dragging = false
+    setHeightPct((v) => clamp(nearest(v, snaps), minSnap, maxSnap))
+    window.removeEventListener('pointermove', onPointerMove)
+    window.removeEventListener('pointerup', onPointerUp)
+  }
+
+  useEffect(() => {
+    const onResize = () => setHeightPct((v) => clamp(v, minSnap, maxSnap))
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [minSnap, maxSnap])
+
+  return (
+    <Sheet
+      style={{
+        height: `${heightPct}dvh`,
+        bottom: bottomOffset ? `${bottomOffset}px` : 0,
+      }}
+    >
+      <DragHeader onPointerDown={onPointerDown}>
+        <Handle />
+        <Title>{title}</Title>
+      </DragHeader>
+
+      {/* 리스트만 스크롤 */}
+      <List>
+        {list.length === 0 && <Empty>{t('text.notice')}</Empty>}
+
+        {list.map((s) => (
+          <CardDivider key={s.id}>
+            <Card onClick={() => onStoreClick?.(s.id)} type='button'>
+              <StoreName>{s.name}</StoreName>
+
+              <StoreInfo>
+                {s.isOpen ? <Info>Open</Info> : <Info>Closed</Info>}
+                <Info>{Array.isArray(s.subCategories) ? s.subCategories.join(', ') : ''}</Info>
+              </StoreInfo>
+
+              <StoreImg
+                src={s.image}
+                alt={s.name}
+                loading='lazy'
+                onError={(e) => {
+                  e.currentTarget.onerror = null
+                  e.currentTarget.src = defaultStoreImg
+                }}
+              />
+
+              {s.address && (
+                <InfoRow>
+                  <Icon src={iconLocation} alt='' />
+                  <span>{s.address}</span>
+                </InfoRow>
+              )}
+
+              {s.phone && (
+                <InfoRow>
+                  <Icon src={iconPhone} alt='' />
+                  <span>{s.phone}</span>
+                </InfoRow>
+              )}
+            </Card>
+          </CardDivider>
+        ))}
+      </List>
+    </Sheet>
+  )
+}
+
+export default ScrollArea
+
 const Sheet = styled.div`
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
   width: 100%;
   background: #fff;
   border-radius: 24px 24px 0 0;
   box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
-  overflow: hidden; // 리스트만 스크롤 가능하게
+  overflow: hidden; // f리스트만 스크롤 되게
   z-index: 20;
 `
 
-/* 드래그 가능한 상단 헤더(손잡이 + 타이틀) */
+// 드래그 가능 영역
 const DragHeader = styled.div`
   padding: 15px 24px 0 24px;
   cursor: grab;
@@ -42,13 +197,13 @@ const Title = styled.p`
   font-weight: 600;
 `
 
-/* 스크롤 리스트: 이 영역만 스크롤됨 */
+// 스크롤 가능 영역
 const List = styled.div`
   display: flex;
   flex-direction: column;
 
-  flex: 1 1 auto; /* 시트 높이에서 남은 영역 전부 */
-  min-height: 0; /* flex 컨테이너에서 스크롤 가능하도록 */
+  flex: 1 1 auto;
+  min-height: 0;
   margin-top: 12px;
   padding: 0 24px 16px 24px;
   overflow-y: auto;
@@ -61,6 +216,7 @@ const List = styled.div`
   -webkit-overflow-scrolling: touch;
 `
 
+/* 카드 */
 const Card = styled.button`
   width: 100%;
   height: 212px;
@@ -120,7 +276,7 @@ const Empty = styled.div`
   font-size: 14px;
 `
 
-// 카드사이 구분선
+// 카드 사이 구분선
 const CardDivider = styled.div`
   position: relative;
   padding-bottom: 9px;
@@ -130,141 +286,6 @@ const CardDivider = styled.div`
     display: block;
     height: 9px;
     background: #e9e9ed;
-    margin: 12px -24px 0 -24px; /* List padding(24px) 상쇄 → edge-to-edge 라인 */
+    margin: 12px -24px 0 -24px;
   }
 `
-
-/* ----- 선택 상태로부터 활성 소분류 이름 배열 만들기 ----- */
-function activeSubcategoryNames(categories, selectedMainId, selectedSubIds) {
-  if (!selectedMainId) return []
-  const main = categories.find((c) => String(c.mainCategoryId) === String(selectedMainId))
-  if (!main) return []
-  if (Array.isArray(selectedSubIds) && selectedSubIds.length > 0) {
-    const set = new Set(selectedSubIds.map(String))
-    return (main.subCategories || [])
-      .filter((s) => set.has(String(s.id)))
-      .map((s) => String(s.name).trim())
-  }
-  return (main.subCategories || []).map((s) => String(s.name).trim())
-}
-
-const ScrollArea = ({
-  title = 'Stores',
-  stores = [],
-  randomStores = [],
-  categories = [],
-  selectedMainId = null,
-  selectedSubIds = [],
-  onStoreClick,
-}) => {
-  /* 리스트 필터링*/
-  const isAnythingSelected =
-    !!selectedMainId || (Array.isArray(selectedSubIds) && selectedSubIds.length > 0)
-
-  const list = useMemo(() => {
-    if (!isAnythingSelected) return randomStores || []
-    const activeNames = activeSubcategoryNames(categories, selectedMainId, selectedSubIds)
-    if (activeNames.length === 0) return []
-    const set = new Set(activeNames.map((n) => String(n).trim()))
-    return (stores || []).filter(
-      (s) =>
-        Array.isArray(s.subCategories) && s.subCategories.some((n) => set.has(String(n).trim())),
-    )
-  }, [isAnythingSelected, randomStores, stores, categories, selectedMainId, selectedSubIds])
-
-  /* 드래그로 높이 조절 */
-  const [heightPct, setHeightPct] = useState(20) // 초기 30dvh
-  const snapPoints = [20, 50, 72] // 스냅 단계
-  const minPct = 24,
-    maxPct = 92
-  const dragRef = useRef({ startY: 0, startH: 30, dragging: false })
-
-  const getVH = () => window.visualViewport?.height || window.innerHeight
-  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
-  const nearest = (v, arr) =>
-    arr.reduce((p, c) => (Math.abs(c - v) < Math.abs(p - v) ? c : p), arr[0])
-
-  const onPointerDown = (e) => {
-    const y = e.clientY ?? e.touches?.[0]?.clientY
-    if (y == null) return
-    dragRef.current = { startY: y, startH: heightPct, dragging: true }
-    window.addEventListener('pointermove', onPointerMove, { passive: false })
-    window.addEventListener('pointerup', onPointerUp, { passive: true })
-  }
-
-  const onPointerMove = (e) => {
-    if (!dragRef.current.dragging) return
-    e.preventDefault() /* 헤더 드래그 중 문서 스크롤 방지 */
-    const y = e.clientY ?? e.touches?.[0]?.clientY
-    if (y == null) return
-    const deltaPct = ((dragRef.current.startY - y) / getVH()) * 100
-    setHeightPct(clamp(dragRef.current.startH + deltaPct, minPct, maxPct))
-  }
-
-  const onPointerUp = () => {
-    if (!dragRef.current.dragging) return
-    dragRef.current.dragging = false
-    setHeightPct((v) => clamp(nearest(v, snapPoints), minPct, maxPct))
-    window.removeEventListener('pointermove', onPointerMove)
-    window.removeEventListener('pointerup', onPointerUp)
-  }
-
-  // 주소창 변화 등 뷰포트 변경 시 현재 비율 유지
-  useEffect(() => {
-    const onResize = () => setHeightPct((v) => clamp(v, minPct, maxPct))
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
-
-  return (
-    <Sheet style={{ height: `${heightPct}dvh` }}>
-      <DragHeader onPointerDown={onPointerDown}>
-        <Handle />
-        <Title>{title}</Title>
-      </DragHeader>
-
-      <List>
-        {list.length === 0 && <Empty>조건에 맞는 가게가 없어요.</Empty>}
-
-        {list.map((s) => (
-          <CardDivider key={s.id}>
-            <Card onClick={() => onStoreClick?.(s.id)} type='button'>
-              <StoreName>{s.name}</StoreName>
-
-              <StoreInfo>
-                {s.isOpen ? <Info>Open</Info> : <Info>Closed</Info>}
-                <Info>{Array.isArray(s.subCategories) ? s.subCategories.join(', ') : ''}</Info>
-              </StoreInfo>
-
-              <StoreImg
-                src={s.image}
-                alt={s.name}
-                loading='lazy'
-                onError={(e) => {
-                  e.currentTarget.onerror = null
-                  e.currentTarget.src = defaultStoreImg
-                }}
-              />
-
-              {s.address && (
-                <InfoRow>
-                  <Icon src={iconLocation} alt='' />
-                  <span>{s.address}</span>
-                </InfoRow>
-              )}
-
-              {s.phone && (
-                <InfoRow>
-                  <Icon src={iconPhone} alt='' />
-                  <span>{s.phone}</span>
-                </InfoRow>
-              )}
-            </Card>
-          </CardDivider>
-        ))}
-      </List>
-    </Sheet>
-  )
-}
-
-export default ScrollArea
