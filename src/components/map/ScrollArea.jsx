@@ -233,6 +233,10 @@ const StoreName = styled.p`
   font-weight: 500;
   line-height: 28px;
   margin: 0 0 2px 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const StoreInfo = styled.div`
@@ -243,6 +247,10 @@ const StoreInfo = styled.div`
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 6px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const Info = styled.span``
@@ -262,6 +270,17 @@ const InfoRow = styled.div`
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 10px;
+
+  min-width: 0;
+
+  /* 아이콘 옆 텍스트만 말줄임 */
+  span {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `
 
 const Icon = styled.img`
