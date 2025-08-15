@@ -1,6 +1,7 @@
 {
   "button": { "continue": "继续", "search": "搜索" },
   "bottomNav": { "overview": "概述", "map": "地图", "course": "推荐", "rates": "汇率" },
+  "header": { "storeDetails": "店铺详情" },
   "dropdown": {
     "select": "请选择一个市场",
     "yongmun": "龙山区龙门市场",
@@ -10,5 +11,26 @@
     "haebangchon": "解放村新兴市场",
     "stores": "店铺"
   },
-  "text": { "notice": "暂无符合条件的店铺。" }
+  "text": { "notice": "暂无符合条件的店铺。" },
+  "day": {
+    "MON": "星期一",
+    "TUE": "星期二",
+    "WED": "星期三",
+    "THU": "星期四",
+    "FRI": "星期五",
+    "SAT": "星期六",
+    "SUN": "星期日"
+  },
+  "rates": {
+    "swap": "兑换货币",
+    "to": "目标币种",
+    "usd": "美元",
+    "eur": "欧元",
+    "cny": "人民币",
+    "jpy": "日元",
+    "rate": "汇率",
+    "warning1": "韩国银行汇率（最后更新日期：YYYY年M月D日）",
+    "warning2": "汇率仅供参考。实际金额可能因汇率变动、银行手续费和您的支付方式而有所不同。",
+    "warning3": "请向您的银行或发卡机构确认以您货币计算的确切扣款金额。"
+  }
 }

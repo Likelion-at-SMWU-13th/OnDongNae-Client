@@ -35,6 +35,7 @@ import DetailEditPage from './pages/store/description/DetailEditPage'
 
 // map
 import MainMapPage from './pages/customer/map/MainMapPage'
+import MapStorePage from './pages/customer/map/MapStoresPage'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -149,6 +150,10 @@ const router = createBrowserRouter([
       {
         path: '/user/map',
         element: <MainMapPage />,
+      },
+      {
+        path: '/user/map/store',
+        element: <MapStorePage />,
       },
     ],
   },

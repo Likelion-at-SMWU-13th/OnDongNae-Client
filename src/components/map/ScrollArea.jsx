@@ -124,8 +124,9 @@ const ScrollArea = ({
               <StoreName>{s.name}</StoreName>
 
               <StoreInfo>
-                {s.isOpen ? <Info>Open</Info> : <Info>Closed</Info>}
                 <Info>{Array.isArray(s.subCategories) ? s.subCategories.join(', ') : ''}</Info>
+                <Info>|</Info>
+                {s.isOpen ? <OpenInfo>Open</OpenInfo> : <OpenInfo>Closed</OpenInfo>}
               </StoreInfo>
 
               <StoreImg
@@ -204,7 +205,7 @@ const List = styled.div`
 
   flex: 1 1 auto;
   min-height: 0;
-  margin-top: 12px;
+  margin-top: 11px;
   padding: 0 24px 16px 24px;
   overflow-y: auto;
 
@@ -218,6 +219,7 @@ const List = styled.div`
 
 /* 카드 */
 const Card = styled.button`
+  margin-top: 9px;
   width: 100%;
   height: 212px;
   text-align: left;
@@ -241,8 +243,8 @@ const StoreName = styled.p`
 
 const StoreInfo = styled.div`
   display: flex;
-  gap: 15px;
-  color: #000;
+  gap: 6px;
+  color: #838383;
   font-feature-settings: 'dlig' on;
   font-size: 14px;
   font-weight: 400;
@@ -254,6 +256,10 @@ const StoreInfo = styled.div`
 `
 
 const Info = styled.span``
+
+const OpenInfo = styled.span`
+  color: #feb99d;
+`
 
 const StoreImg = styled.img`
   width: 328px;
@@ -298,7 +304,6 @@ const Empty = styled.div`
 // 카드 사이 구분선
 const CardDivider = styled.div`
   position: relative;
-  padding-bottom: 9px;
 
   &:not(:last-child)::after {
     content: '';
