@@ -1,8 +1,8 @@
-// 연동 후 제거
+// 연동 후 제거 (ZH)
 
-const detailDummyData = {
+const detailDummyDataZh = {
   code: 'OK',
-  message: '가게 상세 조회 성공',
+  message: '门店详情查询成功',
   success: true,
   data: {
     header: {
@@ -16,74 +16,37 @@ const detailDummyData = {
         open: true,
       },
       weeklyHours: [
-        {
-          day: 'MON',
-          open: '11:00',
-          close: '21:00',
-          closed: false,
-        },
-        {
-          day: 'TUE',
-          open: '11:00',
-          close: '21:00',
-          closed: false,
-        },
-        {
-          day: 'WED',
-          open: '11:00',
-          close: '21:00',
-          closed: false,
-        },
-        {
-          day: 'THU',
-          open: '11:00',
-          close: '21:00',
-          closed: false,
-        },
-        {
-          day: 'FRI',
-          open: '11:00',
-          close: '22:00',
-          closed: false,
-        },
-        {
-          day: 'SAT',
-          open: '12:00',
-          close: '22:00',
-          closed: false,
-        },
-        {
-          day: 'SUN',
-          open: null,
-          close: null,
-          closed: true,
-        },
+        { day: 'MON', open: '11:00', close: '21:00', closed: false },
+        { day: 'TUE', open: '11:00', close: '21:00', closed: false },
+        { day: 'WED', open: '11:00', close: '21:00', closed: false },
+        { day: 'THU', open: '11:00', close: '21:00', closed: false },
+        { day: 'FRI', open: '11:00', close: '22:00', closed: false },
+        { day: 'SAT', open: '12:00', close: '22:00', closed: false },
+        { day: 'SUN', open: null, close: null, closed: true },
       ],
-      shortIntro:
-        'A snack bar specializing in traditional tteokbokki and sundae made with fresh ingredients, offering delicious flavors.',
+      shortIntro: '以新鲜食材制作传统辣炒年糕与米肠的小吃店，风味可口。',
     },
     menuTab: [
       {
-        name: 'Classic Tteokbokki',
+        name: '经典辣炒年糕',
         priceKrw: 5000,
-        allergies: ['Wheat'],
+        allergies: ['小麦'],
       },
       {
-        name: 'Sundae (Korean Blood Sausage)',
+        name: '韩国米肠（Sundae）',
         priceKrw: 7000,
-        allergies: ['Pork', 'Beef', 'Wheat', 'Soy'],
+        allergies: ['猪肉', '牛肉', '小麦', '大豆'],
       },
       {
-        name: 'Fish Cake Skewer',
+        name: '鱼糕串',
         priceKrw: 1000,
-        allergies: ['Wheat', 'Soy', 'Fish'],
+        allergies: ['小麦', '大豆', '鱼类'],
       },
     ],
     infoTab: {
-      longIntro:
-        'Ondongnae Tteokbokki is loved for its sweet and spicy sauce and variety of toppings.',
+      longIntro: 'Ondongnae 辣炒年糕因其甜辣酱汁和多样配料而深受喜爱。',
       phone: '02-999-8888',
-      address: '00-ro 11, Yongsan-gu, Seoul',
+      address: '韩国首尔市龙山区00路11号',
     },
     map: {
       lat: 37.541,
@@ -92,4 +55,4 @@ const detailDummyData = {
   },
 }
 
-export default detailDummyData
+export default detailDummyDataZh

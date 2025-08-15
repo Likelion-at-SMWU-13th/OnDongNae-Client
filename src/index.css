@@ -74,7 +74,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Pretendard';
+  font-family:
+    'Pretendard',
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 #root {
@@ -88,6 +92,7 @@ body {
   height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
+  text-rendering: optimizeLegibility;
 }
 
 html {
@@ -108,7 +113,8 @@ body {
   min-height: 100dvh;
   /*height: calc(var(--vh, 1vh) * 100); /* 모바일 주소창 높이 변화 대응 */
   /* 폰트 렌더링 품질 향상 */
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: auto;
+  font-feature-settings: normal;
   -moz-osx-font-smoothing: grayscale;
 }
 

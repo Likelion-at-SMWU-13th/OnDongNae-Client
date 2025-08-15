@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 import iconLocation from '@/assets/icon-location.svg'
 import iconPhone from '@/assets/icon-phone-call.svg'
@@ -40,6 +41,7 @@ const ScrollArea = ({
   bottomOffset = 0, // 하단 오프셋
 }) => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   // 리스트 필터링
   const isAnythingSelected =
@@ -56,7 +58,6 @@ const ScrollArea = ({
     )
   }, [isAnythingSelected, randomStores, stores, categories, selectedMainId, selectedSubIds])
 
-  /* ---- 스냅만으로 범위 결정 ---- */
   const snaps = useMemo(() => {
     const arr = (snapPoints && snapPoints.length ? snapPoints : [20, 65])
       .slice()
@@ -102,6 +103,11 @@ const ScrollArea = ({
     return () => window.removeEventListener('resize', onResize)
   }, [minSnap, maxSnap])
 
+  // 가게 카드 클릭 시 페이지 이동
+  const handleCardClick = (store) => {
+    navigate(`/user/map/store`) // 가게 id에 맞게 경로 변경 필요
+  }
+
   return (
     <Sheet
       style={{
@@ -120,13 +126,18 @@ const ScrollArea = ({
 
         {list.map((s) => (
           <CardDivider key={s.id}>
-            <Card onClick={() => onStoreClick?.(s.id)} type='button'>
+            {/* 카드 클릭 시 해당 가게로 이동 */}
+            <Card onClick={() => handleCardClick(s)} type='button'>
               <StoreName>{s.name}</StoreName>
 
               <StoreInfo>
                 <Info>{Array.isArray(s.subCategories) ? s.subCategories.join(', ') : ''}</Info>
                 <Info>|</Info>
-                {s.isOpen ? <OpenInfo>Open</OpenInfo> : <OpenInfo>Closed</OpenInfo>}
+                {s.isOpen ? (
+                  <OpenInfo>{t('text.open')}</OpenInfo>
+                ) : (
+                  <OpenInfo>{t('text.closed')}</OpenInfo>
+                )}
               </StoreInfo>
 
               <StoreImg
@@ -243,6 +254,7 @@ const StoreName = styled.p`
 
 const StoreInfo = styled.div`
   display: flex;
+  align-items: center;
   gap: 6px;
   color: #838383;
   font-feature-settings: 'dlig' on;

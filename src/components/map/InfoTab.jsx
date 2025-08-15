@@ -1,22 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 
 function InfoTab({ info }) {
+  const { t } = useTranslation()
+
   // 정보 없으면 '정보가 없습니다' 문구 띄우기
   const show = (v) => (typeof v === 'string' && v.trim() ? v : 'No Info')
 
   return (
     <Container>
       <TextContainer>
-        <Title>Description</Title>
+        <Title>{t('text.description')}</Title>
         <PreText>{show(info?.longIntro)}</PreText>
       </TextContainer>
       <TextContainer>
-        <Title>Contact</Title>
+        <Title>{t('text.contact')}</Title>
         <Text>{show(info?.phone)}</Text>
       </TextContainer>
       <TextContainer>
-        <Title>Address</Title>
+        <Title>{t('text.address')}</Title>
         <Text>{show(info?.address)}</Text>
       </TextContainer>
     </Container>

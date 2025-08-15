@@ -1,8 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import alertIcon from '@/assets/icon-alert.svg'
+import { useTranslation } from 'react-i18next'
 
 function MenuTab({ items }) {
+  const { t } = useTranslation()
+
   return (
     <Container>
       {items?.map((m, i) => (
@@ -12,7 +15,11 @@ function MenuTab({ items }) {
             <span>₩ {Number(m.priceKrw).toLocaleString()}</span>
           </MenuRow>
 
-          {m.allergies?.length > 0 && <AllergyRow>contains : {m.allergies.join(', ')}</AllergyRow>}
+          {m.allergies?.length > 0 && (
+            <AllergyRow>
+              {t('text.contains')} : {m.allergies.join(', ')}
+            </AllergyRow>
+          )}
 
           <Divider />
         </Item>
@@ -20,10 +27,7 @@ function MenuTab({ items }) {
 
       <WarningRow>
         <WarningIcon src={alertIcon} alt='' />
-        <WarningText>
-          Allergy information is AI-generated and may not be accurate. Please verify with the store
-          directly.
-        </WarningText>
+        <WarningText>{t('text.allergyWarning')}</WarningText>
       </WarningRow>
     </Container>
   )
@@ -62,6 +66,7 @@ const AllergyRow = styled.div`
   font-weight: 400;
 `
 const WarningRow = styled.div`
+  margin-top: 17.5px;
   display: flex;
   flex-direction: row;
   align-items: start;

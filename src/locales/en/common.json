@@ -11,7 +11,21 @@
     "haebangchon": "Haebangchon Shinheung Market",
     "stores": "Stores"
   },
-  "text": { "notice": "No stores found" },
+  "text": {
+    "notice": "No stores found",
+    "open": "Open",
+    "closed": "Closed",
+    "contains": "Contains",
+    "menu": "Menu",
+    "info": "Info",
+    "description": "Description",
+    "contact": "Contact",
+    "address": "Address",
+    "allergyWarning": "Allergy information is AI-generated and may not be accurate. Please verify with the store directly.",
+    "closes": "Closes",
+    "opens": "Opens",
+    "closedToday": "Closed today"
+  },
   "day": {
     "MON": "Monday",
     "TUE": "Tuesday",

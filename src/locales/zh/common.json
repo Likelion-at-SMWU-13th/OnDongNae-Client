@@ -11,7 +11,21 @@
     "haebangchon": "解放村新兴市场",
     "stores": "店铺"
   },
-  "text": { "notice": "暂无符合条件的店铺。" },
+  "text": {
+    "notice": "未找到门店",
+    "open": "营业中",
+    "closed": "未营业",
+    "contains": "含有",
+    "menu": "菜单",
+    "info": "信息",
+    "description": "说明",
+    "contact": "联系方式",
+    "address": "地址",
+    "allergyWarning": "过敏原信息由 AI 生成，可能不准确，请直接向店家确认。",
+    "closes": "营业至",
+    "opens": "开门",
+    "closedToday": "今天不营业"
+  },
   "day": {
     "MON": "星期一",
     "TUE": "星期二",

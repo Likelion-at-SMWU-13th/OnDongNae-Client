@@ -12,7 +12,21 @@
     "haebangchon": "カイホウソン(解放村)シンコウ市場",
     "stores": "店舗"
   },
-  "text": { "notice": "条件に合う店舗がありません。" },
+  "text": {
+    "notice": "店舗が見つかりません",
+    "open": "営業中",
+    "closed": "営業時間外",
+    "contains": "含む",
+    "menu": "メニュー",
+    "info": "情報",
+    "description": "説明",
+    "contact": "連絡先",
+    "address": "住所",
+    "allergyWarning": "アレルギー情報は AI が生成したもので、正確でない場合があります。店舗へご確認ください。",
+    "closes": "閉店",
+    "opens": "開店",
+    "closedToday": "本日休業"
+  },
   "day": {
     "MON": "月曜日",
     "TUE": "火曜日",

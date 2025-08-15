@@ -3,19 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 
-const Wrap = styled.section`
-  padding: 0 25px 20px 25px;
-`
-
-// 박스 안에 카카오맵을 채워 넣기
-const MapBox = styled.div`
-  width: 100%;
-  height: 122px;
-  border-radius: 10px;
-  overflow: hidden;
-`
-
-export default function MapSection({ header }) {
+function MapSection({ header }) {
   // header가 없거나 lat/lng가 비어있으면 용산구 중심 좌표로 기본값 처리 + 마커는 보여주지 말기
   const lat = header?.lat ?? 37.5326
   const lng = header?.lng ?? 126.9905
@@ -41,3 +29,17 @@ export default function MapSection({ header }) {
     </Wrap>
   )
 }
+
+export default MapSection
+
+const Wrap = styled.section`
+  padding: 0 25px 20px 25px;
+`
+
+// 박스 안에 카카오맵을 채워 넣기
+const MapBox = styled.div`
+  width: 100%;
+  height: 122px;
+  border-radius: 10px;
+  overflow: hidden;
+`

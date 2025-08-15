@@ -5,9 +5,68 @@ import styled from 'styled-components'
 import clockIcon from '@/assets/icon-small-clock.svg'
 import downIcon from '@/assets/icon-down-arrow.svg'
 
+function HeaderSection({ header }) {
+  const { t } = useTranslation()
+
+  const [expanded, setExpanded] = useState(false) // 시간정보 기본 닫힘
+
+  const statusText = useMemo(() => {
+    const isOpen = header?.status?.open // 오늘 오픈 여부
+    const closeAt = header?.status?.todayCloseTime // 종료 시간
+    const openAt = header?.status?.todayOpenTime // 시작 시간
+
+    if (header?.status?.todayClosed) return `· ${t('text.closedToday')}`
+    if (isOpen && closeAt) return `· ${t('text.closes')} ${closeAt}`
+    if (!isOpen && openAt) return `· ${t('text.opens')} ${openAt}`
+    return ''
+  }, [header])
+
+  return (
+    <Section>
+      <Name>
+        {header?.name} <KorName>{header?.nameKo}</KorName>
+      </Name>
+      <TimeInfo>
+        <Img src={clockIcon} />
+        <OpenInfo>{header?.status?.open ? t('text.open') : t('text.closed')}</OpenInfo>{' '}
+        <CloseInfo>{statusText}</CloseInfo>
+        <ArrowButton type='button' data-expanded={expanded} onClick={() => setExpanded((v) => !v)}>
+          <img src={downIcon} alt='' />
+        </ArrowButton>
+      </TimeInfo>
+
+      {/* 펼침 영역: 주간 영업시간 */}
+      {expanded && (
+        <Card>
+          {(header?.weeklyHours || []).map((row, idx) => {
+            const dayKey = `day.${(row?.day || '').toUpperCase()}`
+            const dayLabel = t(dayKey, { defaultValue: row?.day || '' }) // 번역 없으면 코드 그대로 표시
+
+            return (
+              <Day key={idx}>
+                <DayText>{dayLabel}</DayText>
+                {row.closed ? (
+                  <ClosedText>{t('text.closed')}</ClosedText>
+                ) : (
+                  <TimeText>
+                    {row.open} ~ {row.close}
+                  </TimeText>
+                )}
+              </Day>
+            )
+          })}
+        </Card>
+      )}
+      {header?.shortIntro && <ShortIntro>{header.shortIntro}</ShortIntro>}
+    </Section>
+  )
+}
+
+export default HeaderSection
+
 const Section = styled.section`
   padding: 20px 25px 15px 25px;
-  flex: display;
+  display: flex;
   flex-direction: column;
   gap: 11px;
 `
@@ -26,7 +85,6 @@ const KorName = styled.span`
 `
 
 const TimeInfo = styled.div`
-  margin-top: 12px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -68,7 +126,7 @@ const ArrowButton = styled.button`
 `
 
 const Card = styled.div`
-  padding: 10px 93px 20px 23px;
+  padding: 10px 101px 20px 23px;
 `
 
 const Day = styled.div`
@@ -95,72 +153,4 @@ const ShortIntro = styled.p`
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  margin-top: 10px;
 `
-const dayMap = {
-  MON: 'Monday',
-  TUE: 'Tuesday',
-  WED: 'Wednesday',
-  THU: 'Thursday',
-  FRI: 'Friday',
-  SAT: 'Saturday',
-  SUN: 'Sunday',
-}
-
-export default function HeaderSection({ header }) {
-  const { t } = useTranslation()
-
-  const [expanded, setExpanded] = useState(false) // 시간정보 기본 닫힘
-
-  const statusText = useMemo(() => {
-    const isOpen = header?.status?.open // 오늘 오픈 여부
-    const closeAt = header?.status?.todayCloseTime // 종료 시간
-    const openAt = header?.status?.todayOpenTime // 시작 시간
-
-    if (header?.status?.todayClosed) return '· Closed today'
-    if (isOpen && closeAt) return `· Closes ${closeAt}`
-    if (!isOpen && openAt) return `· Opens ${openAt}`
-    return ''
-  }, [header])
-
-  return (
-    <Section>
-      <Name>
-        {header?.name} <KorName>{header?.nameKo}</KorName>
-      </Name>
-      <TimeInfo>
-        <Img src={clockIcon} />
-        <OpenInfo>{header?.status?.isOpen ? 'Open' : 'Closed'}</OpenInfo>
-        <CloseInfo>{statusText}</CloseInfo>
-
-        <ArrowButton type='button' data-expanded={expanded} onClick={() => setExpanded((v) => !v)}>
-          <img src={downIcon} alt='' />
-        </ArrowButton>
-      </TimeInfo>
-
-      {/* 펼침 영역: 주간 영업시간 */}
-      {expanded && (
-        <Card>
-          {(header?.weeklyHours || []).map((row, idx) => {
-            const dayKey = `day.${(row?.day || '').toUpperCase()}`
-            const dayLabel = t(dayKey, { defaultValue: row?.day || '' }) // 번역 없으면 코드 그대로 표시
-
-            return (
-              <Day key={idx}>
-                <DayText>{dayLabel}</DayText>
-                {row.closed ? (
-                  <ClosedText>Closed</ClosedText>
-                ) : (
-                  <TimeText>
-                    {row.open} ~ {row.close}
-                  </TimeText>
-                )}
-              </Day>
-            )
-          })}
-        </Card>
-      )}
-      {header?.shortIntro && <ShortIntro>{header.shortIntro}</ShortIntro>}
-    </Section>
-  )
-}
