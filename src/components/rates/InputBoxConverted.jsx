@@ -187,7 +187,6 @@ const ResultRate = styled.div`
   }
 `
 const Text = styled.p`
-  color: #000;
   font-size: 16px;
   font-weight: 500;
 `
