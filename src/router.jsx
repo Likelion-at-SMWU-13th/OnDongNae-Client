@@ -29,6 +29,8 @@ import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
 import MenuExtractFailPage from './pages/MenuExtractFailPage'
 import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
 import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
+
+// hours
 import HoursPage from './pages/store/hours/HoursPage.jsx'
 import HoursEditPage from './pages/store/hours/HoursEditPage.jsx'
 
@@ -40,6 +42,9 @@ import DetailEditPage from './pages/store/description/DetailEditPage'
 // map
 import MainMapPage from './pages/customer/map/MainMapPage'
 import MapStorePage from './pages/customer/map/MapStoresPage'
+
+// overview
+import OverviewPage from './pages/customer/overview/OverviewPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -141,7 +146,6 @@ const router = createBrowserRouter([
         element: <MenuAllergensFailPage />,
       },
       {
-
         path: '/hours',
         element: <HoursPage />,
       },
@@ -149,7 +153,7 @@ const router = createBrowserRouter([
         path: '/hours/edit',
         element: <HoursEditPage />,
       },
-  {
+      {
         path: '/store/description',
         element: <DescriptionPage />,
       },
@@ -168,6 +172,10 @@ const router = createBrowserRouter([
       {
         path: '/user/map/store',
         element: <MapStorePage />,
+      },
+      {
+        path: '/user/overview',
+        element: <OverviewPage />,
       },
     ],
   },

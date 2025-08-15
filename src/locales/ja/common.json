@@ -1,7 +1,7 @@
 {
   "button": { "continue": "続ける", "search": "検索" },
   "bottomNav": { "overview": "概要", "map": "地図", "course": "コース", "rates": "レート" },
-  "header": { "storeDetails": "店舗詳細" },
+  "header": { "storeDetails": "店舗詳細", "overview": "概要" },
 
   "dropdown": {
     "select": "市場を選んでください",
@@ -48,5 +48,4 @@
     "warning2": "為替レートは参考値です。実際の金額は為替レートや銀行手数料、お支払い方法により異なる場合があります。",
     "warning3": "正確な請求金額については、ご利用の銀行またはカード会社にご確認ください。"
   }
-
 }
