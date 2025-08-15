@@ -1,5 +1,3 @@
-// src/pages/signup/SelectSubcategoryPage.jsx
-import styled from 'styled-components'
 import * as S from '@/styles/signup/StoreCategoryPage.styles'
 import React, { useMemo, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'

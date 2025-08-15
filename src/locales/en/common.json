@@ -1,0 +1,51 @@
+{
+  "button": { "continue": "continue", "search": "Search" },
+  "bottomNav": { "overview": "Overview", "map": "Map", "course": "Course", "rates": "Rates" },
+  "header": { "storeDetails": "Store Details" },
+  "dropdown": {
+    "select": "Select Market",
+    "yongmun": "Yongsan Yongmun market",
+    "itaewon": "Itaewon Market",
+    "huam": "Huam Traditional Market",
+    "manly": "Manly Market",
+    "haebangchon": "Haebangchon Shinheung Market",
+    "stores": "Stores"
+  },
+  "text": {
+    "notice": "No stores found",
+    "open": "Open",
+    "closed": "Closed",
+    "contains": "Contains",
+    "menu": "Menu",
+    "info": "Info",
+    "description": "Description",
+    "contact": "Contact",
+    "address": "Address",
+    "allergyWarning": "Allergy information is AI-generated and may not be accurate. Please verify with the store directly.",
+    "closes": "Closes",
+    "opens": "Opens",
+    "closedToday": "Closed today"
+  },
+  "day": {
+    "MON": "Monday",
+    "TUE": "Tuesday",
+    "WED": "Wednesday",
+    "THU": "Thursday",
+    "FRI": "Friday",
+    "SAT": "Saturday",
+    "SUN": "Sunday"
+  },
+  "rates": {
+    "swap": "Swap Currency",
+    "to": "To",
+    "usd": "USD",
+    "eur": "EUR",
+    "cny": "CNY",
+    "jpy": "JPY",
+    "rate": "Exchange rate",
+    "warning1": "Exchange rate from Bank of Korea (Last updated: Month Day, Year)",
+    "warning2": "Exchange rates are for reference only. Actual amounts may differ depending on the exchange rate, bank fees, and your payment method.",
+    "warning3": "Please check with your bank or card provider for the exact amount to be charged in your currency."
+  }
+
+}

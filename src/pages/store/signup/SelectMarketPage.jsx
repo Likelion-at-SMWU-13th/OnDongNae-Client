@@ -33,7 +33,7 @@ const SelectMarketPage = () => {
     }
     // 공백 제외 후, 다음 페이지로
     const marketName = (markets.find((m) => m.id === selectedId)?.name ?? '').replace(/\s+/g, '')
-    navigate('/signup/store-address', { state: { ...state, marketName } })
+    navigate('/signup/store-name', { state: { ...state, marketName } })
   }
 
   return (

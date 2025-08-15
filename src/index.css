@@ -74,7 +74,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Pretendard';
+  font-family:
+    'Pretendard',
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 #root {
@@ -88,14 +92,15 @@ body {
   height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
+  text-rendering: optimizeLegibility;
 }
 
 html {
   box-sizing: border-box;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; */
+  justify-content: center;
   background-color: #fafafa;
   /* overscroll-behavior: none; */
 }
@@ -104,14 +109,13 @@ body {
   width: 100%;
   margin: 0 auto;
   max-width: 390px;
-  overflow-x: hidden;
-  overflow-y: hidden;
   background-color: rgba(255, 255, 255, 1);
   position: relative;
   min-height: 100dvh;
   /*height: calc(var(--vh, 1vh) * 100); /* 모바일 주소창 높이 변화 대응 */
   /* 폰트 렌더링 품질 향상 */
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: auto;
+  font-feature-settings: normal;
   -moz-osx-font-smoothing: grayscale;
 }
 

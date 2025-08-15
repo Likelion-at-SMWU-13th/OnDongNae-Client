@@ -11,6 +11,7 @@ const TitleContainer = styled.div`
 const StyledTitle = styled.p`
   font-size: 23px;
   font-weight: 600;
+  white-space: pre-line;
 `
 const StyledSubtitle = styled.p`
   font-size: 18px;

@@ -14,7 +14,7 @@ import icMyActive from '@/assets/icon-bottomNav-myStore-active.svg'
 const NAVS = [
   { to: '/menu', label: '메뉴관리', icon: icMenu, iconActive: icMenuActive },
   { to: '/hours', label: '영업시간', icon: icTime, iconActive: icTimeActive },
-  { to: '/about', label: '가게설명', icon: icAbout, iconActive: icAboutActive },
+  { to: '/store/description', label: '가게설명', icon: icAbout, iconActive: icAboutActive },
   { to: '/mypage', label: '나의가게', icon: icMy, iconActive: icMyActive },
 ]
 
