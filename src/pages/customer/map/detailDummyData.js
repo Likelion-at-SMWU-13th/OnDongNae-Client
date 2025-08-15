@@ -68,6 +68,16 @@ const detailDummyData = {
         priceKrw: 5000,
         allergies: ['Wheat'],
       },
+      {
+        name: 'Sundae (Korean Blood Sausage)',
+        priceKrw: 7000,
+        allergies: ['Pork', 'Beef', 'Wheat', 'Soy'],
+      },
+      {
+        name: 'Fish Cake Skewer',
+        priceKrw: 1000,
+        allergies: ['Wheat', 'Soy', 'Fish'],
+      },
     ],
     infoTab: {
       longIntro:

@@ -33,6 +33,10 @@ const MapStoresPage = () => {
           <HeaderSection header={data?.header} />
           {/* 지도 영역 */}
           <MapSection header={data?.map} />
+
+          {/* 탭 */}
+          <TabSection active={tab} onChange={setTab} />
+
           {/* 탭 (메뉴 탭 or 상세정보 탭) */}
           {tab === 'menu' ? <MenuTab items={data?.menuTab} /> : <InfoTab info={data?.infoTab} />}
         </S.Scroll>
