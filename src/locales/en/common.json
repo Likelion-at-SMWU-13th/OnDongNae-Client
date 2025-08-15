@@ -46,5 +46,18 @@
     "warning1": "Exchange rate from Bank of Korea (Last updated: Month Day, Year)",
     "warning2": "Exchange rates are for reference only. Actual amounts may differ depending on the exchange rate, bank fees, and your payment method.",
     "warning3": "Please check with your bank or card provider for the exact amount to be charged in your currency."
+  },
+  "overview": {
+    "title": "Markets in Yongsan-gu",
+    "YongmunMarket": "Yongsan Yongmun Market",
+    "yongmunDescription": "Known for its mix of tradition, modern facilities, and lively cultural events",
+    "itaewonMarket": "Itaewon Market",
+    "itaewonDescription": "Combines multicultural vibes with trendy, affordable fashion",
+    "huamMarket": "Huam Traditional Market",
+    "huamDescription": "Historic yet modern, part of Seoul’s heritage",
+    "manlyMarket": "Manly Market",
+    "manlyDescription": "Historic traditional market with about  and a preserved traditional atmosphere.",
+    "haebangchonMarket": "Haebangchon Shinheung Market",
+    "haebangchonDescription": "Vibrant market mixing youth culture, art, food, and affordable shops"
   }
 }

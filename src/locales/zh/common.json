@@ -46,5 +46,18 @@
     "warning1": "韩国银行汇率（最后更新日期：YYYY年M月D日）",
     "warning2": "汇率仅供参考。实际金额可能因汇率变动、银行手续费和您的支付方式而有所不同。",
     "warning3": "请向您的银行或发卡机构确认以您货币计算的确切扣款金额。"
+  },
+  "overview": {
+    "title": "龙山区市场",
+    "YongmunMarket": "龙山区龙门市场",
+    "yongmunDescription": "以融合传统、现代设施和丰富多彩的文化活动而闻名。",
+    "itaewonMarket": "厚岩集市",
+    "itaewonDescription": "历史悠久却现代，是首尔遗产的一部分。",
+    "huamMarket": "梨泰院市场",
+    "huamDescription": "结合多元文化氛围与时尚且实惠的服饰",
+    "manlyMarket": "万里市场",
+    "manlyDescription": "历史悠久的传统市场，约有___家商铺，保留着传统氛围。",
+    "haebangchonMarket": "解放村新兴市场",
+    "haebangchonDescription": "充满活力的市场，融合了青年文化、艺术、美食和实惠的商店。"
   }
 }
