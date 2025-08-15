@@ -45,6 +45,12 @@ import MapStorePage from './pages/customer/map/MapStoresPage'
 
 // overview
 import OverviewPage from './pages/customer/overview/OverviewPage.jsx'
+import OverviewInfo from './pages/customer/overview/OverviewInfoPage.jsx'
+import OverviewInfo1 from './pages/customer/overview/OverviewInfoPage1.jsx'
+import OverviewInfo2 from './pages/customer/overview/OverviewInfoPage2.jsx'
+import OverviewInfo3 from './pages/customer/overview/OverviewInfoPage3.jsx'
+import OverviewInfo4 from './pages/customer/overview/OverviewInfoPage4.jsx'
+import OverviewInfo5 from './pages/customer/overview/OverviewInfoPage5.jsx'
 
 const router = createBrowserRouter([
   {
@@ -176,6 +182,30 @@ const router = createBrowserRouter([
       {
         path: '/user/overview',
         element: <OverviewPage />,
+      },
+      {
+        path: '/user/overview/info',
+        element: <OverviewInfo />,
+      },
+      {
+        path: '/user/overview/info/1',
+        element: <OverviewInfo1 />,
+      },
+      {
+        path: '/user/overview/info/2',
+        element: <OverviewInfo2 />,
+      },
+      {
+        path: '/user/overview/info/3',
+        element: <OverviewInfo3 />,
+      },
+      {
+        path: '/user/overview/info/4',
+        element: <OverviewInfo4 />,
+      },
+      {
+        path: '/user/overview/info/5',
+        element: <OverviewInfo5 />,
       },
     ],
   },
