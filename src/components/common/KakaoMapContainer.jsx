@@ -1,7 +1,24 @@
+/**
+ * @typedef {{lat: number, lng: number}} LatLng
+ * @typedef {{
+ *   center?: LatLng,
+ *   level?: number,
+ *   style?: React.CSSProperties,
+ *   markers?: Array<{ id?: string|number, position: LatLng, image?: any, data?: any }>,
+ *   onMarkerClick?: (marker:any)=>void,
+ *   onMapClick?: (e:any)=>void,
+ *   onIdle?: (map:any)=>void,
+ *   draggable?: boolean,
+ *   scrollwheel?: boolean,
+ *   zoomControlPosition?: any
+ * }} KakaoMapProps
+ */
+
 import { useRef } from 'react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 
-export default function KakaoMapContainer({
+/** @param {KakaoMapProps} props */
+export default function KakaoMap({
   // [뷰 설정]
   center = { lat: 37.5326, lng: 126.9905 }, // 기본 중심 좌표 (용산구)
   level = 6, // 확대 레벨 (낮을수록 확대)
