@@ -4,6 +4,8 @@ import './App.css'
 import { Outlet } from 'react-router-dom'
 import './i18n'
 
+import './i18n'
+
 function App() {
   return (
     <>

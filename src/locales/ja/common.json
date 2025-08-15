@@ -1,3 +1,52 @@
 {
-  "button": { "continue": "続ける" }
+  "button": { "continue": "続ける", "search": "検索" },
+  "bottomNav": { "overview": "概要", "map": "地図", "course": "コース", "rates": "レート" },
+  "header": { "storeDetails": "店舗詳細" },
+
+  "dropdown": {
+    "select": "市場を選んでください",
+    "yongmun": "ヨンサン(龍山)ヨンムン(龍門)市場",
+    "itaewon": "イテウォン（梨泰院）市場",
+    "huam": "フアム（厚岩）伝統市場",
+    "manly": "マンニ（万里）市場",
+    "haebangchon": "カイホウソン(解放村)シンコウ市場",
+    "stores": "店舗"
+  },
+  "text": {
+    "notice": "店舗が見つかりません",
+    "open": "営業中",
+    "closed": "営業時間外",
+    "contains": "含む",
+    "menu": "メニュー",
+    "info": "情報",
+    "description": "説明",
+    "contact": "連絡先",
+    "address": "住所",
+    "allergyWarning": "アレルギー情報は AI が生成したもので、正確でない場合があります。店舗へご確認ください。",
+    "closes": "閉店",
+    "opens": "開店",
+    "closedToday": "本日休業"
+  },
+  "day": {
+    "MON": "月曜日",
+    "TUE": "火曜日",
+    "WED": "水曜日",
+    "THU": "木曜日",
+    "FRI": "金曜日",
+    "SAT": "土曜日",
+    "SUN": "日曜日"
+  },
+  "rates": {
+    "swap": "通貨を入れ替え",
+    "to": "変換後",
+    "usd": "米ドル",
+    "eur": "ユーロ",
+    "cny": "人民元",
+    "jpy": "日本円",
+    "rate": "為替レート",
+    "warning1": "韓国銀行の為替レート（最終更新日：YYYY年M月D日）",
+    "warning2": "為替レートは参考値です。実際の金額は為替レートや銀行手数料、お支払い方法により異なる場合があります。",
+    "warning3": "正確な請求金額については、ご利用の銀行またはカード会社にご確認ください。"
+  }
+
 }
