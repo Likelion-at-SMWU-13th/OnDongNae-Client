@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
+
 //onboarding
 import SelectLanguagePage from './pages/onboarding/SelectLanguagePage'
 // signup
@@ -28,6 +29,9 @@ import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
 import MenuExtractFailPage from './pages/MenuExtractFailPage'
 import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
 import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
+import HoursPage from './pages/store/hours/HoursPage.jsx'
+import HoursEditPage from './pages/store/hours/HoursEditPage.jsx'
+
 // description
 import DescriptionPage from './pages/store/description/DescriptionPage'
 import SummaryEditPage from './pages/store/description/SummaryEditPage'
@@ -36,6 +40,7 @@ import DetailEditPage from './pages/store/description/DetailEditPage'
 // map
 import MainMapPage from './pages/customer/map/MainMapPage'
 import MapStorePage from './pages/customer/map/MapStoresPage'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -136,6 +141,15 @@ const router = createBrowserRouter([
         element: <MenuAllergensFailPage />,
       },
       {
+
+        path: '/hours',
+        element: <HoursPage />,
+      },
+      {
+        path: '/hours/edit',
+        element: <HoursEditPage />,
+      },
+  {
         path: '/store/description',
         element: <DescriptionPage />,
       },
