@@ -41,6 +41,9 @@ import DetailEditPage from './pages/store/description/DetailEditPage'
 import MainMapPage from './pages/customer/map/MainMapPage'
 import MapStorePage from './pages/customer/map/MapStoresPage'
 
+//rates
+import ExchangeRatePage from './pages/customer/rates/ExchangeRatePage'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -141,7 +144,6 @@ const router = createBrowserRouter([
         element: <MenuAllergensFailPage />,
       },
       {
-
         path: '/hours',
         element: <HoursPage />,
       },
@@ -149,7 +151,7 @@ const router = createBrowserRouter([
         path: '/hours/edit',
         element: <HoursEditPage />,
       },
-  {
+      {
         path: '/store/description',
         element: <DescriptionPage />,
       },
@@ -168,6 +170,10 @@ const router = createBrowserRouter([
       {
         path: '/user/map/store',
         element: <MapStorePage />,
+      },
+      {
+        path: '/user/rates',
+        element: <ExchangeRatePage />,
       },
     ],
   },
