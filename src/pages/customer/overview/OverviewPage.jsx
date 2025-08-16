@@ -47,7 +47,7 @@ const markers = [
     },
   },
   {
-    id: 2,
+    id: 3,
     title: 'overview.huamMarket',
     position: { lat: 37.550104514133615, lng: 126.97593591802915 },
     image: {
@@ -56,7 +56,7 @@ const markers = [
     },
   },
   {
-    id: 3,
+    id: 2,
     title: 'overview.itaewonMarket',
     position: { lat: 37.53381428, lng: 126.990046559 },
     image: {
