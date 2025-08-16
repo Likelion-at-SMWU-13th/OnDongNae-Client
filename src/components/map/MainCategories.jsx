@@ -5,7 +5,7 @@ const PillsRow = styled.div`
   width: 90%;
   display: flex;
   gap: 10px;
-  margin-top: 13px;
+  margin-top: 5px;
   overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -37,11 +37,14 @@ const ScrollArea = ({
   onStoreClick,
   // 스크롤 영역 높이
   initialHeightPct = 20, // 초기 높이
-  snapPoints = [12, 20, 65], // 스냅 포인트
+  snapPoints = [4, 20, 65], // 스냅 포인트
   bottomOffset = 0, // 하단 오프셋
 }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  // 가게 기본 이미지 없을 때
+  const defaultSrc = (src) => (src && String(src).trim() ? src : defaultStoreImg)
 
   // 리스트 필터링
   const isAnythingSelected =
@@ -141,7 +144,7 @@ const ScrollArea = ({
               </StoreInfo>
 
               <StoreImg
-                src={s.image}
+                src={defaultSrc(s.image)}
                 alt={s.name}
                 loading='lazy'
                 onError={(e) => {
@@ -160,7 +163,7 @@ const ScrollArea = ({
               {s.phone && (
                 <InfoRow>
                   <Icon src={iconPhone} alt='' />
-                  <span>{s.phone}</span>
+                  <span>{s.phone ? s.phone : t('text.noInfo')}</span>
                 </InfoRow>
               )}
             </Card>
