@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import InputTitle from '@/components/description/InputTitle'
 import Button from '@/components/description/Button'
 
-const DetailDescription = () => {
+const DetailDescription = ({ text = '' }) => {
   const navigate = useNavigate()
 
   const handleSubmit = () => {
@@ -17,7 +17,7 @@ const DetailDescription = () => {
     <Container>
       <InputTitle text={'한 줄 소개'} />
       {/* 받아온 글 넣기 */}
-      <Comment>신선한 재료로 만든 옛날 떡볶이와 순대가 맛있는 분식집</Comment>
+      <Comment>{text || '등록된 한 줄 소개가 없습니다.'}</Comment>
       <ButtonContainer>
         <Button type='button' label='수정' onBtnClick={handleSubmit} />
       </ButtonContainer>

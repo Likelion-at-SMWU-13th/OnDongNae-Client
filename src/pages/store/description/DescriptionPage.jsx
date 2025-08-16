@@ -1,15 +1,37 @@
 import React from 'react'
 import * as S from '@/styles/description/StoreDescriptionPage.styles'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import ShortDescription from '@/components/description/ShortDescription'
-import DetailDesription from '@/components/description/DetailDescription'
+import LongDescription from '@/components/description/LongDescription'
 import BottomNav from '@/components/common/BottomNav'
 
 const StoreDescriptionPage = () => {
   const navigate = useNavigate()
+  const [shortDesc, setShortDesc] = useState('')
+  const [longDesc, setLongDesc] = useState('')
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
+    axios
+      .get('http://127.0.0.1:8000/me/store/description', {
+        params: { ver: 'both' },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setShortDesc(res.data?.data?.shortDescription ?? '')
+        setLongDesc(res.data?.data?.longDescription ?? '')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
   return (
     <>
@@ -22,9 +44,9 @@ const StoreDescriptionPage = () => {
           />
           <S.Container>
             {/* 한 줄 소개 */}
-            <ShortDescription />
+            <ShortDescription text={shortDesc} />
             {/* 세부 설명 */}
-            <DetailDesription />
+            <LongDescription text={longDesc} />
           </S.Container>
         </S.Scroll>
       </S.Main>

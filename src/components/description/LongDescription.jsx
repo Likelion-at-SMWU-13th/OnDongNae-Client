@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import InputTitle from '@/components/description/InputTitle'
 import Button from '@/components/description/Button'
 
-const DetailDescription = () => {
+const DetailDescription = ({ text = '' }) => {
   const navigate = useNavigate()
   const handleSubmit = () => {
     navigate('/store/description/detail-edit')
@@ -15,11 +15,7 @@ const DetailDescription = () => {
     <>
       <Container>
         <InputTitle text={'상세 설명'} />
-        <Comment>
-          온동네 가게는 떡볶이가 유명한 곳이에요.쫄깃한 떡볶이와 함께 순대, 어묵꼬치를 함께 즐길 수
-          있습니다.특히 떡볶이에 순대를 찍어 먹으면 더 맛있다고 많은 손님들이 추천해요.친절한
-          서비스와 훈훈한 분위기 속에서 한국 길거리 분식의 진수를 맛보실 수 있습니다.
-        </Comment>
+        <Comment>{text || '등록된 상세 설명이 없습니다.'}</Comment>
         <ButtonContainer>
           <Button type='button' label='수정' onBtnClick={handleSubmit} />
         </ButtonContainer>
