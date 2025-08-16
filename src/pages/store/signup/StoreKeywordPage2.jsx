@@ -1,7 +1,6 @@
-import styled from 'styled-components'
 import * as S from '@/styles/signup/StoreKeywordPage.styles'
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -14,15 +13,20 @@ import SmallButtonContainerSkip from '@/components/common/SmallButtonContainerSk
 
 const StoreKeywordPage2 = () => {
   const navigate = useNavigate()
-  const { state } = useLocation()
   const [recommendation, setRecommendation] = useState('')
 
-  const handleSubmit = (e) => {
-    if (e === 'skip') {
-      navigate('/signup/loading', { state: { ...state } })
+  const handleSubmit = (action) => {
+    if (action === 'skip') {
+      navigate('/signup/loading')
       return
     }
-    navigate('/signup/loading', { state: { ...state, recommendation } })
+    const value = recommendation.trim()
+    if (!value) {
+      alert('키워드를 입력하세요.')
+      return
+    }
+    sessionStorage.setItem('recommendation', value)
+    navigate('/signup/loading')
   }
 
   return (

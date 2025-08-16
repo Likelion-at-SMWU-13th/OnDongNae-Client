@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 import * as S from '@/styles/signup/SelectMarketPage.styles'
 import React, { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
@@ -13,9 +12,7 @@ import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const SelectMarketPage = () => {
   const navigate = useNavigate()
-  const memberId = localStorage.getItem('userId')
-  const { state } = useLocation() // 이전 값 넘겨받기
-  const [selectedId, setSelectedId] = useState(null)
+  const [id, setId] = useState(null)
 
   const markets = [
     { id: 1, name: '용산용문시장' },
@@ -28,13 +25,13 @@ const SelectMarketPage = () => {
   // 다음 클릭 시
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!selectedId) {
+    if (!id) {
       alert('시장을 선택해주세요.')
       return
     }
-    // 공백 제외 후, 다음 페이지로
-    const marketName = (markets.find((m) => m.id === selectedId)?.name ?? '').replace(/\s+/g, '')
-    navigate('/signup/store-name', { state: { ...state, marketName } })
+    const marketName = (markets.find((m) => m.id === id)?.name ?? '').replace(/\s+/g, '')
+    sessionStorage.setItem('marketName', marketName)
+    navigate('/signup/store-name')
   }
 
   return (
@@ -48,7 +45,7 @@ const SelectMarketPage = () => {
               <Title text={'가게가 위치한 시장을 선택해주세요'} />
             </S.TextContainer>
             <S.ButtonContainer>
-              <SelectButton options={markets} value={selectedId} onChange={setSelectedId} />
+              <SelectButton options={markets} value={id} onChange={setId} />
             </S.ButtonContainer>
 
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>

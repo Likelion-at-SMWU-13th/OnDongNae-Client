@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import * as S from '@/styles/signup/StoreImagePage.styles'
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -13,83 +13,69 @@ import SmallButtonContainerSkip from '@/components/common/SmallButtonContainerSk
 import addImg from '@/assets/button-add-picture.svg'
 import deleteImg from '@/assets/button-delete-picture.svg'
 
+const SESSION_KEY = 'image' // 세션 저장 키
+
 const StoreImagePage = () => {
   const navigate = useNavigate()
-  const { state } = useLocation()
 
-  // 숨겨진 <input type="file">에 접근하기 위한 ref
   const fileInputRef = useRef(null)
 
-  // 업로드 이미지 상태
-  /* id: 리스트 키 및 삭제 식별자 
-  file: 원본 File 객체 (서버 업로드 시 사용) 
-  url: 미리보기용 Object URL (img src로 사용)
-  */
+  // photos: [{ id, url }]
   const [photos, setPhotos] = useState([])
 
-  // 파일 선택창 열기 (버튼/타일 클릭 → 숨겨진 input click)
+  // 파일 선택창 열기
   const openPicker = () => fileInputRef.current?.click()
 
-  // 파일 선택 시 함수
-  const onFilesSelected = (e) => {
+  // File -> Data URL 변환
+  const fileToDataUrl = (file) =>
+    new Promise((resolve, reject) => {
+      const r = new FileReader()
+      r.onload = () => resolve(r.result)
+      r.onerror = reject
+      r.readAsDataURL(file)
+    })
+
+  // 파일 선택 시
+  const onFilesSelected = async (e) => {
     const files = Array.from(e.target.files || [])
     if (!files.length) return
 
-    // 남은 슬롯(4 - 현재 수)만큼만 받기 (디자인: 최대 4장)
     const remain = 4 - photos.length
     const picked = files.slice(0, remain)
 
-    // 선택 파일들에 대한 미리보기 URL을 만든다
-    const appended = picked.map((file, i) => ({
-      id: Date.now() + i, // 간단한 고유 id (충돌 가능성 낮음)
-      file,
-      url: URL.createObjectURL(file), // 브라우저 로컬 미리보기
+    // Data URL로 변환
+    const urls = await Promise.all(picked.map(fileToDataUrl))
+    const appended = urls.map((dataUrl, i) => ({
+      id: Date.now() + i,
+      url: dataUrl,
     }))
 
-    // 기존 + 신규 병합
-    setPhotos((prev) => [...prev, ...appended])
+    const next = [...photos, ...appended].slice(0, 4)
+    setPhotos(next)
+    // 세션스토리지에 추가
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(next.map((p) => p.url)))
 
-    // 같은 파일을 다시 선택할 수 있도록 input 값 초기화
+    // 같은 파일 다시 선택 가능하도록 초기화
     e.target.value = ''
   }
 
-  // 사진 제거 함수
+  // 사진 삭제
   const removePhoto = (id) => {
-    setPhotos((prev) => {
-      const target = prev.find((p) => p.id === id)
-      // Object URL은 수동으로 revoke하여 메모리 누수 방지
-      if (target) URL.revokeObjectURL(target.url)
-      return prev.filter((p) => p.id !== id)
-    })
+    const next = photos.filter((p) => p.id !== id)
+    setPhotos(next)
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(next.map((p) => p.url)))
   }
 
-  // 컴포넌트 unmount 시 Object URL 정리 (안전장치)
-  useEffect(() => {
-    return () => {
-      photos.forEach((p) => {
-        try {
-          URL.revokeObjectURL(p.url)
-        } catch {}
-      })
-    }
-  }, [])
-
-  // 다음 또는 건너뛰기 선택
-  const handleSubmit = (e) => {
-    // 건너뛰기 선택 시 빈 배열
-    if (e === 'skip') {
-      navigate('/signup/store-keyword1', { state: { ...state } })
+  const handleSubmit = (action) => {
+    if (action === 'skip') {
+      // 건너뛰기 시 비우기
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify([]))
+      navigate('/signup/store-keyword1')
       return
     }
-    // 이미지 업로드한 경우만 전달
-    const hasPhotos = photos.length > 0
-    const nextState = hasPhotos
-      ? { ...state, image: photos.map((p) => p.file) } // File 형식으로 전달
-      : { ...state } // 업로드 안 했으면 image 없이
-
-    navigate('/signup/store-keyword1', { state: nextState })
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(photos.map((p) => p.url)))
+    navigate('/signup/store-keyword1')
   }
-
   return (
     <>
       {/* 상단 헤더*/}

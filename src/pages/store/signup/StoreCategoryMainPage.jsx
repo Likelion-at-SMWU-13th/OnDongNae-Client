@@ -1,7 +1,6 @@
-import styled from 'styled-components'
 import * as S from '@/styles/signup/StoreCategoryPage.styles'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 import Header from '@/components/common/Header'
@@ -14,7 +13,6 @@ import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const StoreCategoryMainPage = () => {
   const navigate = useNavigate()
-  const { state } = useLocation()
   // 대분류 카테고리
   // [{id, name}]
   const [categories, setCategories] = useState([])
@@ -40,13 +38,15 @@ const StoreCategoryMainPage = () => {
       alert('업종을 선택해주세요.')
       return
     }
+
+    // 세션 스토리지에 저장
+    sessionStorage.setItem('mainCategory', String(id))
     // 서비스 기타 페이지는 소분류 빈 문자열 값으로 주기
     if (id == 6) {
-      navigate('/signup/store-image', {
-        state: { ...state, mainCategory: String(id), subCategory: '' },
-      })
+      sessionStorage.setItem('subCategory', '') // 소분류 빈 문자열 저장
+      navigate('/signup/store-image')
     } else {
-      navigate('/signup/store-category-sub', { state: { ...state, mainCategory: String(id) } })
+      navigate('/signup/store-category-sub')
     }
   }
 

@@ -1,9 +1,9 @@
 import * as S from '@/styles/signup/StoreCategoryPage.styles'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-// 공용 UI 컴포넌트
+// 공용 컴포넌트
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
@@ -14,13 +14,13 @@ import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const SelectSubcategoryPage = () => {
   const navigate = useNavigate()
-  const { state } = useLocation()
-  const mainCategory = Number(state?.mainCategory) // mainCategory 값 받기
+
+  // 대분류 카테고리 값 받기
+  const mainCategory = Number(sessionStorage.getItem('mainCategory') || '')
   // 소분류 카테고리
   // [{id, name}]
   const [categories, setCategories] = useState([])
-  const [id, setId] = useState(null) // 소분류 선택값 저장
-
+  const [id, setId] = useState([])
   useEffect(() => {
     if (!mainCategory) {
       alert('대분류 정보가 없습니다.')
@@ -43,13 +43,13 @@ const SelectSubcategoryPage = () => {
     e.preventDefault()
 
     // 선택값 없으면 경고
-    if (!id) {
+    if (!id.length) {
       alert('세부 업종을 선택해주세요.')
       return
     }
-
-    // 다음 페이지로 이동
-    navigate('/signup/store-image', { state: { ...state, subCategory: String(id) } })
+    // 마지막에 세션 스토리지에서 꺼낼 때 주의
+    sessionStorage.setItem('subCategory', JSON.stringify(id))
+    navigate('/signup/store-image')
   }
 
   return (
@@ -69,7 +69,7 @@ const SelectSubcategoryPage = () => {
             {/* 선택 폼 영역 */}
             <S.ButtonContainer>
               {/* 소분류 리스트 */}
-              <SelectButton options={categories} value={id} onChange={setId} />
+              <SelectButton options={categories} multiple value={id} onChange={setId} />
 
               {/* 하단 버튼: 이전 / 다음 */}
             </S.ButtonContainer>
