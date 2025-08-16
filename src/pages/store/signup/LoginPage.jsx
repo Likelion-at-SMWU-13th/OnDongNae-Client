@@ -46,22 +46,12 @@ const Login = () => {
         { id: id, password: password },
         { headers: { 'Content-Type': 'application/json' } },
       )
-      .then((response) => {
-        const { success, message, data } = response.data
-
-        if (!success) {
-          // 로그인 실패
-          alert(message)
-          return
-        }
-        // 토큰은 response.data.data 내에 위치
-        const { accessToken, refreshToken } = data
-
-        localStorage.setItem('accessToken', accessToken)
-        localStorage.setItem('refreshToken', refreshToken)
+      .then((res) => {
+        localStorage.setItem('accessToken', res.data.accessToken)
+        localStorage.setItem('refreshToken', res.data.refreshToken)
 
         // axios 기본 헤더에 등록 -> 이후 요청은 자동으로 Bearer 토큰이 붙음
-        axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`
+        axios.defaults.headers.common.Authorization = `Bearer ${res.data.accessToken}`
 
         // 소상공인 홈 화면 이동 navigate 함수 추가
         navigate('store/home')
@@ -69,7 +59,8 @@ const Login = () => {
       .catch((error) => {
         console.log(error)
         alert('로그인에 실패했습니다.')
-        navigate('/store/home') // 삭제 해야 됨!!!!
+        // 연동 확인 후 삭제
+        navigate('/store/home')
       })
   }
 

@@ -32,35 +32,36 @@ const SignupAccountInfo = () => {
       return
     }
     if (pw1 !== pw2) {
+      alert('비밀번호가 일치하지 않아요.')
+
       return
     }
     e.preventDefault()
-    navigate('/signup/terms')
     // 연동
-    // axios
-    //   .post(
-    //     'http://127.0.0.1:8000/auth/signup/user',
-    //     { name, phoneNum, loginId, password1: pw1, password2: pw2 },
-    //     { headers: { 'Content-Type': 'application/json' } },
-    //   )
-    //   .then((response) => {
-    //     const { success, message, userId } = response.data || {}
+    axios
+      .post(
+        'http://127.0.0.1:8000/auth/signup/user',
+        { name: name, phoneNum: phoneNum, loginId: loginId, password1: pw1, password2: pw2 },
+        { headers: { 'Content-Type': 'application/json' } },
+      )
+      .then((res) => {
+        // 응답에서 반환한 userId를 가게 등록 API에서 ResponseBody에 넣어주기
+        const { userId } = res.data
+        // 세션에 userId 저장
+        sessionStorage.setItem('userId', String(userId))
 
-    //     if (!success) {
-    //       alert(message)
-    //     }
-    //     if (!userId) {
-    //       alert(message)
-    //     }
+        // 이 코드는 회원가입이 완료된 페이지에 넣어야 하는 것?
+        localStorage.setItem('accessToken', res.data.tokens.accessToken)
+        localStorage.setItem('refreshToken', res.data.tokens.refreshToken)
+        axios.defaults.headers.common.Authorization = `Bearer ${res.data.tokens.accessToken}`
 
-    //     // 토큰 저장..?
-
-    //     // 다음 회원가입 단계로 (userId 포함해서 이동해야 하는 것?)
-    //     navigate('signup/terms')
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
+        navigate('signup/terms')
+      })
+      .catch((err) => {
+        console.log(err)
+        // 연동 후 삭제
+        navigate('signup/terms')
+      })
   }
 
   return (

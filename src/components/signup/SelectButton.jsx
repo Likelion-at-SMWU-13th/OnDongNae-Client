@@ -28,23 +28,35 @@ const Button = styled.button`
   }
 `
 
-function SelectButton({ options = [], value, onChange }) {
-  // options 는 전체 옵션, value는 선택된 값
+// multiple true면 복수 선택 가능
+function SelectButton({ options = [], multiple = false, value, onChange }) {
+  // id가 선택되었는지 판별 (모드에 따라 비교 방식이 다름)
+  const isSelected = (id) => (multiple ? Array.isArray(value) && value.includes(id) : value === id)
+
+  const handleClick = (id) => {
+    // multiple false면 그냥 눌린 id로 치환
+    if (!multiple) return onChange(id)
+
+    // multiple true면 배열에 추가+삭제
+    const current = Array.isArray(value) ? value : []
+    onChange(current.includes(id) ? current.filter((v) => v !== id) : [...current, id])
+  }
+
   return (
     <List>
-      {options.map(
-        // options 는 [{id, name}] 형태
-        (opt) => (
+      {options.map(({ id, name }) => {
+        const selected = isSelected(id)
+        return (
           <Button
-            key={opt.id} // 선택된 id 번호
+            key={id}
             type='button'
-            className={value === opt.id ? 'selected' : ''} // 선택 여부에 따라 클래스 부여
-            onClick={() => onChange(opt.id)}
+            className={selected ? 'selected' : ''}
+            onClick={() => handleClick(id)} // 클릭 시 선택/해제
           >
-            {opt.name}
+            {name}
           </Button>
-        ),
-      )}
+        )
+      })}
     </List>
   )
 }

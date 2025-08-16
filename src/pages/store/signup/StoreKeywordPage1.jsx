@@ -1,7 +1,6 @@
-import styled from 'styled-components'
 import * as S from '@/styles/signup/StoreKeywordPage.styles'
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -14,16 +13,21 @@ import SmallButtonContainerSkip from '@/components/common/SmallButtonContainerSk
 
 const StoreKeywordPage1 = () => {
   const navigate = useNavigate()
-  const { state } = useLocation()
   const [strength, setStrength] = useState('')
 
   // 다음 또는 건너뛰기 클릭
   const handleSubmit = (action) => {
     if (action === 'skip') {
-      navigate('/signup/store-keyword2', { state: { ...state, strength: '' } })
+      navigate('/signup/store-keyword2')
       return
     }
-    navigate('/signup/store-keyword2', { state: { ...state, strength } })
+    const value = strength.trim()
+    if (!value) {
+      alert('키워드를 입력하세요.')
+      return
+    }
+    sessionStorage.setItem('strength', value)
+    navigate('/signup/store-keyword2')
   }
 
   return (

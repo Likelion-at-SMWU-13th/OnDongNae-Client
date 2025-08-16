@@ -1,8 +1,6 @@
-import styled from 'styled-components'
 import * as S from '@/styles/signup/StoreAddressPage.styles.js'
 import React, { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -12,9 +10,8 @@ import Title from '@/components/signup/Title'
 import InputField from '@/components/signup/InputField'
 import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
-const StoreAddressPage = () => {
+const StoreNamePage = () => {
   const navigate = useNavigate()
-  const { state } = useLocation()
   const [storeName, setStoreName] = useState('')
 
   const handleSubmit = () => {
@@ -22,10 +19,10 @@ const StoreAddressPage = () => {
       alert('가게명을 입력해주세요.')
       return
     }
-    // 연동
+    sessionStorage.setItem('storeName', storeName)
 
     // 다음 페이지로 이동
-    navigate('/signup/store-address', { state: { ...state, storeName } })
+    navigate('/signup/store-address')
   }
   return (
     <>
@@ -49,4 +46,4 @@ const StoreAddressPage = () => {
   )
 }
 
-export default StoreAddressPage
+export default StoreNamePage

@@ -1,4 +1,4 @@
-// 더미데이터 연동 후 삭제 !!!
+// 더미데이터 연동 후 삭제
 import dummyData from './dummyData'
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MainMapPage.styles'
@@ -16,19 +16,43 @@ import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import KakaoMap from '@/components/map/KakaoMap'
 
 const MainMapPage = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [query, setQuery] = useState('') // 검색창
   const [market, setMarket] = useState(null) // 드롭다운 선택 값
   const [markets, setMarkets] = useState([]) // 드롭다운 리스트
   const [categories, setCategories] = useState([]) // 대분류 리스트
   const [subCategories, setSubCategories] = useState([]) // 소분류 리스트
   const [randomStores, setRandomStores] = useState([]) // 랜덤 가게 리스트
-
   const [selectedMainId, setSelectedMainId] = useState(null) // 선택된 대분류 ID (단일 선택)
   const [selectedSubIds, setSelectedSubIds] = useState([]) // 선택된 대분류 ID (복수 선택)
 
+  /*
+    useEffect(() => {
+    // 'en-US' -> 'en' 형태로 변환
+    const lang = (i18n.language || 'en').split('-')[0]
+
+
+    axios
+      .get('http://127.0.0.1:8000/map', {
+        headers: { 'Accept-Language': lang },
+      })
+      .then((response) => {
+        const data = response?.data?.data
+        if (!data) return
+
+        setMarkets(data.marketOptions || [])
+        setCategories(data.categoryOptions || [])
+        setRandomStores(data.randomStores || [])
+      })
+      .catch((error) => {
+        console.log(error)
+        alert('데이터 불러오기에 실패했습니다.')
+      })
+  }, [i18n.language]) 
+  */
+
+  // 연동 후 삭제
   useEffect(() => {
-    // 실제 API 연동 전, dummyData 세팅
     setMarkets(dummyData.data.marketOptions)
     setCategories(dummyData.data.categoryOptions)
     setRandomStores(dummyData.data.randomStores)
@@ -41,13 +65,14 @@ const MainMapPage = () => {
     setSubCategories([]) // 소분류 초기화
   }
 
-  // 대분류 클릭 시 소분류 세팅
+  // 대분류 클릭 시, 소분류 세팅
   const handleSelectMain = (mainCategoryId) => {
     setSelectedMainId(mainCategoryId)
     const found = categories.find((c) => c.mainCategoryId === mainCategoryId)
     setSubCategories(found ? found.subCategories : [])
   }
 
+  // 소분류 버튼 선택+해제
   const handleToggleSub = (id) => {
     setSelectedSubIds(
       (prev) =>

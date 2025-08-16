@@ -1,8 +1,6 @@
-import styled from 'styled-components'
 import * as S from '@/styles/signup/StorePhonePage.styles'
 import React, { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
@@ -14,17 +12,22 @@ import SmallButtonContainerSkip from '@/components/common/SmallButtonContainerSk
 
 const StorePhonePage = () => {
   const navigate = useNavigate()
-  const { state } = useLocation()
   const [phoneNum, setPhoneNum] = useState('')
 
   const handleSubmit = (action) => {
     // skip 버튼인 경우
     if (action === 'skip') {
-      navigate('/signup/store-category-main', { state: { ...state, phoneNum: '' } })
+      navigate('/signup/store-category-main')
       return
     }
-    // 다음 버튼인 경우
-    navigate('/signup/store-category-main', { state: { ...state, phoneNum } })
+    // 폰번호 유효성 검사
+    const value = phoneNum.trim()
+    if (!value) {
+      alert('전화번호를 입력하세요.')
+      return
+    }
+    sessionStorage.setItem('phoneNum', value)
+    navigate('/signup/store-category-main')
   }
   return (
     <>
