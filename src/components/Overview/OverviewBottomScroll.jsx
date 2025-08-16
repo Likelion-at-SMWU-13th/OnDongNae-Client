@@ -39,7 +39,7 @@ const ScrollArea = ({
   selectedSubIds = [],
   onStoreClick,
   initialHeightPct = 20,
-  snapPoints = [12, 20, 65],
+  snapPoints = [4, 20, 65],
   bottomOffset = 0,
 }) => {
   const { t } = useTranslation()
