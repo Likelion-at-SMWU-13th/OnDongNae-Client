@@ -8,12 +8,15 @@ import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import SearchBar from '@/components/map/SearchBar'
 import DropDown from '@/components/map/DropDown'
+import MarketCategoryRow from '@/components/map/MarketCategoryRow'
+
 import MainCategories from '@/components/map/MainCategories'
 import SubCategories from '@/components/map/SubCategories'
 import ScrollArea from '@/components/map/ScrollArea'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import KakaoMap from '@/components/common/KakaoMap'
 import iconMarker from '@/assets/icon-default-marker.svg'
+
 const DEFAULT_CENTER = { lat: 37.5326, lng: 126.9905 } // 기본 좌표
 const DEFAULT_LEVEL = 6 // 기본 확대 정도
 // 시장 좌표
@@ -146,6 +149,11 @@ const MainMapPage = () => {
     }
   }
 
+  // 대분류 이름 받아오기
+  const activeMainName = selectedMainId
+    ? categories.find((c) => String(c.mainCategoryId) === String(selectedMainId))?.mainCategoryName
+    : ''
+
   // 대분류 클릭 시, 소분류 세팅
   const handleSelectMain = (mainCategoryId) => {
     setSelectedMainId(mainCategoryId)
@@ -190,29 +198,53 @@ const MainMapPage = () => {
         <S.Overlay>
           {/* 검색창 */}
           <SearchBar value={query} onChange={setQuery} placeholder={t('button.search')} />
-          {/* 시장 드롭다운 */}
-          <DropDown
-            value={market}
-            onChange={handleChangeMarket}
-            placeholder={t('dropdown.select')}
-            options={markets.map((m) => ({ label: m.name, value: m.id }))}
-          />
-          {/* 시장 선택시 -> 대분류 */}
-          {market && (
-            <MainCategories
-              market={market}
-              categories={categories}
-              selectedMainId={selectedMainId}
-              onSelectMain={handleSelectMain}
+          {/* 시장 선택 안하면 DropDown 보여주고, 선택하면 그 자리에 MarketCategoryRow 보여주기 */}
+          {!market ? (
+            <DropDown
+              value={market}
+              onChange={handleChangeMarket}
+              placeholder={t('dropdown.select')}
+              options={markets.map((m) => ({ label: m.name, value: m.id }))}
+            />
+          ) : (
+            <MarketCategoryRow
+              marketLabel={market.label}
+              mainLabel={activeMainName}
+              onClearMarket={() => {
+                // 시장 초기화
+                setMarket(null)
+                setSelectedMainId(null)
+                setSelectedSubIds([])
+                setSubCategories([])
+                setMarkers([])
+                setCenter(DEFAULT_CENTER)
+                setLevel(DEFAULT_LEVEL)
+              }}
+              onClearMain={() => {
+                // 대분류 초기화 (시장 유지)
+                setSelectedMainId(null)
+                setSelectedSubIds([])
+                setSubCategories([])
+              }}
             />
           )}
-          {/* 소분류 */}
-          {subCategories.length > 0 && (
+
+          {/* 대분류 선택되면 소분류 보여주고, 시장만 선택된 상태면 대분류 보여주기 */}
+          {selectedMainId ? (
             <SubCategories
               subCategories={subCategories}
               selectedSubIds={selectedSubIds}
               onToggleSub={handleToggleSub}
             />
+          ) : (
+            market && (
+              <MainCategories
+                market={market}
+                categories={categories}
+                selectedMainId={selectedMainId}
+                onSelectMain={handleSelectMain}
+              />
+            )
           )}
         </S.Overlay>
       </S.MapContainer>
