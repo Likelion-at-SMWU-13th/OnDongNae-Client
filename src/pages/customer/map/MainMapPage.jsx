@@ -13,7 +13,7 @@ import MainCategories from '@/components/map/MainCategories'
 import SubCategories from '@/components/map/SubCategories'
 import ScrollArea from '@/components/map/ScrollArea'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
-import KakaoMap from '@/components/map/KakaoMap'
+import KakaoMap from '@/components/common/KakaoMap'
 
 const MainMapPage = () => {
   const { t, i18n } = useTranslation()
