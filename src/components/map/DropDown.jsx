@@ -90,7 +90,8 @@ const ItemList = styled.ul`
   top: 100%;
   left: 0;
   right: 0;
-  margin-top: 0;
+  margin: 0 auto;
+  width: 322px;
   padding: 10px 20px;
   list-style: none;
   display: flex;
@@ -107,7 +108,7 @@ const ItemList = styled.ul`
 const Item = styled.li`
   font-size: 14px;
   color: #222;
-  padding: 10px 0;
+  padding: 5px 0;
   text-align: center;
   cursor: pointer;
 

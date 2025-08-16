@@ -37,7 +37,7 @@ const ScrollArea = ({
   onStoreClick,
   // 스크롤 영역 높이
   initialHeightPct = 20, // 초기 높이
-  snapPoints = [12, 20, 65], // 스냅 포인트
+  snapPoints = [4, 20, 65], // 스냅 포인트
   bottomOffset = 0, // 하단 오프셋
 }) => {
   const { t } = useTranslation()
