@@ -14,6 +14,17 @@ import SubCategories from '@/components/map/SubCategories'
 import ScrollArea from '@/components/map/ScrollArea'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import KakaoMap from '@/components/common/KakaoMap'
+import iconMarker from '@/assets/icon-default-marker.svg'
+const DEFAULT_CENTER = { lat: 37.5326, lng: 126.9905 } // 기본 좌표
+const DEFAULT_LEVEL = 6 // 기본 확대 정도
+// 시장 좌표 (임시)
+const MARKET_COORDS = {
+  1: { lat: 37.5343, lng: 126.9615 }, // 용산용문시장
+  2: { lat: 37.5349, lng: 126.994 }, // 이태원시장
+  3: { lat: 37.5503, lng: 126.975 }, // 후암재래시장
+  4: { lat: 37.5532, lng: 126.969 }, // 만리시장
+  5: { lat: 37.5412, lng: 126.9865 }, // 해방촌 신흥시장
+}
 
 const MainMapPage = () => {
   const { t, i18n } = useTranslation()
@@ -24,8 +35,10 @@ const MainMapPage = () => {
   const [subCategories, setSubCategories] = useState([]) // 소분류 리스트
   const [randomStores, setRandomStores] = useState([]) // 랜덤 가게 리스트
   const [selectedMainId, setSelectedMainId] = useState(null) // 선택된 대분류 ID (단일 선택)
-  const [selectedSubIds, setSelectedSubIds] = useState([]) // 선택된 대분류 ID (복수 선택)
-
+  const [selectedSubIds, setSelectedSubIds] = useState([]) // 선택된 소분류 ID (복수 선택)
+  const [center, setCenter] = useState(DEFAULT_CENTER) // 지도 중심 상태
+  const [level, setLevel] = useState(DEFAULT_LEVEL) // 지도 확대 정도
+  const [markers, setMarkers] = useState([]) // 마커 배열
   /*
     useEffect(() => {
     // 'en-US' -> 'en' 형태로 변환
@@ -58,11 +71,28 @@ const MainMapPage = () => {
     setRandomStores(dummyData.data.randomStores)
   }, [])
 
-  // 시장이 바뀌면 대/소분류 선택 초기화
+  // 시장이 바뀌면 대/소분류 선택 초기화 & 지도 이동
   const handleChangeMarket = (opt) => {
     setMarket(opt) // opt = { label, value }
     setSelectedMainId(null) // 대분류 초기화
     setSubCategories([]) // 소분류 초기화
+
+    const mapped = MARKET_COORDS[opt.value]
+    if (mapped) {
+      setCenter(mapped)
+      setLevel(3)
+      setMarkers([
+        {
+          id: `${opt.label}`,
+          position: mapped,
+          image: { src: iconMarker, size: { width: 32, height: 32 } },
+        },
+      ])
+    } else {
+      setCenter(DEFAULT_CENTER)
+      setLevel(DEFAULT_LEVEL)
+      setMarkers([])
+    }
   }
 
   // 대분류 클릭 시, 소분류 세팅
@@ -88,7 +118,7 @@ const MainMapPage = () => {
       <Header img={backIcon} title={t('bottomNav.map')} showImg={false} />
       <S.MapContainer>
         {/* 카카오 지도 */}
-        <KakaoMap />
+        <KakaoMap center={center} level={level} markers={markers} />
         {/* 스크롤 영역 */}
         <ScrollArea
           title={t('dropdown.stores')}
@@ -106,7 +136,7 @@ const MainMapPage = () => {
           {/* 시장 드롭다운 */}
           <DropDown
             value={market}
-            onChange={setMarket}
+            onChange={handleChangeMarket}
             placeholder={t('dropdown.select')}
             options={markets.map((m) => ({ label: m.name, value: m.id }))}
           />

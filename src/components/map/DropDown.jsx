@@ -2,6 +2,47 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import iconArrow from '@/assets/icon-arrow-down.svg'
 
+// id 배열을 options로 받음
+function DropDown({ value, onChange, placeholder, options = [] }) {
+  const [open, setOpen] = useState(false)
+
+  const handleSelect = (opt) => {
+    onChange?.(opt) // { label, value } 그대로 돌려줌
+    setOpen(false)
+  }
+
+  const isSelected = !!value //
+  const displayLabel = value?.label || placeholder
+
+  return (
+    <Wrap>
+      <Trigger type='button' onClick={() => setOpen(!open)}>
+        <Text className={isSelected ? 'selected' : ''}>{displayLabel}</Text>
+        <Icon src={iconArrow} alt='' />
+      </Trigger>
+
+      {open && (
+        <ItemList>
+          {options.map((opt) => {
+            const isActive = value && String(value.value) === String(opt.value)
+            return (
+              <Item
+                key={opt.value}
+                className={isActive ? 'active' : ''}
+                onClick={() => handleSelect(opt)}
+              >
+                {opt.label}
+              </Item>
+            )
+          })}
+        </ItemList>
+      )}
+    </Wrap>
+  )
+}
+
+export default DropDown
+
 const Wrap = styled.div`
   margin-top: 13px;
   position: relative;
@@ -76,44 +117,3 @@ const Item = styled.li`
     background: #feb99d;
   }
 `
-
-// id 배열을 options로 받음
-function DropDown({ value, onChange, placeholder, options = [] }) {
-  const [open, setOpen] = useState(false)
-
-  const handleSelect = (opt) => {
-    onChange?.(opt) // { label, value } 그대로 돌려줌
-    setOpen(false)
-  }
-
-  const isSelected = !!value //
-  const displayLabel = value?.label || placeholder
-
-  return (
-    <Wrap>
-      <Trigger type='button' onClick={() => setOpen(!open)}>
-        <Text className={isSelected ? 'selected' : ''}>{displayLabel}</Text>
-        <Icon src={iconArrow} alt='' />
-      </Trigger>
-
-      {open && (
-        <ItemList>
-          {options.map((opt) => {
-            const isActive = value && String(value.value) === String(opt.value)
-            return (
-              <Item
-                key={opt.value}
-                className={isActive ? 'active' : ''}
-                onClick={() => handleSelect(opt)}
-              >
-                {opt.label}
-              </Item>
-            )
-          })}
-        </ItemList>
-      )}
-    </Wrap>
-  )
-}
-
-export default DropDown
