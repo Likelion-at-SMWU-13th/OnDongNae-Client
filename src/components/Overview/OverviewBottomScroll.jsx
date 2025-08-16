@@ -25,8 +25,8 @@ const nearest = (v, arr) =>
 
 const MARKETS = [
   { id: 1, nameKey: 'overview.YongmunMarket', descKey: 'overview.yongmunDescription' },
-  { id: 2, nameKey: 'overview.huamMarket', descKey: 'overview.huamDescription' },
-  { id: 3, nameKey: 'overview.itaewonMarket', descKey: 'overview.itaewonDescription' },
+  { id: 3, nameKey: 'overview.huamMarket', descKey: 'overview.huamDescription' },
+  { id: 2, nameKey: 'overview.itaewonMarket', descKey: 'overview.itaewonDescription' },
   { id: 4, nameKey: 'overview.manlyMarket', descKey: 'overview.manlyDescription' },
   { id: 5, nameKey: 'overview.haebangchonMarket', descKey: 'overview.haebangchonDescription' },
 ]
