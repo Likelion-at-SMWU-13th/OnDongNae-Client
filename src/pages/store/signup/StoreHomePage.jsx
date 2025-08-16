@@ -28,7 +28,7 @@ const StoreHomePage = () => {
       {/* 메뉴 -> 경로 수정 필요 */}
       <MenuList>
         <MenuItem img={iconMenu} text='메뉴 관리' onClick={() => navigate('/menu')} />
-        <MenuItem img={iconClock} text='영업 시간' onClick={() => navigate('/menu')} />
+        <MenuItem img={iconClock} text='영업 시간' onClick={() => navigate('/hours')} />
         <MenuItem img={iconStore} text='가게 설명' onClick={() => navigate('/store/description')} />
         <MenuItem img={iconSetting} text='나의 가게' onClick={() => navigate('/menu')} />
       </MenuList>

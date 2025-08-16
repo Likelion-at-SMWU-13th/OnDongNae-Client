@@ -14,7 +14,7 @@ import MainCategories from '@/components/map/MainCategories'
 import SubCategories from '@/components/map/SubCategories'
 import ScrollArea from '@/components/map/ScrollArea'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
-import KakaoMap from '@/components/common/KakaoMap'
+import KakaoMap from '@/components/common/KakaoMapContainer'
 import iconMarker from '@/assets/icon-default-marker.svg'
 
 const DEFAULT_CENTER = { lat: 37.5326, lng: 126.9905 } // 기본 좌표
