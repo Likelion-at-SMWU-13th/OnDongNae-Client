@@ -24,7 +24,7 @@ const StoreAddressPage = () => {
     }
     // 연동
 
-    // 다음 페이지로 이동
+    // userId + marketName + address
     navigate('/signup/store-phone', { state: { ...state, address } })
   }
   return (

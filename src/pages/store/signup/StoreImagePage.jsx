@@ -75,16 +75,19 @@ const StoreImagePage = () => {
   }, [])
 
   // 다음 또는 건너뛰기 선택
-  const handleSubmit = (action) => {
+  const handleSubmit = (e) => {
     // 건너뛰기 선택 시 빈 배열
-    if (action === 'skip') {
-      navigate('/signup/store-keyword1', { state: { ...state, image: [] } })
+    if (e === 'skip') {
+      navigate('/signup/store-keyword1', { state: { ...state } })
       return
     }
-    // file 객체 배열만 넘겨두고, 전송은 마지막 페이지에서 FormData로 처리
-    navigate('/signup/store-keyword1', {
-      state: { ...state, image: photos.map((p) => p.file) },
-    })
+    // 이미지 업로드한 경우만 전달
+    const hasPhotos = photos.length > 0
+    const nextState = hasPhotos
+      ? { ...state, image: photos.map((p) => p.file) } // File 형식으로 전달
+      : { ...state } // 업로드 안 했으면 image 없이
+
+    navigate('/signup/store-keyword1', { state: nextState })
   }
 
   return (

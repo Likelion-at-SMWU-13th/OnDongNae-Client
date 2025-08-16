@@ -45,13 +45,15 @@ const SignupAccountInfo = () => {
         { headers: { 'Content-Type': 'application/json' } },
       )
       .then((res) => {
+        // 응답에서 반환한 userId를 가게 등록 API에서 ResponseBody에 넣어주기
+        const { userId } = res.data
+
+        // 이 코드는 회원가입이 완료된 페이지에 넣어야 하는 것?
         localStorage.setItem('accessToken', res.data.tokens.accessToken)
         localStorage.setItem('refreshToken', res.data.tokens.refreshToken)
-
         axios.defaults.headers.common.Authorization = `Bearer ${res.data.tokens.accessToken}`
-        navigate('signup/terms')
 
-        // 응답에서 반환한 userId를 가게 등록 API에서 ResponseBody에 넣어주세요 !!
+        navigate('signup/terms', { state: { userId } })
       })
       .catch((err) => {
         console.log(err)

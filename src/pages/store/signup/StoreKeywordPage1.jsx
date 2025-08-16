@@ -18,9 +18,9 @@ const StoreKeywordPage1 = () => {
   const [strength, setStrength] = useState('')
 
   // 다음 또는 건너뛰기 클릭
-  const handleSubmit = (action) => {
-    if (action === 'skip') {
-      navigate('/signup/store-keyword2', { state: { ...state, strength: '' } })
+  const handleSubmit = (e) => {
+    if (e === 'skip') {
+      navigate('/signup/store-keyword2', { state: { ...state } })
       return
     }
     navigate('/signup/store-keyword2', { state: { ...state, strength } })

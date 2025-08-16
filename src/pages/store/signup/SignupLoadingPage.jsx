@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useNavigate, useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -33,14 +34,70 @@ const SignupLoadingPage = () => {
   const { state } = useLocation()
 
   useEffect(() => {
-    // 3초 후 다음 페이지로 이동
-    const timer = setTimeout(() => {
-      // replace: 뒤로 가기 클릭시 로딩 페이지로 돌아오지 않도록 히스토리를 교체
-      // state: 이전 단계에서 받아둔 값을 다음 페이지로 전달
-      navigate('/signup/complete', { replace: true, state })
-    }, 3000)
+    if (!state) {
+      console.log('회원가입을 처음부터 다시 진행해주세요.')
+      navigate('/signup/userinfo')
+      return
+    }
 
-    return () => clearTimeout(timer)
+    const {
+      userId,
+      storeName,
+      address,
+      marketName,
+      phoneNum,
+      mainCategory,
+      subCategory,
+      strength,
+      recommendation,
+      image,
+    } = state
+
+    if (
+      !userId ||
+      !storeName ||
+      !marketName ||
+      !phoneNum ||
+      !mainCategory ||
+      typeof subCategory === 'undefined'
+    ) {
+      console.log('필수값이 누락되었습니다. 회원가입을 처음부터 다시 진행해주세요.')
+      navigate('/signup/userinfo')
+      return
+    }
+
+    // FormData 생성
+    const form = new FormData()
+
+    // 필수값
+    form.append('userId', userId)
+    form.append('storeName', storeName)
+    form.append('marketName', marketName)
+    form.append('phoneNum', phoneNum)
+    form.append('mainCategory', mainCategory)
+    form.append('subCategory', subCategory)
+
+    // 선택값
+    if (address) form.append('address', address)
+    if (strength) form.append('strength', strength)
+    if (recommendation) form.append('recommendation', recommendation)
+    if (Array.isArray(image) && image.length > 0) {
+      image.forEach((file) => form.append('image', file, file.name))
+    }
+
+    // post 요청
+    axios
+      .post('http://127.0.0.1:8000/auth/signup/store', form)
+      .then((res) => {
+        navigate('/signup/complete', {
+          replace: true, // 회원가입 완료 후, 다시 이 페이지로 돌아오지 못하게
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+        console.log('가게 등록 중 오류가 발생했습니다. 다시 시도해주세요.')
+        navigate('/signup/userinfo')
+      })
   }, [navigate, state])
 
   return (

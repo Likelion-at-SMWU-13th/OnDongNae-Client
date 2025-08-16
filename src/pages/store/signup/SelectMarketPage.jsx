@@ -13,6 +13,7 @@ import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const SelectMarketPage = () => {
   const navigate = useNavigate()
+  const memberId = localStorage.getItem('userId')
   const { state } = useLocation() // 이전 값 넘겨받기
   const [selectedId, setSelectedId] = useState(null)
 

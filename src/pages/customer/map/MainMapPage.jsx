@@ -65,7 +65,7 @@ const MainMapPage = () => {
     setSubCategories([]) // 소분류 초기화
   }
 
-  // 대분류 클릭 시 소분류 세팅
+  // 대분류 클릭 시, 소분류 세팅
   const handleSelectMain = (mainCategoryId) => {
     setSelectedMainId(mainCategoryId)
     const found = categories.find((c) => c.mainCategoryId === mainCategoryId)

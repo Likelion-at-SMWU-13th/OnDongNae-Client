@@ -1,6 +1,7 @@
 import * as S from '@/styles/signup/StoreCategoryPage.styles'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 // 공용 UI 컴포넌트
 import Header from '@/components/common/Header'
@@ -14,76 +15,41 @@ import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 const SelectSubcategoryPage = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
-  const major = state?.major
+  const mainCategory = Number(state?.mainCategory) // mainCategory 값 받기
+  // 소분류 카테고리
+  // [{id, name}]
+  const [categories, setCategories] = useState([])
+  const [id, setId] = useState(null) // 소분류 선택값 저장
 
-  const [selectedId, setSelectedId] = useState(null) // 소분류 선택값 저장
-
-  // 대분류별 소분류 목록 매핑
-  const minorOptions = useMemo(() => {
-    const map = {
-      1: [
-        // 농수산물 / 식품
-        { id: 1, name: '청과' },
-        { id: 2, name: '수산물' },
-        { id: 3, name: '정육/축산' },
-        { id: 4, name: '곡물' },
-        { id: 5, name: '반찬' },
-        { id: 6, name: '떡/제과' },
-      ],
-      2: [
-        // 음식점 / 카페
-        { id: 1, name: '한식' },
-        { id: 2, name: '분식' },
-        { id: 3, name: '회 · 해산물' },
-        { id: 4, name: '세계 음식' },
-        { id: 5, name: '퓨전음식' },
-        { id: 6, name: '카페 · 차' },
-      ],
-      3: [
-        // 주점 / 술집
-        { id: 1, name: '전통주점' },
-        { id: 2, name: '맥주집 · 호프' },
-        { id: 3, name: '바' },
-        { id: 4, name: '이자카야' },
-      ],
-      4: [
-        // 잡화 / 생활용품
-        { id: 1, name: '의류 · 신발' },
-        { id: 2, name: '생활 잡화' },
-        { id: 3, name: '가정용품' },
-      ],
-      5: [
-        // 기념품 / 전통공예 / 한복 / 특산품
-        { id: 1, name: '기념품점' },
-        { id: 2, name: '한복 · 전통의류' },
-        { id: 3, name: '공예품' },
-        { id: 4, name: '소품점' },
-      ],
-      6: [], // 서비스 / 기타 -> 여기는 이 페이지로 넘어오지 않음
+  useEffect(() => {
+    if (!mainCategory) {
+      alert('대분류 정보가 없습니다.')
+      return
     }
-    return map[major?.id] || []
-  }, [major?.id])
+    axios
+      .get('http://127.0.0.1:8000/auth/signup/store/sub-category', {
+        params: { mainCategory }, //sub-category?mainCategory=2
+      })
+      .then((res) => {
+        setCategories(res.data.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [mainCategory])
 
   // 다음 버튼 클릭 시
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // 대분류 정보 없으면 첫 단계로
-    if (!major) {
-      alert('업종 선택 정보가 없습니다. 처음부터 다시 진행해주세요.')
-      navigate('/signup/store-category')
-      return
-    }
-
     // 선택값 없으면 경고
-    if (!selectedId) {
+    if (!id) {
       alert('세부 업종을 선택해주세요.')
       return
     }
 
-    const minor = minorOptions.find((m) => m.id === selectedId)
     // 다음 페이지로 이동
-    navigate('/signup/store-image', { state: { ...state, subCategory: minor.id } })
+    navigate('/signup/store-image', { state: { ...state, subCategory: String(id) } })
   }
 
   return (
@@ -103,7 +69,7 @@ const SelectSubcategoryPage = () => {
             {/* 선택 폼 영역 */}
             <S.ButtonContainer>
               {/* 소분류 리스트 */}
-              <SelectButton options={minorOptions} value={selectedId} onChange={setSelectedId} />
+              <SelectButton options={categories} value={id} onChange={setId} />
 
               {/* 하단 버튼: 이전 / 다음 */}
             </S.ButtonContainer>

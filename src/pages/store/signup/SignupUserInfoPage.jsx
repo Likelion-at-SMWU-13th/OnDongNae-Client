@@ -29,6 +29,7 @@ const Signup = () => {
       return
     }
     e.preventDefault()
+    // 다음 페이지에 name, phoneNum 전달
     navigate('/signup/accountinfo', { state: { name, phoneNum } })
   }
 

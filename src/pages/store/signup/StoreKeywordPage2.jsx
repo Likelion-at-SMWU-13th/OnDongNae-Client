@@ -17,9 +17,9 @@ const StoreKeywordPage2 = () => {
   const { state } = useLocation()
   const [recommendation, setRecommendation] = useState('')
 
-  const handleSubmit = (action) => {
-    if (action === 'skip') {
-      navigate('/signup/loading', { state: { ...state, recommendation: '' } })
+  const handleSubmit = (e) => {
+    if (e === 'skip') {
+      navigate('/signup/loading', { state: { ...state } })
       return
     }
     navigate('/signup/loading', { state: { ...state, recommendation } })

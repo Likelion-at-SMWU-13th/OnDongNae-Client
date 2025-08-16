@@ -20,10 +20,10 @@ const StorePhonePage = () => {
   const handleSubmit = (action) => {
     // skip 버튼인 경우
     if (action === 'skip') {
-      navigate('/signup/store-category-main', { state: { ...state, phoneNum: '' } })
+      navigate('/signup/store-category-main', { state: { ...state } })
       return
     }
-    // 다음 버튼인 경우
+    // userId + marketName + address + phoneNum
     navigate('/signup/store-category-main', { state: { ...state, phoneNum } })
   }
   return (
