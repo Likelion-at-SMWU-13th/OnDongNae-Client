@@ -55,12 +55,12 @@ const SignupAccountInfo = () => {
         localStorage.setItem('refreshToken', res.data.tokens.refreshToken)
         axios.defaults.headers.common.Authorization = `Bearer ${res.data.tokens.accessToken}`
 
-        navigate('signup/terms')
+        navigate('/signup/terms')
       })
       .catch((err) => {
         console.log(err)
         // 연동 후 삭제
-        navigate('signup/terms')
+        navigate('/signup/terms')
       })
   }
 
