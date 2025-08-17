@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MainMapPage.styles'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
+import qs from 'qs'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import SearchBar from '@/components/map/SearchBar'
@@ -41,16 +42,17 @@ const MainMapPage = () => {
   const [selectedSubIds, setSelectedSubIds] = useState([]) // 선택된 소분류 ID (복수 선택)
   const [center, setCenter] = useState(DEFAULT_CENTER) // 지도 중심 상태
   const [level, setLevel] = useState(DEFAULT_LEVEL) // 지도 확대 정도
-  const [markers, setMarkers] = useState([]) // 마커 배열
+  const [marketMarkers, setMarketMarkers] = useState([]) // 시장 마커 배열
+  const [storeMarkers, setStoreMarkers] = useState([]) // 가게 마커 배열
 
-  /* 맨 처음 지도 가져오기
-    useEffect(() => {
+  const apiUrl = import.meta.env.VITE_API_URL
+
+  useEffect(() => {
     // 'en-US' -> 'en' 형태로 변환
     const lang = (i18n.language || 'en').split('-')[0]
 
-
     axios
-      .get('http://127.0.0.1:8000/map', {
+      .get(`${apiUrl}/map`, {
         headers: { 'Accept-Language': lang },
       })
       .then((response) => {
@@ -65,8 +67,7 @@ const MainMapPage = () => {
         console.log(error)
         alert('데이터 불러오기에 실패했습니다.')
       })
-  }, [i18n.language]) 
-  */
+  }, [i18n.language])
 
   /* 사용자가 특정 시장, 대분류, 소분류 선택 시*/
   useEffect(() => {
@@ -76,6 +77,7 @@ const MainMapPage = () => {
     if (!hasMarket && !hasMain && !hasSub) {
       // 아무것도 선택 안되면 호출 x
       setSelectedStores([])
+      setStoreMarkers([])
       return
     }
 
@@ -84,13 +86,15 @@ const MainMapPage = () => {
 
     // 쿼리 파라미터 (하나라도 있으면 params에 추가)
     const params = {}
-    if (hasMarket) params.market = market.value
-    if (hasMain) params.main = selectedMainId
-    if (hasSub) params.sub = selectedSubIds
+    if (hasMarket) params.market = Number(market.value)
+    if (hasMain) params.main = Number(selectedMainId)
+    if (hasSub) params.sub = selectedSubIds.map(Number)
     axios
-      .get('http://127.0.0.1:8000/map/filter', {
+      .get(`${apiUrl}/map/filter`, {
         params,
-        paramsSerializer: { indexes: null }, // sub=7&sub=8 형태
+        paramsSerializer: {
+          serialize: (p) => qs.stringify(p, { arrayFormat: 'repeat' }), // sub=7&sub=8
+        },
         headers: { 'Accept-Language': lang },
       })
       .then((res) => {
@@ -108,33 +112,27 @@ const MainMapPage = () => {
           data: s,
         }))
 
-        setMarkers(storeMarkers)
+        setStoreMarkers(storeMarkers) // 가게 마커만 업데이트
       })
       .catch((err) => {
         console.log(err)
         setSelectedStores([])
-        setMarkers([])
+        setStoreMarkers([]) // 시장 마커는 유지
       })
   }, [market?.value, selectedMainId, selectedSubIds, i18n.language])
-
-  // 연동 후 삭제
-  useEffect(() => {
-    setMarkets(dummyData.data.marketOptions)
-    setCategories(dummyData.data.categoryOptions)
-    setRandomStores(dummyData.data.randomStores)
-  }, [])
 
   // 시장이 바뀌면 대/소분류 선택 초기화 & 지도 이동
   const handleChangeMarket = (opt) => {
     setMarket(opt) // opt = { label, value }
     setSelectedMainId(null) // 대분류 초기화
+    setSelectedSubIds([])
     setSubCategories([]) // 소분류 초기화
 
     const mapped = MARKET_COORDS[opt.value]
     if (mapped) {
       setCenter(mapped)
       setLevel(3)
-      setMarkers([
+      setMarketMarkers([
         {
           id: `market-${opt.value}`,
           position: mapped,
@@ -145,7 +143,7 @@ const MainMapPage = () => {
     } else {
       setCenter(DEFAULT_CENTER)
       setLevel(DEFAULT_LEVEL)
-      setMarkers([])
+      setMarketMarkers([])
     }
   }
 
@@ -157,6 +155,7 @@ const MainMapPage = () => {
   // 대분류 클릭 시, 소분류 세팅
   const handleSelectMain = (mainCategoryId) => {
     setSelectedMainId(mainCategoryId)
+    setSelectedSubIds([])
     const found = categories.find((c) => c.mainCategoryId === mainCategoryId)
     setSubCategories(found ? found.subCategories : [])
   }
@@ -177,7 +176,7 @@ const MainMapPage = () => {
       <Header img={backIcon} title={t('bottomNav.map')} showImg={false} />
       <S.MapContainer>
         {/* 카카오 지도 */}
-        <KakaoMap center={center} level={level} markers={markers} />
+        <KakaoMap center={center} level={level} markers={[...marketMarkers, ...storeMarkers]} />
         {/* 스크롤 영역 -> 아무것도 선택 안되면 랜덤 가게, 선택되면 선택된 가게 정보*/}
         <ScrollArea
           title={t('dropdown.stores')}
@@ -216,15 +215,17 @@ const MainMapPage = () => {
                 setSelectedMainId(null)
                 setSelectedSubIds([])
                 setSubCategories([])
-                setMarkers([])
+                setMarketMarkers([])
+                setStoreMarkers([])
                 setCenter(DEFAULT_CENTER)
                 setLevel(DEFAULT_LEVEL)
               }}
               onClearMain={() => {
-                // 대분류 초기화 (시장 유지)
+                // 대분류 초기화 (시장은 유지)
                 setSelectedMainId(null)
                 setSelectedSubIds([])
                 setSubCategories([])
+                setStoreMarkers([])
               }}
             />
           )}
