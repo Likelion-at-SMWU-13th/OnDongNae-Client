@@ -26,6 +26,7 @@ import MenuPage from './pages/store/menu/MenuPage.jsx'
 import MenuMenualPage from './pages//store/menu/MenuManualPage'
 import MenuUploadPage from './pages//store/menu/MenuUploadPage'
 import MenuExtractLoadingPage from './pages/store/menu/MenuExtractLoadingPage'
+import MenuExtractSuccess from './pages/store/menu/MenuExtractSuccess'
 import MenuExtractFailPage from './pages/store/menu/MenuExtractFailPage'
 import MenuAllergensLoadingPage from './pages/store/menu/MenuAllergensLoadingPage.jsx'
 import MenuAllergensFailPage from './pages/store/menu/MenuAllergensFailPage.jsx'
@@ -126,6 +127,10 @@ const router = createBrowserRouter([
       {
         path: '/menu/extract/loading',
         element: <MenuExtractLoadingPage />,
+      },
+      {
+        path: '/menu/extract/success',
+        element: <MenuExtractSuccess />,
       },
       {
         path: '/menu/extract/fail',
