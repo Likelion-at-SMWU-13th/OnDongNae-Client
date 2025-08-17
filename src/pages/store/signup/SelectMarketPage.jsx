@@ -17,7 +17,7 @@ const SelectMarketPage = () => {
   const markets = [
     { id: 1, name: '용산용문시장' },
     { id: 2, name: '이태원시장' },
-    { id: 3, name: '후암재래시장' },
+    { id: 3, name: '후암전통시장' },
     { id: 4, name: '만리시장' },
     { id: 5, name: '해방촌 신흥시장' },
   ]

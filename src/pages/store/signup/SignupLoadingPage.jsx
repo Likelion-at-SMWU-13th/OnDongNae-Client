@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -55,10 +55,16 @@ function dataUrlToFile(dataUrl, filename = 'image.jpg') {
 
 const SignupLoadingPage = () => {
   const navigate = useNavigate()
+  const sentRef = useRef(false)
+
+  const apiUrl = import.meta.env.VITE_API_URL
 
   useEffect(() => {
+    if (sentRef.current) return // 이미 보냈으면 재전송 막기
+    sentRef.current = true
+
     // 세션에서 값 가져오기
-    const userId = sessionStorage.getItem('userId')
+    const userId = sessionStorage.getItem('memberId')
     const marketName = sessionStorage.getItem('marketName')
     const storeName = sessionStorage.getItem('storeName')
     const address = sessionStorage.getItem('address') || ''
@@ -115,15 +121,23 @@ const SignupLoadingPage = () => {
 
     // axios로 전송
     axios
-      .post('http://127.0.0.1:8000/auth/signup/store', form)
+      .post(`${apiUrl}/auth/signup/store`, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       .then(() => {
         navigate('/signup/complete', { replace: true })
       })
       .catch((err) => {
+        console.error('status:', err.response?.status)
+        console.error('data:', err.response?.data)
+        console.error('headers:', err.response?.headers)
+        console.error('message:', err.message)
         alert('회원가입을 다시 진행해주세요.')
         navigate('/signup/userinfo')
       })
-  }, [navigate])
+  }, [])
 
   return (
     <>

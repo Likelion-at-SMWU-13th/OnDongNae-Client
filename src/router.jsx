@@ -33,22 +33,28 @@ import MenuAllergensFailPage from './pages/store/menu/MenuAllergensFailPage.jsx'
 import MenuAllergensSuccessPage from './pages/store/menu/MenuAllergensSuccessPage'
 import MenuAllergensApplyPage from './pages/store/menu/MenuAllergensApplyPage'
 import MenuCorrectPage from './pages/store/menu/MenuCorrectPage'
-//hours
+import MenuUploadPreviewPage from './pages/MenuUploadPreviewPage'
+// hours
 import HoursPage from './pages/store/hours/HoursPage.jsx'
 import HoursEditPage from './pages/store/hours/HoursEditPage.jsx'
-
 // description
 import DescriptionPage from './pages/store/description/DescriptionPage'
 import SummaryEditPage from './pages/store/description/SummaryEditPage'
 import DetailEditPage from './pages/store/description/DetailEditPage'
-
 // map
 import MainMapPage from './pages/customer/map/MainMapPage'
 import MapStorePage from './pages/customer/map/MapStoresPage'
-
+// overview
+import OverviewPage from './pages/customer/overview/OverviewPage.jsx'
+import OverviewInfo1 from './pages/customer/overview/OverviewInfoPage1.jsx'
+import OverviewInfo2 from './pages/customer/overview/OverviewInfoPage2.jsx'
+import OverviewInfo3 from './pages/customer/overview/OverviewInfoPage3.jsx'
+import OverviewInfo4 from './pages/customer/overview/OverviewInfoPage4.jsx'
+import OverviewInfo5 from './pages/customer/overview/OverviewInfoPage5.jsx'
 //rates
 import ExchangeRatePage from './pages/customer/rates/ExchangeRatePage'
-
+//course
+import CoursePage from './pages/customer/course/CoursePage.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -195,6 +201,34 @@ const router = createBrowserRouter([
       {
         path: '/user/rates',
         element: <ExchangeRatePage />,
+      },
+      {
+        path: '/user/overview',
+        element: <OverviewPage />,
+      },
+      {
+        path: '/user/overview/info/1',
+        element: <OverviewInfo1 />,
+      },
+      {
+        path: '/user/overview/info/2',
+        element: <OverviewInfo2 />,
+      },
+      {
+        path: '/user/overview/info/3',
+        element: <OverviewInfo3 />,
+      },
+      {
+        path: '/user/overview/info/4',
+        element: <OverviewInfo4 />,
+      },
+      {
+        path: '/user/overview/info/5',
+        element: <OverviewInfo5 />,
+      },
+      {
+        path: '/user/course',
+        element: <CoursePage />,
       },
     ],
   },
