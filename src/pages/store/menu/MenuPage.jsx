@@ -7,6 +7,7 @@ import backIcon from '@/assets/button-back.svg'
 import Title from '@/components/common/Title'
 import RegisterOptions from '@/components/menuManagement/RegisterOptions'
 import BottomNav from '@/components/common/BottomNav'
+import RegisteredMenu from '@/components/menuManagement/RegisteredMenu'
 const RegisterMenuSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -34,6 +35,7 @@ function MenuPage() {
       </RegisterMenuSection>
       <MenuList>
         <Title text={'등록된 메뉴'}></Title>
+        <RegisteredMenu />
       </MenuList>
       <BottomNav />
     </>
