@@ -175,7 +175,7 @@ const router = createBrowserRouter([
         element: <MainMapPage />,
       },
       {
-        path: '/user/map/store',
+        path: '/user/map/store/:storeId',
         element: <MapStorePage />,
       },
       {

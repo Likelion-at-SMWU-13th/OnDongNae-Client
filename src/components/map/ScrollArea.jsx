@@ -107,8 +107,8 @@ const ScrollArea = ({
   }, [minSnap, maxSnap])
 
   // 가게 카드 클릭 시 페이지 이동
-  const handleCardClick = (store) => {
-    navigate(`/user/map/store`) // 가게 id에 맞게 경로 변경 필요
+  const handleCardClick = (storeId) => {
+    navigate(`/user/map/store/${storeId}`) // 가게 id에 맞게 경로 변경 필요
   }
 
   return (
