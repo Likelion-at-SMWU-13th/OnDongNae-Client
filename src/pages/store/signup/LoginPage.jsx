@@ -37,12 +37,13 @@ const Login = () => {
   const navigate = useNavigate()
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
+  const apiUrl = import.meta.env.VITE_API_URL
 
   const handleSubmit = () => {
     // 로그인 요청
     axios
       .post(
-        `/auth/login`,
+        `${apiUrl}/auth/login`,
         { id: id, password: password },
         { headers: { 'Content-Type': 'application/json' } },
       )
@@ -54,13 +55,11 @@ const Login = () => {
         axios.defaults.headers.common.Authorization = `Bearer ${res.data.accessToken}`
 
         // 소상공인 홈 화면 이동 navigate 함수 추가
-        navigate('store/home')
+        navigate('/store/home')
       })
       .catch((error) => {
         console.log(error)
         alert('로그인에 실패했습니다.')
-        // 연동 확인 후 삭제
-        navigate('/store/home')
       })
   }
 

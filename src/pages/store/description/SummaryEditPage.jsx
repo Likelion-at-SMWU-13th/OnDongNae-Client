@@ -11,8 +11,8 @@ import Buttons from '@/components/description/Buttons'
 
 const SummaryEditPage = () => {
   const navigate = useNavigate()
-
   const [comment, setComment] = useState('')
+  const apiUrl = import.meta.env.VITE_API_URL
 
   const handleChange = (e) => {
     setComment(e.target.value)
@@ -47,7 +47,7 @@ const SummaryEditPage = () => {
     }
 
     axios
-      .patch('http://127.0.0.1:8000/me/store/description', value, {
+      .patch(`${apiUrl}/me/store/description`, value, {
         params: { ver: 'short' },
         headers: {
           'Content-Type': 'text/plain',
