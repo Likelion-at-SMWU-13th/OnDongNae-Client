@@ -14,6 +14,7 @@ import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 
 const SelectSubcategoryPage = () => {
   const navigate = useNavigate()
+  const apiUrl = import.meta.env.VITE_API_URL
 
   // 대분류 카테고리 값 받기
   const mainCategory = Number(sessionStorage.getItem('mainCategory') || '')
@@ -27,7 +28,7 @@ const SelectSubcategoryPage = () => {
       return
     }
     axios
-      .get('http://127.0.0.1:8000/auth/signup/store/sub-category', {
+      .get(`${apiUrl}/auth/signup/store/sub-category`, {
         params: { mainCategory }, //sub-category?mainCategory=2
       })
       .then((res) => {

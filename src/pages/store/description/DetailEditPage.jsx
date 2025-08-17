@@ -11,8 +11,8 @@ import Buttons from '@/components/description/Buttons'
 
 const DetailEditPage = () => {
   const navigate = useNavigate()
-
   const [comment, setComment] = useState('')
+  const apiUrl = import.meta.env.VITE_API_URL
 
   const handleChange = (e) => {
     setComment(e.target.value)
@@ -22,7 +22,7 @@ const DetailEditPage = () => {
   useEffect(() => {
     const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
     axios
-      .get('http://127.0.0.1:8000/me/store/description', {
+      .get(`${apiUrl}/me/store/description`, {
         params: { ver: 'long' },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const DetailEditPage = () => {
     }
 
     axios
-      .patch('http://127.0.0.1:8000/me/store/description', value, {
+      .patch(`${apiUrl}/me/store/description`, value, {
         params: { ver: 'long' },
         headers: {
           'Content-Type': 'text/plain',

@@ -37,30 +37,29 @@ const Login = () => {
   const navigate = useNavigate()
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
+  const apiUrl = import.meta.env.VITE_API_URL
 
   const handleSubmit = () => {
     // 로그인 요청
     axios
       .post(
-        `/auth/login`,
+        `${apiUrl}/auth/login`,
         { id: id, password: password },
         { headers: { 'Content-Type': 'application/json' } },
       )
       .then((res) => {
-        localStorage.setItem('accessToken', res.data.accessToken)
-        localStorage.setItem('refreshToken', res.data.refreshToken)
+        localStorage.setItem('accessToken', res.data.data.accessToken)
+        localStorage.setItem('refreshToken', res.data.data.refreshToken)
 
         // axios 기본 헤더에 등록 -> 이후 요청은 자동으로 Bearer 토큰이 붙음
-        axios.defaults.headers.common.Authorization = `Bearer ${res.data.accessToken}`
+        axios.defaults.headers.common.Authorization = `Bearer ${res.data.data.accessToken}`
 
         // 소상공인 홈 화면 이동 navigate 함수 추가
-        navigate('store/home')
+        navigate('/store/home')
       })
       .catch((error) => {
         console.log(error)
         alert('로그인에 실패했습니다.')
-        // 연동 확인 후 삭제
-        navigate('/store/home')
       })
   }
 

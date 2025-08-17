@@ -17,11 +17,12 @@ const StoreCategoryMainPage = () => {
   // [{id, name}]
   const [categories, setCategories] = useState([])
   const [id, setId] = useState(null) // 선택한 대분류 id
+  const apiUrl = import.meta.env.VITE_API_URL
 
   // 대분류 카테고리 세팅하기
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:8000/auth/signup/store/main-category')
+      .get(`${apiUrl}/auth/signup/store/main-category`)
       .then((res) => {
         setCategories(res.data.data)
       })
