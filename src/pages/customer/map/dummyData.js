@@ -1,10 +1,6 @@
-// 시장/카테고리/가게 정보 임시 데이터
-// 연동 후 삭제 필요
+// dummyData.ts (or .js)
 
-/*영어 버전*/
-// Temporary data for markets/categories/stores
-// TODO: Remove after API integration
-
+// 👉 /map mock (matches your code: dummyData.data.randomStores)
 const dummyData = {
   code: 'OK',
   message: 'Request succeeded.',
@@ -14,19 +10,19 @@ const dummyData = {
       { name: 'Yongsan Yongmun Market', id: 1 },
       { name: 'Itaewon Market', id: 2 },
       { name: 'Huam Traditional Market', id: 3 },
-      { name: 'Malli Market', id: 4 },
+      { name: 'Manri Market', id: 4 },
       { name: 'Haebangchon Sinheung Market', id: 5 },
     ],
     categoryOptions: [
       {
         mainCategoryId: 1,
-        mainCategoryName: 'Agricultural & Food Products',
+        mainCategoryName: 'Agri-Fishery & Food',
         subCategories: [
           { name: 'Fruits & Vegetables', id: 1 },
           { name: 'Seafood', id: 2 },
           { name: 'Meat & Livestock', id: 3 },
           { name: 'Grains', id: 4 },
-          { name: 'Side Dishes (Banchan)', id: 5 },
+          { name: 'Side Dishes', id: 5 },
           { name: 'Rice Cakes & Bakery', id: 6 },
         ],
       },
@@ -35,10 +31,10 @@ const dummyData = {
         mainCategoryName: 'Restaurants & Cafés',
         subCategories: [
           { name: 'Korean Cuisine', id: 7 },
-          { name: 'Korean Street Food', id: 8 },
+          { name: 'Korean Snacks', id: 8 },
           { name: 'Sashimi & Seafood', id: 9 },
-          { name: 'International Cuisine', id: 10 },
-          { name: 'Fusion', id: 11 },
+          { name: 'World Cuisine', id: 10 },
+          { name: 'Fusion Cuisine', id: 11 },
           { name: 'Cafés & Tea', id: 12 },
         ],
       },
@@ -46,7 +42,7 @@ const dummyData = {
         mainCategoryId: 3,
         mainCategoryName: 'Pubs & Bars',
         subCategories: [
-          { name: 'Korean Tavern', id: 13 },
+          { name: 'Korean Traditional Pub', id: 13 },
           { name: 'Beer Hall', id: 14 },
           { name: 'Bar', id: 15 },
           { name: 'Izakaya', id: 16 },
@@ -54,16 +50,16 @@ const dummyData = {
       },
       {
         mainCategoryId: 4,
-        mainCategoryName: 'General Goods & Household',
+        mainCategoryName: 'General Goods & Daily Supplies',
         subCategories: [
           { name: 'Clothing & Shoes', id: 17 },
-          { name: 'General Goods', id: 18 },
+          { name: 'Daily Goods', id: 18 },
           { name: 'Home Goods', id: 19 },
         ],
       },
       {
         mainCategoryId: 5,
-        mainCategoryName: 'Souvenirs · Traditional Crafts · Hanbok · Local Specialties',
+        mainCategoryName: 'Souvenirs, Crafts & Hanbok',
         subCategories: [
           { name: 'Souvenir Shop', id: 20 },
           { name: 'Hanbok & Traditional Wear', id: 21 },
@@ -79,141 +75,109 @@ const dummyData = {
     ],
     randomStores: [
       {
-        id: 18,
+        id: 101,
         name: 'Egg & Flower',
-        isOpen: false,
-        subCategories: ['International Cuisine'],
+        isOpen: true,
+        subCategories: ['World Cuisine'],
         address: '35, Sinheung-ro 26-gil, Yongsan-gu, Seoul',
         phone: '0507-1328-7681',
-        //image: 'https://gorugoru-bucket/main.png',
+        image: 'https://example.com/images/egg-flower.jpg',
       },
       {
-        id: 5,
-        name: 'Seoul Guk-tang 2',
+        id: 102,
+        name: 'Seoul Gukbap',
         isOpen: false,
-        subCategories: ['Meat & Livestock', 'Fruits & Vegetables'],
+        subCategories: ['Korean Cuisine'],
         address: '100, Cheongpa-ro 47-gil, Yongsan-gu, Seoul',
         phone: '010-0000-0000',
-        //image: 'https://gorugoru-bucket/main.png',
+        image: 'https://example.com/images/seoul-gukbap.jpg',
       },
       {
-        id: 12,
-        name: 'Egg and Flower',
-        isOpen: false,
-        subCategories: ['Meat & Livestock', 'Fruits & Vegetables'],
-        address: '35, Sinheung-ro 26-gil, Yongsan-gu, Seoul',
-        phone: '0507-1328-7681',
-        //image: 'https://gorugoru-bucket/main.png',
+        id: 103,
+        name: 'Itaewon Bakery',
+        isOpen: true,
+        subCategories: ['Rice Cakes & Bakery'],
+        address: '22, Itaewon-ro, Yongsan-gu, Seoul',
+        phone: '02-123-4567',
+        image: 'https://example.com/images/itaewon-bakery.jpg',
       },
     ],
   },
+}
+
+// 👉 /map/filter mock (keys use lat/lng to match your marker code)
+export const mapFilterMock = {
+  code: 'OK',
+  message: 'Request succeeded.',
+  success: true,
+  data: [
+    {
+      id: 201,
+      name: 'Egg & Flower',
+      isOpen: true,
+      subCategories: ['World Cuisine'],
+      address: '35, Sinheung-ro 26-gil, Yongsan-gu, Seoul',
+      phone: '0507-1328-7681',
+      image: 'https://example.com/images/egg-flower.jpg',
+      lat: 37.5453523, // Haebangchon area
+      lng: 126.9843008,
+    },
+    {
+      id: 202,
+      name: 'Seoul Gukbap',
+      isOpen: false,
+      subCategories: ['Korean Cuisine'],
+      address: '100, Cheongpa-ro 47-gil, Yongsan-gu, Seoul',
+      phone: '010-0000-0000',
+      image: 'https://example.com/images/seoul-gukbap.jpg',
+      lat: 37.5471, // near Cheongpa/Yongsan
+      lng: 126.9723,
+    },
+    {
+      id: 203,
+      name: 'Yongmun Butcher',
+      isOpen: true,
+      subCategories: ['Meat & Livestock'],
+      address: 'Yongmun Market, Yongsan-gu, Seoul',
+      phone: '02-111-2222',
+      image: 'https://example.com/images/yongmun-butcher.jpg',
+      lat: 37.5369, // near Yongmun Market
+      lng: 126.9596,
+    },
+    {
+      id: 204,
+      name: 'Huam Seafood',
+      isOpen: true,
+      subCategories: ['Seafood'],
+      address: 'Huam-dong, Yongsan-gu, Seoul',
+      phone: '02-222-3333',
+      image: 'https://example.com/images/huam-seafood.jpg',
+      lat: 37.5502, // near Huam Traditional Market
+      lng: 126.9761,
+    },
+    {
+      id: 205,
+      name: 'Manri Izakaya',
+      isOpen: false,
+      subCategories: ['Izakaya'],
+      address: 'Manri Market, Yongsan-gu, Seoul',
+      phone: '02-333-4444',
+      image: 'https://example.com/images/manri-izakaya.jpg',
+      lat: 37.5511, // near Manri Market
+      lng: 126.9635,
+    },
+    {
+      id: 206,
+      name: 'Itaewon Café Nimbus',
+      isOpen: true,
+      subCategories: ['Cafés & Tea'],
+      address: 'Itaewon-ro, Yongsan-gu, Seoul',
+      phone: '02-444-5555',
+      image: 'https://example.com/images/itaewon-cafe.jpg',
+      lat: 37.5341, // near Itaewon Market
+      lng: 126.9902,
+    },
+  ],
 }
 
 export default dummyData
-
-/*중국어 버전
-const dummyData = {
-  code: 'OK',
-  message: '요청이 성공했습니다.',
-  success: true,
-  data: {
-    marketOptions: [
-      { name: '龙山龙门市场', id: 1 },
-      { name: '梨泰院市场', id: 2 },
-      { name: '厚岩传统市场', id: 3 },
-      { name: '万里市场', id: 4 },
-      { name: '解放村新兴市场', id: 5 },
-    ],
-    categoryOptions: [
-      {
-        mainCategoryId: 1,
-        mainCategoryName: '农水产品・食品',
-        subCategories: [
-          { name: '果蔬', id: 1 },
-          { name: '水产・海鲜', id: 2 },
-          { name: '肉类・畜产', id: 3 },
-          { name: '谷物', id: 4 },
-          { name: '配菜', id: 5 },
-          { name: '年糕・烘焙点心', id: 6 },
-        ],
-      },
-      {
-        mainCategoryId: 2,
-        mainCategoryName: '餐厅・咖啡馆',
-        subCategories: [
-          { name: '韩国料理', id: 7 },
-          { name: '韩国小吃', id: 8 },
-          { name: '生鱼片・海鲜', id: 9 },
-          { name: '各国料理', id: 10 },
-          { name: '融合料理', id: 11 },
-          { name: '咖啡馆・茶饮', id: 12 },
-        ],
-      },
-      {
-        mainCategoryId: 3,
-        mainCategoryName: '酒馆・酒吧',
-        subCategories: [
-          { name: '韩式传统酒馆', id: 13 },
-          { name: '啤酒馆', id: 14 },
-          { name: '酒吧', id: 15 },
-          { name: '居酒屋', id: 16 },
-        ],
-      },
-      {
-        mainCategoryId: 4,
-        mainCategoryName: '杂货・生活用品',
-        subCategories: [
-          { name: '服装・鞋类', id: 17 },
-          { name: '生活杂货', id: 18 },
-          { name: '家居用品', id: 19 },
-        ],
-      },
-      {
-        mainCategoryId: 5,
-        mainCategoryName: '纪念品・传统工艺・韩服・特产',
-        subCategories: [
-          { name: '纪念品店', id: 20 },
-          { name: '韩服・传统服饰', id: 21 },
-          { name: '工艺品', id: 22 },
-          { name: '小物店', id: 23 },
-        ],
-      },
-      {
-        mainCategoryId: 6,
-        mainCategoryName: '服务・其他',
-        subCategories: [],
-      },
-    ],
-    randomStores: [
-      {
-        id: 18,
-        name: '蛋与花',
-        isOpen: false,
-        subCategories: ['各国料理'],
-        address: '首尔 龙山区 新兴路26街 35号',
-        phone: '0507-1328-7681',
-        image: 'https://gorugoru-bucket/main.png',
-      },
-      {
-        id: 5,
-        name: '首尔国汤2',
-        isOpen: false,
-        subCategories: ['肉类・畜产', '果蔬'],
-        address: '首尔特别市龙山区清坡路47街100',
-        phone: '010-0000-0000',
-        image: 'https://gorugoru-bucket/main.png',
-      },
-      {
-        id: 12,
-        name: '蛋和花',
-        isOpen: false,
-        subCategories: ['肉类・畜产', '果蔬'],
-        address: '首尔龙山区新兴路26街35号',
-        phone: '0507-1328-7681',
-        image: 'https://gorugoru-bucket/main.png',
-      },
-    ],
-  },
-}
-
-export default dummyData */

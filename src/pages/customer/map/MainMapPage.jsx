@@ -1,5 +1,6 @@
 // 더미데이터 관련 부분 연동 후 삭제 (dummy, 더미, 삭제로 검색하기)
-import dummyData from './dummyData'
+import dummyData, { mapFilterMock } from './dummyData'
+const USE_MOCK = true
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MainMapPage.styles'
 import { useTranslation } from 'react-i18next'
@@ -42,8 +43,8 @@ const MainMapPage = () => {
   const [selectedSubIds, setSelectedSubIds] = useState([]) // 선택된 소분류 ID (복수 선택)
   const [center, setCenter] = useState(DEFAULT_CENTER) // 지도 중심 상태
   const [level, setLevel] = useState(DEFAULT_LEVEL) // 지도 확대 정도
-  const [marketMarkers, setMarketMarkers] = useState([]) // 시장 마커 배열
   const [storeMarkers, setStoreMarkers] = useState([]) // 가게 마커 배열
+  const [activeStoreId, setActiveStoreId] = useState(null) // 클릭된 가게 라벨
 
   const apiUrl = import.meta.env.VITE_API_URL
 
@@ -51,7 +52,7 @@ const MainMapPage = () => {
     // 'en-US' -> 'en' 형태로 변환
     const lang = (i18n.language || 'en').split('-')[0]
 
-    axios
+    /*axios
       .get(`${apiUrl}/map`, {
         headers: { 'Accept-Language': lang },
       })
@@ -67,6 +68,16 @@ const MainMapPage = () => {
         console.log(error)
         alert('데이터 불러오기에 실패했습니다.')
       })
+        */
+
+    if (USE_MOCK) {
+      // ✅ 목업 즉시 주입
+      const data = dummyData.data
+      setMarkets(data.marketOptions || [])
+      setCategories(data.categoryOptions || [])
+      setRandomStores(data.randomStores || [])
+      return
+    }
   }, [i18n.language])
 
   /* 사용자가 특정 시장, 대분류, 소분류 선택 시*/
@@ -78,6 +89,7 @@ const MainMapPage = () => {
       // 아무것도 선택 안되면 호출 x
       setSelectedStores([])
       setStoreMarkers([])
+      setActiveStoreId(null)
       return
     }
 
@@ -89,7 +101,7 @@ const MainMapPage = () => {
     if (hasMarket) params.market = Number(market.value)
     if (hasMain) params.main = Number(selectedMainId)
     if (hasSub) params.sub = selectedSubIds.map(Number)
-    axios
+    /*axios
       .get(`${apiUrl}/map/filter`, {
         params,
         paramsSerializer: {
@@ -105,45 +117,66 @@ const MainMapPage = () => {
 
         // 결과 리스트 마커로 모두 찍기
         // 마커 객체에 가게 데이터(s) 그대로 같이 들고 다닐 수 있게 설정 (data:s)
-        const storeMarkers = list.map((s) => ({
+        const nextStoreMarkers = list.map((s) => ({
           id: `store-${s.id}`,
           position: { lat: s.lat, lng: s.lng },
           image: { src: iconMarker, size: { width: 28, height: 28 } },
-          data: s,
+          data: {
+            ...s,
+            type: 'store', //마커 타입 구분
+            _labelText: s.name,
+          },
         }))
 
-        setStoreMarkers(storeMarkers) // 가게 마커만 업데이트
+        setStoreMarkers(nextStoreMarkers) // 가게 마커만 업데이트
+        setActiveStoreId(null) // 필터 변경 시 가게 라벨 초기화
       })
       .catch((err) => {
         console.log(err)
         setSelectedStores([])
         setStoreMarkers([]) // 시장 마커는 유지
+        setActiveStoreId(null) // 라벨 초기화
       })
+        */
+
+    if (USE_MOCK) {
+      // ✅ 목업 데이터 사용
+      const result = mapFilterMock?.data
+      const list = result ? (Array.isArray(result) ? result : [result]) : []
+      setSelectedStores(list)
+
+      const nextStoreMarkers = list.map((s) => ({
+        id: `store-${s.id}`,
+        // ⚠️ lat/lng가 없고 latitude/longitude만 있을 수도 있으니 안전하게 매핑
+        position: { lat: s.lat ?? s.latitude, lng: s.lng ?? s.longitude },
+        image: { src: iconMarker, size: { width: 28, height: 28 } },
+        data: {
+          ...s,
+          type: 'store',
+          _labelText: s.name,
+        },
+      }))
+      setStoreMarkers(nextStoreMarkers)
+      setActiveStoreId(null)
+      return
+    }
   }, [market?.value, selectedMainId, selectedSubIds, i18n.language])
 
   // 시장이 바뀌면 대/소분류 선택 초기화 & 지도 이동
   const handleChangeMarket = (opt) => {
     setMarket(opt) // opt = { label, value }
     setSelectedMainId(null) // 대분류 초기화
-    setSelectedSubIds([])
+    setSelectedSubIds([]) // 소분류 초기화
     setSubCategories([]) // 소분류 초기화
+    setActiveStoreId(null) // 가게 라벨 초기화
 
     const mapped = MARKET_COORDS[opt.value]
     if (mapped) {
       setCenter(mapped)
       setLevel(3)
-      setMarketMarkers([
-        {
-          id: `market-${opt.value}`,
-          position: mapped,
-          image: { src: iconMarker, size: { width: 31, height: 31 } },
-          data: { type: 'market', label: opt.label },
-        },
-      ])
     } else {
       setCenter(DEFAULT_CENTER)
       setLevel(DEFAULT_LEVEL)
-      setMarketMarkers([])
     }
   }
 
@@ -158,6 +191,7 @@ const MainMapPage = () => {
     setSelectedSubIds([])
     const found = categories.find((c) => c.mainCategoryId === mainCategoryId)
     setSubCategories(found ? found.subCategories : [])
+    setActiveStoreId(null)
   }
 
   // 소분류 버튼 선택+해제
@@ -168,6 +202,16 @@ const MainMapPage = () => {
           ? prev.filter((v) => String(v) !== String(id)) // 선택 해제
           : [...prev, id], // 선택 추가
     )
+    setActiveStoreId(null)
+  }
+
+  // 가게 마커 클릭 시 마커 보여주기
+  const handleMarkerClick = (m) => {
+    if (m?.data?.type === 'store') {
+      setActiveStoreId(m?.data?.id ?? null)
+    } else {
+      setActiveStoreId(null)
+    }
   }
 
   return (
@@ -176,7 +220,20 @@ const MainMapPage = () => {
       <Header img={backIcon} title={t('bottomNav.map')} showImg={false} />
       <S.MapContainer>
         {/* 카카오 지도 */}
-        <KakaoMap center={center} level={level} markers={[...marketMarkers, ...storeMarkers]} />
+        <KakaoMap
+          center={center}
+          level={level}
+          markers={storeMarkers}
+          onMarkerClick={handleMarkerClick}
+          showMarkerLabels
+          getLabel={(m) => {
+            // 라벨 노출 기준
+            if (m?.data?.type === 'store' && m?.data?.id === activeStoreId)
+              return m?.data?._labelText ?? ''
+            return '' // 그 외는 라벨 없음
+          }}
+          labelYAnchor={2.3} // 라벨 Y 위치 보정
+        />
         {/* 스크롤 영역 -> 아무것도 선택 안되면 랜덤 가게, 선택되면 선택된 가게 정보*/}
         <ScrollArea
           title={t('dropdown.stores')}
@@ -190,7 +247,16 @@ const MainMapPage = () => {
           categories={categories}
           selectedMainId={selectedMainId}
           selectedSubIds={selectedSubIds}
-          onStoreClick={(id) => console.log('store click:', id)}
+          onStoreClick={(id) => {
+            // 리스트에서 가게 클릭 시 지도에서도 라벨 표시 + 센터 이동
+            const matched = storeMarkers.find((m) => String(m?.data?.id) === String(id))
+            if (matched) {
+              setActiveStoreId(matched.data.id)
+              setCenter(matched.position)
+              setLevel(3)
+            }
+            console.log('store click:', id)
+          }}
         />
 
         {/*지도 위 오버레이 영역 */}
@@ -215,10 +281,10 @@ const MainMapPage = () => {
                 setSelectedMainId(null)
                 setSelectedSubIds([])
                 setSubCategories([])
-                setMarketMarkers([])
                 setStoreMarkers([])
                 setCenter(DEFAULT_CENTER)
                 setLevel(DEFAULT_LEVEL)
+                setActiveStoreId(null)
               }}
               onClearMain={() => {
                 // 대분류 초기화 (시장은 유지)
@@ -226,6 +292,7 @@ const MainMapPage = () => {
                 setSelectedSubIds([])
                 setSubCategories([])
                 setStoreMarkers([])
+                setActiveStoreId(null)
               }}
             />
           )}

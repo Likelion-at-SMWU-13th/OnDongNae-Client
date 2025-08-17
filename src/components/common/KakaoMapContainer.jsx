@@ -69,21 +69,30 @@ export default function KakaoMap({
       scrollwheel={scrollwheel}
       zoomable={true}
     >
-      {markers.map((m) => (
-        <Fragment key={m.id ?? `${m.position.lat}-${m.position.lng}`}>
-          <MapMarker
-            key={m.id ?? `${m.position.lat}-${m.position.lng}`}
-            position={m.position}
-            image={m.image} // { src, size:{width,height}, options? }
-            onClick={() => onMarkerClick?.(m)}
-          />
-          {showMarkerLabels && getLabel && (
-            <CustomOverlayMap position={m.position} yAnchor={labelYAnchor}>
-              <Label>{getLabel(m)}</Label>
-            </CustomOverlayMap>
-          )}
-        </Fragment>
-      ))}
+      {markers.map((m) => {
+        const raw = getLabel?.(m)
+        const hasLabel =
+          raw !== null &&
+          raw !== undefined &&
+          raw !== false &&
+          (typeof raw !== 'string' || raw.trim().length > 0)
+
+        return (
+          <Fragment key={m.id ?? `${m.position.lat}-${m.position.lng}`}>
+            <MapMarker
+              key={m.id ?? `${m.position.lat}-${m.position.lng}`}
+              position={m.position}
+              image={m.image}
+              onClick={() => onMarkerClick?.(m)}
+            />
+            {showMarkerLabels && getLabel && hasLabel && (
+              <CustomOverlayMap position={m.position} xAnchor={labelXAnchor} yAnchor={labelYAnchor}>
+                <Label>{raw}</Label>
+              </CustomOverlayMap>
+            )}
+          </Fragment>
+        )
+      })}
     </Map>
   )
 }
@@ -100,4 +109,8 @@ const Label = styled.div`
   white-space: nowrap;
   transform: translateY(-4px);
   pointer-events: none;
+
+  &:empty {
+    display: none;
+  }
 `
