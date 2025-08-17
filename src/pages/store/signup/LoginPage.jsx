@@ -48,11 +48,11 @@ const Login = () => {
         { headers: { 'Content-Type': 'application/json' } },
       )
       .then((res) => {
-        localStorage.setItem('accessToken', res.data.accessToken)
-        localStorage.setItem('refreshToken', res.data.refreshToken)
+        localStorage.setItem('accessToken', res.data.data.accessToken)
+        localStorage.setItem('refreshToken', res.data.data.refreshToken)
 
         // axios 기본 헤더에 등록 -> 이후 요청은 자동으로 Bearer 토큰이 붙음
-        axios.defaults.headers.common.Authorization = `Bearer ${res.data.accessToken}`
+        axios.defaults.headers.common.Authorization = `Bearer ${res.data.data.accessToken}`
 
         // 소상공인 홈 화면 이동 navigate 함수 추가
         navigate('/store/home')

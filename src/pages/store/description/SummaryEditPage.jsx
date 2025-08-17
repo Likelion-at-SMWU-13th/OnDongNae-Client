@@ -22,7 +22,7 @@ const SummaryEditPage = () => {
   useEffect(() => {
     const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
     axios
-      .get('http://127.0.0.1:8000/me/store/description', {
+      .get(`${apiUrl}/me/store/description`, {
         params: { ver: 'short' },
         headers: {
           Authorization: `Bearer ${token}`,
