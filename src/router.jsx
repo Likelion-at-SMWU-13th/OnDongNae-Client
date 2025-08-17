@@ -21,14 +21,14 @@ import SignupLoadingPage from './pages/store/signup/SignupLoadingPage'
 import SignupCompletePage from './pages/store/signup/SignupCompletePage'
 import StoreHomePage from './pages/store/signup/StoreHomePage'
 // menu
-import MenuPage from './pages/MenuPage'
-import MenuMenualPage from './pages/MenuManualPage'
-import MenuUploadPage from './pages/MenuUploadPage'
-import MenuUploadPreviewPage from './pages/MenuUploadPreviewPage'
-import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
-import MenuExtractFailPage from './pages/MenuExtractFailPage'
-import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
-import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
+import MenuPage from './pages/store/menu/MenuPage.jsx'
+
+import MenuMenualPage from './pages//store/menu/MenuManualPage'
+import MenuUploadPage from './pages//store/menu/MenuUploadPage'
+import MenuExtractLoadingPage from './pages/store/menu/MenuExtractLoadingPage'
+import MenuExtractFailPage from './pages/store/menu/MenuExtractFailPage'
+import MenuAllergensLoadingPage from './pages/store/menu/MenuAllergensLoadingPage.jsx'
+import MenuAllergensFailPage from './pages/store/menu/MenuAllergensFailPage.jsx'
 import HoursPage from './pages/store/hours/HoursPage.jsx'
 import HoursEditPage from './pages/store/hours/HoursEditPage.jsx'
 
@@ -122,10 +122,6 @@ const router = createBrowserRouter([
       {
         path: 'menu/upload',
         element: <MenuUploadPage />,
-      },
-      {
-        path: 'menu/upload/preview',
-        element: <MenuUploadPreviewPage />,
       },
       {
         path: '/menu/extract/loading',
