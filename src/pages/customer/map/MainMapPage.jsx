@@ -48,6 +48,12 @@ const MainMapPage = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL
 
+  // 하나라도 맞는 결과 있으면 ScrollArea에 보여주기
+  const isFiltering =
+    !!market?.value ||
+    !!selectedMainId ||
+    (Array.isArray(selectedSubIds) && selectedSubIds.length > 0)
+
   useEffect(() => {
     // 'en-US' -> 'en' 형태로 변환
     const lang = (i18n.language || 'en').split('-')[0]
@@ -85,8 +91,7 @@ const MainMapPage = () => {
     const hasMarket = !!market?.value
     const hasMain = !!selectedMainId
     const hasSub = Array.isArray(selectedSubIds) && selectedSubIds.length > 0
-    if (!hasMarket && !hasMain && !hasSub) {
-      // 아무것도 선택 안되면 호출 x
+    if (!hasMarket) {
       setSelectedStores([])
       setStoreMarkers([])
       setActiveStoreId(null)
@@ -140,21 +145,81 @@ const MainMapPage = () => {
         */
 
     if (USE_MOCK) {
-      // ✅ 목업 데이터 사용
-      const result = mapFilterMock?.data
-      const list = result ? (Array.isArray(result) ? result : [result]) : []
-      setSelectedStores(list)
+      // 전체 더미 목록
+      const all = Array.isArray(mapFilterMock && mapFilterMock.data) ? mapFilterMock.data : []
 
-      const nextStoreMarkers = list.map((s) => ({
-        id: `store-${s.id}`,
-        // ⚠️ lat/lng가 없고 latitude/longitude만 있을 수도 있으니 안전하게 매핑
-        position: { lat: s.lat ?? s.latitude, lng: s.lng ?? s.longitude },
-        image: { src: iconMarker, size: { width: 28, height: 28 } },
-        data: {
+      // 선택 상태
+      const marketId = hasMarket ? Number(market.value) : null
+
+      // ------- 카테고리 매핑 준비 (id↔name, subId→mainId) -------
+      const subIdToName = new Map()
+      const subNameToId = new Map()
+      const subIdToMainId = new Map()
+      ;((dummyData && dummyData.data && dummyData.data.categoryOptions) || []).forEach((c) => {
+        ;(c.subCategories || []).forEach((sc) => {
+          const sid = Number(sc.id)
+          subIdToName.set(sid, sc.name)
+          subNameToId.set(sc.name, sid)
+          subIdToMainId.set(sid, Number(c.mainCategoryId))
+        })
+      })
+
+      // main 선택 시: 해당 main에 속한 sub 이름 집합
+      const mainSubNameSet = new Set(
+        hasMain
+          ? (
+              ((dummyData && dummyData.data && dummyData.data.categoryOptions) || []).find(
+                (c) => String(c.mainCategoryId) === String(selectedMainId),
+              )?.subCategories || []
+            ).map((sc) => sc.name)
+          : [],
+      )
+
+      // sub 선택 시: 선택된 sub 이름 집합
+      const selectedSubNameSet = new Set(
+        hasSub ? selectedSubIds.map((id) => subIdToName.get(Number(id))).filter(Boolean) : [],
+      )
+
+      // ------- 실제 필터링: 시장 / 메인 / 소분류(OR) -------
+      const filtered = all.filter((s) => {
+        if (hasMarket && s.marketId !== marketId) return false
+        if (
+          hasMain &&
+          mainSubNameSet.size > 0 &&
+          !(s.subCategories || []).some((n) => mainSubNameSet.has(n))
+        )
+          return false
+        if (
+          hasSub &&
+          selectedSubNameSet.size > 0 &&
+          !(s.subCategories || []).some((n) => selectedSubNameSet.has(n))
+        )
+          return false
+        return true
+      })
+
+      // ------- ScrollArea 내부 필터와 동일 기준으로 보조 필드 주입 -------
+      const enriched = filtered.map((s) => {
+        const subIds = (s.subCategories || [])
+          .map((n) => subNameToId.get(n))
+          .filter((v) => typeof v === 'number')
+        const mainIds = Array.from(
+          new Set(subIds.map((sid) => subIdToMainId.get(sid)).filter(Boolean)),
+        )
+        return {
           ...s,
-          type: 'store',
-          _labelText: s.name,
-        },
+          subCategoryIds: subIds, // ✅ ScrollArea가 ID로 필터링해도 매칭되도록
+          mainCategoryIds: mainIds, // ✅ 메인 카테고리 선택 시에도 일관성
+        }
+      })
+
+      setSelectedStores(enriched)
+
+      const nextStoreMarkers = enriched.map((s) => ({
+        id: `store-${s.id}`,
+        position: { lat: s.lat ?? s.lat, lng: s.lng ?? s.lng },
+        image: { src: iconMarker, size: { width: 28, height: 28 } },
+        data: { ...s, type: 'store', _labelText: s.name },
       }))
       setStoreMarkers(nextStoreMarkers)
       setActiveStoreId(null)
@@ -214,6 +279,8 @@ const MainMapPage = () => {
     }
   }
 
+  // ScrollArea에 넣을 리스트 계산 (시장 선택 시: 필터 결과, 아니면 랜덤)
+  const scrollList = market?.value ? storeMarkers.map((m) => m.data) : dummyData.data.randomStores
   return (
     <>
       {/* 헤더 */}
@@ -233,29 +300,30 @@ const MainMapPage = () => {
             return '' // 그 외는 라벨 없음
           }}
           labelYAnchor={2.3} // 라벨 Y 위치 보정
+          fitToMarkers // 마커 전체가 보이도록 자동 맞춤
+          fitSingleLevel={2} // 마커 한 개일 때 레벨
+          fitBoundsPaddingRatio={0.04} // 여백(12%)
         />
         {/* 스크롤 영역 -> 아무것도 선택 안되면 랜덤 가게, 선택되면 선택된 가게 정보*/}
         <ScrollArea
+          key={`m:${market?.value || 0}-main:${selectedMainId || 0}-subs:${(Array.isArray(
+            selectedSubIds,
+          )
+            ? [...selectedSubIds].sort((a, b) => String(a).localeCompare(String(b)))
+            : []
+          ).join('_')}`}
           title={t('dropdown.stores')}
-          randomStores={
-            market?.value
-              ? selectedStores.length
-                ? selectedStores
-                : dummyData.data.randomStores
-              : dummyData.data.randomStores
-          } // 선택 없을 때 노출
+          randomStores={scrollList}
           categories={categories}
-          selectedMainId={selectedMainId}
-          selectedSubIds={selectedSubIds}
+          selectedMainId={null} // ✅ 내부 필터 비활성화
+          selectedSubIds={[]} // ✅ 내부 필터 비활성화
           onStoreClick={(id) => {
-            // 리스트에서 가게 클릭 시 지도에서도 라벨 표시 + 센터 이동
             const matched = storeMarkers.find((m) => String(m?.data?.id) === String(id))
             if (matched) {
               setActiveStoreId(matched.data.id)
               setCenter(matched.position)
               setLevel(3)
             }
-            console.log('store click:', id)
           }}
         />
 

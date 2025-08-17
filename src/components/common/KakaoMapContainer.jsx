@@ -13,12 +13,15 @@
  *   zoomControlPosition?: any
  *   showMarkerLabels?: boolean,
  *   getLabel?: (marker:any)=>React.ReactNode,
- *   labelXAnchor?: number
- *   labelYAnchor?: number
+ *   labelXAnchor?: number,
+ *   labelYAnchor?: number,
+ * fitToMarkers?: boolean,
+ *   fitSingleLevel?: number,
+ * fitBoundsPaddingRatio?: number
  * }} KakaoMapProps
  */
 
-import { useRef, Fragment } from 'react'
+import { useRef, Fragment, useEffect } from 'react'
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import styled from 'styled-components'
 
@@ -53,9 +56,48 @@ export default function KakaoMap({
   getLabel, // (m) => ReactNode (예: (m)=>t(m.title))
   labelYAnchor = 1.3, // 마커 위로 살짝 띄우기
   labelXAnchor = 0.5,
+  fitToMarkers = false,
+  fitSingleLevel = 3,
+  fitBoundsPaddingRatio = 0.1,
 }) {
   // 카카오 지도 인스턴스를 저장(필요 시 직접 API 호출: setCenter, setLevel 등)
   const mapRef = useRef(null)
+  useEffect(() => {
+    if (!fitToMarkers) return
+    const map = mapRef.current
+    const kakao = window.kakao
+    if (!map || !kakao || !Array.isArray(markers) || markers.length === 0) return
+
+    // 마커 1개: 중심 이동 + 지정 레벨
+    if (markers.length === 1) {
+      const p = markers[0].position
+      map.setCenter(new kakao.maps.LatLng(p.lat, p.lng))
+      if (typeof fitSingleLevel === 'number') {
+        map.setLevel(fitSingleLevel)
+      }
+      return
+    }
+
+    // 마커 여러 개: bounds 계산
+    const bounds = new kakao.maps.LatLngBounds()
+    markers.forEach((m) => bounds.extend(new kakao.maps.LatLng(m.position.lat, m.position.lng)))
+
+    // 여백(비율) 적용
+    if (fitBoundsPaddingRatio > 0) {
+      const sw = bounds.getSouthWest()
+      const ne = bounds.getNorthEast()
+      const latSpan = ne.getLat() - sw.getLat()
+      const lngSpan = ne.getLng() - sw.getLng()
+      const latPad = latSpan * fitBoundsPaddingRatio
+      const lngPad = lngSpan * fitBoundsPaddingRatio
+      const paddedSW = new kakao.maps.LatLng(sw.getLat() - latPad, sw.getLng() - lngPad)
+      const paddedNE = new kakao.maps.LatLng(ne.getLat() + latPad, ne.getLng() + lngPad)
+      const padded = new kakao.maps.LatLngBounds(paddedSW, paddedNE)
+      map.setBounds(padded)
+    } else {
+      map.setBounds(bounds)
+    }
+  }, [markers, fitToMarkers, fitSingleLevel, fitBoundsPaddingRatio])
 
   return (
     <Map
