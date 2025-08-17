@@ -6,13 +6,18 @@ import DoubleTitle from '@/components/common/DoubleTitle'
 import BottomNav from '@/components/common/BottomNav'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
 import MenuEdit from '@/components/menuManagement/MenuEdit'
-const handleSave = () => {}
+import { useNavigate } from 'react-router-dom'
+
 const ButtonWapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 30px;
 `
 const MenuExtractSuccess = () => {
+  const navigate = useNavigate()
+
+  const handleSave = () => navigate('/menu/extract/save')
+
   return (
     <div>
       <Header img={backIcon} title={'메뉴 관리'} showImg={true} />
@@ -20,8 +25,8 @@ const MenuExtractSuccess = () => {
         title='메뉴 추출이 끝났어요'
         subtitle='수정 버튼을 누르면 내용을 바꿀 수 있어요.'
       />
+      <MenuEdit />
       <ButtonWapper>
-        <MenuEdit />
         <LargeOrangeButton label='저장' onBtnClick={handleSave} />
       </ButtonWapper>
       <BottomNav />
