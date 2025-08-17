@@ -42,7 +42,7 @@ const Login = () => {
     // 로그인 요청
     axios
       .post(
-        'http://127.0.0.1:8000//auth/login',
+        `/auth/login`,
         { id: id, password: password },
         { headers: { 'Content-Type': 'application/json' } },
       )

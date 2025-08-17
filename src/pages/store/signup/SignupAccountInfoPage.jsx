@@ -21,7 +21,7 @@ const SignupAccountInfo = () => {
   const [loginId, setloginId] = useState('')
   const [pw1, setPw1] = useState('')
   const [pw2, setPw2] = useState('')
-
+  const apiUrl = import.meta.env.VITE_API_URL
   const handleSubmit = (e) => {
     if (!loginId) {
       alert('아이디를 입력해 주세요.')
@@ -40,7 +40,7 @@ const SignupAccountInfo = () => {
     // 연동
     axios
       .post(
-        'http://127.0.0.1:8000/auth/signup/user',
+        `${apiUrl}/auth/signup/user`,
         { name: name, phoneNum: phoneNum, loginId: loginId, password1: pw1, password2: pw2 },
         { headers: { 'Content-Type': 'application/json' } },
       )
