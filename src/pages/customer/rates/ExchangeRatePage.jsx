@@ -18,17 +18,22 @@ const ExchangeRatePage = () => {
   const [priceKr, setPriceKr] = useState('') // 원단위 금액
   const [converted, setConverted] = useState('') // 바뀐 금액
   const [exchangeRate, setExchangeRate] = useState(null) // 환율
+  const apiUrl = import.meta.env.VITE_API_URL
 
   // 원단위 금액이나 화폐단위 바뀌면 실행
   useEffect(() => {
-    const price = Number(priceKr || 0)
+    const textPrice = (priceKr ?? '').trim()
+    const cleanedPrice = textPrice.replace(/,/g, '')
 
-    if (Number.isNaN(price)) return // 문자 입력시 리턴
+    if (cleanedPrice === '') return
+    const priceNum = Number(cleanedPrice)
+
+    if (Number.isNaN(priceNum)) return // 문자 입력시 리턴
 
     // axios 요청
     const timer = setTimeout(() => {
       axios
-        .get('http://127.0.0.1:8000/exchange', {
+        .get(`${apiUrl}/exchange`, {
           params: {
             currency: currency,
             price: priceKr,
@@ -43,8 +48,9 @@ const ExchangeRatePage = () => {
         .catch((err) => {
           console.error(err)
           setConverted('')
+          setExchangeRate(null)
         })
-    }, 300) // 사용자 입력 후, 0.3초 후 변환
+    }, 100) // 사용자 입력 후, 0.1초 후 변환
 
     return () => clearTimeout(timer)
   }, [priceKr, currency])
