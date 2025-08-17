@@ -30,7 +30,8 @@ import MenuExtractSave from './pages/store/menu/MenuExtractSavePage'
 import MenuExtractFailPage from './pages/store/menu/MenuExtractFailPage'
 import MenuAllergensLoadingPage from './pages/store/menu/MenuAllergensLoadingPage.jsx'
 import MenuAllergensFailPage from './pages/store/menu/MenuAllergensFailPage.jsx'
-
+import MenuAllergensSuccessPage from './pages/store/menu/MenuAllergensSuccessPage'
+import MenuAllergensApplyPage from './pages/store/menu/MenuAllergensApplyPage'
 //hours
 import HoursPage from './pages/store/hours/HoursPage.jsx'
 import HoursEditPage from './pages/store/hours/HoursEditPage.jsx'
@@ -149,6 +150,14 @@ const router = createBrowserRouter([
       {
         path: '/menu/allergens/fail',
         element: <MenuAllergensFailPage />,
+      },
+      {
+        path: '/menu/allergens/success',
+        element: <MenuAllergensSuccessPage />,
+      },
+      {
+        path: '/menu/allergens/apply',
+        element: <MenuAllergensApplyPage />,
       },
       {
         path: '/hours',
