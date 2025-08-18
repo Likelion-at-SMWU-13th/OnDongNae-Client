@@ -36,11 +36,18 @@ const Input = styled.input`
   outline: none;
 `
 
-const SearchBar = ({ value, onChange, placeholder }) => {
+const SearchBar = ({ value, onChange, placeholder, onSubmit }) => {
   return (
-    <InputContainer>
+    <InputContainer role='search'>
       <Icon src={iconSearch} alt='' />
-      <Input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
+      <Input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && onSubmit) onSubmit(value.trim())
+        }}
+      />
     </InputContainer>
   )
 }

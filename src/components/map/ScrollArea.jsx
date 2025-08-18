@@ -107,7 +107,8 @@ const ScrollArea = ({
   }, [minSnap, maxSnap])
 
   // 가게 카드 클릭 시 페이지 이동
-  const handleCardClick = (storeId) => {
+  const handleCardClick = (id) => {
+    const storeId = String(id)
     navigate(`/user/map/store/${storeId}`) // 가게 id에 맞게 경로 변경 필요
   }
 
@@ -130,7 +131,7 @@ const ScrollArea = ({
         {list.map((s) => (
           <CardDivider key={s.id}>
             {/* 카드 클릭 시 해당 가게로 이동 */}
-            <Card onClick={() => handleCardClick(s)} type='button'>
+            <Card onClick={() => handleCardClick(s.id)} type='button'>
               <StoreName>{s.name}</StoreName>
 
               <StoreInfo>
