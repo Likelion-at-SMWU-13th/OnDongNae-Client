@@ -48,8 +48,6 @@ export default function KakaoMap({
   // [지도 옵션]
   draggable = true, // 드래그 가능
   scrollwheel = true, // 마우스 휠로 줌 가능
-  // window.kakao 접근 시 빌드 환경에 따라 undefined일 수 있어 안전하게 옵셔널 체이닝
-  zoomControlPosition = window.kakao?.maps.ControlPosition?.RIGHT,
 
   // [라벨 옵션 - 신규]
   showMarkerLabels = false,
@@ -65,8 +63,8 @@ export default function KakaoMap({
   useEffect(() => {
     if (!fitToMarkers) return
     const map = mapRef.current
-    const kakao = window.kakao
-    if (!map || !kakao || !Array.isArray(markers) || markers.length === 0) return
+    const kakao = typeof window !== 'undefined' ? window.kakao : null
+    if (!map || !kakao || !kakao.maps || !Array.isArray(markers) || markers.length === 0) return
 
     // 마커 1개: 중심 이동 + 지정 레벨
     if (markers.length === 1) {
