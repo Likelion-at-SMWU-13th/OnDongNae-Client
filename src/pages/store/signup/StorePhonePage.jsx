@@ -27,7 +27,7 @@ const StorePhonePage = () => {
       return
     }
     sessionStorage.setItem('phoneNum', value)
-    navigate('/signup/store-category-main')
+    navigate('/signup/store-category-main', { state: { prevStep: 4 } })
   }
   return (
     <>

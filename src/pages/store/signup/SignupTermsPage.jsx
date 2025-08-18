@@ -20,7 +20,7 @@ const SignupTerms = () => {
       return
     }
     // TODO: 다음 페이지 이동
-    navigate('/signup/select-market')
+    navigate('/signup/select-market', { state: { prevStep: 3 } })
   }
 
   return (

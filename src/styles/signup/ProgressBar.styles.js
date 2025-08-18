@@ -19,11 +19,11 @@ export const FillBar = styled.div`
   position: absolute;
   inset: 0 auto 0 0;
   background: #f08e67;
-  transition: width 200ms cubic-bezier(0.22, 1, 0.36, 1); //width가 변할 때 효과 주기
+  transition: width 320ms ease;
 `
 
 export const Logo = styled.img`
   position: absolute;
   top: -18.5px; // (42 - 5) / 2 = 18.5 → 바 중앙에 맞추는 보정
-  transition: left 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: left 320ms ease;
 `
