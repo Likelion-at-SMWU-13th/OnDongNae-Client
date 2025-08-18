@@ -17,7 +17,7 @@ import SubCategories from '@/components/map/SubCategories'
 import ScrollArea from '@/components/map/ScrollArea'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import KakaoMap from '@/components/common/KakaoMapContainer'
-import iconMarker from '@/assets/icon-filled-mapMarker.svg'
+import iconMarker from '@/assets/icon-big-mapMarker.svg'
 
 // 지도 기본값
 const DEFAULT_CENTER = { lat: 37.5326, lng: 126.9905 } // 기본 좌표

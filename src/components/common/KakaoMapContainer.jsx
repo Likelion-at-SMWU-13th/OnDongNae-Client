@@ -141,7 +141,7 @@ const Label = styled.div`
   padding: 6px 10px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.96);
-  border: 1px solid #f08e67;
+  border: 1px solid #fb8750;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   color: #1a0f0f;
   font-size: 12px;
