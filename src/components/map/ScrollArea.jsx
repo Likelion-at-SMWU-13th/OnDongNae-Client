@@ -220,7 +220,7 @@ const List = styled.div`
 
   flex: 1 1 auto;
   min-height: 0;
-  margin-top: 11px;
+  margin-top: 8px;
   padding: 0 24px 16px 24px;
   overflow-y: auto;
 
@@ -234,7 +234,7 @@ const List = styled.div`
 
 /* 카드 */
 const Card = styled.button`
-  margin-top: 9px;
+  margin-top: 12px;
   width: 100%;
   height: 212px;
   text-align: left;

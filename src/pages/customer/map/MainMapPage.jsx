@@ -1,3 +1,8 @@
+// 목업데이터 포함 코드
+
+// 더미데이터 관련 부분 연동 후 삭제 (dummy, 더미, 삭제로 검색하기)
+import dummyData, { mapFilterMock } from './dummyData'
+const USE_MOCK = true
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MainMapPage.styles'
 import { useTranslation } from 'react-i18next'
@@ -58,7 +63,7 @@ const MainMapPage = () => {
     // 'en-US' -> 'en' 형태로 변환
     const lang = (i18n.language || 'en').split('-')[0]
 
-    axios
+    /*axios
       .get(`${apiUrl}/map`, {
         headers: { 'Accept-Language': lang },
       })
@@ -74,6 +79,16 @@ const MainMapPage = () => {
         console.log(error)
         alert('데이터 불러오기에 실패했습니다.')
       })
+        */
+
+    if (USE_MOCK) {
+      // ✅ 목업 즉시 주입
+      const data = dummyData.data
+      setMarkets(data.marketOptions || [])
+      setCategories(data.categoryOptions || [])
+      setRandomStores(data.randomStores || [])
+      return
+    }
   }, [i18n.language])
 
   // 사용자가 특정 시장, 대분류, 소분류 선택 시
@@ -96,7 +111,7 @@ const MainMapPage = () => {
     if (hasMarket) params.market = Number(market.value)
     if (hasMain) params.main = Number(selectedMainId)
     if (hasSub) params.sub = selectedSubIds.map(Number)
-    axios
+    /*axios
       .get(`${apiUrl}/map/filter`, {
         params,
         paramsSerializer: {
@@ -132,6 +147,73 @@ const MainMapPage = () => {
         setStoreMarkers([]) // 시장 마커는 유지
         setActiveStoreId(null) // 라벨 초기화
       })
+        */
+
+    if (USE_MOCK) {
+      // 전체 더미 목록
+      const all = Array.isArray(mapFilterMock && mapFilterMock.data) ? mapFilterMock.data : []
+
+      // 선택 상태
+      const marketId = hasMarket ? Number(market.value) : null
+
+      // ------- 카테고리 매핑 준비 (id↔name, subId→mainId) -------
+      const subIdToName = new Map()
+      const subNameToId = new Map()
+      const subIdToMainId = new Map()
+      ;((dummyData && dummyData.data && dummyData.data.categoryOptions) || []).forEach((c) => {
+        ;(c.subCategories || []).forEach((sc) => {
+          const sid = Number(sc.id)
+          subIdToName.set(sid, sc.name)
+          subNameToId.set(sc.name, sid)
+          subIdToMainId.set(sid, Number(c.mainCategoryId))
+        })
+      })
+
+      // 선택된 대분류에 속한 소분류 세트
+      const mainSubNameSet = new Set(
+        hasMain
+          ? (
+              ((dummyData && dummyData.data && dummyData.data.categoryOptions) || []).find(
+                (c) => String(c.mainCategoryId) === String(selectedMainId),
+              )?.subCategories || []
+            ).map((sc) => sc.name)
+          : [],
+      )
+
+      // 선택된 소분류 세트
+      const selectedSubNameSet = new Set(
+        hasSub ? selectedSubIds.map((id) => subIdToName.get(Number(id))).filter(Boolean) : [],
+      )
+
+      // 실제 필터링
+      const filtered = all.filter((s) => {
+        if (hasMarket && s.marketId !== marketId) return false
+        if (
+          hasMain &&
+          mainSubNameSet.size > 0 &&
+          !(s.subCategories || []).some((n) => mainSubNameSet.has(n))
+        )
+          return false
+        if (
+          hasSub &&
+          selectedSubNameSet.size > 0 &&
+          !(s.subCategories || []).some((n) => selectedSubNameSet.has(n))
+        )
+          return false
+        return true
+      })
+
+      // 가게명이 라벨이 되도록 마커 생성
+      const nextStoreMarkers = filtered.map((s) => ({
+        id: `store-${s.id}`,
+        position: { lat: s.lat ?? s.lat, lng: s.lng ?? s.lng },
+        image: { src: iconMarker, size: { width: 28, height: 28 } },
+        data: { ...s, type: 'store', _labelText: s.name },
+      }))
+      setStoreMarkers(nextStoreMarkers)
+      setActiveStoreId(null)
+      return
+    }
   }, [market?.value, selectedMainId, selectedSubIds, i18n.language])
 
   // 이벤트 핸들러
@@ -142,6 +224,28 @@ const MainMapPage = () => {
 
     const lang = (i18n.language || 'en').split('-')[0]
 
+    // 더미/목업 데이터 추후 삭제
+    if (USE_MOCK) {
+      const all = Array.isArray(mapFilterMock?.data) ? mapFilterMock.data : []
+      const norm = (v) => String(v ?? '').toLowerCase()
+      const items = all
+        .filter((s) => norm(s.name).includes(norm(keyword)))
+        .map((s) => ({ id: s.id, name: s.name }))
+
+      if (items.length === 0) {
+        alert('검색 결과가 없습니다.')
+        return
+      }
+
+      const lower = keyword.toLowerCase()
+      const exact = items.find((it) => (it.name || '').toLowerCase() === lower)
+      const targetId = (exact || items[0]).id
+      navigate(`/user/map/store/${targetId}`)
+      return
+    }
+
+    // 실제 API 호출 (then/catch)
+    const params = { keyword }
     axios
       .get(`${apiUrl}/map/search`, {
         params: { keyword },
@@ -221,7 +325,8 @@ const MainMapPage = () => {
   // 최종 ScrollArea에 띄울 리스트 계산
   // 시장 미선택: 랜덤 가게
   // 카테고리 선택: 현재 지도에 있는 마커 띄우고, 마커 클릭하면 해당 가게 하나만 보여주기
-  const allList = market?.value ? storeMarkers.map((m) => m.data) : randomStores
+  const allList = market?.value ? storeMarkers.map((m) => m.data) : dummyData.data.randomStores
+
   const scrollList = activeStoreId
     ? allList.filter((s) => String(s.id) === String(activeStoreId))
     : allList
