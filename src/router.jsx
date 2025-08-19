@@ -40,6 +40,8 @@ import HoursEditPage from './pages/store/hours/HoursEditPage.jsx'
 import DescriptionPage from './pages/store/description/DescriptionPage'
 import SummaryEditPage from './pages/store/description/SummaryEditPage'
 import DetailEditPage from './pages/store/description/DetailEditPage'
+// mystore
+import MyStorePage from './pages/store/mystore/MyStorePage'
 // map
 import MainMapPage from './pages/customer/map/MainMapPage'
 import MapStoresPage from './pages/customer/map/MapStoresPage'
@@ -188,6 +190,10 @@ const router = createBrowserRouter([
       {
         path: '/store/description/detail-edit',
         element: <DetailEditPage />,
+      },
+      {
+        path: 'store/mystore',
+        element: <MyStorePage />,
       },
       {
         path: '/user/map',

@@ -15,7 +15,7 @@ const NAVS = [
   { to: '/menu', label: '메뉴관리', icon: icMenu, iconActive: icMenuActive },
   { to: '/hours', label: '영업시간', icon: icTime, iconActive: icTimeActive },
   { to: '/store/description', label: '가게설명', icon: icAbout, iconActive: icAboutActive },
-  { to: '/mypage', label: '나의가게', icon: icMy, iconActive: icMyActive },
+  { to: '/store/mystore', label: '나의가게', icon: icMy, iconActive: icMyActive },
 ]
 
 const Bar = styled.section`
