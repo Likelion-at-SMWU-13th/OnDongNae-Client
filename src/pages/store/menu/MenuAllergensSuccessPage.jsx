@@ -32,7 +32,6 @@ const MenuAllergensSuccess = () => {
 
   // 로딩 페이지에서 넘긴 데이터
   const initialResults = state?.initialResults ?? []
-
   return (
     <div className='scrollable'>
       <Header img={backIcon} title={'메뉴 관리'} showImg={true} />
@@ -46,7 +45,6 @@ const MenuAllergensSuccess = () => {
               }
             />
           </TitleWrapper>
-
           {/* ✅ 결과를 컴포넌트에 전달 */}
           <AllergensEdit
             initialResults={initialResults}
