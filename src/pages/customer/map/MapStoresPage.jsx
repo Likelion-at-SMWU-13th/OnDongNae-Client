@@ -56,7 +56,7 @@ const MapStoresPage = () => {
           <ImgSection imgs={store?.header?.images || []} />
           {/* 가게 정보 영역 */}
           <HeaderSection header={store?.header} />
-          {/* 지도 영역 — MapSection이 prop 이름을 map으로 기대한다면 아래 줄을 map={store?.map}으로 변경하세요 */}
+          {/* 지도 영역*/}
           <MapSection header={store?.map} />
           {/* 탭 */}
           <TabSection active={tab} onChange={setTab} />

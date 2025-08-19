@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MapStoresPage.styles'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { authAxios } from '@/lib/authAxios'
+import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -12,27 +14,63 @@ import MapSection from '@/components/map/MapSection'
 import TabSection from '@/components/map/TabSection'
 import MenuTab from '@/components/map/MenuTab'
 import InfoTab from '@/components/map/InfoTab'
+
 const MyStoreInfoPage = () => {
+  const { storeId } = useParams()
+  const { t, i18n } = useTranslation()
+  const [store, setStore] = useState()
   const [tab, setTab] = useState('menu') // 일단 메뉴탭 보여주기
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
+
   const apiUrl = import.meta.env.VITE_API_URL
 
   useEffect(() => {
-    const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
+    const fetchStore = async () => {
+      setIsLoading(true)
+      try {
+        const lang = 'ko'
+        const response = await axios.get(`${apiUrl}/stores/${storeId}`, {
+          headers: { 'Accept-Language': lang },
+        })
+        setStore(response?.data?.data ?? null)
+        console.log(response?.data?.data)
+        setError(null)
+      } catch (err) {
+        setError(err)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    if (storeId) fetchStore()
+  }, [storeId, apiUrl])
+  if (!store) {
+    return <div>Loading...</div>
+  }
 
-    axios
-      .get(`${apiUrl}/me/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {})
-      .catch((err) => {
-        alert('가게 정보를 불러오지 못했어요.')
-        console.log(err)
-      })
-  }, [])
-
-  return <div></div>
+  return (
+    <>
+      <Header img={backIcon} title={'나의 가게'} showImg />
+      <S.Main>
+        <S.Scroll className='scrollable'></S.Scroll>
+        {/* 사진 영역 */}
+        <ImgSection imgs={store?.header?.images || []} />
+        {/* 가게 정보 영역 */}
+        <HeaderSection header={store?.header} />
+        {/* 지도 영역*/}
+        <MapSection header={store?.map} />
+        {/* 탭 */}
+        <TabSection active={tab} onChange={setTab} />
+        {/* 탭 콘텐츠 */}
+        {tab === 'menu' ? (
+          <MenuTab items={store?.menuTab || []} />
+        ) : (
+          <InfoTab info={store?.infoTab || {}} />
+        )}
+      </S.Main>
+      <BottomNav />
+    </>
+  )
 }
 
 export default MyStoreInfoPage

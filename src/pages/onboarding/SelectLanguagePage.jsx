@@ -32,6 +32,7 @@ const OnboardingPage = () => {
 
   // 소상공인 페이지로 이동
   const handleStore = () => {
+    i18n.changeLanguage('ko')
     navigate('/login')
   }
 
