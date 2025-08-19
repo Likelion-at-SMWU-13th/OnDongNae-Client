@@ -63,8 +63,9 @@ export default function MenuEdit({ initialItems = [] }) {
     axios
       .post(`${apiUrl}/me/menus/save`, body, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
-        console.log(res.data) // 연동 확인 후 삭제
-        navigate('/menu/extract/save')
+        console.log(res.data) // 연동 확인 후 삭제c
+        const menuData = res.data.data.menus
+        navigate('/menu/extract/save', { state: menuData })
       })
       .catch((err) => {
         console.error(err)
