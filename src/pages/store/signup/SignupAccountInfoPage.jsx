@@ -46,10 +46,9 @@ const SignupAccountInfo = () => {
       )
       .then((res) => {
         // 응답에서 반환한 userId를 가게 등록 API에서 ResponseBody에 넣어주기
-        const memberId = res?.data?.data?.memberId
+        const memberId = res.data.data
         // 세션에 userId 저장
-        sessionStorage.setItem('memberId', String(memberId))
-
+        sessionStorage.setItem('memberId', JSON.stringify(res.data.data))
         // 이 코드는 회원가입이 완료된 페이지에 넣어야 하는 것?
         localStorage.setItem('accessToken', res.data.tokens.accessToken)
         localStorage.setItem('refreshToken', res.data.tokens.refreshToken)

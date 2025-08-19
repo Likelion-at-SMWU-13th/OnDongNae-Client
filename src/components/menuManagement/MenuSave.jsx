@@ -1,25 +1,21 @@
-import React, { useState } from 'react'
+// src/pages/menu/MenuSave.jsx
+import React from 'react'
 import styled from 'styled-components'
-
-/* ---- mock (화면만 테스트용) ---- */
-const MENU_PUT_MOCK = {
-  items: [
-    { nameKo: '김치찌개', priceKrw: 8000 },
-    { nameKo: '불고기', priceKrw: 12000 },
-  ],
-}
+import { useLocation } from 'react-router-dom'
 
 export default function MenuSave() {
-  const [menus] = useState(MENU_PUT_MOCK.items)
+  const location = useLocation()
+  // navigate 시 전달한 state 구조: { state: menuData }
+  const menus = location.state || [] // 안전하게 fallback
 
   return (
     <div>
       {menus.map((m, idx) => (
         <Row key={idx}>
-          {/* 메뉴명: 글자 픽셀 폭에 맞춰 자동 너비 (최대 120px) */}
+          {/* 메뉴명 */}
           <NameKo type='text' value={m.nameKo} readOnly aria-label='메뉴 이름' />
 
-          {/* 가격: 글자 수 기준(ch)로 자동 너비, 최대 90px */}
+          {/* 가격 */}
           <PriceWrapper>
             <Currency>₩</Currency>
             <PriceKrw

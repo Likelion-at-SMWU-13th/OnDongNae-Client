@@ -27,11 +27,6 @@ export default function MenuExtractSuccessPage() {
     }
   }, [initialItems, navigate])
 
-  const handleSave = () => {
-    // TODO: 저장 API 연동시 initialItems(or MenuEdit의 menus 상태)를 전달
-    navigate('/menu/extract/save')
-  }
-
   if (!Array.isArray(initialItems) || initialItems.length === 0) {
     return null
   }
