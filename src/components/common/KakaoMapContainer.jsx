@@ -13,12 +13,15 @@
  *   zoomControlPosition?: any
  *   showMarkerLabels?: boolean,
  *   getLabel?: (marker:any)=>React.ReactNode,
- *   labelXAnchor?: number
- *   labelYAnchor?: number
+ *   labelXAnchor?: number,
+ *   labelYAnchor?: number,
+ * fitToMarkers?: boolean,
+ *   fitSingleLevel?: number,
+ * fitBoundsPaddingRatio?: number
  * }} KakaoMapProps
  */
 
-import { useRef, Fragment } from 'react'
+import { useRef, Fragment, useEffect } from 'react'
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import styled from 'styled-components'
 
@@ -45,17 +48,54 @@ export default function KakaoMap({
   // [지도 옵션]
   draggable = true, // 드래그 가능
   scrollwheel = true, // 마우스 휠로 줌 가능
-  // window.kakao 접근 시 빌드 환경에 따라 undefined일 수 있어 안전하게 옵셔널 체이닝
-  zoomControlPosition = window.kakao?.maps.ControlPosition?.RIGHT,
 
   // [라벨 옵션 - 신규]
   showMarkerLabels = false,
   getLabel, // (m) => ReactNode (예: (m)=>t(m.title))
   labelYAnchor = 1.3, // 마커 위로 살짝 띄우기
   labelXAnchor = 0.5,
+  fitToMarkers = false,
+  fitSingleLevel = 3,
+  fitBoundsPaddingRatio = 0.1,
 }) {
   // 카카오 지도 인스턴스를 저장(필요 시 직접 API 호출: setCenter, setLevel 등)
   const mapRef = useRef(null)
+  useEffect(() => {
+    if (!fitToMarkers) return
+    const map = mapRef.current
+    const kakao = typeof window !== 'undefined' ? window.kakao : null
+    if (!map || !kakao || !kakao.maps || !Array.isArray(markers) || markers.length === 0) return
+
+    // 마커 1개: 중심 이동 + 지정 레벨
+    if (markers.length === 1) {
+      const p = markers[0].position
+      map.setCenter(new kakao.maps.LatLng(p.lat, p.lng))
+      if (typeof fitSingleLevel === 'number') {
+        map.setLevel(fitSingleLevel)
+      }
+      return
+    }
+
+    // 마커 여러 개: bounds 계산
+    const bounds = new kakao.maps.LatLngBounds()
+    markers.forEach((m) => bounds.extend(new kakao.maps.LatLng(m.position.lat, m.position.lng)))
+
+    // 여백(비율) 적용
+    if (fitBoundsPaddingRatio > 0) {
+      const sw = bounds.getSouthWest()
+      const ne = bounds.getNorthEast()
+      const latSpan = ne.getLat() - sw.getLat()
+      const lngSpan = ne.getLng() - sw.getLng()
+      const latPad = latSpan * fitBoundsPaddingRatio
+      const lngPad = lngSpan * fitBoundsPaddingRatio
+      const paddedSW = new kakao.maps.LatLng(sw.getLat() - latPad, sw.getLng() - lngPad)
+      const paddedNE = new kakao.maps.LatLng(ne.getLat() + latPad, ne.getLng() + lngPad)
+      const padded = new kakao.maps.LatLngBounds(paddedSW, paddedNE)
+      map.setBounds(padded)
+    } else {
+      map.setBounds(bounds)
+    }
+  }, [markers, fitToMarkers, fitSingleLevel, fitBoundsPaddingRatio])
 
   return (
     <Map
@@ -69,21 +109,30 @@ export default function KakaoMap({
       scrollwheel={scrollwheel}
       zoomable={true}
     >
-      {markers.map((m) => (
-        <Fragment key={m.id ?? `${m.position.lat}-${m.position.lng}`}>
-          <MapMarker
-            key={m.id ?? `${m.position.lat}-${m.position.lng}`}
-            position={m.position}
-            image={m.image} // { src, size:{width,height}, options? }
-            onClick={() => onMarkerClick?.(m)}
-          />
-          {showMarkerLabels && getLabel && (
-            <CustomOverlayMap position={m.position} yAnchor={labelYAnchor}>
-              <Label>{getLabel(m)}</Label>
-            </CustomOverlayMap>
-          )}
-        </Fragment>
-      ))}
+      {markers.map((m) => {
+        const raw = getLabel?.(m)
+        const hasLabel =
+          raw !== null &&
+          raw !== undefined &&
+          raw !== false &&
+          (typeof raw !== 'string' || raw.trim().length > 0)
+
+        return (
+          <Fragment key={m.id ?? `${m.position.lat}-${m.position.lng}`}>
+            <MapMarker
+              key={m.id ?? `${m.position.lat}-${m.position.lng}`}
+              position={m.position}
+              image={m.image}
+              onClick={() => onMarkerClick?.(m)}
+            />
+            {showMarkerLabels && getLabel && hasLabel && (
+              <CustomOverlayMap position={m.position} xAnchor={labelXAnchor} yAnchor={labelYAnchor}>
+                <Label>{raw}</Label>
+              </CustomOverlayMap>
+            )}
+          </Fragment>
+        )
+      })}
     </Map>
   )
 }
@@ -92,7 +141,7 @@ const Label = styled.div`
   padding: 6px 10px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.96);
-  border: 1px solid #f08e67;
+  border: 1px solid #fb8750;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   color: #1a0f0f;
   font-size: 12px;
@@ -100,4 +149,8 @@ const Label = styled.div`
   white-space: nowrap;
   transform: translateY(-4px);
   pointer-events: none;
+
+  &:empty {
+    display: none;
+  }
 `

@@ -21,18 +21,21 @@ import SignupLoadingPage from './pages/store/signup/SignupLoadingPage'
 import SignupCompletePage from './pages/store/signup/SignupCompletePage'
 import StoreHomePage from './pages/store/signup/StoreHomePage'
 // menu
-import MenuPage from './pages/MenuPage'
-import MenuMenualPage from './pages/MenuManualPage'
-import MenuUploadPage from './pages/MenuUploadPage'
-import MenuUploadPreviewPage from './pages/MenuUploadPreviewPage'
-import MenuExtractLoadingPage from './pages/MenuExtractLoadingPage'
-import MenuExtractFailPage from './pages/MenuExtractFailPage'
-import MenuAllergensLoadingPage from './pages/MenuAllergensLoadingPage.jsx'
-import MenuAllergensFailPage from './pages/MenuAllergensFailPage.jsx'
+import MenuPage from './pages/store/menu/MenuPage.jsx'
+import MenuMenualPage from './pages//store/menu/MenuManualPage'
+import MenuUploadPage from './pages//store/menu/MenuUploadPage'
+import MenuExtractLoadingPage from './pages/store/menu/MenuExtractLoadingPage'
+import MenuExtractSuccess from './pages/store/menu/MenuExtractSuccess'
+import MenuExtractSave from './pages/store/menu/MenuExtractSavePage'
+import MenuExtractFailPage from './pages/store/menu/MenuExtractFailPage'
+import MenuAllergensLoadingPage from './pages/store/menu/MenuAllergensLoadingPage.jsx'
+import MenuAllergensFailPage from './pages/store/menu/MenuAllergensFailPage.jsx'
+import MenuAllergensSuccessPage from './pages/store/menu/MenuAllergensSuccessPage'
+import MenuAllergensApplyPage from './pages/store/menu/MenuAllergensApplyPage'
+import MenuCorrectPage from './pages/store/menu/MenuCorrectPage'
 // hours
 import HoursPage from './pages/store/hours/HoursPage.jsx'
 import HoursEditPage from './pages/store/hours/HoursEditPage.jsx'
-
 // description
 import DescriptionPage from './pages/store/description/DescriptionPage'
 import SummaryEditPage from './pages/store/description/SummaryEditPage'
@@ -131,12 +134,16 @@ const router = createBrowserRouter([
         element: <MenuUploadPage />,
       },
       {
-        path: 'menu/upload/preview',
-        element: <MenuUploadPreviewPage />,
-      },
-      {
         path: '/menu/extract/loading',
         element: <MenuExtractLoadingPage />,
+      },
+      {
+        path: '/menu/extract/success',
+        element: <MenuExtractSuccess />,
+      },
+      {
+        path: '/menu/extract/save',
+        element: <MenuExtractSave />,
       },
       {
         path: '/menu/extract/fail',
@@ -149,6 +156,18 @@ const router = createBrowserRouter([
       {
         path: '/menu/allergens/fail',
         element: <MenuAllergensFailPage />,
+      },
+      {
+        path: '/menu/allergens/success',
+        element: <MenuAllergensSuccessPage />,
+      },
+      {
+        path: '/menu/allergens/apply',
+        element: <MenuAllergensApplyPage />,
+      },
+      {
+        path: '/menu/correct',
+        element: <MenuCorrectPage />,
       },
       {
         path: '/hours',
@@ -175,7 +194,7 @@ const router = createBrowserRouter([
         element: <MainMapPage />,
       },
       {
-        path: '/user/map/store',
+        path: '/user/map/store/:storeId',
         element: <MapStorePage />,
       },
       {

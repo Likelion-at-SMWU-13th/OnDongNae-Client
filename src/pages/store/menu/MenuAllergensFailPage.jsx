@@ -38,6 +38,7 @@ const FailureMsg = styled.p`
 const MenuAllergensFailPage = () => {
   const navigate = useNavigate()
   const handleBack = () => navigate(-1)
+  const handleRetry = () => navigate('/menu')
   return (
     <div>
       <Header img={backIcon} title='메뉴 관리' showImg={true} />
@@ -46,11 +47,7 @@ const MenuAllergensFailPage = () => {
         <FailureMsg>{`인공지능 분석이 실패했어요
 나중에 다시 시도해주세요`}</FailureMsg>
         <ButtonContainer>
-          <SmallLightOrangeButton
-            type='button'
-            label='건너뛰기'
-            onBtnClick={() => navigate('/menu/allergens/loading')}
-          />
+          <SmallLightOrangeButton type='button' label='건너뛰기' onBtnClick={handleRetry} />
           <SmallOrangeButton type='button' label='다시 시도' onBtnClick={handleBack} />
         </ButtonContainer>
       </ComponentContainer>
