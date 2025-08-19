@@ -36,7 +36,6 @@ const MenuAllergensLoadingPage = () => {
         navigate('/menu/allergens/fail', { replace: true })
         return
       }
-
       // ✅ 화면/저장에 쓸 초기 값 (누락 대비 기본값 처리)
       const initialResults = results.map((it) => ({
         menuId: it.menuId,

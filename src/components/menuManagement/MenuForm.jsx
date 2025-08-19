@@ -22,7 +22,7 @@ const SaveBtnContainer = styled.div`
 `
 const MenuForm = () => {
   const apiUrl = import.meta.env.VITE_API_URL
-  const token = sessionStorage.getItem('accessToken')
+  const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
   const [items, setItems] = useState([
     { id: 1, nameKo: '', priceKrw: 0 },
     { id: 2, nameKo: '', priceKrw: 0 },
@@ -49,7 +49,7 @@ const MenuForm = () => {
       .post(`${apiUrl}/me/menus/save`, payload, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
         console.log(res.data) // 연동 확인 후 삭제
-        navigate('/menu/confirm')
+        navigate('/menu/extract/save')
       })
       .catch((err) => {
         console.error(err)
