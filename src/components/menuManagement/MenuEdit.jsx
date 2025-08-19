@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 /* ---- 글자 픽셀 폭 계산 ---- */
 const getTextWidth = (
@@ -19,6 +20,8 @@ export default function MenuEdit({ initialItems = [] }) {
   const [menus, setMenus] = useState(initialItems)
   const [editIndex, setEditIndex] = useState(null)
   const apiUrl = import.meta.env.VITE_API_URL
+  const navigate = useNavigate()
+  const token = sessionStorage.getItem('accessToken')
 
   const handleEdit = (idx) => {
     setEditIndex((cur) => (cur === idx ? null : idx))
@@ -31,21 +34,42 @@ export default function MenuEdit({ initialItems = [] }) {
   }
 
   // 저장 클릭 시 API 호출
-  const handleSave = async () => {
-    try {
-      const body = {
-        items: menus.map((m) => ({
-          nameKo: m.nameKo,
-          priceKrw: m.priceKrw,
-        })),
-      }
+  // const handleSave = async () => {
+  //   try {
+  //     const body = {
+  //       items: menus.map((m) => ({
+  //         nameKo: m.nameKo,
+  //         priceKrw: m.priceKrw,
+  //       })),
+  //     }
+  //     const res = await axios.post(`${apiUrl}/me/menus/save`, body)
+  //     console.log(res.data) // 응답 바로 사용 가능
+  //     navigate('/menu/extract/save')
+  //   } catch (err) {
+  //     console.error(err)
+  //     alert('저장 실패!')
+  //   }
+  // }
 
-      const res = await axios.post(`${apiUrl}/me/menus/save`, body)
-      // TODO: 필요하다면 navigate('/menu/extract/save') 등 추가
-    } catch (err) {
-      console.error(err)
-      alert('저장 실패!')
+  // 저장 클릭 시 API 호출
+  const handleSave = () => {
+    const body = {
+      items: menus.map((m) => ({
+        nameKo: m.nameKo,
+        priceKrw: m.priceKrw,
+      })),
     }
+
+    axios
+      .post(`${apiUrl}/me/menus/save`, body, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => {
+        console.log(res.data) // 연동 확인 후 삭제
+        navigate('/menu/extract/save')
+      })
+      .catch((err) => {
+        console.error(err)
+        alert('저장 실패!')
+      })
   }
 
   return (
