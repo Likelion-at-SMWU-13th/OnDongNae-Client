@@ -19,20 +19,24 @@ const NAVS = [
 ]
 
 const Bar = styled.section`
+  width: min(100vw, 390px);
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
   z-index: 100;
-  display: flex;
-  gap: 48px;
   padding: 17px 25px 26px 25px;
   border-top: 1px solid #f2f2f5;
   background: #fff;
 `
+
+const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
 const Item = styled.div`
-  height: 56px;
-  width: 49px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,18 +68,20 @@ const Link = styled(NavLink)`
 const BottomNav = () => {
   return (
     <Bar>
-      {NAVS.map(({ to, label, icon, iconActive }) => (
-        <Link key={to} to={to}>
-          {(
-            { isActive }, //링크가 활성화 상태인지 알려줌, 활성 상태일 때만 actice 클래스 줌
-          ) => (
-            <Item className={isActive ? 'active' : ''}>
-              <img src={isActive ? iconActive : icon} alt='' aria-hidden />
-              <span>{label}</span>
-            </Item>
-          )}
-        </Link>
-      ))}
+      <ItemContainer>
+        {NAVS.map(({ to, label, icon, iconActive }) => (
+          <Link key={to} to={to}>
+            {(
+              { isActive }, //링크가 활성화 상태인지 알려줌, 활성 상태일 때만 actice 클래스 줌
+            ) => (
+              <Item className={isActive ? 'active' : ''}>
+                <img src={isActive ? iconActive : icon} alt='' aria-hidden />
+                <span>{label}</span>
+              </Item>
+            )}
+          </Link>
+        ))}
+      </ItemContainer>
     </Bar>
   )
 }
