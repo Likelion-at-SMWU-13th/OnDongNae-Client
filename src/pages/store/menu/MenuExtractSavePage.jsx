@@ -7,6 +7,8 @@ import DoubleTitle from '@/components/common/DoubleTitle'
 import BottomNav from '@/components/common/BottomNav'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
 import MenuSave from '@/components/menuManagement/MenuSave'
+import axios from 'axios'
+
 const ButtonWapper = styled.div`
   display: flex;
   justify-content: center;
@@ -14,8 +16,21 @@ const ButtonWapper = styled.div`
 `
 const MenuExtractSave = () => {
   const navigate = useNavigate()
-  const handleSave = () => navigate('/menu/allergens/loading')
+  const apiUrl = import.meta.env.VITE_API_URL
+  const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
 
+  const handleSave = () => {
+    axios
+      .post(`${apiUrl}/me/menus/save`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => {
+        console.log(res.data) // 연동 확인 후 삭제
+        navigate('/menu/allergens/loading')
+      })
+      .catch((err) => {
+        console.error(err)
+        alert('저장 실패!')
+      })
+  }
   return (
     <div>
       <Header img={backIcon} title={'메뉴 관리'} showImg={true} />

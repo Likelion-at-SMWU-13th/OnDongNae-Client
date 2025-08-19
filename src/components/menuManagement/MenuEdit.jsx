@@ -21,7 +21,7 @@ export default function MenuEdit({ initialItems = [] }) {
   const [editIndex, setEditIndex] = useState(null)
   const apiUrl = import.meta.env.VITE_API_URL
   const navigate = useNavigate()
-  const token = sessionStorage.getItem('accessToken')
+  const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
 
   const handleEdit = (idx) => {
     setEditIndex((cur) => (cur === idx ? null : idx))
@@ -171,15 +171,16 @@ const SmallLightOrangeButton = styled.button`
   cursor: pointer;
 `
 const SaveButton = styled.button`
-  margin: 40px auto;
+  margin: 92px auto;
   display: block;
-  border-radius: 12px;
-  background: #ff7a45;
+  border-radius: 10px;
+  background: #f08e67;
   border: none;
-  width: 200px;
-  height: 48px;
   font-size: 18px;
   font-weight: 600;
   color: #fff;
   cursor: pointer;
+  width: 322px;
+  height: 48px;
+  flex-shrink: 0;
 `

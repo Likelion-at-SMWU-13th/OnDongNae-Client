@@ -144,12 +144,12 @@ export default function MenuUploadPage() {
 
   // 연동
   const handleSubmit = (e) => {
+    console.log('[MenuUpload] submit clicked, file=', file)
     const formData = new FormData()
-    formData.append('file', file)
+    formData.append('image', file)
     axios
-      .post(`${apiUrl}/menu/extract`, formData, {
+      .post(`${apiUrl}/me/menus/ocr/extract`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
         },
       })
