@@ -182,7 +182,7 @@ const TitleContainer = styled.div`
   padding: 38px 0 0 30px;
 `
 export const Main = styled.main`
-  height: calc(100dvh - 185px); /* 화면 높이 채우기 */
+  height: calc(100dvh - 160px); /* 화면 높이 채우기 */
   display: flex;
   flex-direction: column;
   min-height: 0;

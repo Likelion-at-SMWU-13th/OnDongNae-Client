@@ -1,15 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
-/* ---- mock (화면만 테스트용) ---- */
-const MENU_PUT_MOCK = {
-  items: [
-    { nameKo: '김치찌개', priceKrw: 8000 },
-    { nameKo: '불고기', priceKrw: 12000 },
-  ],
-}
-
-/* ---- 글자 픽셀 폭 계산: 한글도 정확히 측정 ---- */
+/* ---- 글자 픽셀 폭 계산 ---- */
 const getTextWidth = (
   text = ' ',
   font = '500 19px Pretendard, system-ui, -apple-system, sans-serif',
@@ -19,16 +13,18 @@ const getTextWidth = (
   if (!ctx) return 20
   ctx.font = font
   const w = ctx.measureText(String(text || ' ')).width
-  // 커서/보더 여유 + 최소/최대 폭 클램프
   return Math.min(Math.max(Math.ceil(w) + 6, 20), 120)
 }
 
-export default function MenuEdit() {
-  const [menus, setMenus] = useState(MENU_PUT_MOCK.items)
-  const [editIndex, setEditIndex] = useState(null) // 몇 번째 행 수정 중인지
+export default function MenuEdit({ initialItems = [] }) {
+  const [menus, setMenus] = useState(initialItems)
+  const [editIndex, setEditIndex] = useState(null)
+  const apiUrl = import.meta.env.VITE_API_URL
+  const navigate = useNavigate()
+  const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
 
   const handleEdit = (idx) => {
-    setEditIndex((cur) => (cur === idx ? null : idx)) // 토글 편집
+    setEditIndex((cur) => (cur === idx ? null : idx))
   }
 
   const handleChange = (idx, field, value) => {
@@ -37,11 +33,49 @@ export default function MenuEdit() {
     setMenus(next)
   }
 
+  // 저장 클릭 시 API 호출
+  // const handleSave = async () => {
+  //   try {
+  //     const body = {
+  //       items: menus.map((m) => ({
+  //         nameKo: m.nameKo,
+  //         priceKrw: m.priceKrw,
+  //       })),
+  //     }
+  //     const res = await axios.post(`${apiUrl}/me/menus/save`, body)
+  //     console.log(res.data) // 응답 바로 사용 가능
+  //     navigate('/menu/extract/save')
+  //   } catch (err) {
+  //     console.error(err)
+  //     alert('저장 실패!')
+  //   }
+  // }
+
+  // 저장 클릭 시 API 호출
+  const handleSave = () => {
+    const body = {
+      items: menus.map((m) => ({
+        nameKo: m.nameKo,
+        priceKrw: m.priceKrw,
+      })),
+    }
+
+    axios
+      .post(`${apiUrl}/me/menus/save`, body, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => {
+        console.log(res.data) // 연동 확인 후 삭제
+        navigate('/menu/extract/save')
+      })
+      .catch((err) => {
+        console.error(err)
+        alert('저장 실패!')
+      })
+  }
+
   return (
     <div>
       {menus.map((m, idx) => (
         <Row key={idx}>
-          {/* 메뉴명: 글자 픽셀 폭에 맞춰 자동 너비 (최대 120px) */}
           <NameKo
             type='text'
             value={m.nameKo}
@@ -51,7 +85,6 @@ export default function MenuEdit() {
             aria-label='메뉴 이름'
           />
 
-          {/* 가격: 글자 수 기준(ch)로 자동 너비, 최대 90px */}
           <PriceWrapper>
             <Currency>₩</Currency>
             <PriceKrw
@@ -73,6 +106,11 @@ export default function MenuEdit() {
           </SmallLightOrangeButton>
         </Row>
       ))}
+
+      {/* 저장 버튼 */}
+      <SaveButton type='button' onClick={handleSave}>
+        저장
+      </SaveButton>
     </div>
   )
 }
@@ -83,11 +121,11 @@ const Row = styled.div`
   grid-template-columns: 110px 110px 80px;
   align-items: center;
   column-gap: 12px;
-  justify-items: start; /* ✅ 각 셀의 아이템을 왼쪽 정렬 + stretch 방지 */
+  justify-items: start;
   padding: 44px 0 0 30px;
 `
 const NameKo = styled.input`
-  max-width: 120px; /* 실 최대폭 */
+  max-width: 120px;
   min-width: 20px;
   width: auto;
   color: #7c7c7c;
@@ -96,17 +134,16 @@ const NameKo = styled.input`
   border: none;
   border-bottom: 1px solid #feb99d;
   overflow: hidden;
-  white-space: nowrap; /* 한 줄만 */
-  box-sizing: content-box; /* width를 내용 폭 기준으로 */
+  white-space: nowrap;
+  box-sizing: content-box;
 `
-
 const PriceWrapper = styled.div`
-  display: inline-flex; /* ✅ 내용 크기만큼 */
+  display: inline-flex;
   align-items: center;
   gap: 4px;
-  border-bottom: 1px solid #feb99d; /* ✅ 밑줄이 내용 길이만큼 */
-  width: fit-content; /* ✅ 컨텐츠 너비만 차지 */
-  justify-self: start; /* ✅ 그리드 셀에서 왼쪽 고정 */
+  border-bottom: 1px solid #feb99d;
+  width: fit-content;
+  justify-self: start;
 `
 const Currency = styled.span`
   color: #7c7c7c;
@@ -114,7 +151,6 @@ const Currency = styled.span`
   font-weight: 400;
   line-height: 21px;
 `
-
 const PriceKrw = styled.input`
   color: #7c7c7c;
   font-size: 18px;
@@ -122,7 +158,6 @@ const PriceKrw = styled.input`
   border: none;
   background: transparent;
 `
-
 const SmallLightOrangeButton = styled.button`
   border-radius: 10px;
   background: #feb99d;
@@ -134,4 +169,18 @@ const SmallLightOrangeButton = styled.button`
   font-weight: 600;
   color: #fff;
   cursor: pointer;
+`
+const SaveButton = styled.button`
+  margin: 92px auto;
+  display: block;
+  border-radius: 10px;
+  background: #f08e67;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  width: 322px;
+  height: 48px;
+  flex-shrink: 0;
 `

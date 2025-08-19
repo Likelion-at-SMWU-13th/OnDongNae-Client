@@ -1,18 +1,71 @@
 // src/pages/menu/MenuUploadPage.jsx
 import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
-
+import { useLocation, useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 import BottomNav from '@/components/common/BottomNav'
-
 import BtnUpload from '@/assets/icon-upload-photo.svg'
 import closeIcon from '@/assets/button-close.svg'
+import axios from 'axios'
 
-/* ====== 기존 스타일 유지 ====== */
+// { response body
+//   "code": "OK",
+//   "message": "메뉴 추출 성공",
+//   "success": true,
+//   "data": {
+//       "storeId": 15,
+//       "items": [
+//           {
+//               "name": "라면",
+//               "priceKrw": 3500
+//           },
+//           {
+//               "name": "치즈라면",
+//               "priceKrw": 4000
+//           },
+//           {
+//               "name": "만두라면",
+//               "priceKrw": 4500
+//           },
+//           {
+//               "name": "어묵",
+//               "priceKrw": 3
+//           },
+//           {
+//               "name": "스팸주먹밥",
+//               "priceKrw": 2500
+//           },
+//           {
+//               "name": "어묵",
+//               "priceKrw": 1
+//           },
+//           {
+//               "name": "참치주먹밥",
+//               "priceKrw": 2500
+//           },
+//           {
+//               "name": "어묵탕",
+//               "priceKrw": 3500
+//           },
+//           {
+//               "name": "콜팝",
+//               "priceKrw": 2500
+//           },
+//           {
+//               "name": "슬러시",
+//               "priceKrw": 1300
+//           },
+//           {
+//               "name": "컵떡볶이",
+//               "priceKrw": 1300
+//           }
+//       ]
+//   }
+// }
+
 const Img = styled.img`
   margin-top: 90px;
 `
@@ -47,11 +100,11 @@ const CloseBtn = styled.button`
   border: 0;
   background: transparent;
 `
-/* ====== 여기까지 기존 스타일 ====== */
-
 export default function MenuUploadPage() {
   const navigate = useNavigate()
   const fileRef = useRef(null)
+  const apiUrl = import.meta.env.VITE_API_URL
+  const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
 
   const [file, setFile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState(null)
@@ -89,21 +142,26 @@ export default function MenuUploadPage() {
     if (fileRef.current) fileRef.current.value = ''
   }
 
-  // 제출 (MVP: 서버 연동 없이 다음 단계로 이동)
+  // 연동
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!file) {
-      alert('이미지를 먼저 업로드해주세요.')
-      return
-    }
-    // 추후 연동 시:
-    // const formData = new FormData()
-    // formData.append('file', file)
-    // await axios.post('/menu/extract', formData)
-
-    navigate('/menu/extract/loading')
+    console.log('[MenuUpload] submit clicked, file=', file)
+    const formData = new FormData()
+    formData.append('image', file)
+    axios
+      .post(`${apiUrl}/me/menus/ocr/extract`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        const MenuData = res.data
+        navigate('/menu/extract/loading', { state: { MenuData } })
+      })
+      .catch((err) => {
+        console.log(err)
+        navigate('/menu/extract/fail')
+      })
   }
-
   return (
     <div>
       <Header img={backIcon} title={'메뉴 관리'} showImg={true} />
