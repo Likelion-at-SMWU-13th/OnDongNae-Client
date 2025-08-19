@@ -23,11 +23,13 @@ const MenuExtractSave = () => {
     axios
       .post(`${apiUrl}/me/menus/save`, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
+        const AllergensData = res.data
         console.log(res.data) // 연동 확인 후 삭제
-        navigate('/menu/allergens/loading')
+        navigate('/menu/allergens/loading', { state: { AllergensData } })
       })
       .catch((err) => {
         console.error(err)
+        navigate('/menu/allergens/fail')
         alert('저장 실패!')
       })
   }
