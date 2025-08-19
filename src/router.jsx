@@ -42,6 +42,7 @@ import SummaryEditPage from './pages/store/description/SummaryEditPage'
 import DetailEditPage from './pages/store/description/DetailEditPage'
 // mystore
 import MyStorePage from './pages/store/mystore/MyStorePage'
+import MyStoreInfoPage from './pages/store/mystore/MyStoreInfoPage'
 // map
 import MainMapPage from './pages/customer/map/MainMapPage'
 import MapStoresPage from './pages/customer/map/MapStoresPage'
@@ -194,6 +195,10 @@ const router = createBrowserRouter([
       {
         path: 'store/mystore',
         element: <MyStorePage />,
+      },
+      {
+        path: 'store/mystore/info',
+        element: <MyStoreInfoPage />,
       },
       {
         path: '/user/map',

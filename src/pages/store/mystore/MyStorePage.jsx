@@ -21,20 +21,20 @@ const MyStorePage = () => {
         <MenuItem
           img={iconView}
           text='가게 보기'
-          smallText='손님이 보는 가게 화면을 확인해요.'
-          onClick={() => navigate('/menu')}
+          smallText='손님이 보는 가게 화면을 확인해요'
+          onClick={() => navigate('/store/mystore/info')}
         />
         <MenuItem
           img={iconPencil}
           text='정보 수정'
-          smallText='나의 정보를 확인하고 수정해요.'
-          onClick={() => navigate('/hours')}
+          smallText='나의 정보를 확인하고 수정해요'
+          onClick={() => navigate('/store/mystore/edit')}
         />
         <MenuItem
           img={iconExit}
           text='탈퇴하기'
           smallText='서비스 이용을 원하지 않아요'
-          onClick={() => navigate('/store/description')}
+          onClick={() => navigate('/store/mystore/withdraw')}
         />
       </MenuList>
 
