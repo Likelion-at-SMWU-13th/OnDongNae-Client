@@ -52,21 +52,22 @@ const MyStoreInfoPage = () => {
     <>
       <Header img={backIcon} title={'나의 가게'} showImg />
       <S.Main>
-        <S.Scroll className='scrollable'></S.Scroll>
-        {/* 사진 영역 */}
-        <ImgSection imgs={store?.header?.images || []} />
-        {/* 가게 정보 영역 */}
-        <HeaderSection header={store?.header} />
-        {/* 지도 영역*/}
-        <MapSection header={store?.map} />
-        {/* 탭 */}
-        <TabSection active={tab} onChange={setTab} />
-        {/* 탭 콘텐츠 */}
-        {tab === 'menu' ? (
-          <MenuTab items={store?.menuTab || []} />
-        ) : (
-          <InfoTab info={store?.infoTab || {}} />
-        )}
+        <S.Scroll className='scrollable'>
+          {/* 사진 영역 */}
+          <ImgSection imgs={store?.header?.images || []} />
+          {/* 가게 정보 영역 */}
+          <HeaderSection header={store?.header} />
+          {/* 지도 영역*/}
+          <MapSection header={store?.map} />
+          {/* 탭 */}
+          <TabSection active={tab} onChange={setTab} />
+          {/* 탭 콘텐츠 */}
+          {tab === 'menu' ? (
+            <MenuTab items={store?.menuTab || []} />
+          ) : (
+            <InfoTab info={store?.infoTab || {}} />
+          )}
+        </S.Scroll>
       </S.Main>
       <BottomNav />
     </>
