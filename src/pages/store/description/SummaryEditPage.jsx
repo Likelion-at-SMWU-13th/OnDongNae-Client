@@ -8,6 +8,7 @@ import backIcon from '@/assets/button-back.svg'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import BottomNav from '@/components/common/BottomNav'
 import Buttons from '@/components/description/Buttons'
+import authAxios from '@/lib/authAxios'
 
 const SummaryEditPage = () => {
   const navigate = useNavigate()
@@ -20,16 +21,12 @@ const SummaryEditPage = () => {
 
   // 랜더링 시, axios get 으로 내용 가져오기
   useEffect(() => {
-    const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
-    axios
+    authAxios
       .get(`${apiUrl}/me/store/description`, {
         params: { ver: 'short' },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       })
       .then((res) => {
-        setComment(res.data?.data ?? '')
+        setComment(res.data.data ?? '')
       })
       .catch((err) => {
         console.log(err)
@@ -46,20 +43,17 @@ const SummaryEditPage = () => {
       return
     }
 
-    axios
-      .patch(`${apiUrl}/me/store/description`, value, {
+    authAxios
+      .patch(`${apiUrl}/me/store/description`, (comment || '').trim(), {
         params: { ver: 'short' },
-        headers: {
-          'Content-Type': 'text/plain',
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { 'Content-Type': 'text/plain' },
       })
-      .then((res) => {
+      .then(() => {
         alert('수정이 완료되었습니다.')
         navigate('/store/description')
       })
       .catch((err) => {
-        console.log(err)
+        console.error('[SummaryEdit] failed:', err)
         alert('한 줄 소개 수정에 실패했습니다.')
       })
   }

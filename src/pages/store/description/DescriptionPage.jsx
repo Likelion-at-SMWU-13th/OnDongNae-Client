@@ -9,6 +9,7 @@ import DoubleTitle from '@/components/common/DoubleTitle'
 import ShortDescription from '@/components/description/ShortDescription'
 import LongDescription from '@/components/description/LongDescription'
 import BottomNav from '@/components/common/BottomNav'
+import { authAxios } from '@/lib/authAxios'
 
 const StoreDescriptionPage = () => {
   const navigate = useNavigate()
@@ -17,22 +18,14 @@ const StoreDescriptionPage = () => {
   const apiUrl = import.meta.env.VITE_API_URL
 
   useEffect(() => {
-    const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
-    axios
-      .get(`${apiUrl}/me/store/description`, {
-        params: { ver: 'both' },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    authAxios
+      .get(`${apiUrl}/me/store/description`, { params: { ver: 'both' } })
       .then((res) => {
-        setShortDesc(res.data?.data?.shortDescription ?? '')
-        setLongDesc(res.data?.data?.longDescription ?? '')
+        setShortDesc(res.data.data.shortDescription ?? '')
+        setLongDesc(res.data.data.longDescription ?? '')
       })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
+      .catch((err) => console.error('[StoreDescription] failed:', err))
+  }, [apiUrl])
 
   return (
     <>

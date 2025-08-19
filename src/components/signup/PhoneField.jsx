@@ -36,26 +36,56 @@ function PhoneField({
   onChange = (v) => {},
   required = false,
 }) {
-  // 포맷 규칙:
-  // 02로 시작하면: 02-(3 or 4)-(4)
-  // 그 외 기본(모바일 등): 3-4-4
+  // 포맷 규칙
+  // 1. 02로 시작할 때
+  // 2. 050 으로 시작할 때
+  // 3. 01로 시작할 때
+  // 4. 그 외 지역번호로 시작할 때
+
   const formatPhone = (v) => {
     const dRaw = v.replace(/\D/g, '') // 숫자만
-    // 02로 시작하는 번호 처리
+
+    if (!dRaw) return ''
+
+    // 1. 02
     if (dRaw.startsWith('02')) {
-      const rest = dRaw.slice(2, 10) // 지역번호 뒤 최대 8자리
-      if (rest.length === 0) return '02' // '02'만 입력 중
+      // 02 + 최대 8자리 (총 10자리까지)
+      const rest = dRaw.slice(2, 10)
+      if (rest.length === 0) return '02'
       if (rest.length <= 3) return `02-${rest}`
       if (rest.length <= 7) {
-        // 02-<1~3>-<마지막 4>
         return `02-${rest.slice(0, rest.length - 4)}-${rest.slice(-4)}`
       }
-      // rest가 8자리 이상이면 4-4로 고정
       return `02-${rest.slice(0, 4)}-${rest.slice(4, 8)}`
     }
 
-    // 3-4-4
-    const d = dRaw.slice(0, 11) // 최대 11자리
+    // 2. 050으로 시작할 때
+    if (dRaw.startsWith('050')) {
+      const d = dRaw.slice(0, 12)
+      if (d.length <= 4) return d
+      if (d.length <= 8) return `${d.slice(0, 4)}-${d.slice(4)}`
+      return `${d.slice(0, 4)}-${d.slice(4, 8)}-${d.slice(8, 12)}`
+    }
+
+    // 3. 01 로 시작할 때
+    if (/^01[016789]/.test(dRaw)) {
+      const d = dRaw.slice(0, 11)
+      if (d.length <= 3) return d
+      if (d.length <= 7) return `${d.slice(0, 3)}-${d.slice(3)}`
+      return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7, 11)}`
+    }
+
+    // 4. 그 외 지역번호 일 때
+    if (/^0[2-9]\d/.test(dRaw)) {
+      const d = dRaw.slice(0, 11) // 10 or 11자리
+      if (d.length <= 3) return d
+      if (d.length <= 6) return `${d.slice(0, 3)}-${d.slice(3)}`
+      if (d.length <= 10) return `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6, 10)}` // 3-3-4
+      return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7, 11)}` // 3-4-4
+    }
+
+    // 5. 기타 -> 3-4-4 포맷
+    const d = dRaw.slice(0, 11)
     if (d.length <= 3) return d
     if (d.length <= 7) return `${d.slice(0, 3)}-${d.slice(3)}`
     return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`
@@ -64,6 +94,7 @@ function PhoneField({
   const handleChange = (e) => {
     onChange(formatPhone(e.target.value))
   }
+
   return (
     <Container>
       {label && <Text>{label}</Text>}
@@ -73,7 +104,7 @@ function PhoneField({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
-        maxLength={13} // 13자리
+        maxLength={14} // 최대 14자리
         required={required}
       />
     </Container>

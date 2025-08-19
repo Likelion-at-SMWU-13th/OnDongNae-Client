@@ -50,7 +50,7 @@ const SelectSubcategoryPage = () => {
     }
     // 마지막에 세션 스토리지에서 꺼낼 때 주의
     sessionStorage.setItem('subCategory', JSON.stringify(id))
-    navigate('/signup/store-image')
+    navigate('/signup/store-image', { state: { prevStep: 5 } })
   }
 
   return (

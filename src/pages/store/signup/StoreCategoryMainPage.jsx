@@ -44,7 +44,7 @@ const StoreCategoryMainPage = () => {
     sessionStorage.setItem('mainCategory', String(id))
     // 서비스 기타 페이지는 소분류 빈 문자열 값으로 주기
     if (id == 6) {
-      sessionStorage.setItem('subCategory', JSON.stringify(24)) // 소분류 빈 문자열 저장
+      sessionStorage.setItem('subCategory', JSON.stringify([24])) // 소분류 빈 문자열 저장
       navigate('/signup/store-image')
     } else {
       navigate('/signup/store-category-sub')

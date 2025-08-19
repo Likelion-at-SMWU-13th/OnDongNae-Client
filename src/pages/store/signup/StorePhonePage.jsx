@@ -27,7 +27,7 @@ const StorePhonePage = () => {
       return
     }
     sessionStorage.setItem('phoneNum', value)
-    navigate('/signup/store-category-main')
+    navigate('/signup/store-category-main', { state: { prevStep: 4 } })
   }
   return (
     <>
@@ -41,7 +41,7 @@ const StorePhonePage = () => {
               <SubTitle text={'전화번호가 없으면 건너뛰기를 눌러주세요.'} />
             </S.TextContainer>
             <S.InputContainer>
-              <PhoneField placeholder='02-000-0000' value={phoneNum} onChange={setPhoneNum} />
+              <PhoneField placeholder='예) 02-000-0000' value={phoneNum} onChange={setPhoneNum} />
             </S.InputContainer>
 
             <SmallButtonContainerSkip handleSubmit={handleSubmit}></SmallButtonContainerSkip>
