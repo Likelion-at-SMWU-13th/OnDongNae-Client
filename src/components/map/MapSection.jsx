@@ -1,6 +1,7 @@
 // components/map/MapSection.jsx
 import React from 'react'
 import styled from 'styled-components'
+
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 
 function MapSection({ header }) {

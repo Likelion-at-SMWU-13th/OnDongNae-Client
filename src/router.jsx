@@ -33,7 +33,6 @@ import MenuAllergensFailPage from './pages/store/menu/MenuAllergensFailPage.jsx'
 import MenuAllergensSuccessPage from './pages/store/menu/MenuAllergensSuccessPage'
 import MenuAllergensApplyPage from './pages/store/menu/MenuAllergensApplyPage'
 import MenuCorrectPage from './pages/store/menu/MenuCorrectPage'
-import MenuUploadPreviewPage from './pages/MenuUploadPreviewPage'
 // hours
 import HoursPage from './pages/store/hours/HoursPage.jsx'
 import HoursEditPage from './pages/store/hours/HoursEditPage.jsx'
@@ -195,7 +194,7 @@ const router = createBrowserRouter([
         element: <MainMapPage />,
       },
       {
-        path: '/user/map/store',
+        path: '/user/map/store/:storeId',
         element: <MapStorePage />,
       },
       {

@@ -107,8 +107,9 @@ const ScrollArea = ({
   }, [minSnap, maxSnap])
 
   // 가게 카드 클릭 시 페이지 이동
-  const handleCardClick = (store) => {
-    navigate(`/user/map/store`) // 가게 id에 맞게 경로 변경 필요
+  const handleCardClick = (id) => {
+    const storeId = String(id)
+    navigate(`/user/map/store/${storeId}`) // 가게 id에 맞게 경로 변경 필요
   }
 
   return (
@@ -130,7 +131,7 @@ const ScrollArea = ({
         {list.map((s) => (
           <CardDivider key={s.id}>
             {/* 카드 클릭 시 해당 가게로 이동 */}
-            <Card onClick={() => handleCardClick(s)} type='button'>
+            <Card onClick={() => handleCardClick(s.id)} type='button'>
               <StoreName>{s.name}</StoreName>
 
               <StoreInfo>
@@ -219,7 +220,7 @@ const List = styled.div`
 
   flex: 1 1 auto;
   min-height: 0;
-  margin-top: 11px;
+  margin-top: 8px;
   padding: 0 24px 16px 24px;
   overflow-y: auto;
 
@@ -233,7 +234,7 @@ const List = styled.div`
 
 /* 카드 */
 const Card = styled.button`
-  margin-top: 9px;
+  margin-top: 12px;
   width: 100%;
   height: 212px;
   text-align: left;

@@ -33,10 +33,10 @@ const MarketButton = styled.button`
 const MainCategoryButton = styled(MarketButton)``
 
 export default function SelectedChips({
-  marketLabel, // ex) "Yongsan Yongmun Market"
-  mainLabel, // ex) "Restaurants & Cafés" (없으면 표시 X)
-  onClearMarket, // (선택) 시장 초기화
-  onClearMain, // (선택) 대분류 초기화
+  marketLabel, // 시장 라벨명
+  mainLabel, // 대분류 라벨명
+  onClearMarket, // 시장 초기화
+  onClearMain, // 대분류 초기화
 }) {
   return (
     <Wrap>
