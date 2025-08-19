@@ -42,7 +42,7 @@ import SummaryEditPage from './pages/store/description/SummaryEditPage'
 import DetailEditPage from './pages/store/description/DetailEditPage'
 // map
 import MainMapPage from './pages/customer/map/MainMapPage'
-import MapStorePage from './pages/customer/map/MapStoresPage'
+import MapStoresPage from './pages/customer/map/MapStoresPage'
 // overview
 import OverviewPage from './pages/customer/overview/OverviewPage.jsx'
 import OverviewInfo1 from './pages/customer/overview/OverviewInfoPage1.jsx'
@@ -195,7 +195,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/user/map/store/:storeId',
-        element: <MapStorePage />,
+        element: <MapStoresPage />,
       },
       {
         path: '/user/rates',
