@@ -1,21 +1,24 @@
+// src/components/menuManagement/RegisteredMenu.jsx
 import React from 'react'
 import styled from 'styled-components'
-const RegisteredMenu = () => {
+
+const RegisteredMenu = ({ nameKo, priceKrw, allergies = [] }) => {
   return (
     <Content>
       <RowWrapper>
-        <MenuName>떡볶이</MenuName>
+        <MenuName>{nameKo}</MenuName>
         <PriceWrapper>
           <Won>₩</Won>
-          <MenuPrice>5000</MenuPrice>
+          <MenuPrice>{priceKrw}</MenuPrice>
         </PriceWrapper>
       </RowWrapper>
-      <MenuAllergens>밀, 대두, 생선</MenuAllergens>
+      <MenuAllergens>{(allergies ?? []).join(', ')}</MenuAllergens>
     </Content>
   )
 }
 
 export default RegisteredMenu
+
 const Content = styled.span`
   padding-bottom: 38.5px;
 `
@@ -37,13 +40,13 @@ const Won = styled.span`
   color: #000;
   font-size: 15px;
   font-weight: 400;
-  line-height: 21px; /* 140% */
+  line-height: 21px;
 `
 const MenuPrice = styled.span`
   color: #000;
   font-size: 15px;
   font-weight: 400;
-  line-height: 21px; /* 140% */
+  line-height: 21px;
 `
 const MenuAllergens = styled.span`
   color: #000;
