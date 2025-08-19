@@ -2,7 +2,6 @@ import React, { useMemo, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-
 import iconLocation from '@/assets/icon-location.svg'
 import iconPhone from '@/assets/icon-phone-call.svg'
 import defaultStoreImg from '@/assets/img-defaultStoreImg.svg'
@@ -145,7 +144,7 @@ const ScrollArea = ({
               </StoreInfo>
 
               <StoreImg
-                src={defaultSrc(s.image)}
+                src={s.image}
                 alt={s.name}
                 loading='lazy'
                 onError={(e) => {
