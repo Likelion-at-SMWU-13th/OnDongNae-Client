@@ -58,7 +58,7 @@ const SignupCompletePage = () => {
   const navigate = useNavigate()
 
   const handleSubmit = () => {
-    navigate('/store/home')
+    navigate('/login')
   }
   return (
     <>
