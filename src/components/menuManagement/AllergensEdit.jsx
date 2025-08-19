@@ -1,20 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-
-/* --- MOCK: 실제에선 API 응답 사용 --- */
-const MENU_PUT_MOCK = {
-  code: 'OK',
-  message: '알레르기 추출 성공',
-  success: true,
-  data: {
-    results: [
-      { menuId: 1, nameKo: '떡볶이&모둠튀김&어묵 세트', allergiesCanonical: ['Wheat', 'Fish'] },
-      { menuId: 2, nameKo: '땅콩소스 비빔국수', allergiesCanonical: ['Wheat', 'Soy', 'Peanuts'] },
-      { menuId: 3, nameKo: '돈가스 카레우동', allergiesCanonical: ['Pork', 'Wheat', 'Eggs'] },
-      { menuId: 4, nameKo: '김치전골(돼지고기)', allergiesCanonical: ['Pork', 'Wheat'] },
-    ],
-  },
-}
+import SmallButtonContainer from '@/components/common/SmallButtonContainer'
+import axios from 'axios'
 
 /* ---- 글자 픽셀 폭 계산 ---- */
 const getTextWidth = (
@@ -26,12 +13,13 @@ const getTextWidth = (
   if (!ctx) return 20
   ctx.font = font
   const w = ctx.measureText(String(text || ' ')).width
-  return Math.min(Math.max(Math.ceil(w) + 6, 20), 220) // 최소 20px, 최대 400px
+  return Math.min(Math.max(Math.ceil(w) + 6, 20), 220)
 }
 
-export default function AllergensEdit() {
-  const [menus, setMenus] = useState(MENU_PUT_MOCK.data.results)
+export default function AllergensEdit({ initialResults = [], onSaved }) {
+  const [menus, setMenus] = useState(initialResults)
   const [editIndex, setEditIndex] = useState(null)
+  const apiUrl = import.meta.env.VITE_API_URL
 
   const toggleEdit = (idx) => setEditIndex((cur) => (cur === idx ? null : idx))
 
@@ -40,6 +28,7 @@ export default function AllergensEdit() {
       i === idx
         ? {
             ...m,
+            // 쉼표로 구분 입력 → 배열로 변환
             allergiesCanonical: value
               .split(',')
               .map((s) => s.trim())
@@ -48,6 +37,46 @@ export default function AllergensEdit() {
         : m,
     )
     setMenus(next)
+  }
+
+  const handleSave = () => {
+    // 요청 바디 만들기: menuId -> [알레르기 문자열]
+    const menuAllergies = menus.reduce((acc, m) => {
+      const arr = Array.isArray(m.allergiesCanonical) ? m.allergiesCanonical : []
+      acc[m.menuId] = arr
+      return acc
+    }, {})
+
+    // 가드
+    if (!Object.keys(menuAllergies).length) {
+      alert('보낼 데이터가 없어요.')
+      return
+    }
+
+    const token = localStorage.getItem('accessToken') || ''
+    if (!token) {
+      alert('로그인이 필요합니다.')
+      return
+    }
+
+    // 전역 Content-Type 간섭 방지 (FormData가 아니라 JSON이지만, 혹시 모를 전역값 제거 습관)
+    delete axios.defaults.headers.post?.['Content-Type']
+    delete axios.defaults.headers.common?.['Content-Type']
+
+    const payload = { menuAllergies }
+
+    axios
+      .post(`${apiUrl}/me/menus/allergens/apply`, payload, {
+        headers: { Authorization: `Bearer ${token}` }, // JSON은 Content-Type 생략 가능(axios가 자동)
+      })
+      .then((res) => {
+        console.log('allergies save OK:', res.data)
+        onSaved?.()
+      })
+      .catch((err) => {
+        console.error('allergies save ERR:', err?.response?.status, err?.response?.data)
+        alert('저장 실패!')
+      })
   }
 
   return (
@@ -75,6 +104,13 @@ export default function AllergensEdit() {
           </Row>
         )
       })}
+
+      {/* ✅ 저장 버튼은 리스트 밖에 1개만 */}
+      <ButtonWapper>
+        {/* SmallButtonContainer가 실제로 onClick을 호출하는 prop 이름을 확인해 맞추세요.
+           이전 코드들에서 handleSubmit을 받았으니 그대로 사용 */}
+        <SmallButtonContainer handleSubmit={handleSave} />
+      </ButtonWapper>
     </div>
   )
 }
@@ -122,4 +158,10 @@ const SmallLightOrangeButton = styled.button`
   font-weight: 600;
   color: #fff;
   cursor: pointer;
+`
+
+const ButtonWapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 60px;
 `
