@@ -236,7 +236,7 @@ const router = createBrowserRouter([
         element: <CourseAI />,
       },
       {
-        path: 'user/course/ai/loading',
+        path: 'user/course/AI/loading',
         element: <CourseLoading />,
       },
     ],
