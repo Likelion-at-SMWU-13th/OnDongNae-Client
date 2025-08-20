@@ -44,7 +44,7 @@
     "CNY": "CNY",
     "JPY": "JPY",
     "rate": "Exchange rate",
-    "warning1": "Exchange rate from Bank of Korea. (Last updated: Month, Day, Year)",
+    "warning1": "Exchange rate from Bank of Korea. (Updated every hour)",
     "warning2": "Exchange rates are for reference only. Actual amounts may differ depending on the exchange rate, bank fees, and your payment method.",
     "warning3": "Please check with your bank or card provider for the exact amount to be charged in your currency."
   },

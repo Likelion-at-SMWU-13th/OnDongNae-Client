@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
 const CURRENCIES = [
-  { code: 'USD', symbol: '$' },
-  { code: 'EUR', symbol: '€' },
-  { code: 'JPY', symbol: '¥' },
-  { code: 'CNY', symbol: '¥' },
+  { unit: 'USD', symbol: '$' },
+  { unit: 'EUR', symbol: '€' },
+  { unit: 'JPY', symbol: '¥' },
+  { unit: 'CNY', symbol: '¥' },
 ]
 
 const InputBoxConverted = ({ currency, onCurrency, converted, exchangeRate }) => {
@@ -14,7 +14,7 @@ const InputBoxConverted = ({ currency, onCurrency, converted, exchangeRate }) =>
 
   // 화폐 단위
   const symbol = useMemo(() => {
-    const f = CURRENCIES.find((c) => c.code === currency)
+    const f = CURRENCIES.find((c) => c.unit === currency)
     return f ? f.symbol : ''
   }, [currency])
 
@@ -40,15 +40,15 @@ const InputBoxConverted = ({ currency, onCurrency, converted, exchangeRate }) =>
 
             <BtnGroup>
               {CURRENCIES.map((c) => {
-                const isActive = currency === c.code
+                const isActive = currency === c.unit
                 return (
                   <CurrencyBtn
-                    key={c.code}
+                    key={c.unit}
                     type='button'
-                    onClick={() => onCurrency && onCurrency(c.code)}
+                    onClick={() => onCurrency && onCurrency(c.unit)}
                     data-active={isActive}
                   >
-                    {t(`rates.${c.code}`, c.code)}
+                    {t(`rates.${c.unit}`, c.unit)}
                   </CurrencyBtn>
                 )
               })}
