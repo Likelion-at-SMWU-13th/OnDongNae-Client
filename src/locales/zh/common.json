@@ -103,6 +103,7 @@
     "loading": "正在生成您的课程…",
     "regenerate": "生成",
     "failComment": "无法生成推荐路线。\n\n请再试一次。",
-    "share": "分享"
+    "share": "分享",
+    "create": "通过人工智能接受路线推荐\nAI推荐路线"
   }
 }
