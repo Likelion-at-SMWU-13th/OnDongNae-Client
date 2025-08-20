@@ -199,7 +199,7 @@ const router = createBrowserRouter([
         element: <MyStorePage />,
       },
       {
-        path: 'store/mystore/info/:storeId',
+        path: 'store/mystore/info',
         element: <MyStoreInfoPage />,
       },
       {

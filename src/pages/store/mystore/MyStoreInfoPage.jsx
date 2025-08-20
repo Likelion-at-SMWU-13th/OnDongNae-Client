@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MapStoresPage.styles'
-import { useNavigate, useParams } from 'react-router-dom'
 import { authAxios } from '@/lib/authAxios'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
@@ -14,9 +13,9 @@ import MapSection from '@/components/map/MapSection'
 import TabSection from '@/components/map/TabSection'
 import MenuTab from '@/components/map/MenuTab'
 import InfoTab from '@/components/map/InfoTab'
+import Loading from '@/components/common/Loading'
 
 const MyStoreInfoPage = () => {
-  const { storeId } = useParams()
   const { t, i18n } = useTranslation()
   const [store, setStore] = useState()
   const [tab, setTab] = useState('menu') // 일단 메뉴탭 보여주기
@@ -27,10 +26,9 @@ const MyStoreInfoPage = () => {
 
   useEffect(() => {
     const fetchStore = async () => {
-      setIsLoading(true)
+      const lang = i18n.language
       try {
-        const lang = 'ko'
-        const response = await axios.get(`${apiUrl}/stores/${storeId}`, {
+        const response = await authAxios.get(`${apiUrl}/me/store`, {
           headers: { 'Accept-Language': lang },
         })
         setStore(response?.data?.data ?? null)
@@ -42,10 +40,16 @@ const MyStoreInfoPage = () => {
         setIsLoading(false)
       }
     }
-    if (storeId) fetchStore()
-  }, [storeId, apiUrl])
-  if (!store) {
-    return <div>Loading...</div>
+    fetchStore()
+  }, [i18n.language])
+
+  // 로딩 상태일 때 UI
+  if (isLoading) {
+    return (
+      <S.LoadingOverlay>
+        <Loading />
+      </S.LoadingOverlay>
+    )
   }
 
   return (

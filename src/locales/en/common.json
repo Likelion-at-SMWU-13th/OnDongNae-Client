@@ -1,5 +1,5 @@
 {
-  "button": { "continue": "continue", "search": "Search" },
+  "button": { "continue": "Continue", "search": "Search" },
   "bottomNav": { "overview": "Overview", "map": "Map", "course": "Course", "rates": "Rates" },
   "header": { "storeDetails": "Store Details", "overview": "Overview" },
   "dropdown": {

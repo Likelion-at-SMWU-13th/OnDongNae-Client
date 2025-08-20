@@ -4,7 +4,6 @@ export const Main = styled.main`
   height: calc(100dvh - 155px);
   display: flex;
   flex-direction: column;
-
   min-height: 0;
 `
 
