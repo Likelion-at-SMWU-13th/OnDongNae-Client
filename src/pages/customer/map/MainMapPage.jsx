@@ -16,6 +16,7 @@ import ScrollArea from '@/components/map/ScrollArea'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import KakaoMap from '@/components/common/KakaoMapContainer'
 import iconMarker from '@/assets/icon-big-mapMarker.svg'
+import Loading from '@/components/common/Loading'
 
 // 지도 기본값
 const DEFAULT_CENTER = { lat: 37.5326, lng: 126.9905 } // 기본 좌표
@@ -66,8 +67,6 @@ const MainMapPage = () => {
       })
       .then((response) => {
         const data = response?.data?.data
-        if (!data) return
-
         setMarkets(data.marketOptions || [])
         setCategories(data.categoryOptions || [])
         setRandomStores(data.randomStores || [])
@@ -77,7 +76,7 @@ const MainMapPage = () => {
         alert('데이터 불러오기에 실패했습니다.')
       })
       .finally(() => {
-        setIsLoading(false) // ✅ API 요청 완료 시 로딩 상태 해제
+        setIsLoading(false) // API 요청 완료 시 로딩 상태 해제
       })
   }, [i18n.language])
 
@@ -143,10 +142,12 @@ const MainMapPage = () => {
   }, [market?.value, selectedMainId, selectedSubIds, i18n.language])
 
   // 이벤트 핸들러
-  // 검색창에 검색 시, 가장 비슷한 키워드의 가게 상세정보로 넘기기
-  const handleSearchSubmit = (raw) => {
-    const keyword = (raw ?? '').trim()
+  // 검색창에 검색 시, 해당 가게의 마커 찍기 + ScrollArea에 보여주기
+  const handleSearchSubmit = (keywordInput) => {
+    const keyword = (keywordInput ?? '').trim()
     if (!keyword) return
+
+    setIsLoading(true)
 
     const lang = (i18n.language || 'en').split('-')[0]
 
@@ -156,29 +157,57 @@ const MainMapPage = () => {
         headers: { 'Accept-Language': lang },
       })
       .then((res) => {
-        // 들어온 데이터 배열로
-        const result = res?.data?.data
+        // 결과를 배열로 만들어주기
+        const result = res.data.data
         const items = result ? (Array.isArray(result) ? result : [result]) : []
 
         if (items.length === 0) {
-          alert('검색 결과가 없습니다.')
+          setStoreMarkers([])
+          if (!market?.value) {
+            setRandomStores([]) // 시장 선택 전이면 랜덤 가게 띄우기
+          }
+          setActiveStoreId(null)
           return
         }
 
-        // 이름 정확히 일치하는걸 우선
-        const toLower = (v) => String(v ?? '').toLowerCase()
-        const exact = items.find((it) => toLower(it.name) === toLower(keyword))
-        const storeId = (exact || items[0]).id
+        const markers = items.map((s) => ({
+          id: `store-${s.id}`,
+          position: { lat: s.latitude, lng: s.longitude },
+          image: { src: iconMarker, size: { width: 28, height: 28 } },
+          data: {
+            ...s,
+            type: 'store',
+            _labelText: s.name,
+          },
+        }))
 
-        // 7) 상세 페이지 이동 (요구사항 경로 포맷)
-        navigate(`/user/map/store/${storeId}`)
+        // 지도에 마커 반영
+        setStoreMarkers(markers)
+        setActiveStoreId(null)
+
+        //ScrollArea에 결과 반영
+        if (!market?.value) {
+          setRandomStores(items)
+        }
+
+        // 결과 하나면 지도에 확대해서 보여주기
+        // 결과 여러개면 fitToMarkers 알아서 작동함
+        if (items.length === 1) {
+          setCenter({ lat: items[0].latitude, lng: items[0].longitude })
+          setLevel(3)
+        }
       })
       .catch((err) => {
         console.error(err)
         alert('Failed')
+        setStoreMarkers([])
+        if (!market?.value) {
+          setRandomStores([])
+        }
+        setActiveStoreId(null)
       })
       .finally(() => {
-        setIsLoading(false) // ✅ 필터링 완료 시 로딩 상태 해제
+        setIsLoading(false)
       })
   }
   // 시장 선택 시, 대/소분류 선택 초기화 & 지도 이동
@@ -242,9 +271,7 @@ const MainMapPage = () => {
       {/* 헤더 */}
       <Header img={backIcon} title={t('bottomNav.map')} showImg={false} />
       <S.MapContainer>
-        {isLoading ? (
-          <S.LoadingOverlay>Loading ...</S.LoadingOverlay>
-        ) : (
+        {!isLoading && (
           <KakaoMap
             center={center}
             level={level}
@@ -285,6 +312,7 @@ const MainMapPage = () => {
               setLevel(3)
             }
           }}
+          isLoading={isLoading}
         />
 
         {/* 카카오맵 */}
@@ -352,6 +380,11 @@ const MainMapPage = () => {
       </S.MapContainer>
       {/* 하단바 */}
       <CustomerBottomNav />
+      {isLoading && (
+        <S.LoadingOverlay>
+          <Loading />
+        </S.LoadingOverlay>
+      )}
     </>
   )
 }
