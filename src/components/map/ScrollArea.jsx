@@ -38,6 +38,7 @@ const ScrollArea = ({
   initialHeightPct = 20, // 초기 높이
   snapPoints = [4, 20, 65], // 스냅 포인트
   bottomOffset = 0, // 하단 오프셋
+  isLoading = false,
 }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -125,50 +126,51 @@ const ScrollArea = ({
 
       {/* 리스트만 스크롤 */}
       <List>
-        {list.length === 0 && <Empty>{t('text.notice')}</Empty>}
+        {!isLoading && list.length === 0 && <Empty>{t('text.notice')}</Empty>}
 
-        {list.map((s) => (
-          <CardDivider key={s.id}>
-            {/* 카드 클릭 시 해당 가게로 이동 */}
-            <Card onClick={() => handleCardClick(s.id)} type='button'>
-              <StoreName>{s.name}</StoreName>
+        {!isLoading &&
+          list.map((s) => (
+            <CardDivider key={s.id}>
+              {/* 카드 클릭 시 해당 가게로 이동 */}
+              <Card onClick={() => handleCardClick(s.id)} type='button'>
+                <StoreName>{s.name}</StoreName>
 
-              <StoreInfo>
-                <Info>{Array.isArray(s.subCategories) ? s.subCategories.join(', ') : ''}</Info>
-                <Info>|</Info>
-                {s.isOpen ? (
-                  <OpenInfo>{t('text.open')}</OpenInfo>
-                ) : (
-                  <OpenInfo>{t('text.closed')}</OpenInfo>
+                <StoreInfo>
+                  <Info>{Array.isArray(s.subCategories) ? s.subCategories.join(', ') : ''}</Info>
+                  <Info>|</Info>
+                  {s.isOpen ? (
+                    <OpenInfo>{t('text.open')}</OpenInfo>
+                  ) : (
+                    <OpenInfo>{t('text.closed')}</OpenInfo>
+                  )}
+                </StoreInfo>
+
+                <StoreImg
+                  src={s.image}
+                  alt={s.name}
+                  loading='lazy'
+                  onError={(e) => {
+                    e.currentTarget.onerror = null
+                    e.currentTarget.src = defaultStoreImg
+                  }}
+                />
+
+                {s.address && (
+                  <InfoRow>
+                    <Icon src={iconLocation} alt='' />
+                    <span>{s.address}</span>
+                  </InfoRow>
                 )}
-              </StoreInfo>
 
-              <StoreImg
-                src={s.image}
-                alt={s.name}
-                loading='lazy'
-                onError={(e) => {
-                  e.currentTarget.onerror = null
-                  e.currentTarget.src = defaultStoreImg
-                }}
-              />
-
-              {s.address && (
-                <InfoRow>
-                  <Icon src={iconLocation} alt='' />
-                  <span>{s.address}</span>
-                </InfoRow>
-              )}
-
-              {s.phone && (
-                <InfoRow>
-                  <Icon src={iconPhone} alt='' />
-                  <span>{s.phone ? s.phone : t('text.noInfo')}</span>
-                </InfoRow>
-              )}
-            </Card>
-          </CardDivider>
-        ))}
+                {s.phone && (
+                  <InfoRow>
+                    <Icon src={iconPhone} alt='' />
+                    <span>{s.phone ? s.phone : t('text.noInfo')}</span>
+                  </InfoRow>
+                )}
+              </Card>
+            </CardDivider>
+          ))}
       </List>
     </Sheet>
   )
