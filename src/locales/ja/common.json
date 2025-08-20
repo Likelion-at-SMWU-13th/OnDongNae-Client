@@ -99,6 +99,7 @@
   "course": {
     "selectMarket": "市場を選んでください",
     "with": "一緒に行く相手",
-    "atmosphere": "雰囲気"
+    "atmosphere": "雰囲気",
+    "loading": "コースを作成しています…"
   }
 }

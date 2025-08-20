@@ -99,6 +99,7 @@
   "course": {
     "selectMarket": "请选择一个市场",
     "with": "一起同行人员",
-    "atmosphere": "氛围"
+    "atmosphere": "氛围",
+    "loading": "正在生成您的课程…"
   }
 }

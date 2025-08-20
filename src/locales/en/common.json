@@ -98,6 +98,7 @@
   "course": {
     "selectMarket": "Select market",
     "with": "With",
-    "atmosphere": "Atmosphere"
+    "atmosphere": "Atmosphere",
+    "loading": "Generating your course …"
   }
 }
