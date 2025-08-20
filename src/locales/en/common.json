@@ -99,6 +99,8 @@
     "selectMarket": "Select market",
     "with": "With",
     "atmosphere": "Atmosphere",
-    "loading": "Generating your course …"
+    "loading": "Generating your course …",
+    "regenerate": "regenerate",
+    "failComment": "Failed to generate\ncourse recommendation.\n\nPlease try again"
   }
 }

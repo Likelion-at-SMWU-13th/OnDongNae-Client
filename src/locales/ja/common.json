@@ -100,6 +100,8 @@
     "selectMarket": "市場を選んでください",
     "with": "一緒に行く相手",
     "atmosphere": "雰囲気",
-    "loading": "コースを作成しています…"
+    "loading": "コースを作成しています…",
+    "regenerate": "生成する",
+    "failComment": "コースの推薦を生成できませんでした。\n\nもう一度お試しください。"
   }
 }
