@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import SubTitle from '@/components/signup/SubTitle'
+import LargeOrangeButton from '@/components/common/LargeOrangeButton'
 
 function Btn({ active, children, onClick }) {
   return (
@@ -30,7 +31,7 @@ function Btn({ active, children, onClick }) {
   )
 }
 
-export default function CourseRecommend() {
+export default function CourseOption() {
   const { t } = useTranslation()
   const [markets, setMarkets] = useState([])
   const [options, setOptions] = useState([])
@@ -39,9 +40,7 @@ export default function CourseRecommend() {
     withOptionId: null,
     atmosphereOptionId: null,
   })
-
   const navigate = useNavigate()
-  const { courseId } = useParams() // 라우트가 /courses/:courseId 인 경우
   const apiUrl = import.meta.env.VITE_API_URL
 
   // 데이터 GET (시장 + 옵션)
@@ -61,15 +60,15 @@ export default function CourseRecommend() {
   const withOptions = useMemo(() => options.filter((o) => o.id >= 1 && o.id <= 7), [options])
   const atmosphereOptions = useMemo(() => options.filter((o) => o.id >= 8 && o.id <= 13), [options])
 
-  // 세 값이 모두 선택되면 결과 페이지로 state 전달
-  useEffect(() => {
+  // Generate 클릭 → Loading 페이지로 state 넘기기
+  const handleGenerate = () => {
     const { marketId, withOptionId, atmosphereOptionId } = sel
     if (marketId && withOptionId && atmosphereOptionId) {
-      navigate('user/course/result', {
-        state: { marketId, withOptionId, atmosphereOptionId },
-      })
+      navigate('/user/course/AI/loading', { state: sel })
+    } else {
+      alert(t('course.selectAll') || '옵션을 모두 선택해주세요!')
     }
-  }, [sel, navigate])
+  }
 
   return (
     <div>
@@ -141,6 +140,13 @@ export default function CourseRecommend() {
           </Btn>
         ))}
       </div>
+      <ButtonWrapper>
+        <LargeOrangeButton
+          label={t('button.generate')}
+          onBtnClick={handleGenerate}
+          disabled={!allSelected}
+        />
+      </ButtonWrapper>
     </div>
   )
 }
