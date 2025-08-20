@@ -14,7 +14,7 @@ import iconArrow from '@/assets/icon-circle-down-arrow.svg'
 
 const ExchangeRatePage = () => {
   const { t } = useTranslation()
-  const [currency, setCurrency] = useState('USD') // 통화단위 설정
+  const [currency, setCurrency] = useState('') // 통화단위 설정
   const [priceKr, setPriceKr] = useState('') // 원단위 금액
   const [converted, setConverted] = useState('') // 바뀐 금액
   const [exchangeRate, setExchangeRate] = useState(null) // 환율
