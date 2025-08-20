@@ -1,5 +1,5 @@
 {
-  "button": { "continue": "continue", "search": "Search" },
+  "button": { "continue": "continue", "search": "Search", "generate": "generate" },
   "bottomNav": { "overview": "Overview", "map": "Map", "course": "Course", "rates": "Rates" },
   "header": { "storeDetails": "Store Details", "overview": "Overview" },
   "dropdown": {
@@ -94,5 +94,10 @@
     "eventAndActivities3": "Currently, there are no special activities or events taking place at our market. We invite you to visit us again in the future when new and exciting programs become available.",
     "eventAndActivities4": "Currently, there are no special activities or events taking place at our market. We invite you to visit us again in the future when new and exciting programs become available.",
     "eventAndActivities5": "Currently, there are no special activities or events taking place at our market. We invite you to visit us again in the future when new and exciting programs become available."
+  },
+  "course": {
+    "selectMarket": "Select market",
+    "with": "With",
+    "atmosphere": "Atmosphere"
   }
 }

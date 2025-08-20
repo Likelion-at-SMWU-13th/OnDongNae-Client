@@ -1,5 +1,5 @@
 {
-  "button": { "continue": "続ける", "search": "検索" },
+  "button": { "continue": "続ける", "search": "検索", "generate": "生成する" },
   "bottomNav": { "overview": "概要", "map": "地図", "course": "コース", "rates": "レート" },
   "header": { "storeDetails": "店舗詳細", "overview": "概要" },
 
@@ -95,5 +95,10 @@
     "eventAndActivities3": "現在、特別なイベントや活動は開催されておりません。今後、新しく魅力的なプログラムが始まる際には、ぜひまたお越しくださいませ。",
     "eventAndActivities4": "現在、特別なイベントや活動は開催されておりません。今後、新しく魅力的なプログラムが始まる際には、ぜひまたお越しくださいませ。",
     "eventAndActivities5": "現在、特別なイベントや活動は開催されておりません。今後、新しく魅力的なプログラムが始まる際には、ぜひまたお越しくださいませ。"
+  },
+  "course": {
+    "selectMarket": "市場を選んでください",
+    "with": "一緒に行く相手",
+    "atmosphere": "雰囲気"
   }
 }

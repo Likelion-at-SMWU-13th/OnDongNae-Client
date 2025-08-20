@@ -1,5 +1,5 @@
 {
-  "button": { "continue": "继续", "search": "搜索" },
+  "button": { "continue": "继续", "search": "搜索", "generate": "生成" },
   "bottomNav": { "overview": "概述", "map": "地图", "course": "推荐", "rates": "汇率" },
   "header": { "storeDetails": "店铺详情", "overview": "概述" },
   "dropdown": {
@@ -95,5 +95,10 @@
     "eventAndActivities3": "目前，我们市场没有正在进行的特别活动或事件。欢迎您在未来有新的精彩活动时再次光临。",
     "eventAndActivities4": "目前，我们市场没有正在进行的特别活动或事件。欢迎您在未来有新的精彩活动时再次光临。",
     "eventAndActivities5": "目前，我们市场没有正在进行的特别活动或事件。欢迎您在未来有新的精彩活动时再次光临。"
+  },
+  "course": {
+    "selectMarket": "请选择一个市场",
+    "with": "一起同行人员",
+    "atmosphere": "氛围"
   }
 }
