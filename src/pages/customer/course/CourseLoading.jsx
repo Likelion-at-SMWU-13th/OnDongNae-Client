@@ -54,7 +54,9 @@ const CourseLoading = () => {
 
   useEffect(() => {
     axios
-      .post(`${apiUrl}/courses/recommend`, state)
+      .post(`${apiUrl}/courses/recommend`, state, {
+        headers: { 'Accept-Language': lang },
+      })
       .then((res) => {
         navigate('/user/course/result', { state: res.data.data })
       })

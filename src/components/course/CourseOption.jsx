@@ -49,7 +49,9 @@ export default function CourseOption() {
     alert('로딩 중입니다!') // 연동 후 삭제
 
     axios
-      .get(`${apiUrl}/courses/options`)
+      .get(`${apiUrl}/courses/options`, {
+        headers: { 'Accept-Language': lang },
+      })
       .then((res) => {
         setMarkets(res.data?.data?.market)
         setOptions(res.data?.data?.option)
