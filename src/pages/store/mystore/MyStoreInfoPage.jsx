@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MapStoresPage.styles'
 import { useNavigate, useParams } from 'react-router-dom'
+import { authAxios } from '@/lib/authAxios'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
-import CustomerBottomNav from '@/components/common/CustomerBottomNav'
+import BottomNav from '@/components/common/BottomNav'
 
 import ImgSection from '@/components/map/ImgSection'
 import HeaderSection from '@/components/map/HeaderSection'
@@ -14,10 +15,10 @@ import TabSection from '@/components/map/TabSection'
 import MenuTab from '@/components/map/MenuTab'
 import InfoTab from '@/components/map/InfoTab'
 
-const MapStoresPage = () => {
+const MyStoreInfoPage = () => {
   const { storeId } = useParams()
   const { t, i18n } = useTranslation()
-  const [store, setStore] = useState() // url에서 id 정보 추출
+  const [store, setStore] = useState()
   const [tab, setTab] = useState('menu') // 일단 메뉴탭 보여주기
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -28,7 +29,7 @@ const MapStoresPage = () => {
     const fetchStore = async () => {
       setIsLoading(true)
       try {
-        const lang = (i18n.language || 'en').split('-')[0]
+        const lang = 'ko'
         const response = await axios.get(`${apiUrl}/stores/${storeId}`, {
           headers: { 'Accept-Language': lang },
         })
@@ -42,14 +43,14 @@ const MapStoresPage = () => {
       }
     }
     if (storeId) fetchStore()
-  }, [storeId, i18n.language, apiUrl])
+  }, [storeId, apiUrl])
   if (!store) {
     return <div>Loading...</div>
   }
 
   return (
     <>
-      <Header img={backIcon} title={t('header.storeDetails')} showImg />
+      <Header img={backIcon} title={'나의 가게'} showImg />
       <S.Main>
         <S.Scroll className='scrollable'>
           {/* 사진 영역 */}
@@ -68,9 +69,9 @@ const MapStoresPage = () => {
           )}
         </S.Scroll>
       </S.Main>
-      <CustomerBottomNav />
+      <BottomNav />
     </>
   )
 }
 
-export default MapStoresPage
+export default MyStoreInfoPage

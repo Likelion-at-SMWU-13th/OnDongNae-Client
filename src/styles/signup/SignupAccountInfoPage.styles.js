@@ -16,7 +16,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 29px;
-  margin: 0 56px 43px 30px;
+  margin: 0 56px 75px 30px;
 `
 
 export const Main = styled.main`

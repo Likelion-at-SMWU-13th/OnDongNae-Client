@@ -45,33 +45,16 @@ const Input = styled.input`
   }
 `
 
-// 에러 문구
-const ErrorMessage = styled.p`
-  font-size: 14px;
-  color: #ff5a5a;
-  margin: 2px 0 0 10px;
-  min-height: 18px; /* 항상 공간 확보 */
-  visibility: hidden;
-`
-
-// visible 클래스일 때만 보이기
-const VisibleErrorMessage = styled(ErrorMessage)`
-  visibility: visible;
-`
-
 function PasswordField({
   value1 = '',
   value2 = '',
   onChange1 = (e1) => {},
   onChange2 = (e2) => {},
 }) {
-  // 빨간 에러 뜨는 경우
-  const showError = value2.length > 0 && value1 !== value2
-
   return (
     <Container>
       <Text>비밀번호</Text>
-      <PasswordContainer data-error={showError}>
+      <PasswordContainer>
         <Input
           type='password'
           placeholder='숫자/특수문자 혼합, 4자'
@@ -87,12 +70,6 @@ function PasswordField({
           required
         />
       </PasswordContainer>
-      {/* show/hide 대신 항상 같은 높이 유지 */}
-      {showError ? (
-        <VisibleErrorMessage>비밀번호가 일치하지 않습니다.</VisibleErrorMessage>
-      ) : (
-        <ErrorMessage />
-      )}{' '}
     </Container>
   )
 }
