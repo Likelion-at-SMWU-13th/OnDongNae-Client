@@ -80,7 +80,7 @@ const MyInfoEditPage = () => {
             <PasswordField value1={pw1} value2={pw2} onChange1={setPw1} onChange2={setPw2} />
             <TextField
               label='가게명'
-              placeholder='온동네'
+              placeholder='고루고루'
               value={storeNameKo}
               onChange={setStoreNameKo}
             />

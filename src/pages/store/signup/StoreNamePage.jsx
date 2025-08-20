@@ -35,7 +35,7 @@ const StoreNamePage = () => {
               <Title text={'가게 이름을 입력해주세요.'} />
             </S.TextContainer>
             <S.InputContainer>
-              <InputField placeholder='온동네' value={storeName} onChange={setStoreName} />
+              <InputField placeholder='고루고루' value={storeName} onChange={setStoreName} />
             </S.InputContainer>
 
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
