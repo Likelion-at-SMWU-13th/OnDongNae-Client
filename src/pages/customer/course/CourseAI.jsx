@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -28,7 +28,7 @@ const CourseAI = () => {
 
   return (
     <div>
-      <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
+      <Header img={backIcon} title={t('bottomNav.course')} showImg={true} />
       <CourseOption />
       <CustomerBottomNav />
     </div>
