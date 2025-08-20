@@ -1,10 +1,7 @@
 // src/lib/authAxios.js
 import axios from 'axios'
 
-//  공통 인증 요청 래퍼
-// 사용법: authRequest((accessToken) => axios.get(...Authorization: Bearer accessToken...))
 // 1차 요청이 401이면 refresh Token으로 새로운 토큰 발급 받기 -> 원 요청 재시도
-
 const API_BASE = import.meta.env.VITE_API_URL
 const REFRESH_PATH = '/auth/token/refresh'
 

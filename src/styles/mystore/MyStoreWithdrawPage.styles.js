@@ -12,9 +12,11 @@ export const Scroll = styled.div`
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  margin: 40px 33px 0 33px;
   -webkit-overflow-scrolling: touch;
   padding-bottom: calc(env(safe-area-inset-bottom, 0));
+`
+export const Container = styled.div`
+  margin: 40px 33px 0 33px;
 `
 export const Text = styled.p`
   color: #000;
@@ -39,6 +41,5 @@ export const Button = styled.button`
   align-items: center;
   font-size: 18px;
   font-weight: 600;
-  margin: 0 auto;
-  margin-top: 40px;
+  margin: 40px auto 52px auto;
 `
