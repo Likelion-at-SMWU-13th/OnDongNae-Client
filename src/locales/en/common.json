@@ -101,6 +101,7 @@
     "atmosphere": "Atmosphere",
     "loading": "Generating your course …",
     "regenerate": "regenerate",
-    "failComment": "Failed to generate\ncourse recommendation.\n\nPlease try again"
+    "failComment": "Failed to generate\ncourse recommendation.\n\nPlease try again",
+    "share": "Share"
   }
 }
