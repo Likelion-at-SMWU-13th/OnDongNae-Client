@@ -57,6 +57,7 @@ import CoursePage from './pages/customer/course/CoursePage.jsx'
 import CourseAI from './pages/customer/course/CourseAI'
 import CourseLoading from './pages/customer/course/CourseLoading'
 import CourseFail from './pages/customer/course/CourseFail'
+import CourseResultPage from './pages/customer/course/CourseResultPage'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -243,6 +244,10 @@ const router = createBrowserRouter([
       {
         path: '/user/course/AI/fail',
         element: <CourseFail />,
+      },
+      {
+        path: '/user/course/result',
+        element: <CourseResultPage />,
       },
     ],
   },
