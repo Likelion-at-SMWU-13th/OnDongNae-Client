@@ -55,6 +55,7 @@ import ExchangeRatePage from './pages/customer/rates/ExchangeRatePage'
 //course
 import CoursePage from './pages/customer/course/CoursePage.jsx'
 import CourseAI from './pages/customer/course/CourseAI'
+import CourseLoading from './pages/customer/course/CourseLoading'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -233,6 +234,10 @@ const router = createBrowserRouter([
       {
         path: 'user/course/ai',
         element: <CourseAI />,
+      },
+      {
+        path: 'user/course/ai/loading',
+        element: <CourseLoading />,
       },
     ],
   },
