@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import SubTitle from '@/components/signup/SubTitle'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
+import styled from 'styled-components'
 
 function Btn({ active, children, onClick }) {
   return (
@@ -45,6 +46,8 @@ export default function CourseOption() {
 
   // 데이터 GET (시장 + 옵션)
   useEffect(() => {
+    alert('로딩 중입니다!') // 연동 후 삭제
+
     axios
       .get(`${apiUrl}/courses/options`)
       .then((res) => {
@@ -59,6 +62,8 @@ export default function CourseOption() {
   // 옵션 분리: With(1~7), Atmosphere(8~13)
   const withOptions = useMemo(() => options.filter((o) => o.id >= 1 && o.id <= 7), [options])
   const atmosphereOptions = useMemo(() => options.filter((o) => o.id >= 8 && o.id <= 13), [options])
+  //  세 값이 모두 선택됐는지 여부
+  const allSelected = Boolean(sel.marketId && sel.withOptionId && sel.atmosphereOptionId)
 
   // Generate 클릭 → Loading 페이지로 state 넘기기
   const handleGenerate = () => {
@@ -73,7 +78,7 @@ export default function CourseOption() {
   return (
     <div>
       {/* Market */}
-      <div style={{ padding: '0 40px', marginBottom: '8px' }}>
+      <div style={{ padding: '22px 40px 0 22px', marginBottom: '8px' }}>
         <SubTitle text={t('course.selectMarket')} />
       </div>
       <div
@@ -150,3 +155,8 @@ export default function CourseOption() {
     </div>
   )
 }
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`

@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -61,7 +60,7 @@ const CourseLoading = () => {
       })
       .catch((err) => {
         console.error(err)
-        navigate('/user/course/result', { state: res.data.data })
+        navigate('/user/course/AI/fail')
       })
   }, [])
 
