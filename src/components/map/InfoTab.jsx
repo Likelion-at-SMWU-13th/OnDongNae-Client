@@ -6,7 +6,7 @@ function InfoTab({ info }) {
   const { t } = useTranslation()
 
   // 정보 없으면 '정보가 없습니다' 문구 띄우기
-  const show = (v) => (typeof v === 'string' && v.trim() ? v : 'No Info')
+  const show = (v) => (typeof v === 'string' && v.trim() ? v : t('text.noInfo'))
 
   return (
     <Container>

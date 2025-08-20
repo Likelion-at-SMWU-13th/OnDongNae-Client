@@ -22,7 +22,7 @@ const MyStorePage = () => {
           img={iconView}
           text='가게 보기'
           smallText='손님이 보는 가게 화면을 확인해요'
-          onClick={() => navigate(`/store/mystore/info/${storeId}`)}
+          onClick={() => navigate(`/store/mystore/info`)}
         />
         <MenuItem
           img={iconPencil}
