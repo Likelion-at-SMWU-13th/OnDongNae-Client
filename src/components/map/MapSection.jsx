@@ -1,8 +1,8 @@
 // components/map/MapSection.jsx
 import React from 'react'
 import styled from 'styled-components'
-
-import { Map, MapMarker } from 'react-kakao-maps-sdk'
+import KakaoMapContainer from '@/components/common/KakaoMapContainer'
+import iconMarker from '@/assets/icon-big-mapMarker.svg'
 
 function MapSection({ header }) {
   // header가 없거나 lat/lng가 비어있으면 용산구 중심 좌표로 기본값 처리 + 마커는 보여주지 말기
@@ -11,10 +11,21 @@ function MapSection({ header }) {
 
   const hasCoords = header?.lat != null && header?.lng != null
 
+  // 마커 배열
+  const markers = hasCoords
+    ? [
+        {
+          id: 'main-marker',
+          position: { lat, lng },
+          image: { src: iconMarker, size: { width: 28, height: 28 } },
+        },
+      ]
+    : []
+
   return (
     <Wrap>
       <MapBox>
-        <Map
+        <KakaoMapContainer
           center={{ lat, lng }}
           level={4}
           style={{
@@ -22,10 +33,8 @@ function MapSection({ header }) {
             height: '100%',
             display: 'flex',
           }}
-        >
-          {/* 마커 표시 */}
-          {hasCoords && <MapMarker position={{ lat, lng }} />}
-        </Map>
+          markers={markers}
+        />
       </MapBox>
     </Wrap>
   )

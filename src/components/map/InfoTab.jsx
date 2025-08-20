@@ -43,7 +43,7 @@ const TextContainer = styled.div`
 const Title = styled.div`
   color: #000;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 `
 
 const Text = styled.div`
