@@ -10,7 +10,7 @@ import LargeOrangeButton from '@/components/common/LargeOrangeButton'
 import LargeWhiteButton from '@/components/common/LargeWhiteButton'
 
 const Logo = styled.p`
-  margin: 56px 0 111px 0;
+  margin: 7dvh 0 14dvh 0;
   text-align: center;
   align-items: center;
   font-size: 30px;
@@ -20,10 +20,10 @@ const Logo = styled.p`
 `
 
 const ButtonContainer = styled.div`
-  margin-top: 31px;
+  margin-top: 3.8dvh;
   display: flex;
   flex-direction: column;
-  gap: 21px;
+  gap: 2.6dvh;
 `
 
 const Line = styled.div`

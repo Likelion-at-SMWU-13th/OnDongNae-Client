@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MapStoresPage.styles'
-import { useNavigate, useParams } from 'react-router-dom'
+import { authAxios } from '@/lib/authAxios'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
-import CustomerBottomNav from '@/components/common/CustomerBottomNav'
+import BottomNav from '@/components/common/BottomNav'
 
 import ImgSection from '@/components/map/ImgSection'
 import HeaderSection from '@/components/map/HeaderSection'
@@ -13,11 +13,11 @@ import MapSection from '@/components/map/MapSection'
 import TabSection from '@/components/map/TabSection'
 import MenuTab from '@/components/map/MenuTab'
 import InfoTab from '@/components/map/InfoTab'
+import Loading from '@/components/common/Loading'
 
-const MapStoresPage = () => {
-  const { storeId } = useParams()
+const MyStoreInfoPage = () => {
   const { t, i18n } = useTranslation()
-  const [store, setStore] = useState() // url에서 id 정보 추출
+  const [store, setStore] = useState()
   const [tab, setTab] = useState('menu') // 일단 메뉴탭 보여주기
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -26,10 +26,9 @@ const MapStoresPage = () => {
 
   useEffect(() => {
     const fetchStore = async () => {
-      setIsLoading(true)
+      const lang = i18n.language
       try {
-        const lang = (i18n.language || 'en').split('-')[0]
-        const response = await axios.get(`${apiUrl}/stores/${storeId}`, {
+        const response = await authAxios.get(`${apiUrl}/me/store`, {
           headers: { 'Accept-Language': lang },
         })
         setStore(response?.data?.data ?? null)
@@ -41,15 +40,21 @@ const MapStoresPage = () => {
         setIsLoading(false)
       }
     }
-    if (storeId) fetchStore()
-  }, [storeId, i18n.language, apiUrl])
-  if (!store) {
-    return <div>Loading...</div>
+    fetchStore()
+  }, [i18n.language])
+
+  // 로딩 상태일 때 UI
+  if (isLoading) {
+    return (
+      <S.LoadingOverlay>
+        <Loading />
+      </S.LoadingOverlay>
+    )
   }
 
   return (
     <>
-      <Header img={backIcon} title={t('header.storeDetails')} showImg />
+      <Header img={backIcon} title={'나의 가게'} showImg />
       <S.Main>
         <S.Scroll className='scrollable'>
           {/* 사진 영역 */}
@@ -68,9 +73,9 @@ const MapStoresPage = () => {
           )}
         </S.Scroll>
       </S.Main>
-      <CustomerBottomNav />
+      <BottomNav />
     </>
   )
 }
 
-export default MapStoresPage
+export default MyStoreInfoPage

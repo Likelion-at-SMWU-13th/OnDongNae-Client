@@ -15,15 +15,13 @@ export const Scroll = styled.div`
   -webkit-overflow-scrolling: touch;
   padding-bottom: calc(env(safe-area-inset-bottom, 0));
 `
-export const LoadingOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 1);
+export const FieldContainer = styled.div`
+  margin: 40px 33px 0 33px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 20; // 다른 UI 요소들보다 위에 있도록 설정
+  flex-direction: column;
+  gap: 49px;
+`
+
+export const ButtonContainer = styled.div`
+  margin: 61px 0 40px 0;
 `

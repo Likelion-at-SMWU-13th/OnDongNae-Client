@@ -5,16 +5,15 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 9vh;
+  margin-top: 8dvh;
 `
 export const Img = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 10dvh;
   flex-shrink: 0;
   aspect-ratio: 1/1;
 `
 export const TextContainer = styled.div`
-  margin-top: 3.1vh;
+  margin-top: 3.1dvh;
 `
 
 export const Title = styled.p`
@@ -29,7 +28,7 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5vh;
+  gap: 4.5dvh;
 `
 
 export const Navigation = styled.button`
@@ -39,10 +38,10 @@ export const Navigation = styled.button`
   background: white;
   border: none;
   cursor: pointer;
-  margin-bottom: 9.7vh;
+  margin-bottom: 8dvh;
 `
 export const Icon = styled.img`
-  width: 24px;
+  width: 3dvh;
   height: 24px;
   flex-shrink: 0;
   aspect-ratio: 1/1;
@@ -70,7 +69,7 @@ export const ContinueButton = styled.button`
   cursor: pointer;
 `
 export const Container = styled.main`
-  height: calc(var(--vh, 1vh) * 100); /* 화면 높이 채우기 */
+  height: calc(var(--dvh, 1dvh) * 100); /* 화면 높이 채우기 */
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -83,5 +82,5 @@ export const Scroll = styled.div`
   min-height: 0; /* 내부에 overflow가 먹히게 하는 핵심 */
   /* overflow-y는 전역 .scrollable에서 적용됨 */
   -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 60px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0));
 `

@@ -7,12 +7,12 @@ const List = styled.div`
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  gap: 20px;
+  gap: 3.4dvh;
 `
 
 // 개별 버튼 (선택 / 기본 스타일은 클래스명으로 구분)
 const Button = styled.button`
-  padding: 13px 0;
+  padding: 1.6dvh 0;
   border-radius: 10px;
   border: 2px solid #e4e4e4;
   background: #fff;
