@@ -67,110 +67,121 @@ const CourseResultPage = () => {
     : []
 
   return (
-    <div>
+    <div className='scrollable'>
       <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
-      <DoubleTitle title={title} subtitle={description} />
+      <Main>
+        <Scroll>
+          <TitleWrapper>
+            <DoubleTitle title={title} subtitle={description} />
+          </TitleWrapper>
+          <CourseWrapper>
+            {stores.map((store, idx) => (
+              <Row key={store.order ?? `${store.name}-${idx}`}>
+                <TimelineCell $isFirst={idx === 0} $isLast={idx === stores.length - 1}>
+                  <Dot>{store.order}</Dot>
+                </TimelineCell>
 
-      <CourseWrapper>
-        {stores.map((store, idx) => (
-          <Row key={store.order ?? `${store.name}-${idx}`}>
-            <TimelineCell $isFirst={idx === 0} $isLast={idx === stores.length - 1}>
-              <Dot>{store.order}</Dot>
-            </TimelineCell>
+                <StoreWrapper>
+                  <StoreHeader>
+                    <StoreImg src={store.imageUrl} alt={store.name} />
+                    <StoreTextWrapper>
+                      <StoreName>{store.name}</StoreName>
+                      <StoreShortDescription>{store.shortDescription}</StoreShortDescription>
+                    </StoreTextWrapper>
+                  </StoreHeader>
+                  <StoreLongDescription>{store.longDescription}</StoreLongDescription>
+                </StoreWrapper>
+              </Row>
+            ))}
+          </CourseWrapper>
 
-            <StoreWrapper>
-              <StoreHeader>
-                <StoreImg src={store.imageUrl} alt={store.name} />
-                <StoreTextWrapper>
-                  <StoreName>{store.name}</StoreName>
-                  <StoreShortDescription>{store.shortDescription}</StoreShortDescription>
-                </StoreTextWrapper>
-              </StoreHeader>
-              <StoreLongDescription>{store.longDescription}</StoreLongDescription>
-            </StoreWrapper>
-          </Row>
-        ))}
-      </CourseWrapper>
-
-      <ButtonContainer>
-        <RegenerateBtn type='button' onClick={() => navigate(-1)}>
-          {t('course.regenerate')}
-        </RegenerateBtn>
-        <ShareBtn type='button' onClick={handleShare}>
-          {t('course.share')}
-        </ShareBtn>
-      </ButtonContainer>
-
+          <ButtonContainer>
+            <RegenerateBtn type='button' onClick={() => navigate(-1)}>
+              {t('course.regenerate')}
+            </RegenerateBtn>
+            <ShareBtn type='button' onClick={handleShare}>
+              {t('course.share')}
+            </ShareBtn>
+          </ButtonContainer>
+        </Scroll>
+      </Main>
       <CustomerBottomNav />
     </div>
   )
 }
 
 export default CourseResultPage
+/* ---------- styles: 그대로 교체 ---------- */
+const TitleWrapper = styled.div`
+  padding-right: 22px;
+  padding-bottom: 30px;
+`
 
-/* ---------- styles ---------- */
 const CourseWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 0 16px 24px;
+  padding: 0 24px;
 `
 
+/* 행: 왼쪽 타임라인 칼럼 + 오른쪽 카드 */
 const Row = styled.div`
   display: grid;
   grid-template-columns: 28px 1fr;
   column-gap: 12px;
-  align-items: flex-start;
+  align-items: stretch; /* 타임라인 칼럼을 행 높이에 맞게 확장 */
+  &:last-child {
+    padding-bottom: 0;
+  }
 `
 
+/* 타임라인(세로선) */
 const TimelineCell = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  align-self: stretch;
 
-  &::before,
-  &::after {
+  /* 주황색 세로선: 한 줄만 사용 */
+  &::before {
     content: '';
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     width: 2px;
     background: #f08e67;
-  }
 
-  &::before {
-    top: 0;
-    bottom: calc(50% + 16px);
-    display: ${(props) => (props.$isFirst ? 'none' : 'block')};
-  }
+    /* Dot 지름 28px → 반지름 14px */
+    /* 첫 아이템은 원 위로 선 없음 */
+    top: ${({ $isFirst }) => ($isFirst ? '14px' : '0')};
 
-  &::after {
-    top: calc(50% + 16px);
-    bottom: 0;
-    display: ${(props) => (props.$isLast ? 'none' : 'block')};
+    /* 마지막 아이템은 '원 중심까지만' 선을 그리고 바로 끝 */
+    /* 원 중심 y = 14px (위에서부터) */
+    bottom: ${({ $isLast }) => ($isLast ? 'calc(100% - 14px)' : '0')};
+
+    z-index: 0; /* 선은 뒤 */
   }
 `
 
+/* 번호 동그라미 */
 const Dot = styled.div`
   width: 28px;
   height: 28px;
-  border-radius: 9999px;
+  border-radius: 50%;
   border: 2px solid #f08e67;
-  color: #f08e67;
+  color: #000000;
   font-size: 12px;
   font-weight: 700;
-  background: #fff;
+  background: #fff; /* 선을 자연스럽게 가림 */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2px;
+  z-index: 2; /* 선보다 위 */
 `
 
 const StoreWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 12px;
-  border-bottom: 1px solid #eee;
 `
 
 const StoreHeader = styled.div`
@@ -202,13 +213,12 @@ const StoreShortDescription = styled.p`
   font-size: 12px;
   font-weight: 400;
   margin: 0;
-  max-width: 240px;
   line-height: 1.4;
 `
 
 const StoreLongDescription = styled.p`
-  margin: 8px 0 0;
-  font-size: 12px;
+  margin: 8px 5px 0 0;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.6;
 `
@@ -236,6 +246,7 @@ const RegenerateBtn = styled.button`
   color: #fff;
   font-size: 16px;
   font-weight: 500;
+  border: none;
 `
 
 const ShareBtn = styled.button`
@@ -246,4 +257,21 @@ const ShareBtn = styled.button`
   color: #fff;
   font-size: 16px;
   font-weight: 500;
+  border: none;
+`
+
+export const Main = styled.main`
+  height: calc(100dvh - 155px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+`
+
+export const Scroll = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
 `
