@@ -103,6 +103,7 @@
     "regenerate": "regenerate",
     "failComment": "Failed to generate\ncourse recommendation.\n\nPlease try again",
     "share": "Share",
-    "create": "create course with AI"
+    "create": "create course with AI",
+    "option": "Please select all options."
   }
 }
