@@ -40,7 +40,7 @@ const ExchangeRatePage = () => {
           setConverted('')
           setExchangeRate(null)
         })
-    }, 400) // 입력 멈추고 0.4초 뒤에 get 호출
+    }, 250) // 입력 멈추고 0.25초 뒤에 get 호출
 
     const cleanedPrice = (priceKr ?? '').replace(/,/g, '') // 가격에서 쉼표 제거
     if (cleanedPrice && !isNaN(Number(cleanedPrice))) {

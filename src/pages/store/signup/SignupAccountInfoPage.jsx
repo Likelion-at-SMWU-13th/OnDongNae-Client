@@ -31,6 +31,10 @@ const SignupAccountInfo = () => {
       alert('비밀번호를 입력해 주세요.')
       return
     }
+    if (pw1.length < 4) {
+      alert('비밀번호는 4자리 이상으로 설정해주세요.')
+      return
+    }
     if (pw1 !== pw2) {
       alert('비밀번호가 일치하지 않아요.')
 

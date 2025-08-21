@@ -50,6 +50,10 @@ const MyInfoEditPage = () => {
           alert('비밀번호가 일치하지 않습니다.')
           return
         }
+        if (pw1.length < 4) {
+          alert('비밀번호는 4자리 이상으로 설정해주세요.')
+          return
+        }
         body.newPassword = pw1
         body.confirmPassword = pw2
       }

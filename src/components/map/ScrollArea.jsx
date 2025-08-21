@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import iconLocation from '@/assets/icon-location.svg'
 import iconPhone from '@/assets/icon-phone-call.svg'
-import defaultStoreImg from '@/assets/img-defaultStoreImg.svg'
+import defaultStoreImg from '@/assets/img-defaultStoreImg.png'
 
 // 카테고리 배열 만들기
 function activeSubcategoryNames(categories, selectedMainId, selectedSubIds) {
