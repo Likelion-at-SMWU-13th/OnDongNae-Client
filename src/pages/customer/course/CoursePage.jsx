@@ -16,20 +16,38 @@ const TitleWrapper = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin: 30px 0;
+`
+export const Main = styled.main`
+  height: calc(100dvh - 155px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+`
+export const Scroll = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
 `
 const CoursePage = () => {
   const { t } = useTranslation()
   return (
-    <div>
+    <div className='scrollable'>
       <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
-      <TitleWrapper>{t('bottomNav.course')}</TitleWrapper>
-      <CourseContent />
-      <ButtonWrapper>
-        <LargeOrangeButton
-          label={t('course.create')}
-          onBtnClick={() => window.location.replace('/user/course/AI')}
-        />
-      </ButtonWrapper>
+      <Main>
+        <Scroll>
+          <CourseContent />
+          <ButtonWrapper>
+            <LargeOrangeButton
+              label={t('course.create')}
+              onBtnClick={() => window.location.replace('/user/course/AI')}
+            />
+          </ButtonWrapper>
+        </Scroll>
+      </Main>
       <CustomerBottomNav />
     </div>
   )
