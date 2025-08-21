@@ -8,13 +8,14 @@ const API_URL = import.meta.env.VITE_API_URL
 
 export default function CourseContent() {
   const navigate = useNavigate()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
   useEffect(() => {
     ;(async () => {
+      const lang = (i18n.language || 'en').split('-')[0]
       setLoading(true)
       setError(null)
       try {
@@ -26,6 +27,8 @@ export default function CourseContent() {
         setCourses(list)
       } catch (e) {
         console.error(e)
+      } finally {
+        setLoading(false) // ✅ 반드시 내려주기
       }
     })()
   }, [])
@@ -35,21 +38,23 @@ export default function CourseContent() {
   if (!courses.length) return <Empty>코스가 없습니다.</Empty>
 
   return (
-    <ContentWrapper>
+    <>
       <Title>{t('bottomNav.course')}</Title>
-      {courses.map((c) => (
-        <Card key={c.id} onClick={() => navigate(`/user/map/store/${c.id}`)}>
-          <CardMain>
-            <CourseInfo>
-              <CourseTitle>{c.courseTitle}</CourseTitle>
-              <CourseDescription>{c.courseDescription}</CourseDescription>
-            </CourseInfo>
-            <StoreImg src={c.mainImageUrl}></StoreImg>
-          </CardMain>
-          <CommentTxt>{(c.storeNames ?? []).join(', ')}</CommentTxt>
-        </Card>
-      ))}
-    </ContentWrapper>
+      <ContentWrapper>
+        {courses.map((c) => (
+          <Card key={c.id} onClick={() => navigate(`/user/map/store/${c.id}`)}>
+            <CardMain>
+              <CourseInfo>
+                <CourseTitle>{c.courseTitle}</CourseTitle>
+                <CourseDescription>{c.courseDescription}</CourseDescription>
+              </CourseInfo>
+              <StoreImg src={c.mainImageUrl}></StoreImg>
+            </CardMain>
+            <CommentTxt>{(c.storeNames ?? []).join(', ')}</CommentTxt>
+          </Card>
+        ))}
+      </ContentWrapper>
+    </>
   )
 }
 
@@ -58,7 +63,6 @@ const Title = styled.p`
   padding: 20px 0 20px 29px;
   color: #000;
   font-feature-settings: 'dlig' on;
-  font-family: Pretendard;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -68,6 +72,7 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: center;
 `
 const Card = styled.div`
   width: 330px;
@@ -75,7 +80,8 @@ const Card = styled.div`
   flex-shrink: 0;
   border-radius: 10px;
   background: #fdd8ca;
-  padding: 0px 10px 10px 20px;
+  text-align: left;
+  padding: 10px 19px 10px 14px;
   cursor: pointer;
   &:hover {
     background: #f8c4b6;
@@ -86,7 +92,7 @@ const CourseInfo = styled.div`
 `
 const CourseTitle = styled.div`
   color: #000;
-  text-align: center;
+  text-align: left;
   font-size: 16px;
   font-weight: 700;
   line-height: 22px; /* 137.5% */
@@ -116,13 +122,14 @@ const CardMain = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 77.43%;
-  /* gap: 12.3%; */
-  margin: 0 auto;
+  width: 100%;
+  gap: 5%;
 `
 const StoreImg = styled.img`
   width: 90px;
   height: 90px;
+  object-fit: cover;
+  flex-shrink: 0;
 `
 const Empty = styled.p`
   padding: 24px 16px;

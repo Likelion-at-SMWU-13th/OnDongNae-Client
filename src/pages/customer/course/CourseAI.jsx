@@ -29,10 +29,30 @@ const CourseAI = () => {
   return (
     <div>
       <Header img={backIcon} title={t('bottomNav.course')} showImg={true} />
-      <CourseOption />
+      <Main>
+        <Scroll>
+          <CourseOption />
+        </Scroll>
+      </Main>
       <CustomerBottomNav />
     </div>
   )
 }
 
 export default CourseAI
+
+export const Main = styled.main`
+  height: calc(100dvh - 155px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+`
+export const Scroll = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
+`

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
-import SubTitle from '@/components/signup/SubTitle'
+import Subtitle from '../common/Subtitle'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
 import styled from 'styled-components'
 
@@ -15,8 +15,8 @@ function Btn({ active, children, onClick }) {
       style={{
         height: '37px',
         padding: '10px 12px',
-        borderRadius: 10,
-        border: active ? 'none' : '1px solid #B3B3B3', // 선택 시 테두리 제거
+        borderRadius: '30px',
+        border: active ? '1px solid #F08E67' : '1px solid #B3B3B3', // 선택 시 테두리 제거
         background: active ? '#F08E67' : '#fff',
         color: active ? '#fff' : '#000', // 선택 시 글자색
         fontSize: '14px',
@@ -33,7 +33,7 @@ function Btn({ active, children, onClick }) {
 }
 
 export default function CourseOption() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [markets, setMarkets] = useState([])
   const [options, setOptions] = useState([])
   const [sel, setSel] = useState({
@@ -47,7 +47,7 @@ export default function CourseOption() {
   // 데이터 GET (시장 + 옵션)
   useEffect(() => {
     alert('로딩 중입니다!') // 연동 후 삭제
-
+    const lang = (i18n.language || 'en').split('-')[0]
     axios
       .get(`${apiUrl}/courses/options`, {
         headers: { 'Accept-Language': lang },
@@ -73,15 +73,15 @@ export default function CourseOption() {
     if (marketId && withOptionId && atmosphereOptionId) {
       navigate('/user/course/AI/loading', { state: sel })
     } else {
-      alert(t('course.selectAll') || '옵션을 모두 선택해주세요!')
+      alert(t('course.option') || '옵션을 모두 선택해주세요!')
     }
   }
 
   return (
     <div>
       {/* Market */}
-      <div style={{ padding: '22px 40px 0 22px', marginBottom: '8px' }}>
-        <SubTitle text={t('course.selectMarket')} />
+      <div style={{ padding: '22px 40px 0 40px', marginBottom: '8px' }}>
+        <Subtitle text={t('course.selectMarket')} />
       </div>
       <div
         style={{
@@ -104,7 +104,7 @@ export default function CourseOption() {
 
       {/* With (1~7) */}
       <div style={{ padding: '0 40px', marginBottom: '8px' }}>
-        <SubTitle text={t('course.with')} />
+        <Subtitle text={t('course.with')} />
       </div>
       <div
         style={{
@@ -127,7 +127,7 @@ export default function CourseOption() {
 
       {/* Atmosphere (8~13) */}
       <div style={{ padding: '0 40px', marginBottom: '8px' }}>
-        <SubTitle text={t('course.atmosphere')} />
+        <Subtitle text={t('course.atmosphere')} />
       </div>
       <div
         style={{
