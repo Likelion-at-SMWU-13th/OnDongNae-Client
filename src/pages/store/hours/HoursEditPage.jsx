@@ -1,4 +1,4 @@
-import React, { use } from 'react'
+import React from 'react'
 import Header from '@/components/common/Header'
 import BottomNav from '@/components/common/BottomNav'
 import DoubleTitle from '@/components/common/DoubleTitle'
@@ -11,7 +11,7 @@ import TimePickerModal from '@/components/hours/TimePickerModal'
 import { hhmmToPicker, pickerToHhmm } from '@/utils/pageedittime'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import { authAxios } from '@/lib/authAxios'
 const DAY_KO = {
   MON: '월요일',
   TUE: '화요일',
@@ -121,15 +121,22 @@ const HoursEditPage = () => {
     }),
     [items],
   )
-
-  const handleSave = async () => {
-    console.log('PUT payload', payload)
-    // await fetch('/api/hours', { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-  }
-  // 5) 저장 버튼
   const navigate = useNavigate()
+  const apiUrl = import.meta.env.VITE_API_URL
+
+  // 5) 저장 버튼
   const handleSubmit = () => {
-    navigate('/hours')
+    const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
+    console.log('PUT payload', payload)
+
+    authAxios
+      .put(`${apiUrl}/me/business-hours`, payload)
+      .then((res) => {
+        navigate('/hours')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
   const LargeOrangeButtonWarpper = styled.div`
     display: flex;
