@@ -1,5 +1,5 @@
 {
-  "button": { "continue": "続ける", "search": "検索", "generate": "生成する" },
+  "button": { "continue": "続ける", "search": "検索", "generate": "生成する", "skip": "スキップ" },
   "bottomNav": { "overview": "概要", "map": "地図", "course": "コース", "rates": "レート" },
   "header": { "storeDetails": "店舗詳細", "overview": "概要" },
 
@@ -106,5 +106,42 @@
     "share": "共有する",
     "create": "通过人工智能接受路人工知能で市場コースを作成\nAIで市場コースを作成线推荐 ",
     "option": "すべてのオプションを選択してください。"
+  },
+  "onboarding1": {
+    "title": "こんにちは、Koruです。",
+    "content1": "GoruGoruの公式キャラクターとして、",
+    "content2": "龍山の伝統市場を一緒に探検しましょう！"
+  },
+  "onboarding2": {
+    "title": "私がドラゴンである理由は…",
+    "content1": "「龍山」という名前は、漢江に伝わる",
+    "content2": "二匹の龍の伝説から来ています。",
+    "content3": "韓国でドラゴンは、強さ・力、",
+    "content4": "そして幸運の象徴です。",
+    "content5": "だから私は、",
+    "content6": "龍山の市場のガイドなのです。"
+  },
+  "onboarding3": {
+    "content1": "ご紹介するのは特別なサービス、",
+    "content2": "韓国語の言葉から着想を得た ",
+    "content3": "特別でユニークな体験を提供します,",
+    "content4": "それは「隅々まで探検し",
+    "content5": "すべてを体験する」という意味を持っています",
+    "content6": "このサービスは、龍山区の多様な市場を",
+    "content7": "隅々まで探検するお手伝いをします。"
+  },
+  "onboarding4": {
+    "content1": "あなたにできることは…",
+    "content2": "龍山区に広がる",
+    "content3": "多彩な市場を探検",
+    "content4": "気になるお店を発見",
+    "content5": "自分だけの旅行プランを",
+    "content6": "おすすめとして受け取る",
+    "content7": "リアルタイムで為替をチェック"
+  },
+  "onboarding5": {
+    "content1": "いっしょにぶらり",
+    "content2": "伝統市場の魅力を",
+    "content3": ""
   }
 }
