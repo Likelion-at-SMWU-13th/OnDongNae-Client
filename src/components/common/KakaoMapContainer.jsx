@@ -105,8 +105,8 @@ export default function KakaoMap({
       onCreate={(map) => (mapRef.current = map)} // 생성 시 map 인스턴스 확보
       onClick={onMapClick} // 지도 빈 곳 클릭 이벤트
       onIdle={() => onIdle?.(mapRef.current)} // 이동/확대 종료 콜백
-      draggable={draggable}
-      scrollwheel={scrollwheel}
+      draggable={true}
+      scrollwheel={true}
       zoomable={true}
     >
       {markers.map((m) => {
