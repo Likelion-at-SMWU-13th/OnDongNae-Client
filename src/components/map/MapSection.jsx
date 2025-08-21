@@ -27,7 +27,7 @@ function MapSection({ header }) {
       <MapBox>
         <KakaoMapContainer
           center={{ lat, lng }}
-          level={4}
+          level={2}
           style={{
             width: '100%',
             height: '100%',

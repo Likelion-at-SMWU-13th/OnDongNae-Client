@@ -35,6 +35,11 @@ const MyStoreInfoPage = () => {
         console.log(response?.data?.data)
         setError(null)
       } catch (err) {
+        if (axios.isAxiosError(err)) {
+          console.log('[me/store] status:', err.response?.status)
+          console.log('[me/store] body:', err.response?.data)
+          console.log('[me/store] headers:', err.response?.headers)
+        }
         setError(err)
       } finally {
         setIsLoading(false)

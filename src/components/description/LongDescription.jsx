@@ -39,9 +39,7 @@ const Comment = styled.div`
   padding: 17px 19px 17px 15px;
   color: #000;
   font-feature-settings: 'dlig' on;
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
+  font-size: 17px;
   font-weight: 400;
   line-height: 21px; /* 116.667% */
 `

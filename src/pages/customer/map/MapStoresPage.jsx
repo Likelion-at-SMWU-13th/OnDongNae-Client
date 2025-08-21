@@ -13,6 +13,7 @@ import MapSection from '@/components/map/MapSection'
 import TabSection from '@/components/map/TabSection'
 import MenuTab from '@/components/map/MenuTab'
 import InfoTab from '@/components/map/InfoTab'
+import Loading from '@/components/common/Loading'
 
 const MapStoresPage = () => {
   const { storeId } = useParams()
@@ -43,8 +44,12 @@ const MapStoresPage = () => {
     }
     if (storeId) fetchStore()
   }, [storeId, i18n.language, apiUrl])
-  if (!store) {
-    return <div>Loading...</div>
+  if (isLoading) {
+    return (
+      <S.LoadingOverlay>
+        <Loading />
+      </S.LoadingOverlay>
+    )
   }
 
   return (
