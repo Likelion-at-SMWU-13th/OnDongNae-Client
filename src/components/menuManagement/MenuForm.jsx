@@ -5,8 +5,7 @@ import MenuFormRow from '@/components/menuManagement/MenuFormRow'
 import LargeLightOrangeButton from '@/components/common/LargeLightOrangeButton'
 import SmallGrayButton from '@/components/common/SmallGrayButton'
 import SmallOrangeButton from '../common/SmallOrangeButton'
-import axios from 'axios'
-
+import { authAxios } from '@/lib/authAxios'
 const ButtonContainer = styled.div`
   margin-top: 30px;
   display: flex;
@@ -45,11 +44,12 @@ const MenuForm = () => {
         .filter((it) => it.nameKo && it.priceKrw > 0), // 이름 있고 0원 초과만
     }
 
-    axios
+    authAxios
       .post(`${apiUrl}/me/menus/save`, payload, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
         console.log(res.data) // 연동 확인 후 삭제
-        navigate('/menu/extract/save')
+        const menuData = res.data.data.menus
+        navigate('/menu/extract/save', { state: menuData })
       })
       .catch((err) => {
         console.error(err)
