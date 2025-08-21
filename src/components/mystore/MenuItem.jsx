@@ -8,9 +8,8 @@ const ItemContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  border-bottom: 1px solid #b1b1b1;
-  padding: 15px 0 21px 13px;
-  margin-top: 20px;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 23px 0 23px 13px;
   background: #fff;
 `
 
