@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Header from '@/components/common/Header'
@@ -9,35 +8,15 @@ import LoginForm from '@/components/login/LoginForm'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
 import LargeWhiteButton from '@/components/common/LargeWhiteButton'
 
-const Logo = styled.p`
-  margin: 7dvh 0 14dvh 0;
-  text-align: center;
-  align-items: center;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-`
-
-const ButtonContainer = styled.div`
-  margin-top: 3.8dvh;
-  display: flex;
-  flex-direction: column;
-  gap: 2.6dvh;
-`
-
-const Line = styled.div`
-  width: 82.56%;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.31);
-  margin: 0 auto;
-`
-
 const Login = () => {
   const navigate = useNavigate()
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
   const apiUrl = import.meta.env.VITE_API_URL
+
+  useEffect(() => {
+    localStorage.setItem('i18nextLng', 'ko')
+  }, [])
 
   const handleSubmit = () => {
     // 로그인 요청
@@ -79,3 +58,27 @@ const Login = () => {
 }
 
 export default Login
+
+const Logo = styled.p`
+  margin: 7dvh 0 14dvh 0;
+  text-align: center;
+  align-items: center;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+`
+
+const ButtonContainer = styled.div`
+  margin-top: 3.8dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 2.6dvh;
+`
+
+const Line = styled.div`
+  width: 82.56%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.31);
+  margin: 0 auto;
+`

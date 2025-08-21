@@ -21,11 +21,9 @@ const authRequest = (makeRequest, opts = {}) => {
     }
 
     return axios
-      .post(
-        `${API_BASE}${REFRESH_PATH}`,
-        { refreshToken },
-        { headers: { 'Content-Type': 'text/plain' } },
-      ) // 서버 스펙에 따라 키 이름 변경 가능
+      .post(`${API_BASE}${REFRESH_PATH}`, refreshToken, {
+        headers: { 'Content-Type': 'text/plain' },
+      }) // 서버 스펙에 따라 키 이름 변경 가능
       .then((res) => {
         const nextAccess = res.data.data.accessToken
         const nextRefresh = res.data.data.refreshToken
