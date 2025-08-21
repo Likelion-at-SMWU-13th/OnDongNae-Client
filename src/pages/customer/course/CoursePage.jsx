@@ -26,7 +26,7 @@ const CoursePage = () => {
       <CourseContent />
       <ButtonWrapper>
         <LargeOrangeButton
-          label={t('bottomNav.course')}
+          label={t('course.create')}
           onBtnClick={() => window.location.replace('/user/course/AI')}
         />
       </ButtonWrapper>
