@@ -58,8 +58,9 @@ const CourseResultPage = () => {
     )
   }
 
-  const handleStoreMove = () => {
-    navigate(`user/map/store/${stores.storeId}`)
+  const handleStoreMove = (storeId) => {
+    if (!storeId) return // 안전 장치
+    navigate(`/user/map/store/${storeId}`)
   }
   const stores = Array.isArray(recommendedCourseStores)
     ? [...recommendedCourseStores].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
@@ -75,8 +76,10 @@ const CourseResultPage = () => {
           </TitleWrapper>
           <CourseWrapper>
             {stores.map((store, idx) => (
-              <Row key={store.order ?? `${store.name}-${idx}`} onClick={handleStoreMove}>
-                {' '}
+              <Row
+                key={store.order ?? `${store.name}-${idx}`}
+                onClick={() => handleStoreMove(store.id)}
+              >
                 <TimelineCell $isFirst={idx === 0} $isLast={idx === stores.length - 1}>
                   <Dot>{store.order}</Dot>
                 </TimelineCell>
@@ -213,6 +216,7 @@ const ButtonContainer = styled.div`
   gap: 12.3%;
   margin: 0 auto;
   padding-top: 34px;
+  padding-bottom: 39px;
 `
 const RegenerateBtn = styled.button`
   width: 125px;

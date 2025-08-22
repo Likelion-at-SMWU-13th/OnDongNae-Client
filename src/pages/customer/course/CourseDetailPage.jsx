@@ -19,6 +19,12 @@ export default function CourseDetailPage() {
   const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
   const PUBLIC_ORIGIN = import.meta.env.VITE_PUBLIC_SITE_URL ?? window.location.origin
   const shareUrl = `${PUBLIC_ORIGIN}/courses/${courseId}`
+
+  const handleStoreMove = (storeId) => {
+    if (!storeId) return
+    navigate(`/user/map/store/${storeId}`)
+  }
+
   useEffect(() => {
     let mounted = true
     ;(async () => {
@@ -29,19 +35,18 @@ export default function CourseDetailPage() {
           method: 'GET',
           headers: {
             ...(token ? { Authorization: `Bearer ${token}` } : {}),
-            // 서버가 언어 헤더 기대하면 추가
             'Accept-Language': (navigator.language || 'en').split('-')[0],
           },
         })
 
         if (!res.ok) {
-          // ← 여기가 핵심: 서버가 보내준 에러 본문을 읽어 콘솔에 출력
           const text = await res.text()
           console.error('Course detail error', res.status, res.statusText, text)
           throw new Error(`Failed to fetch: ${res.status}`)
         }
 
         const json = await res.json()
+        console.log('Course detail response:', json)
         if (mounted) setData(json?.data ?? null)
       } catch (err) {
         console.log(err)
@@ -113,15 +118,23 @@ export default function CourseDetailPage() {
       <Header title={t('bottomNav.course')} showImg={false} />
       <C.Main>
         <C.Scroll>
-          <DoubleTitle title={title} subtitle={description} />
+          <TitleWrapper>
+            <DoubleTitle title={title} subtitle={description} />
+          </TitleWrapper>
           <CourseWrapper>
             {stores.map((store, idx) => (
-              <Row key={store.order ?? `${store.name}-${idx}`}>
-                {/* 왼쪽 타임라인(주황선 + 번호) */}
+              <Row
+                key={store.order ?? `${store.name}-${idx}`}
+                onClick={() => handleStoreMove(store.id)} // ✅ 여기서 store.id 전달
+                style={{ cursor: 'pointer' }} // (선택) 클릭 가능한 느낌
+                role='button' // (선택) 접근성
+                tabIndex={0} // (선택) 키보드 포커스
+                onKeyDown={(e) => e.key === 'Enter' && handleStoreMove(store.id)} // (선택)
+              >
                 <TimelineCell $isFirst={idx === 0} $isLast={idx === stores.length - 1}>
                   <Dot>{store.order}</Dot>
                 </TimelineCell>
-                {/* 오른쪽 카드 */}
+
                 <StoreWrapper>
                   <StoreHeader>
                     <StoreImg src={store.imageUrl} alt={store.name} />
@@ -252,6 +265,7 @@ const ButtonContainer = styled.div`
   gap: 12.3%;
   margin: 0 auto;
   padding-top: 34px;
+  padding-bottom: 39px;
 `
 const RegenerateBtn = styled.button`
   width: 125px;
