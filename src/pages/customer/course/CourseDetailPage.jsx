@@ -9,7 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 
 export default function CourseDetailPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const { courseId } = useParams() // /courses/:courseId
   const [data, setData] = useState(null)
@@ -29,13 +29,14 @@ export default function CourseDetailPage() {
     let mounted = true
     ;(async () => {
       try {
+        const lang = (i18n.language || 'en').split('-')[0]
         const token =
           sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
         const res = await fetch(`${API_URL}/courses/${encodeURIComponent(courseId)}`, {
           method: 'GET',
           headers: {
             ...(token ? { Authorization: `Bearer ${token}` } : {}),
-            'Accept-Language': (navigator.language || 'en').split('-')[0],
+            'Accept-Language': lang,
           },
         })
 
@@ -115,7 +116,7 @@ export default function CourseDetailPage() {
 
   return (
     <div className='scrollable'>
-      <Header title={t('bottomNav.course')} showImg={false} />
+      <Header title={t('bottomNav.course')} showImg={true} />
       <C.Main>
         <C.Scroll>
           <TitleWrapper>

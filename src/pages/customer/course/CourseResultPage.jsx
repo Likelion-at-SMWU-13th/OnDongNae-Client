@@ -51,7 +51,7 @@ const CourseResultPage = () => {
   if (!state) {
     return (
       <div>
-        <Header title={t('bottomNav.course')} showImg={false} />
+        <Header title={t('bottomNav.course')} showImg={true} />
         <Empty>{t('course.failComment')}</Empty>
         <CustomerBottomNav />
       </div>
