@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '@/components/common/Header'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -36,8 +37,8 @@ const CoursePage = () => {
   return (
     <div className='scrollable'>
       <Header title={t('bottomNav.course')} showImg={false} />
-      <Main>
-        <Scroll>
+      <C.Main>
+        <C.Scroll>
           <CourseContent />
           <ButtonWrapper>
             <LargeOrangeButton
@@ -45,8 +46,8 @@ const CoursePage = () => {
               onBtnClick={() => window.location.replace('/user/course/AI')}
             />
           </ButtonWrapper>
-        </Scroll>
-      </Main>
+        </C.Scroll>
+      </C.Main>
       <CustomerBottomNav />
     </div>
   )

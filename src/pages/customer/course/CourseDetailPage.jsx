@@ -1,6 +1,7 @@
 // src/pages/course/CourseDetailPage.jsx
 import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import { useTranslation } from 'react-i18next'
@@ -10,35 +11,47 @@ import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 export default function CourseDetailPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { id } = useParams() // /courses/:id
+  const { courseId } = useParams() // /courses/:courseId
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
 
   //  배포 도메인이 있으면 우선 사용, 없으면 현재 origin
-  const origin = import.meta.env.VITE_API_URL ?? window.location.origin
-  const shareUrl = `${origin}/courses/${id}`
-
+  const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
+  const PUBLIC_ORIGIN = import.meta.env.VITE_PUBLIC_SITE_URL ?? window.location.origin
+  const shareUrl = `${PUBLIC_ORIGIN}/courses/${courseId}`
   useEffect(() => {
     let mounted = true
     ;(async () => {
       try {
-        const res = await fetch(`/stores/${id}`, { method: 'GET' })
-        if (!res.ok) throw new Error('Failed to fetch')
-        const json = await res.json()
-        if (mounted) {
-          // 응답 형태: { code, message, success, data: {...(id 없음)} }
-          setData(json?.data ?? null)
+        const token =
+          sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
+        const res = await fetch(`${API_URL}/courses/${encodeURIComponent(courseId)}`, {
+          method: 'GET',
+          headers: {
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            // 서버가 언어 헤더 기대하면 추가
+            'Accept-Language': (navigator.language || 'en').split('-')[0],
+          },
+        })
+
+        if (!res.ok) {
+          // ← 여기가 핵심: 서버가 보내준 에러 본문을 읽어 콘솔에 출력
+          const text = await res.text()
+          console.error('Course detail error', res.status, res.statusText, text)
+          throw new Error(`Failed to fetch: ${res.status}`)
         }
-      } catch (e) {
-        console.error(e)
+
+        const json = await res.json()
+        if (mounted) setData(json?.data ?? null)
+      } catch (err) {
+        console.log(err)
         if (mounted) setData(null)
       } finally {
         if (mounted) setLoading(false)
       }
     })()
     return () => (mounted = false)
-  }, [id])
-
+  }, [courseId, API_URL])
   const stores = useMemo(() => {
     const arr = data?.recommendedCourseStores
     if (!Array.isArray(arr)) return []
@@ -46,7 +59,7 @@ export default function CourseDetailPage() {
   }, [data])
 
   const handleShare = async () => {
-    if (!id) {
+    if (!courseId) {
       alert(t('course.shareUnavailable') || '공유할 코스 정보를 찾을 수 없습니다.')
       return
     }
@@ -76,7 +89,7 @@ export default function CourseDetailPage() {
   if (loading) {
     return (
       <div>
-        <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
+        <Header title={t('bottomNav.course')} showImg={false} />
         <Empty>{t('common.loading') || '불러오는 중...'}</Empty>
         <CustomerBottomNav />
       </div>
@@ -86,7 +99,7 @@ export default function CourseDetailPage() {
   if (!data) {
     return (
       <div>
-        <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
+        <Header title={t('bottomNav.course')} showImg={false} />
         <Empty>{t('course.failComment') || '코스 정보를 불러오지 못했어요.'}</Empty>
         <CustomerBottomNav />
       </div>
@@ -96,126 +109,113 @@ export default function CourseDetailPage() {
   const { title = '', description = '' } = data
 
   return (
-    <div>
+    <div className='scrollable'>
       <Header title={t('bottomNav.course')} showImg={false} />
-      <DoubleTitle title={title} subtitle={description} />
-
-      <CourseWrapper>
-        {stores.map((store, idx) => (
-          <Row key={store.order ?? `${store.name}-${idx}`}>
-            {/* 왼쪽 타임라인(주황선 + 번호) */}
-            <TimelineCell $isFirst={idx === 0} $isLast={idx === stores.length - 1}>
-              <Dot>{store.order}</Dot>
-            </TimelineCell>
-
-            {/* 오른쪽 카드 */}
-            <StoreWrapper>
-              <StoreHeader>
-                <StoreImg src={store.imageUrl} alt={store.name} />
-                <StoreTextWrapper>
-                  <StoreName>{store.name}</StoreName>
-                  <StoreShortDescription>{store.shortDescription}</StoreShortDescription>
-                </StoreTextWrapper>
-              </StoreHeader>
-              <StoreLongDescription>{store.longDescription}</StoreLongDescription>
-            </StoreWrapper>
-          </Row>
-        ))}
-      </CourseWrapper>
-
-      <ButtonContainer>
-        <RegenerateBtn type='button' onClick={() => navigate(-1)}>
-          {t('course.regenerate')}
-        </RegenerateBtn>
-        <ShareBtn type='button' onClick={handleShare}>
-          {t('course.share')}
-        </ShareBtn>
-      </ButtonContainer>
-
+      <C.Main>
+        <C.Scroll>
+          <DoubleTitle title={title} subtitle={description} />
+          <CourseWrapper>
+            {stores.map((store, idx) => (
+              <Row key={store.order ?? `${store.name}-${idx}`}>
+                {/* 왼쪽 타임라인(주황선 + 번호) */}
+                <TimelineCell $isFirst={idx === 0} $isLast={idx === stores.length - 1}>
+                  <Dot>{store.order}</Dot>
+                </TimelineCell>
+                {/* 오른쪽 카드 */}
+                <StoreWrapper>
+                  <StoreHeader>
+                    <StoreImg src={store.imageUrl} alt={store.name} />
+                    <StoreTextWrapper>
+                      <StoreName>{store.name}</StoreName>
+                      <StoreShortDescription>{store.shortDescription}</StoreShortDescription>
+                    </StoreTextWrapper>
+                  </StoreHeader>
+                  <StoreLongDescription>{store.longDescription}</StoreLongDescription>
+                </StoreWrapper>
+              </Row>
+            ))}
+          </CourseWrapper>
+          <ButtonContainer>
+            <RegenerateBtn type='button' onClick={() => navigate(-1)}>
+              {t('course.regenerate')}
+            </RegenerateBtn>
+            <ShareBtn type='button' onClick={handleShare}>
+              {t('course.share')}
+            </ShareBtn>
+          </ButtonContainer>
+        </C.Scroll>
+      </C.Main>
       <CustomerBottomNav />
     </div>
   )
 }
 
-/* ---------- styles (ResultPage와 동일) ---------- */
+/* ---------- styles ---------- */
+const TitleWrapper = styled.div`
+  padding-right: 22px;
+  padding-bottom: 30px;
+`
 const CourseWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 0 16px 24px;
+  padding: 0 24px;
 `
-
 const Row = styled.div`
   display: grid;
   grid-template-columns: 28px 1fr;
   column-gap: 12px;
-  align-items: flex-start;
+  align-items: stretch;
+  &:last-child {
+    padding-bottom: 0;
+  }
 `
-
-// JS(.jsx)이므로 제네릭 X, transient props로 그대로 사용
 const TimelineCell = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  align-self: stretch;
 
-  &::before,
-  &::after {
+  &::before {
     content: '';
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
+    width: 1px;
     background: #f08e67;
-  }
-
-  /* 위쪽 선 (첫 행이면 숨김) */
-  &::before {
-    top: 0;
-    bottom: calc(50% + 16px);
-    display: ${(props) => (props.$isFirst ? 'none' : 'block')};
-  }
-
-  /* 아래쪽 선 (마지막 행이면 숨김) */
-  &::after {
-    top: calc(50% + 16px);
-    bottom: 0;
-    display: ${(props) => (props.$isLast ? 'none' : 'block')};
+    top: ${({ $isFirst }) => ($isFirst ? '14px' : '0')};
+    bottom: ${({ $isLast }) => ($isLast ? 'calc(100% - 14px)' : '0')};
+    z-index: 0;
   }
 `
-
 const Dot = styled.div`
   width: 28px;
   height: 28px;
-  border-radius: 9999px;
-  border: 2px solid #f08e67;
+  border-radius: 50%;
+  border: 1px solid #f08e67;
   color: #f08e67;
   font-size: 12px;
   font-weight: 700;
   background: #fff;
+  color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2px;
+  z-index: 1;
 `
-
 const StoreWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 12px;
-  border-bottom: 1px solid #eee;
 `
-
 const StoreHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
 `
-
 const StoreTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
-
 const StoreImg = styled.img`
   width: 50px;
   height: 50px;
@@ -223,34 +223,28 @@ const StoreImg = styled.img`
   border-radius: 10px;
   object-fit: cover;
 `
-
 const StoreName = styled.p`
   font-size: 16px;
   font-weight: 600;
   margin: 0 0 4px;
 `
-
 const StoreShortDescription = styled.p`
   font-size: 12px;
   font-weight: 400;
   margin: 0;
-  max-width: 240px;
   line-height: 1.4;
 `
-
 const StoreLongDescription = styled.p`
-  margin: 8px 0 0;
-  font-size: 12px;
+  margin: 8px 5px 0 0;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.6;
 `
-
 const Empty = styled.p`
   padding: 24px 16px;
   color: #777;
   font-size: 14px;
 `
-
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -259,7 +253,6 @@ const ButtonContainer = styled.div`
   margin: 0 auto;
   padding-top: 34px;
 `
-
 const RegenerateBtn = styled.button`
   width: 125px;
   height: 43px;
@@ -268,8 +261,8 @@ const RegenerateBtn = styled.button`
   color: #fff;
   font-size: 16px;
   font-weight: 500;
+  border: none;
 `
-
 const ShareBtn = styled.button`
   width: 125px;
   height: 43px;
@@ -278,4 +271,5 @@ const ShareBtn = styled.button`
   color: #fff;
   font-size: 16px;
   font-weight: 500;
+  border: none;
 `

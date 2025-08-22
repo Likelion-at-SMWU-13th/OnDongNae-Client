@@ -41,18 +41,20 @@ export default function CourseContent() {
     <>
       <Title>{t('bottomNav.course')}</Title>
       <ContentWrapper>
-        {courses.map((c) => (
-          <Card key={c.id} onClick={() => navigate(`/user/map/store/${c.id}`)}>
-            <CardMain>
-              <CourseInfo>
-                <CourseTitle>{c.courseTitle}</CourseTitle>
-                <CourseDescription>{c.courseDescription}</CourseDescription>
-              </CourseInfo>
-              <StoreImg src={c.mainImageUrl}></StoreImg>
-            </CardMain>
-            <CommentTxt>{(c.storeNames ?? []).join(', ')}</CommentTxt>
-          </Card>
-        ))}
+        {courses.map(
+          ({ id: courseId, courseTitle, courseDescription, mainImageUrl, storeNames }) => (
+            <Card key={courseId} onClick={() => navigate(`/user/course/detail/${courseId}`)}>
+              <CardMain>
+                <CourseInfo>
+                  <CourseTitle>{courseTitle}</CourseTitle>
+                  <CourseDescription>{courseDescription}</CourseDescription>
+                </CourseInfo>
+                <StoreImg src={mainImageUrl}></StoreImg>
+              </CardMain>
+              <CommentTxt>{(storeNames ?? []).join(', ')}</CommentTxt>
+            </Card>
+          ),
+        )}
       </ContentWrapper>
     </>
   )

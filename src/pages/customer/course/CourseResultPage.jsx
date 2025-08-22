@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
-import backIcon from '@/assets/button-back.svg'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
@@ -51,28 +51,31 @@ const CourseResultPage = () => {
   if (!state) {
     return (
       <div>
-        <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
+        <Header title={t('bottomNav.course')} showImg={false} />
         <Empty>{t('course.failComment')}</Empty>
         <CustomerBottomNav />
       </div>
     )
   }
 
+  const handleStoreMove = () => {
+    navigate(`user/map/store/${stores.storeId}`)
+  }
   const stores = Array.isArray(recommendedCourseStores)
     ? [...recommendedCourseStores].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
     : []
 
   return (
     <div className='scrollable'>
-      <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
-      <Main>
-        <Scroll>
+      <Header title={t('bottomNav.course')} showImg={false} />
+      <C.Main>
+        <C.Scroll>
           <TitleWrapper>
             <DoubleTitle title={title} subtitle={description} />
           </TitleWrapper>
           <CourseWrapper>
             {stores.map((store, idx) => (
-              <Row key={store.order ?? `${store.name}-${idx}`}>
+              <Row key={store.order ?? `${store.name}-${idx}`} onClick={handleStoreMove}>
                 {' '}
                 <TimelineCell $isFirst={idx === 0} $isLast={idx === stores.length - 1}>
                   <Dot>{store.order}</Dot>
@@ -99,8 +102,8 @@ const CourseResultPage = () => {
               {t('course.share')}
             </ShareBtn>
           </ButtonContainer>
-        </Scroll>
-      </Main>
+        </C.Scroll>
+      </C.Main>
       <CustomerBottomNav />
     </div>
   )
@@ -230,18 +233,4 @@ const ShareBtn = styled.button`
   font-size: 16px;
   font-weight: 500;
   border: none;
-`
-export const Main = styled.main`
-  height: calc(100dvh - 155px);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-export const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
 `

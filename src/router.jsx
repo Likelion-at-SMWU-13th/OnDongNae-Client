@@ -68,6 +68,7 @@ import CourseAI from './pages/customer/course/CourseAI'
 import CourseLoading from './pages/customer/course/CourseLoading'
 import CourseFail from './pages/customer/course/CourseFail'
 import CourseResultPage from './pages/customer/course/CourseResultPage'
+import CourseDetailPage from './pages/customer/course/CourseDetailPage'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -295,6 +296,10 @@ const router = createBrowserRouter([
       {
         path: '/user/course/result',
         element: <CourseResultPage />,
+      },
+      {
+        path: '/user/course/detail/:courseId',
+        element: <CourseDetailPage />,
       },
     ],
   },
