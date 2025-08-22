@@ -8,7 +8,7 @@ import Title from '@/components/common/Title'
 import RegisterOptions from '@/components/menuManagement/RegisterOptions'
 import BottomNav from '@/components/common/BottomNav'
 import RegisteredMenu from '@/components/menuManagement/RegisteredMenu'
-import axios from 'axios'
+import { authAxios } from '@/lib/authAxios'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
 
 export const Main = styled.main`
@@ -64,7 +64,7 @@ function MenuPage() {
       return
     }
 
-    axios
+    authAxios
       .get(`${apiUrl}/me/menus`, {
         headers: { Authorization: `Bearer ${token}` },
       })

@@ -32,21 +32,23 @@ export default function MenuExtractSuccessPage() {
   }
 
   return (
-    <div className='scrollable'>
-      <Header img={backIcon} title='메뉴 관리' showImg />
-      <Main>
-        <Scroll>
-          <DoubleTitle
-            title='메뉴 추출이 끝났어요'
-            subtitle='수정 버튼을 누르면 내용을 바꿀 수 있어요.'
-          />
+    <>
+      <div className='scrollable'>
+        <Header img={backIcon} title='메뉴 관리' showImg />
+        <Main>
+          <Scroll>
+            <DoubleTitle
+              title='메뉴 추출이 끝났어요'
+              subtitle='수정 버튼을 누르면 내용을 바꿀 수 있어요.'
+            />
 
-          {/* ✅ 반드시 props로 전달 */}
-          <MenuEdit initialItems={initialItems} />
-        </Scroll>
-      </Main>
-      <BottomNav />
-    </div>
+            {/* ✅ 반드시 props로 전달 */}
+            <MenuEdit initialItems={initialItems} />
+          </Scroll>
+        </Main>
+        <BottomNav />
+      </div>
+    </>
   )
 }
 
@@ -62,7 +64,7 @@ export const Scroll = styled.div`
   flex-direction: column;
   flex: 1; /* 남은 공간을 차지 */
   min-height: 0; /* 내부에 overflow가 먹히게 하는 핵심 */
-  /* overflow-y는 전역 .scrollable에서 적용됨 */
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
 `

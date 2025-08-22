@@ -9,7 +9,7 @@ import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 import BottomNav from '@/components/common/BottomNav'
 import BtnUpload from '@/assets/icon-upload-photo.svg'
 import closeIcon from '@/assets/button-close.svg'
-import axios from 'axios'
+import { authAxios } from '@/lib/authAxios'
 
 // { response body
 //   "code": "OK",
@@ -147,7 +147,7 @@ export default function MenuUploadPage() {
     console.log('[MenuUpload] submit clicked, file=', file)
     const formData = new FormData()
     formData.append('image', file)
-    axios
+    authAxios
       .post(`${apiUrl}/me/menus/ocr/extract`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,

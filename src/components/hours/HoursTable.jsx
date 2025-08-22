@@ -1,24 +1,7 @@
-import React from 'react'
+// src/components/hours/HoursTable.jsx
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
-
-const MOCK_HOURS_RESPONSE = {
-  code: 'OK',
-  message: '영업시간 조회 성공',
-  success: true,
-  data: {
-    storeName: '온동네 떡볶이',
-    items: [
-      { day: 'MON', open: '11:00', close: '23:00', closed: false },
-      { day: 'TUE', open: '11:00', close: '23:00', closed: false },
-      { day: 'WED', open: '09:00', close: '23:00', closed: false },
-      { day: 'THU', open: '11:00', close: '23:00', closed: false },
-      { day: 'FRI', open: '17:00', close: '23:00', closed: false },
-      { day: 'SAT', open: '11:00', close: '23:00', closed: false },
-      { day: 'SUN', open: null, close: null, closed: true },
-    ],
-  },
-}
+import { authAxios } from '@/lib/authAxios'
 
 const DAY_KO = {
   MON: '월요일',
@@ -40,24 +23,57 @@ const TitleWrapper = styled.div`
 const HourTableWrapper = styled.div`
   display: flex;
   padding: 0 0 27px 30px;
+  gap: 30px;
 `
 
-const HoursTable = () => {
-  const [hoursData] = useState(MOCK_HOURS_RESPONSE.data)
+export default function HoursTable() {
+  const apiUrl = import.meta.env.VITE_API_URL
+  const [hoursData, setHoursData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    let mounted = true
+
+    authAxios
+      .get(`${apiUrl}/me/business-hours`)
+      .then((res) => {
+        if (!mounted) return
+        setHoursData(res?.data?.data ?? null)
+      })
+      .catch((err) => {
+        if (!mounted) return
+        const status = err?.response?.status
+        const serverMsg = err?.response?.data?.message
+        console.error('GET /me/business-hours ERROR:', status, err?.response?.data || err)
+        setError(serverMsg || `불러오기 실패 (${status ?? '알 수 없음'})`)
+      })
+      .finally(() => mounted && setLoading(false))
+
+    return () => {
+      mounted = false
+    }
+  }, [apiUrl])
+
+  if (loading) return null // 필요하면 로딩 UI 넣어도 됨
+  if (error) return <div style={{ padding: '30px' }}>{error}</div>
+  if (!hoursData || !Array.isArray(hoursData.items) || hoursData.items.length === 0) {
+    return <div style={{ padding: '30px' }}>설정된 영업시간이 없어요.</div>
+  }
+
   return (
     <div>
       <TitleWrapper>
         <span>{hoursData.storeName}</span>
         <span>의 영업시간이에요</span>
       </TitleWrapper>
-      {hoursData.items.map((item, index) => (
-        <HourTableWrapper key={index}>
-          <span style={{ paddingRight: `30px` }}>{DAY_KO[item.day]}</span>
+
+      {(hoursData.items ?? []).map((item, idx) => (
+        <HourTableWrapper key={idx}>
+          <span>{DAY_KO[item.day] ?? item.day}</span>
           <span>{item.closed ? '휴무' : `${item.open} - ${item.close}`}</span>
         </HourTableWrapper>
       ))}
     </div>
   )
 }
-
-export default HoursTable
