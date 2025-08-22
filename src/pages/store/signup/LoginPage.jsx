@@ -34,7 +34,7 @@ const Login = () => {
         axios.defaults.headers.common.Authorization = `Bearer ${res.data.data.accessToken}`
 
         // 소상공인 홈 화면 이동 navigate 함수 추가
-        navigate('/store/home')
+        navigate('/menu')
       })
       .catch((error) => {
         console.log(error)

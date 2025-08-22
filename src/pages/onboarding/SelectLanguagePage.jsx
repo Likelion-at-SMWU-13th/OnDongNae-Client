@@ -46,7 +46,7 @@ const OnboardingPage = () => {
     i18n.changeLanguage(lang)
 
     // 고객용 메인 페이지 이동
-    navigate('user/map')
+    navigate('onboarding/1')
   }
   return (
     <S.Container>

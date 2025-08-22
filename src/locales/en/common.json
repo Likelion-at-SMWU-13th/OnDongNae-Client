@@ -1,5 +1,5 @@
 {
-  "button": { "continue": "Continue", "search": "Search", "generate": "generate" },
+  "button": { "continue": "Continue", "search": "Search", "generate": "generate", "skip": "Skip" },
   "bottomNav": { "overview": "Overview", "map": "Map", "course": "Course", "rates": "Rates" },
   "header": { "storeDetails": "Store Details", "overview": "Overview" },
   "dropdown": {
@@ -105,5 +105,42 @@
     "share": "Share",
     "create": "create course with AI",
     "option": "Please select all options."
+  },
+  "onboarding1": {
+    "title": "Hello, I’m Koru.",
+    "content1": "I’m the official character of GoruGoru, here to",
+    "content2": "help you explore Yongsan’s traditional markets."
+  },
+  "onboarding2": {
+    "title": "Let me tell you why I’m a dragon.",
+    "content1": "The name “Yongsan” comes from a legend",
+    "content2": "about two dragons in the Han River.",
+    "content3": "In Korea, dragons symbolize strength, power,",
+    "content4": "and good luck.",
+    "content5": "That’s why I’m proud to be your guide",
+    "content6": "to Yongsan’s markets!"
+  },
+  "onboarding3": {
+    "content1": "Let me introduce",
+    "content2": "a special service inspired",
+    "content3": "by the Korean word",
+    "content4": "which means “explore every corner,",
+    "content5": "experience it all.”",
+    "content6": "This service helps you explore all the diverse",
+    "content7": "markets in Yongsan-gu thoroughly."
+  },
+  "onboarding4": {
+    "content1": "You can ...",
+    "content2": "Explore the many markets in",
+    "content3": "Yongsan District",
+    "content4": "Discover shops that catch your eye",
+    "content5": "Get personalized travel itinerary",
+    "content6": "recommendations",
+    "content7": "Check real-time exchange rates"
+  },
+  "onboarding5": {
+    "content1": "Let’s discover",
+    "content2": "the charm of traditional markets",
+    "content3": "with "
   }
 }

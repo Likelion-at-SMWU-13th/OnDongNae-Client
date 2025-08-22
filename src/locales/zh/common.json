@@ -1,5 +1,5 @@
 {
-  "button": { "continue": "继续", "search": "搜索", "generate": "生成" },
+  "button": { "continue": "继续", "search": "搜索", "generate": "生成", "skip": "跳过" },
   "bottomNav": { "overview": "概述", "map": "地图", "course": "推荐", "rates": "汇率" },
   "header": { "storeDetails": "店铺详情", "overview": "概述" },
   "dropdown": {
@@ -106,5 +106,42 @@
     "share": "分享",
     "create": "通过人工智能接受路线推荐\nAI推荐路线",
     "option": "请先选择所有选项。"
+  },
+  "onboarding1": {
+    "title": "你好，我是Koru。",
+    "content1": "GoruGoru的官方角色，",
+    "content2": "帶你一起探索龍山的傳統市場。"
+  },
+  "onboarding2": {
+    "title": "让我告诉你，为什么我是龙。",
+    "content1": "“龍山”这个名字来自",
+    "content2": "汉江里两条龙的传说。",
+    "content3": "在韩国，龙象征着力量、",
+    "content4": "权威和好运。",
+    "content5": "所以我成了",
+    "content6": "龍山市场的向导。"
+  },
+  "onboarding3": {
+    "content1": "让我介绍一个特别的服务，",
+    "content2": "它的灵感来自一个韩语词汇，",
+    "content3": "这个词是",
+    "content4": "意思是“探索每个角落”，",
+    "content5": "并亲身体验一切。",
+    "content6": "这项服务将帮助你，",
+    "content7": "龍山市场的向导。"
+  },
+  "onboarding4": {
+    "content1": "你可以……",
+    "content2": "探索龙山区的",
+    "content3": "多样市场",
+    "content4": "发现吸引你目光的店铺",
+    "content5": "获得专属行程",
+    "content6": "并收到个性化推荐",
+    "content7": "随时查看实时汇率"
+  },
+  "onboarding5": {
+    "content1": "一起发现 ",
+    "content2": "传统市场的魅力，",
+    "content3": ""
   }
 }

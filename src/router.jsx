@@ -3,6 +3,11 @@ import App from './App'
 
 //onboarding
 import SelectLanguagePage from './pages/onboarding/SelectLanguagePage'
+import OnboardingPage1 from './pages/onboarding/OnboardingPage1'
+import OnboardingPage2 from './pages/onboarding/OnboardingPage2'
+import OnboardingPage3 from './pages/onboarding/OnboardingPage3'
+import OnboardingPage4 from './pages/onboarding/OnboardingPage4'
+import OnboardingPage5 from './pages/onboarding/OnboardingPage5'
 // signup
 import LoginPage from './pages/store/signup/LoginPage'
 import SignupUserInfoPage from './pages/store/signup/SignupUserInfoPage.jsx'
@@ -71,9 +76,30 @@ const router = createBrowserRouter([
       { index: true, element: <SelectLanguagePage /> },
       { path: 'login', element: <LoginPage /> },
       {
+        path: 'onboarding/1',
+        element: <OnboardingPage1 />,
+      },
+      {
+        path: 'onboarding/2',
+        element: <OnboardingPage2 />,
+      },
+      {
+        path: 'onboarding/3',
+        element: <OnboardingPage3 />,
+      },
+      {
+        path: 'onboarding/4',
+        element: <OnboardingPage4 />,
+      },
+      {
+        path: 'onboarding/5',
+        element: <OnboardingPage5 />,
+      },
+      {
         path: 'signup/userinfo',
         element: <SignupUserInfoPage />,
       },
+
       {
         path: 'signup/accountinfo',
         element: <SignupAccountInfoPage />,

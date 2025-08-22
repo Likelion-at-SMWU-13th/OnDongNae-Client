@@ -51,4 +51,5 @@ const MenuList = styled.div`
   width: 86%;
   justify-content: center;
   margin: 0 auto;
+  margin-top: 10px;
 `
