@@ -108,17 +108,18 @@
   },
   "onboarding1": {
     "title": "Hello, I’m Koru.",
-    "content1": "I’m the official character of GoruGoru, here to",
-    "content2": "help you explore Yongsan’s traditional markets."
+    "content1": "I’m the official character of GoruGoru,",
+    "content2": "here to help you explore",
+    "content3": "Yongsan’s traditional markets."
   },
   "onboarding2": {
     "title": "Let me tell you why I’m a dragon.",
-    "content1": "The name “Yongsan” comes from a legend",
+    "content1": "The name 'Yongsan' comes from a legend",
     "content2": "about two dragons in the Han River.",
-    "content3": "In Korea, dragons symbolize strength, power,",
-    "content4": "and good luck.",
-    "content5": "That’s why I’m proud to be your guide",
-    "content6": "to Yongsan’s markets!"
+    "content3": "In Korea, dragons symbolize",
+    "content4": "strength, power, and good luck.",
+    "content5": "That’s why I’m proud to be your",
+    "content6": "guide to Yongsan’s markets!"
   },
   "onboarding3": {
     "content1": "Let me introduce",
@@ -131,16 +132,15 @@
   },
   "onboarding4": {
     "content1": "You can ...",
-    "content2": "Explore the many markets in",
-    "content3": "Yongsan District",
-    "content4": "Discover shops that catch your eye",
+    "content2": "Explore markets in Yongsan District",
+    "content3": "Discover shops that catch your eye",
+    "content4": "Check real-time exchange rates",
     "content5": "Get personalized travel itinerary",
-    "content6": "recommendations",
-    "content7": "Check real-time exchange rates"
+    "content6": "recommendations"
   },
   "onboarding5": {
     "content1": "Let’s discover",
-    "content2": "the charm of traditional markets",
-    "content3": "with "
+    "content2": "the charm of traditional",
+    "content3": "markets with "
   }
 }

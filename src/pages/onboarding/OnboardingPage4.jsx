@@ -31,18 +31,14 @@ const OnboardingPage4 = () => {
       <Main>
         <Title>{t('onboarding4.content1')}</Title>
         <List>
-          <Item>
-            {t('onboarding4.content2')}
-            <br />
-            {t('onboarding4.content3')}
-          </Item>
+          <Item>{t('onboarding4.content2')}</Item>
+          <Item>{t('onboarding4.content3')}</Item>
           <Item>{t('onboarding4.content4')}</Item>
-          <Item>
+          <TwoItem>
             {t('onboarding4.content5')}
             <br />
             {t('onboarding4.content6')}
-          </Item>
-          <Item>{t('onboarding4.content7')}</Item>
+          </TwoItem>
         </List>
       </Main>
       <Footer currentStep={step} totalSteps={totalSteps} onNext={handleNext} />
@@ -59,41 +55,47 @@ const Container = styled.div`
 `
 
 const Main = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  margin-top: 10dvh;
-  margin-bottom: 16dvh;
-  padding-top: 8.29dvh;
+  margin-top: 13dvh;
+  margin-bottom: 9dvh;
+  padding-top: 6.4dvh;
 `
 
 const Title = styled.p`
   color: #000;
   text-align: center;
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
 `
 
 const List = styled.ul`
   list-style: none;
-  padding-top: 7.16dvh;
+  padding-top: 7.91dvh;
+  padding-left: 11.54dvw;
   display: flex;
   flex-direction: column;
-  gap: 5.02dvh;
+  gap: 4.64dvh;
 `
 
 const Item = styled.li`
   color: #000;
-  text-align: center;
+  text-align: left;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   &::before {
     content: url(${koru3});
     display: inline-block; /* content 속성이 잘 적용되도록 */
-    margin-right: 10px; /* 아이콘과 텍스트 사이 간격 */
+    margin-right: 14px; /* 아이콘과 텍스트 사이 간격 */
   }
+`
+const TwoItem = styled(Item)`
+  line-height: 25px;
 `

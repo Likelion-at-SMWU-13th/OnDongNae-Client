@@ -61,24 +61,26 @@ const Container = styled.div`
 `
 
 const Main = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  margin-top: 10dvh;
-  margin-bottom: 16dvh;
-  padding-top: 5.02dvh;
+  margin-top: 13dvh;
+  margin-bottom: 9dvh;
+  padding-top: 6.4dvh;
 `
 
 const Title = styled.p`
   color: #000;
   text-align: center;
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
 `
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.62dvh;
-  padding-top: 2.51dvh;
+  gap: 1.88dvh;
+  padding-top: 5.02dvh;
 `
 
 const Content = styled.p`
@@ -86,12 +88,13 @@ const Content = styled.p`
   text-align: center;
   font-size: 16px;
   font-weight: 400;
-  line-height: 30px;
+  gap: 0.5dvh;
 `
 const Img = styled.img`
-  display: block;
   margin: 0 auto;
-  padding-top: 3.2dvh;
-
+  margin-top: auto;
+  margin-bottom: 5.52dvh;
   height: 30.52dvh;
+  flex-shrink: 0;
+  aspect-ratio: 2/3;
 `

@@ -50,27 +50,33 @@ const Container = styled.div`
 `
 
 const Main = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  margin-top: 10dvh;
-  margin-bottom: 16dvh;
-  padding-top: 8.29dvh;
+  margin-top: 13dvh;
+  margin-bottom: 9dvh;
+  padding-top: 6.4dvh;
 `
 
 const Title = styled.p`
   color: #000;
   text-align: center;
-  font-size: 1.25rem;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
 `
 const Highlight = styled.span`
   color: #fa6432;
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 700;
+  line-height: 30px;
 `
 const Img = styled.img`
-  display: block;
   margin: 0 auto;
-  padding-top: 6.28dvh;
+  margin-top: auto;
+  margin-bottom: 13.44dvh;
   width: 207px;
   height: 311px;
+  flex-shrink: 0;
+  aspect-ratio: 207/311;
 `

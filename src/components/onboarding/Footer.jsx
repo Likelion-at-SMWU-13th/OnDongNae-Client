@@ -25,7 +25,7 @@ const Container = styled.div`
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
-  height: 16vh;
+  height: 9vh;
   background: white;
 `
 const ContentContainer = styled.div`
