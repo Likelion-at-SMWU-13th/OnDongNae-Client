@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useDrag } from '@use-gesture/react'
 import styled from 'styled-components'
 import Header from '@/components/onboarding/Header'
 import Footer from '@/components/onboarding/Footer'
-
 import koru1 from '@/assets/img-koru1.svg'
 
 const OnboardingPage1 = () => {
@@ -22,16 +22,24 @@ const OnboardingPage1 = () => {
     navigate('/onboarding/2')
   }
 
+  // useDgrag 훅
+  const bind = useDrag(({ down, movement: [mx], velocity: [vx] }) => {
+    if (!down && (mx < -40 || vx < -0.5)) {
+      handleNext() // 다음 페이지로 이동
+    }
+  })
+
   return (
     <Container>
       <Header onSkip={handleSkip} />
       {/* 메인 콘텐츠 영역 */}
-      <Main>
+      <Main {...bind()}>
         <Title>{t('onboarding1.title')}</Title>
-        <Content>
-          {t('onboarding1.content1')} <br />
-          {t('onboarding1.content2')}
-        </Content>
+        <ContentContainer>
+          <Content>{t('onboarding1.content1')}</Content>
+          <Content>{t('onboarding1.content2')} </Content>
+          <Content> {t('onboarding1.content3')}</Content>
+        </ContentContainer>
         <Img src={koru1} alt='logo' />
       </Main>
       <Footer currentStep={step} totalSteps={totalSteps} onNext={handleNext} />
@@ -48,32 +56,41 @@ const Container = styled.div`
 `
 
 const Main = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  margin-top: 10dvh;
-  margin-bottom: 16dvh;
-  padding-top: 8.29dvh;
+  margin-top: 13dvh;
+  margin-bottom: 9dvh;
+  padding-top: 6.4dvh;
+  touch-action: pan-y;
 `
 
 const Title = styled.p`
   color: #000;
   text-align: center;
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
+`
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5dvh;
+  padding-top: 5.02dvh;
 `
 
 const Content = styled.p`
   color: #000;
   text-align: center;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 30px;
-  padding-top: 2.51dvh;
 `
 const Img = styled.img`
-  display: block;
   margin: 0 auto;
-  padding-top: 6.28dvh;
-
-  width: 179px;
-  height: 269px;
+  margin-top: auto;
+  margin-bottom: 5.52dvh;
+  width: 161.699px;
+  height: 243px;
+  flex-shrink: 0;
+  aspect-ratio: 161.7/243;
 `

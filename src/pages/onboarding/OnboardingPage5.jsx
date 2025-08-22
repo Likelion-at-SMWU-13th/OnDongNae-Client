@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useDrag } from '@use-gesture/react'
 import styled from 'styled-components'
 import Header from '@/components/onboarding/Header'
 import Footer from '@/components/onboarding/Footer'
-
 import koru4 from '@/assets/img-koru4.svg'
 
 const OnboardingPage5 = () => {
@@ -22,11 +22,29 @@ const OnboardingPage5 = () => {
     navigate('/user/map')
   }
 
+  const handlePrev = () => {
+    navigate(-1)
+  }
+
+  // useDgrag 훅
+  const bind = useDrag(({ down, movement: [mx], velocity: [vx] }) => {
+    if (!down) {
+      // 왼쪽으로 스와이프
+      if (mx < -50 || vx < -0.5) {
+        handleNext()
+      }
+      // 오른쪽으로 스와이프
+      else if (mx > 50 || vx > 0.5) {
+        handlePrev()
+      }
+    }
+  })
+
   return (
     <Container>
       <Header onSkip={handleSkip} />
       {/* 메인 콘텐츠 영역 */}
-      <Main>
+      <Main {...bind()}>
         <Title>{t('onboarding5.content1')}</Title>
         <Title>{t('onboarding5.content2')}</Title>
         <Title>
@@ -50,27 +68,34 @@ const Container = styled.div`
 `
 
 const Main = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  margin-top: 10dvh;
-  margin-bottom: 16dvh;
-  padding-top: 8.29dvh;
+  margin-top: 13dvh;
+  margin-bottom: 9dvh;
+  padding-top: 6.4dvh;
+  touch-action: pan-y;
 `
 
 const Title = styled.p`
   color: #000;
   text-align: center;
-  font-size: 1.25rem;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
 `
 const Highlight = styled.span`
   color: #fa6432;
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 700;
+  line-height: 30px;
 `
 const Img = styled.img`
-  display: block;
   margin: 0 auto;
-  padding-top: 6.28dvh;
+  margin-top: auto;
+  margin-bottom: 13.44dvh;
   width: 207px;
   height: 311px;
+  flex-shrink: 0;
+  aspect-ratio: 207/311;
 `

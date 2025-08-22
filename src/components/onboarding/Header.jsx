@@ -30,12 +30,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
-  height: 10dvh;
+  height: 11.76dvh;
+  margin-top: 1.24dvh;
 `
 const SkipWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
   margin-right: 20px;
 `
 
@@ -56,4 +56,5 @@ const Button = styled.button`
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: auto;
 `

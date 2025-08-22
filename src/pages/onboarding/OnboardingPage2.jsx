@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useDrag } from '@use-gesture/react'
 import styled from 'styled-components'
 import Header from '@/components/onboarding/Header'
 import Footer from '@/components/onboarding/Footer'
-
 import koru2 from '@/assets/img-koru2.svg'
 
 const OnboardingPage2 = () => {
@@ -22,11 +22,29 @@ const OnboardingPage2 = () => {
     navigate('/onboarding/3')
   }
 
+  const handlePrev = () => {
+    navigate(-1)
+  }
+
+  // useDgrag 훅
+  const bind = useDrag(({ down, movement: [mx], velocity: [vx] }) => {
+    if (!down) {
+      // 왼쪽으로 스와이프
+      if (mx < -50 || vx < -0.5) {
+        handleNext()
+      }
+      // 오른쪽으로 스와이프
+      else if (mx > 50 || vx > 0.5) {
+        handlePrev()
+      }
+    }
+  })
+
   return (
     <Container>
       <Header onSkip={handleSkip} />
       {/* 메인 콘텐츠 영역 */}
-      <Main>
+      <Main {...bind()}>
         <Title>{t('onboarding2.title')}</Title>
         <ContentContainer>
           <Content>
@@ -61,24 +79,27 @@ const Container = styled.div`
 `
 
 const Main = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  margin-top: 10dvh;
-  margin-bottom: 16dvh;
-  padding-top: 5.02dvh;
+  margin-top: 13dvh;
+  margin-bottom: 9dvh;
+  padding-top: 6.4dvh;
+  touch-action: pan-y;
 `
 
 const Title = styled.p`
   color: #000;
   text-align: center;
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
 `
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.62dvh;
-  padding-top: 2.51dvh;
+  gap: 1.88dvh;
+  padding-top: 5.02dvh;
 `
 
 const Content = styled.p`
@@ -86,12 +107,13 @@ const Content = styled.p`
   text-align: center;
   font-size: 16px;
   font-weight: 400;
-  line-height: 30px;
+  gap: 0.5dvh;
 `
 const Img = styled.img`
-  display: block;
   margin: 0 auto;
-  padding-top: 3.2dvh;
-
+  margin-top: auto;
+  margin-bottom: 5.52dvh;
   height: 30.52dvh;
+  flex-shrink: 0;
+  aspect-ratio: 2/3;
 `
