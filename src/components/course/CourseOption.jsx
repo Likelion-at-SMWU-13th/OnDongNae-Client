@@ -18,11 +18,11 @@ function Btn({ active, children, onClick }) {
         borderRadius: '30px',
         border: active ? '1px solid #F08E67' : '1px solid #B3B3B3', // 선택 시 테두리 제거
         background: active ? '#F08E67' : '#fff',
-        color: active ? '#fff' : '#000', // 선택 시 글자색
+        color: active ? '#fff' : '#000',
         fontSize: '14px',
         margin: '5px 10px 5px 0',
         cursor: 'pointer',
-        whiteSpace: 'nowrap', // 한 버튼 내 줄바꿈 방지
+        whiteSpace: 'nowrap',
         transition: 'background-color 0.2s, border-color 0.2s',
         outline: 'none',
       }}
