@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -36,7 +35,7 @@ const CoursePage = () => {
   const { t } = useTranslation()
   return (
     <div className='scrollable'>
-      <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
+      <Header title={t('bottomNav.course')} showImg={false} />
       <Main>
         <Scroll>
           <CourseContent />

@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import warning from '@/assets/icon-warning.svg'
 import { useTranslation } from 'react-i18next'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
@@ -16,7 +15,7 @@ const CourseFail = () => {
   }
   return (
     <div>
-      <Header img={backIcon} title={t('bottomNav.course')} showImg={true} />
+      <Header title={t('bottomNav.course')} showImg={true} />
       <Content>
         <FailIcon src={warning} />
         <Comment>{t('course.failComment')}</Comment>

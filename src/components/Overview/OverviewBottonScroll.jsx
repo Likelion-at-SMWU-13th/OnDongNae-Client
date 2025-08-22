@@ -2,6 +2,11 @@ import React, { useMemo, useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import yongmunSmallImg from '@/assets/img-market-small-yongmun.png'
+import huamSmallImg from '@/assets/img-market-small-huam.png'
+import itaewonSmallImg from '@/assets/img-market-small-itaewon.png'
+import manlySmallImg from '@/assets/img-market-small-manly.png'
+import haebangchonSmallImg from '@/assets/img-market-small-haebangchon.png'
 
 import cardImage from '@/assets/image.png'
 
@@ -24,11 +29,36 @@ const nearest = (v, arr) =>
   arr.reduce((p, c) => (Math.abs(c - v) < Math.abs(p - v) ? c : p), arr[0])
 
 const MARKETS = [
-  { id: 1, nameKey: 'overview.YongmunMarket', descKey: 'overview.yongmunDescription' },
-  { id: 3, nameKey: 'overview.huamMarket', descKey: 'overview.huamDescription' },
-  { id: 2, nameKey: 'overview.itaewonMarket', descKey: 'overview.itaewonDescription' },
-  { id: 4, nameKey: 'overview.manlyMarket', descKey: 'overview.manlyDescription' },
-  { id: 5, nameKey: 'overview.haebangchonMarket', descKey: 'overview.haebangchonDescription' },
+  {
+    id: 1,
+    nameKey: 'overview.YongmunMarket',
+    descKey: 'overview.yongmunDescription',
+    src: yongmunSmallImg,
+  },
+  {
+    id: 3,
+    nameKey: 'overview.huamMarket',
+    descKey: 'overview.huamDescription',
+    src: huamSmallImg,
+  },
+  {
+    id: 2,
+    nameKey: 'overview.itaewonMarket',
+    descKey: 'overview.itaewonDescription',
+    src: itaewonSmallImg,
+  },
+  {
+    id: 4,
+    nameKey: 'overview.manlyMarket',
+    descKey: 'overview.manlyDescription',
+    src: manlySmallImg,
+  },
+  {
+    id: 5,
+    nameKey: 'overview.haebangchonMarket',
+    descKey: 'overview.haebangchonDescription',
+    src: haebangchonSmallImg,
+  },
 ]
 
 const ScrollArea = ({
@@ -39,7 +69,7 @@ const ScrollArea = ({
   selectedSubIds = [],
   onStoreClick,
   initialHeightPct = 20,
-  snapPoints = [4, 20, 65],
+  snapPoints = [7, 20, 70],
   bottomOffset = 0,
 }) => {
   const { t } = useTranslation()
@@ -127,7 +157,7 @@ const ScrollArea = ({
           <CardDivider key={m.id}>
             <Card type='button' onClick={() => handleCardClick(m)}>
               <Row>
-                <StoreImg src={cardImage} alt='' loading='lazy' />
+                <StoreImg src={m.src} alt='' loading='lazy' />
                 <TextBox>
                   <StoreName>{t(m.nameKey)}</StoreName>
                   <StoreDesc>{t(m.descKey)}</StoreDesc>

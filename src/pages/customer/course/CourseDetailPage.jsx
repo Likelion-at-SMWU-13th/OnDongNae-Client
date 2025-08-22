@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
-import backIcon from '@/assets/button-back.svg'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
@@ -98,7 +97,7 @@ export default function CourseDetailPage() {
 
   return (
     <div>
-      <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
+      <Header title={t('bottomNav.course')} showImg={false} />
       <DoubleTitle title={title} subtitle={description} />
 
       <CourseWrapper>

@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useLocation } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
@@ -37,7 +36,7 @@ const CourseLoading = () => {
 
   return (
     <div>
-      <Header img={backIcon} title={t('bottomNav.course')} showImg={false} />
+      <Header title={t('bottomNav.course')} showImg={false} />
       <ContentWrapper>
         <SpinnerIcon src={Spinner} alt='로딩중' />
         <SubTitle text={t('course.loading')} />
