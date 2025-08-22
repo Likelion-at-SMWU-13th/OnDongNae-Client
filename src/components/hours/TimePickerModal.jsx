@@ -22,14 +22,44 @@ const Sheet = styled.div`
 `
 const Row = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: 8px;
+  padding-top: 20px;
   justify-content: center;
 `
 const Sel = styled.select`
   padding: 8px 12px;
   font-size: 16px;
+  border: solid 1px #f08e67;
+  border-radius: 10px;
 `
-
+const TimeBtn = styled.button`
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f08e67;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  margin-right: 10px;
+`
+const BackBtn = styled.button`
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #fff;
+  background-color: #d6d6d6;
+  font-weight: 600;
+  margin-left: 10px;
+`
+const Mins = styled.p`
+  font-size: 15px;
+`
+const Hours = styled.p`
+  font-size: 15px;
+`
 export default function TimePickerModal({
   title = '시간 선택',
   value, // { hour, minute }
@@ -55,22 +85,24 @@ export default function TimePickerModal({
   return (
     <Backdrop onClick={onCancel}>
       <Sheet onClick={(e) => e.stopPropagation()}>
-        <div style={{ fontWeight: 700 }}>{title}</div>
+        <div style={{ fontWeight: 600, fontSize: '18px', padding: '8px 10px' }}>{title}</div>
         <Row>
           <Sel value={hour} onChange={(e) => handleHourChange(e.target.value)}>
             {hourOptions.map((v) => (
               <option key={v}>{v}</option>
             ))}
           </Sel>
+          <Hours>시</Hours>
           <Sel value={minute} onChange={(e) => onChange({ ...value, minute: e.target.value })}>
             {minuteOptions.map((v) => (
               <option key={v}>{v}</option>
             ))}
           </Sel>
+          <Mins>분</Mins>
         </Row>
         <Row style={{ justifyContent: 'space-between' }}>
-          <button onClick={onCancel}>취소</button>
-          <button onClick={onConfirm}>확인</button>
+          <BackBtn onClick={onCancel}>취소</BackBtn>
+          <TimeBtn onClick={onConfirm}>확인</TimeBtn>
         </Row>
       </Sheet>
     </Backdrop>
