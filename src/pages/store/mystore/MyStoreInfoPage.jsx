@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MapStoresPage.styles'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import { authAxios } from '@/lib/authAxios'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
@@ -59,8 +60,8 @@ const MyStoreInfoPage = () => {
   return (
     <>
       <Header title={'나의 가게'} showImg={true} />
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           {/* 사진 영역 */}
           <ImgSection imgs={store?.header?.images || []} />
           {/* 가게 정보 영역 */}
@@ -75,8 +76,8 @@ const MyStoreInfoPage = () => {
           ) : (
             <InfoTab info={store?.infoTab || {}} />
           )}
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
       <BottomNav />
     </>
   )
