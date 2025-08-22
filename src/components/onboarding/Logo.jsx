@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Logo = () => {
   return (
     <>
-      <LogoTxt>GorGoru</LogoTxt>
+      <LogoTxt>GoruGoru</LogoTxt>
     </>
   )
 }

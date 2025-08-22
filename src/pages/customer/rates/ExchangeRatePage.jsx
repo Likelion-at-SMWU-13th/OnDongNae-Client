@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/rates/ExchangeRatesPage.styles'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
@@ -54,8 +55,8 @@ const ExchangeRatePage = () => {
     <>
       <Header img={backIcon} title={t('bottomNav.rates')} showImg={false} />
       {/* 스크롤 영역 */}
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <S.BoxContainer>
             {/* Input 박스 1 */}
             <InputBoxKr priceKr={priceKr} setPriceKr={setPriceKr} />
@@ -72,8 +73,8 @@ const ExchangeRatePage = () => {
             {/* 설명문 */}
             <RatesDescription />
           </S.BoxContainer>
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
       <CustomerBottomNav />
     </>
   )
