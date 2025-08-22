@@ -1,16 +1,15 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import styled from 'styled-components'
 import parkingIcon from '@/assets/icon-parking.svg'
 import restroomIcon from '@/assets/icon-restroom.svg'
-import marketImage from '@/assets/img-market.svg'
+import marketImage from '@/assets/img-market-big-haebangchon.png'
 import locationIcon from '@/assets/icon-location.svg'
 import phoneIcon from '@/assets/icon-phone-call.svg'
 import KakaoMapContainer from '@/components/common/KakaoMapContainer'
-import markerIcon from '@/assets/icon-mapMarker.svg'
+import mapMaker from '@/assets/icon-big-mapMarker.svg'
 
 const Main = styled.main`
   height: calc(100dvh - 175px);
@@ -36,7 +35,8 @@ const MarketImg = styled.img`
   flex-shrink: 0;
 `
 const TitleWrapper = styled.div`
-  margin: 15px 0 0 30px;
+  padding-top: 30px;
+  text-align: center;
   color: #1a0f0f;
   font-size: 22px;
   font-style: normal;
@@ -85,7 +85,7 @@ const OverviewInfoPage5 = () => {
   const { t } = useTranslation()
   return (
     <div>
-      <Header img={backIcon} title={t('header.overview')} showImg={true} />
+      <Header title={t('header.overview')} showImg={true} />
       <Main>
         <Scroll>
           <MarketImg src={marketImage} alt='' />
@@ -113,8 +113,8 @@ const OverviewInfoPage5 = () => {
                 id: 1,
                 position: { lat: 37.536618383, lng: 126.959796815 },
                 image: {
-                  src: markerIcon,
-                  size: { width: 31, height: 31 },
+                  src: mapMaker,
+                  size: { width: 28, height: 28 },
                   options: { offset: { x: 15, y: 31 } }, // ✅ 마커 중앙 정렬 위해 anchor 지정
                 },
               },

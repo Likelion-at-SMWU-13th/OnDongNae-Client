@@ -1,17 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from '@/components/common/Header'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import { useTranslation } from 'react-i18next'
-import backIcon from '@/assets/button-back.svg'
+import { useNavigate } from 'react-router-dom'
 import KakaoMapContainer from '@/components/common/KakaoMapContainer'
 import OverviewBottomScroll from '@/components/Overview/OverviewBottonScroll'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-import markerIcon from '@/assets/icon-mapMarker.svg'
-
-const HEADER_H = 50
-const TABBAR_H = 50
+import mapMaker from '@/assets/icon-big-mapMarker.svg'
 
 const Page = styled.div`
   position: relative;
@@ -25,7 +20,7 @@ const Page = styled.div`
 const MapContainer = styled.div`
   position: relative;
   width: 100%;
-  height: calc(100dvh - ${HEADER_H + TABBAR_H}px);
+  height: calc(100dvh - 19dvh);
   min-height: 0;
   overflow: hidden;
   z-index: 0;
@@ -41,8 +36,8 @@ const markers = [
     title: 'overview.YongmunMarket',
     position: { lat: 37.536618383, lng: 126.959796815 },
     image: {
-      src: markerIcon,
-      size: { width: 31, height: 31 }, // 마커 크기
+      src: mapMaker,
+      size: { width: 28, height: 28 },
       options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
@@ -51,8 +46,9 @@ const markers = [
     title: 'overview.huamMarket',
     position: { lat: 37.550104514133615, lng: 126.97593591802915 },
     image: {
-      src: markerIcon,
-      size: { width: 31, height: 31 }, // 마커 크기
+      src: mapMaker,
+      size: { width: 28, height: 28 },
+      options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
   {
@@ -60,8 +56,8 @@ const markers = [
     title: 'overview.itaewonMarket',
     position: { lat: 37.53381428, lng: 126.990046559 },
     image: {
-      src: markerIcon,
-      size: { width: 31, height: 31 }, // 마커 크기
+      src: mapMaker,
+      size: { width: 28, height: 28 },
       options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
@@ -70,8 +66,8 @@ const markers = [
     title: 'overview.manlyMarket',
     position: { lat: 37.551367465, lng: 126.963639378 },
     image: {
-      src: markerIcon,
-      size: { width: 31, height: 31 }, // 마커 크기
+      src: mapMaker,
+      size: { width: 28, height: 28 },
       options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
@@ -80,8 +76,8 @@ const markers = [
     title: 'overview.haebangchonMarket',
     position: { lat: 37.54550342552204, lng: 126.98219607716948 },
     image: {
-      src: markerIcon,
-      size: { width: 31, height: 31 }, // 마커 크기
+      src: mapMaker,
+      size: { width: 28, height: 28 },
       options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
@@ -93,28 +89,23 @@ const OverviewPage = () => {
   const [selected, setSelected] = useState(null)
   return (
     <Page>
-      <Header img={backIcon} title={t('header.overview')} showImg={false} />
-
+      <Header title={t('header.overview')} showImg={false} />
       <MapContainer>
         <KakaoMapContainer
           level={7}
           center={{ lat: 37.533049142, lng: 126.970520625 }}
           markers={markers}
           onMarkerClick={(m) => navigate(`/user/overview/info/${m?.id}`)}
-          // ⬇️ 라벨
           showMarkerLabels
           getLabel={(m) => t(m.title)}
-          labelYAnchor={2.3}
+          labelYAnchor={2.4}
         />
-
         <OverviewBottomScroll
-          bottomOffset={TABBAR_H}
           onStoreClick={(item) => {
             navigate(`/user/overview/info/${item?.id ?? ''}`)
           }}
         />
       </MapContainer>
-
       <CustomerBottomNav />
     </Page>
   )
