@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import spinnerIcon from '@/assets/icon-spinner.svg'
+import Loading from '@/components/common/Loading'
 
 const Container = styled.div`
   display: flex;
@@ -143,11 +143,7 @@ const SignupLoadingPage = () => {
     <>
       <Header img={backIcon} title={'회원가입'} showImg={true} />
       <Container>
-        <Img src={spinnerIcon} alt='로딩중' />
-        <Text>
-          회원가입 진행 중… <br />
-          잠시만 기다려 주세요!
-        </Text>
+        <Loading />
       </Container>
     </>
   )
