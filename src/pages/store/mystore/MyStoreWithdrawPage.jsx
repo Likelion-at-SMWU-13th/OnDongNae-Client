@@ -4,7 +4,6 @@ import * as S from '@/styles/mystore/MyStoreWithdrawPage.styles'
 import { useNavigate } from 'react-router-dom'
 
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import BottomNav from '@/components/common/BottomNav'
 import TextBox from '@/components/mystore/TextBox'
 import DeletePopup from '@/components/mystore/DeletePopup'
@@ -29,7 +28,7 @@ const MyStoreWithdrawPage = () => {
   }
   return (
     <>
-      <Header img={backIcon} title={'탈퇴하기'} showImg />
+      <Header title={'탈퇴하기'} showImg={true} />
       <S.Main>
         <S.Scroll className='scrollable'>
           <S.Container>

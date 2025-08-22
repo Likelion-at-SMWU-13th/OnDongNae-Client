@@ -32,7 +32,7 @@ export default function KakaoMap({
   level = 6, // 확대 레벨 (낮을수록 확대)
   style = {
     width: '100%',
-    height: 'calc(100dvh - 155px)',
+    height: 'calc(100dvh - 19dvh)',
     display: 'flex',
     minHeight: '0',
   }, // 지도의 크기 (height 꼭 지정 권장)

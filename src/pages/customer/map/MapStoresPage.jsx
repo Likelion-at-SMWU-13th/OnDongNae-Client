@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MapStoresPage.styles'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
-
 import ImgSection from '@/components/map/ImgSection'
 import HeaderSection from '@/components/map/HeaderSection'
 import MapSection from '@/components/map/MapSection'
@@ -54,9 +53,9 @@ const MapStoresPage = () => {
 
   return (
     <>
-      <Header img={backIcon} title={t('header.storeDetails')} showImg />
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <Header title={t('header.storeDetails')} showImg={true} />
+      <C.Main>
+        <C.Scroll className='scrollable'>
           {/* 사진 영역 */}
           <ImgSection imgs={store?.header?.images || []} />
           {/* 가게 정보 영역 */}
@@ -71,8 +70,8 @@ const MapStoresPage = () => {
           ) : (
             <InfoTab info={store?.infoTab || {}} />
           )}
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
       <CustomerBottomNav />
     </>
   )

@@ -4,7 +4,6 @@ import { authAxios } from '@/lib/authAxios'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import BottomNav from '@/components/common/BottomNav'
 
 import ImgSection from '@/components/map/ImgSection'
@@ -59,7 +58,7 @@ const MyStoreInfoPage = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'나의 가게'} showImg />
+      <Header title={'나의 가게'} showImg={true} />
       <S.Main>
         <S.Scroll className='scrollable'>
           {/* 사진 영역 */}

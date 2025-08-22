@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import MenuItem from '@/components/mystore/MenuItem'
 import iconView from '@/assets/icon-eyes-look-left.svg'
 import iconPencil from '@/assets/icon-pencil.svg'
@@ -16,7 +15,7 @@ const MyStorePage = () => {
   return (
     <>
       {/* 상단 헤더 */}
-      <Header img={backIcon} title={'나의 가게'} showImg={false} />
+      <Header title={'나의 가게'} showImg={false} />
       <MenuList>
         <MenuItem
           img={iconView}

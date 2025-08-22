@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import BottomNav from '@/components/common/BottomNav'
 import Buttons from '@/components/description/Buttons'
@@ -60,7 +59,7 @@ const SummaryEditPage = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'가게 설명'} showImg={true} />
+      <Header title={'가게 설명'} showImg={true} />
       <S.Main>
         <S.Scroll className='scrollable'>
           <DoubleTitle

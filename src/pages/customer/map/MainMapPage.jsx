@@ -5,11 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import qs from 'qs'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import SearchBar from '@/components/map/SearchBar'
 import DropDown from '@/components/map/DropDown'
 import MarketCategoryRow from '@/components/map/MarketCategoryRow'
-
 import MainCategories from '@/components/map/MainCategories'
 import SubCategories from '@/components/map/SubCategories'
 import ScrollArea from '@/components/map/ScrollArea'
@@ -269,7 +267,7 @@ const MainMapPage = () => {
   return (
     <>
       {/* 헤더 */}
-      <Header img={backIcon} title={t('bottomNav.map')} showImg={false} />
+      <Header title={t('bottomNav.map')} showImg={false} />
       <S.MapContainer>
         {!isLoading && (
           <KakaoMap

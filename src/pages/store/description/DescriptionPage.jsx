@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import ShortDescription from '@/components/description/ShortDescription'
 import LongDescription from '@/components/description/LongDescription'
@@ -29,7 +28,7 @@ const StoreDescriptionPage = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'가게 설명'} showImg={true} />
+      <Header title={'가게 설명'} showImg={false} />
       <S.Main>
         <S.Scroll className='scrollable'>
           <DoubleTitle

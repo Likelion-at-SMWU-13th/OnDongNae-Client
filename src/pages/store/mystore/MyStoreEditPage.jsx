@@ -3,7 +3,6 @@ import { authAxios } from '@/lib/authAxios'
 import * as S from '@/styles/mystore/MyStoreEditPage.styles'
 
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import PhoneField from '@/components/signup/PhoneField'
 import PasswordField from '@/components/signup/PasswordField'
 import TextField from '@/components/signup/TextField'
@@ -70,7 +69,7 @@ const MyInfoEditPage = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'정보 수정'} showImg />
+      <Header title={'정보 수정'} showImg={true} />
       <S.Main>
         <S.Scroll className='scrollable'>
           <S.FieldContainer>
