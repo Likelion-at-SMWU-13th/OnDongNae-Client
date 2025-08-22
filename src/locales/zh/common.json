@@ -110,7 +110,8 @@
   "onboarding1": {
     "title": "你好，我是Koru。",
     "content1": "GoruGoru的官方角色，",
-    "content2": "帶你一起探索龍山的傳統市場。"
+    "content2": "帶你一起探索，",
+    "content3": "龍山的傳統市場。"
   },
   "onboarding2": {
     "title": "让我告诉你，为什么我是龙。",
@@ -122,7 +123,7 @@
     "content6": "龍山市场的向导。"
   },
   "onboarding3": {
-    "content1": "让我介绍一个特别的服务，",
+    "content1": "这就是 ",
     "content2": "它的灵感来自一个韩语词汇，",
     "content3": "这个词是",
     "content4": "意思是“探索每个角落”，",
@@ -132,12 +133,11 @@
   },
   "onboarding4": {
     "content1": "你可以……",
-    "content2": "探索龙山区的",
-    "content3": "多样市场",
-    "content4": "发现吸引你目光的店铺",
+    "content2": "探索龙山区的多样市场",
+    "content3": "发现吸引你目光的店铺",
+    "content4": "随时查看实时汇率",
     "content5": "获得专属行程",
-    "content6": "并收到个性化推荐",
-    "content7": "随时查看实时汇率"
+    "content6": "并收到个性化推荐"
   },
   "onboarding5": {
     "content1": "一起发现 ",

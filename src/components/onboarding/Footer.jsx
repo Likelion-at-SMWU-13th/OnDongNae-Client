@@ -11,7 +11,6 @@ const Footer = ({ currentStep, totalSteps, onNext }) => {
             <Dot key={index} className={index === currentStep ? 'active' : ''} />
           ))}
         </Dots>
-        <ImgNext src={imgNext} onClick={onNext} />
       </ContentContainer>
     </Container>
   )
@@ -49,12 +48,4 @@ const Dot = styled.div`
   &.active {
     background: rgba(240, 142, 103, 1); /* 활성화 색 */
   }
-`
-const ImgNext = styled.img`
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-  aspect-ratio: 1/1;
-  position: absolute;
-  left: 80%;
 `

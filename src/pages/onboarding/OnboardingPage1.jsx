@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useDrag } from '@use-gesture/react'
 import styled from 'styled-components'
 import Header from '@/components/onboarding/Header'
 import Footer from '@/components/onboarding/Footer'
-
 import koru1 from '@/assets/img-koru1.svg'
 
 const OnboardingPage1 = () => {
@@ -22,11 +22,18 @@ const OnboardingPage1 = () => {
     navigate('/onboarding/2')
   }
 
+  // useDgrag 훅
+  const bind = useDrag(({ down, movement: [mx], velocity: [vx] }) => {
+    if (!down && (mx < -40 || vx < -0.5)) {
+      handleNext() // 다음 페이지로 이동
+    }
+  })
+
   return (
     <Container>
       <Header onSkip={handleSkip} />
       {/* 메인 콘텐츠 영역 */}
-      <Main>
+      <Main {...bind()}>
         <Title>{t('onboarding1.title')}</Title>
         <ContentContainer>
           <Content>{t('onboarding1.content1')}</Content>
@@ -55,6 +62,7 @@ const Main = styled.div`
   margin-top: 13dvh;
   margin-bottom: 9dvh;
   padding-top: 6.4dvh;
+  touch-action: pan-y;
 `
 
 const Title = styled.p`

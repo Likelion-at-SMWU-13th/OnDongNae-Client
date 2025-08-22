@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-
+import { useDrag } from '@use-gesture/react'
 import styled from 'styled-components'
 import Header from '@/components/onboarding/Header'
 import Footer from '@/components/onboarding/Footer'
-
 import koru3 from '@/assets/img-koru3.svg'
 
 const OnboardingPage4 = () => {
@@ -24,11 +23,29 @@ const OnboardingPage4 = () => {
     navigate('/onboarding/5')
   }
 
+  const handlePrev = () => {
+    navigate(-1)
+  }
+
+  // useDgrag 훅
+  const bind = useDrag(({ down, movement: [mx], velocity: [vx] }) => {
+    if (!down) {
+      // 왼쪽으로 스와이프
+      if (mx < -50 || vx < -0.5) {
+        handleNext()
+      }
+      // 오른쪽으로 스와이프
+      else if (mx > 50 || vx > 0.5) {
+        handlePrev()
+      }
+    }
+  })
+
   return (
     <Container>
       <Header onSkip={handleSkip} />
       {/* 메인 콘텐츠 영역 */}
-      <Main>
+      <Main {...bind()}>
         <Title>{t('onboarding4.content1')}</Title>
         <List>
           <Item>{t('onboarding4.content2')}</Item>
@@ -57,10 +74,12 @@ const Container = styled.div`
 const Main = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   flex: 1;
   margin-top: 13dvh;
   margin-bottom: 9dvh;
   padding-top: 6.4dvh;
+  touch-action: pan-y;
 `
 
 const Title = styled.p`
@@ -73,7 +92,6 @@ const Title = styled.p`
 const List = styled.ul`
   list-style: none;
   padding-top: 7.91dvh;
-  padding-left: 11.54dvw;
   display: flex;
   flex-direction: column;
   gap: 4.64dvh;
