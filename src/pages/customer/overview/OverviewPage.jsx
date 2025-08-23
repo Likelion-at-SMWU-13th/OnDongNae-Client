@@ -8,6 +8,36 @@ import KakaoMapContainer from '@/components/common/KakaoMapContainer'
 import OverviewBottomScroll from '@/components/Overview/OverviewBottonScroll'
 import mapMaker from '@/assets/icon-big-mapMarker.svg'
 
+const OverviewPage = () => {
+  const { t, i18n } = useTranslation()
+  const navigate = useNavigate()
+  const [selected, setSelected] = useState(null)
+  return (
+    <Page>
+      <Header title={t('header.overview')} showImg={false} />
+      <MapContainer>
+        <KakaoMapContainer
+          level={7}
+          center={{ lat: 37.533049142, lng: 126.970520625 }}
+          markers={markers}
+          onMarkerClick={(m) => navigate(`/user/overview/info/${m?.id}`)}
+          showMarkerLabels
+          getLabel={(m) => t(m.title)}
+          labelYAnchor={2.4}
+        />
+        <OverviewBottomScroll
+          onStoreClick={(item) => {
+            navigate(`/user/overview/info/${item?.id ?? ''}`)
+          }}
+        />
+      </MapContainer>
+      <CustomerBottomNav />
+    </Page>
+  )
+}
+
+export default OverviewPage
+
 const Page = styled.div`
   position: relative;
   width: 100%;
@@ -82,33 +112,3 @@ const markers = [
     },
   },
 ]
-
-const OverviewPage = () => {
-  const { t } = useTranslation()
-  const navigate = useNavigate()
-  const [selected, setSelected] = useState(null)
-  return (
-    <Page>
-      <Header title={t('header.overview')} showImg={false} />
-      <MapContainer>
-        <KakaoMapContainer
-          level={7}
-          center={{ lat: 37.533049142, lng: 126.970520625 }}
-          markers={markers}
-          onMarkerClick={(m) => navigate(`/user/overview/info/${m?.id}`)}
-          showMarkerLabels
-          getLabel={(m) => t(m.title)}
-          labelYAnchor={2.4}
-        />
-        <OverviewBottomScroll
-          onStoreClick={(item) => {
-            navigate(`/user/overview/info/${item?.id ?? ''}`)
-          }}
-        />
-      </MapContainer>
-      <CustomerBottomNav />
-    </Page>
-  )
-}
-
-export default OverviewPage

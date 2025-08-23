@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { useTranslation } from 'react-i18next'
+import styled from 'styled-components'
+import authAxios from '@/lib/authAxios'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -19,16 +19,15 @@ export default function CourseContent() {
       setLoading(true)
       setError(null)
       try {
-        const res = await axios.get(`${API_URL}/courses`, {
+        const res = await authAxios.get(`${API_URL}/courses`, {
           headers: { 'Accept-Language': lang },
         })
-        // ✅ 응답: { code, message, success, data: [...] }
         const list = Array.isArray(res.data?.data) ? res.data.data : []
         setCourses(list)
       } catch (e) {
         console.error(e)
       } finally {
-        setLoading(false) // ✅ 반드시 내려주기
+        setLoading(false)
       }
     })()
   }, [])
@@ -60,7 +59,6 @@ export default function CourseContent() {
   )
 }
 
-/* styles */
 const Title = styled.p`
   padding: 20px 0 20px 29px;
   color: #000;

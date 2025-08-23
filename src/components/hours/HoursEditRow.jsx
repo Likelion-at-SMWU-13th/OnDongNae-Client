@@ -1,6 +1,26 @@
 // src/features/hours/HoursEditRow.jsx
 import React from 'react'
 import styled from 'styled-components'
+export default function HoursEditRow({ label, item, onOpenClick, onCloseClick, onClosedToggle }) {
+  return (
+    <Row>
+      <div></div>
+      <div style={{ fontWeight: 600, fontSize: '18px' }}>{label}</div>
+      <div></div>
+      <CellBtn disabled={item.closed} onClick={onOpenClick}>
+        {item.open ?? '  :  '}
+      </CellBtn>
+      <div></div>
+      <CellBtn disabled={item.closed} onClick={onCloseClick}>
+        {item.close ?? '  :  '}
+      </CellBtn>
+      <div></div>
+      <label style={{ display: 'flex', alignItems: 'center' }}>
+        <Checkbox checked={item.closed} onChange={(e) => onClosedToggle(e.target.checked)} />
+      </label>
+    </Row>
+  )
+}
 const Row = styled.div`
   display: grid;
   grid-template-columns: 30px 47px 25px 85px 21px 85px 33px 24px; //320
@@ -33,24 +53,3 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
     border: none;
   }
 `
-
-export default function HoursEditRow({ label, item, onOpenClick, onCloseClick, onClosedToggle }) {
-  return (
-    <Row>
-      <div></div>
-      <div style={{ fontWeight: 600, fontSize: '18px' }}>{label}</div>
-      <div></div>
-      <CellBtn disabled={item.closed} onClick={onOpenClick}>
-        {item.open ?? '  :  '}
-      </CellBtn>
-      <div></div>
-      <CellBtn disabled={item.closed} onClick={onCloseClick}>
-        {item.close ?? '  :  '}
-      </CellBtn>
-      <div></div>
-      <label style={{ display: 'flex', alignItems: 'center' }}>
-        <Checkbox checked={item.closed} onChange={(e) => onClosedToggle(e.target.checked)} />
-      </label>
-    </Row>
-  )
-}

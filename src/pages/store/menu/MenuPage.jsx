@@ -1,5 +1,5 @@
 // src/pages/menu/MenuPage.jsx
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import * as C from '@/styles/common/CustomerBottomNav.styles'
@@ -23,18 +23,16 @@ function MenuPage() {
     navigate('/menu/correct', { state: { menus } })
   }
 
-  useEffect(() => {
-    const onFocus = () => fetchMenus() // 메뉴 수정 후 재렌더링
-    window.addEventListener('focus', onFocus)
+  const fetchMenus = useCallback(() => {
     const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
-
-    authAxios
+    return authAxios
       .get(`${apiUrl}/me/menus`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         const list = Array.isArray(res?.data?.data) ? res.data.data : []
         setMenus(list)
+        setError(null)
       })
       .catch((err) => {
         const status = err?.response?.status
@@ -43,6 +41,13 @@ function MenuPage() {
         else setError('메뉴를 불러오지 못했어요.')
       })
       .finally(() => setLoading(false))
+  }, [apiUrl])
+
+  useEffect(() => {
+    setLoading(true)
+    fetchMenus() // 최초 로드
+    const onFocus = () => fetchMenus() // 페이지로 다시 돌아왔을 때 갱신
+    window.addEventListener('focus', onFocus)
     return () => window.removeEventListener('focus', onFocus)
   }, [fetchMenus])
 
@@ -74,6 +79,7 @@ function MenuPage() {
                   nameKo={m.nameKo}
                   priceKrw={m.priceKrw}
                   allergies={m.allergies ?? []}
+                  style={{ padding: '0px' }}
                 />
               ))}
           </MenuList>
@@ -99,15 +105,15 @@ const RegisterMenuSection = styled.section`
 const MenuList = styled.section`
   display: flex;
   flex-direction: column;
-  padding: 0px 30px 0px 30px;
-  gap: 35px;
+  padding: 0px 30px 30px 30px;
+  gap: 30px;
 `
-
 const LoadingComment = styled.div`
   text-align: center;
   padding-bottom: 30px;
 `
 
 const ButtonWrapper = styled.div`
+  display: flex;
   margin-bottom: 40px;
 `

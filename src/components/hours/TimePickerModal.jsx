@@ -2,6 +2,55 @@
 import React from 'react'
 import styled from 'styled-components'
 
+export default function TimePickerModal({
+  title = '시간 선택',
+  value, // { hour, minute }
+  onChange, // (next) => void
+  onCancel, // () => void
+  onConfirm, // () => void
+}) {
+  const { hour, minute } = value
+
+  // 00..24 (24시는 분을 00만 허용)
+  const hourOptions = Array.from({ length: 25 }, (_, i) => String(i).padStart(2, '0'))
+  const minuteOptions =
+    hour === '24' ? ['00'] : Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'))
+
+  const handleHourChange = (h) => {
+    if (h === '24' && minute !== '00') {
+      onChange({ ...value, hour: h, minute: '00' })
+    } else {
+      onChange({ ...value, hour: h })
+    }
+  }
+
+  return (
+    <Backdrop onClick={onCancel}>
+      <Sheet onClick={(e) => e.stopPropagation()}>
+        <div style={{ fontWeight: 600, fontSize: '18px', padding: '8px 10px' }}>{title}</div>
+        <Row>
+          <Sel value={hour} onChange={(e) => handleHourChange(e.target.value)}>
+            {hourOptions.map((v) => (
+              <option key={v}>{v}</option>
+            ))}
+          </Sel>
+          <Hours>시</Hours>
+          <Sel value={minute} onChange={(e) => onChange({ ...value, minute: e.target.value })}>
+            {minuteOptions.map((v) => (
+              <option key={v}>{v}</option>
+            ))}
+          </Sel>
+          <Mins>분</Mins>
+        </Row>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <BackBtn onClick={onCancel}>취소</BackBtn>
+          <TimeBtn onClick={onConfirm}>확인</TimeBtn>
+        </Row>
+      </Sheet>
+    </Backdrop>
+  )
+}
+
 const Backdrop = styled.div`
   position: fixed;
   inset: 0;
@@ -60,51 +109,3 @@ const Mins = styled.p`
 const Hours = styled.p`
   font-size: 15px;
 `
-export default function TimePickerModal({
-  title = '시간 선택',
-  value, // { hour, minute }
-  onChange, // (next) => void
-  onCancel, // () => void
-  onConfirm, // () => void
-}) {
-  const { hour, minute } = value
-
-  // 00..24 (24시는 분을 00만 허용)
-  const hourOptions = Array.from({ length: 25 }, (_, i) => String(i).padStart(2, '0'))
-  const minuteOptions =
-    hour === '24' ? ['00'] : Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'))
-
-  const handleHourChange = (h) => {
-    if (h === '24' && minute !== '00') {
-      onChange({ ...value, hour: h, minute: '00' })
-    } else {
-      onChange({ ...value, hour: h })
-    }
-  }
-
-  return (
-    <Backdrop onClick={onCancel}>
-      <Sheet onClick={(e) => e.stopPropagation()}>
-        <div style={{ fontWeight: 600, fontSize: '18px', padding: '8px 10px' }}>{title}</div>
-        <Row>
-          <Sel value={hour} onChange={(e) => handleHourChange(e.target.value)}>
-            {hourOptions.map((v) => (
-              <option key={v}>{v}</option>
-            ))}
-          </Sel>
-          <Hours>시</Hours>
-          <Sel value={minute} onChange={(e) => onChange({ ...value, minute: e.target.value })}>
-            {minuteOptions.map((v) => (
-              <option key={v}>{v}</option>
-            ))}
-          </Sel>
-          <Mins>분</Mins>
-        </Row>
-        <Row style={{ justifyContent: 'space-between' }}>
-          <BackBtn onClick={onCancel}>취소</BackBtn>
-          <TimeBtn onClick={onConfirm}>확인</TimeBtn>
-        </Row>
-      </Sheet>
-    </Backdrop>
-  )
-}

@@ -1,13 +1,12 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react'
-import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import yongmunSmallImg from '@/assets/img-market-small-yongmun.png'
 import huamSmallImg from '@/assets/img-market-small-huam.png'
 import itaewonSmallImg from '@/assets/img-market-small-itaewon.png'
 import manlySmallImg from '@/assets/img-market-small-manly.png'
 import haebangchonSmallImg from '@/assets/img-market-small-haebangchon.png'
-
 import cardImage from '@/assets/image.png'
 
 function activeSubcategoryNames(categories, selectedMainId, selectedSubIds) {

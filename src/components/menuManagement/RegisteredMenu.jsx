@@ -19,9 +19,7 @@ const RegisteredMenu = ({ nameKo, priceKrw, allergies = [] }) => {
 
 export default RegisteredMenu
 
-const Content = styled.span`
-  padding-bottom: 38.5px;
-`
+const Content = styled.span``
 const RowWrapper = styled.span`
   display: flex;
   justify-content: space-between;
