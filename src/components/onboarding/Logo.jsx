@@ -2,11 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Logo = () => {
-  return (
-    <>
-      <LogoTxt>GoruGoru</LogoTxt>
-    </>
-  )
+  return <LogoTxt>GoruGoru</LogoTxt>
 }
 
 export default Logo

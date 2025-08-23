@@ -13,7 +13,7 @@ export default SkipButton
 
 const Button = styled.button`
   display: inline;
-  width: auto; /* 넓이 자동 */
+  width: auto;
   height: auto;
   color: #fa6432;
   text-align: center;

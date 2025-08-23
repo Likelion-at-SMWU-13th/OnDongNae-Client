@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDrag } from '@use-gesture/react'
@@ -8,14 +8,15 @@ import Footer from '@/components/onboarding/Footer'
 import koru1 from '@/assets/img-koru1.svg'
 
 const OnboardingPage1 = () => {
-  const { t } = useTranslation()
   const navigate = useNavigate()
-  const [step, setStep] = useState(0)
-  const totalSteps = 5
+  const { t } = useTranslation()
 
-  const nextStep = () => setStep((prev) => (prev + 1) % totalSteps)
   const handleSkip = () => {
-    navigate('/user/map')
+    navigate('/')
+  }
+
+  const handlePrev = () => {
+    navigate(-1)
   }
 
   const handleNext = () => {
@@ -24,8 +25,15 @@ const OnboardingPage1 = () => {
 
   // useDgrag 훅
   const bind = useDrag(({ down, movement: [mx], velocity: [vx] }) => {
-    if (!down && (mx < -40 || vx < -0.5)) {
-      handleNext() // 다음 페이지로 이동
+    if (!down) {
+      // 왼쪽으로 스와이프
+      if (mx < -50 || vx < -0.5) {
+        handleNext()
+      }
+      // 오른쪽으로 스와이프
+      else if (mx > 50 || vx > 0.5) {
+        handlePrev()
+      }
     }
   })
 
@@ -42,7 +50,7 @@ const OnboardingPage1 = () => {
         </ContentContainer>
         <Img src={koru1} alt='logo' />
       </Main>
-      <Footer currentStep={step} totalSteps={totalSteps} onNext={handleNext} />
+      <Footer currentStep={0} totalSteps={5} onNext={handleNext} />
     </Container>
   )
 }
@@ -92,5 +100,4 @@ const Img = styled.img`
   width: 161.699px;
   height: 243px;
   flex-shrink: 0;
-  aspect-ratio: 161.7/243;
 `
