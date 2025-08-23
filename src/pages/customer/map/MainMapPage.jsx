@@ -56,7 +56,6 @@ const MainMapPage = () => {
 
   // 렌더링 시, 데이터 불러오기
   useEffect(() => {
-    // 'en-US' -> 'en' 형태로 변환
     const lang = (i18n.language || 'en').split('-')[0]
     setIsLoading(true)
     axios

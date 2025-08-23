@@ -221,7 +221,6 @@ const List = styled.div`
 
   flex: 1 1 auto;
   min-height: 0;
-  margin-top: 8px;
   padding: 0 24px 16px 24px;
   overflow-y: auto;
 
@@ -262,11 +261,9 @@ const StoreInfo = styled.div`
   align-items: center;
   gap: 6px;
   color: #838383;
-  font-feature-settings: 'dlig' on;
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 6px;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -280,7 +277,7 @@ const OpenInfo = styled.span`
 
 const StoreImg = styled.img`
   width: 328px;
-  height: 84px;
+  height: 87px;
   margin: 6px 0 10px 0;
 `
 
@@ -325,7 +322,7 @@ const CardDivider = styled.div`
   &:not(:last-child)::after {
     content: '';
     display: block;
-    height: 9px;
+    height: 6px;
     background: #e9e9ed;
     margin: 12px -24px 0 -24px;
   }

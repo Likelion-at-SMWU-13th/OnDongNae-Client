@@ -126,7 +126,7 @@ const ArrowButton = styled.button`
 `
 
 const Card = styled.div`
-  padding: 10px 101px 20px 23px;
+  padding: 0 101px 0 23px;
 `
 
 const Day = styled.div`
