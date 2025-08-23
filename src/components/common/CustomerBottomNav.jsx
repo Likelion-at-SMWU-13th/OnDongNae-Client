@@ -23,6 +23,30 @@ const NAVS = [
   { to: '/user/rates', label: 'bottomNav.rates', icon: icRates, iconActive: icRatesActive },
 ]
 
+const BottomNav = () => {
+  const { t } = useTranslation()
+  return (
+    <Bar>
+      <ItemContainer>
+        {NAVS.map(({ to, label, icon, iconActive }) => (
+          <Link key={to} to={to}>
+            {(
+              { isActive }, //링크가 활성화 상태인지 알려줌, 활성 상태일 때만 actice 클래스 줌
+            ) => (
+              <Item className={isActive ? 'active' : ''}>
+                <img src={isActive ? iconActive : icon} alt='' aria-hidden />
+                <span>{t(label)}</span>
+              </Item>
+            )}
+          </Link>
+        ))}
+      </ItemContainer>
+    </Bar>
+  )
+}
+
+export default BottomNav
+
 const Bar = styled.div`
   width: min(100vw, 390px);
   position: fixed;
@@ -59,7 +83,6 @@ const Item = styled.div`
     color: #f08e67;
   }
 `
-/* 2) 링크 기본 스타일 제거(파란색 밑줄) */
 const Link = styled(NavLink)`
   text-decoration: none;
   color: inherit;
@@ -68,27 +91,3 @@ const Link = styled(NavLink)`
   }
   -webkit-tap-highlight-color: transparent;
 `
-
-const BottomNav = () => {
-  const { t } = useTranslation()
-  return (
-    <Bar>
-      <ItemContainer>
-        {NAVS.map(({ to, label, icon, iconActive }) => (
-          <Link key={to} to={to}>
-            {(
-              { isActive }, //링크가 활성화 상태인지 알려줌, 활성 상태일 때만 actice 클래스 줌
-            ) => (
-              <Item className={isActive ? 'active' : ''}>
-                <img src={isActive ? iconActive : icon} alt='' aria-hidden />
-                <span>{t(label)}</span>
-              </Item>
-            )}
-          </Link>
-        ))}
-      </ItemContainer>
-    </Bar>
-  )
-}
-
-export default BottomNav

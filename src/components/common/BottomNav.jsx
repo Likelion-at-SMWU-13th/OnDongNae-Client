@@ -18,6 +18,29 @@ const NAVS = [
   { to: '/store/mystore', label: '나의가게', icon: icMy, iconActive: icMyActive },
 ]
 
+const BottomNav = () => {
+  return (
+    <Bar>
+      <ItemContainer>
+        {NAVS.map(({ to, label, icon, iconActive }) => (
+          <Link key={to} to={to}>
+            {(
+              { isActive }, //링크가 활성화 상태인지 알려줌, 활성 상태일 때만 actice 클래스 줌
+            ) => (
+              <Item className={isActive ? 'active' : ''}>
+                <img src={isActive ? iconActive : icon} alt='' aria-hidden />
+                <span>{label}</span>
+              </Item>
+            )}
+          </Link>
+        ))}
+      </ItemContainer>
+    </Bar>
+  )
+}
+
+export default BottomNav
+
 const Bar = styled.section`
   width: min(100vw, 390px);
   position: fixed;
@@ -55,7 +78,6 @@ const Item = styled.div`
     color: #f08e67;
   }
 `
-/* 2) 링크 기본 스타일 제거(파란색 밑줄) */
 const Link = styled(NavLink)`
   text-decoration: none;
   color: inherit;
@@ -64,26 +86,3 @@ const Link = styled(NavLink)`
   }
   -webkit-tap-highlight-color: transparent;
 `
-
-const BottomNav = () => {
-  return (
-    <Bar>
-      <ItemContainer>
-        {NAVS.map(({ to, label, icon, iconActive }) => (
-          <Link key={to} to={to}>
-            {(
-              { isActive }, //링크가 활성화 상태인지 알려줌, 활성 상태일 때만 actice 클래스 줌
-            ) => (
-              <Item className={isActive ? 'active' : ''}>
-                <img src={isActive ? iconActive : icon} alt='' aria-hidden />
-                <span>{label}</span>
-              </Item>
-            )}
-          </Link>
-        ))}
-      </ItemContainer>
-    </Bar>
-  )
-}
-
-export default BottomNav
