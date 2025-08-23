@@ -81,7 +81,7 @@ const Title = styled.p`
   color: #000;
   text-align: center;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 30px;
 `
 const Highlight = styled.span`
