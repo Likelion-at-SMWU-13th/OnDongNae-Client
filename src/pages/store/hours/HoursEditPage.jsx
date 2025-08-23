@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
+import { hhmmToPicker, pickerToHhmm } from '@/utils/pageedittime'
+import { useNavigate } from 'react-router-dom'
+import { authAxios } from '@/lib/authAxios'
 import Header from '@/components/common/Header'
 import BottomNav from '@/components/common/BottomNav'
 import DoubleTitle from '@/components/common/DoubleTitle'
@@ -8,10 +11,8 @@ import HoursEditRow, { CellBtn } from '@/components/hours/HoursEditRow'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
 import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 import TimePickerModal from '@/components/hours/TimePickerModal'
-import { hhmmToPicker, pickerToHhmm } from '@/utils/pageedittime'
-import { useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { authAxios } from '@/lib/authAxios'
+import BottomNav from '@/components/common/BottomNav'
+
 const DAY_KO = {
   MON: '월요일',
   TUE: '화요일',
@@ -109,7 +110,7 @@ const HoursEditPage = () => {
     )
   }
 
-  // 4) 저장 payload (연동시 PUT)
+  // 4) 저장 payload
   const payload = useMemo(
     () => ({
       items: items.map(({ day, open, close, closed }) => ({
