@@ -8,7 +8,6 @@ import debounce from 'lodash.debounce' // 가격 입력 시, 매번 환율 api �
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
-
 import InputBoxKr from '@/components/rates/InputBoxKr'
 import InputBoxConverted from '@/components/rates/InputBoxConverted'
 import RatesDescription from '@/components/rates/RatesDescription'
