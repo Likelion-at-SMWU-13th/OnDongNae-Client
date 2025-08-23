@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-
 import InputTitle from '@/components/description/InputTitle'
 import Button from '@/components/description/Button'
 
@@ -12,15 +11,13 @@ const DetailDescription = ({ text = '' }) => {
   }
   // useEffect로 마운트 시, getDetail 함수 내 axios get으로 데이터 받아오기
   return (
-    <>
-      <Container>
-        <InputTitle text={'상세 설명'} />
-        <Comment>{text || '등록된 상세 설명이 없습니다.'}</Comment>
-        <ButtonContainer>
-          <Button type='button' label='수정' onBtnClick={handleSubmit} />
-        </ButtonContainer>
-      </Container>
-    </>
+    <Container>
+      <InputTitle text={'상세 설명'} />
+      <Comment>{text || '등록된 상세 설명이 없습니다.'}</Comment>
+      <ButtonContainer>
+        <Button type='button' label='수정' onBtnClick={handleSubmit} />
+      </ButtonContainer>
+    </Container>
   )
 }
 

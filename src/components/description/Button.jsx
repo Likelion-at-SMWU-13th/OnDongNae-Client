@@ -1,10 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
+
+function SmallOrangeButton({ type, label, onBtnClick }) {
+  return (
+    <Button type={type} onClick={onBtnClick}>
+      {label}
+    </Button>
+  )
+}
+
+export default SmallOrangeButton
 
 const Button = styled.button`
   width: 80px;
-
   display: flex;
   padding: 13px 25px;
   text-align: center;
@@ -16,13 +24,3 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
 `
-
-function SmallOrangeButton({ type, label, onBtnClick = undefined }) {
-  return (
-    <Button type={type} onClick={onBtnClick ? onBtnClick : undefined}>
-      {label}
-    </Button>
-  )
-}
-
-export default SmallOrangeButton
