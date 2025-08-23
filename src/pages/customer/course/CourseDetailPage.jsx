@@ -1,11 +1,11 @@
 // src/pages/course/CourseDetailPage.jsx
 import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import * as C from '@/styles/common/CustomerBottomNav.styles'
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
-import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 
 export default function CourseDetailPage() {
@@ -15,8 +15,7 @@ export default function CourseDetailPage() {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  //  배포 도메인이 있으면 우선 사용, 없으면 현재 origin
-  const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
+  const apiUrl = import.meta.env.VITE_API_URL
   const PUBLIC_ORIGIN = import.meta.env.VITE_PUBLIC_SITE_URL ?? window.location.origin
   const shareUrl = `${PUBLIC_ORIGIN}/courses/${courseId}`
 
@@ -32,7 +31,7 @@ export default function CourseDetailPage() {
         const lang = (i18n.language || 'en').split('-')[0]
         const token =
           sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
-        const res = await fetch(`${API_URL}/courses/${encodeURIComponent(courseId)}`, {
+        const res = await fetch(`${apiUrl}/courses/${encodeURIComponent(courseId)}`, {
           method: 'GET',
           headers: {
             ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -57,7 +56,7 @@ export default function CourseDetailPage() {
       }
     })()
     return () => (mounted = false)
-  }, [courseId, API_URL])
+  }, [courseId, apiUrl])
   const stores = useMemo(() => {
     const arr = data?.recommendedCourseStores
     if (!Array.isArray(arr)) return []

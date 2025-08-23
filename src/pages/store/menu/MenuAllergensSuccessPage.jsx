@@ -1,29 +1,10 @@
-import styled from 'styled-components'
-import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
-import DoubleTitle from '@/components/common/DoubleTitle'
-import BottomNav from '@/components/common/BottomNav'
-import AllergensEdit from '@/components/menuManagement/AllergensEdit'
 import { useLocation, useNavigate } from 'react-router-dom'
-
-const TitleWrapper = styled.div`
-  white-space: pre-line;
-`
-
-export const Main = styled.main`
-  height: calc(100dvh - 155px);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-export const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
-`
+import styled from 'styled-components'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
+import Header from '@/components/common/Header'
+import DoubleTitle from '@/components/common/DoubleTitle'
+import AllergensEdit from '@/components/menuManagement/AllergensEdit'
+import BottomNav from '@/components/common/BottomNav'
 
 const MenuAllergensSuccess = () => {
   const { state } = useLocation()
@@ -33,9 +14,9 @@ const MenuAllergensSuccess = () => {
   const initialResults = state?.initialResults ?? []
   return (
     <div className='scrollable'>
-      <Header img={backIcon} title={'메뉴 관리'} showImg={true} />
-      <Main>
-        <Scroll>
+      <Header title={'메뉴 관리'} showImg={true} />
+      <C.Main>
+        <C.Scroll>
           <TitleWrapper>
             <DoubleTitle
               title='알레르기 분석이 끝났어요'
@@ -44,16 +25,19 @@ const MenuAllergensSuccess = () => {
               }
             />
           </TitleWrapper>
-          {/* ✅ 결과를 컴포넌트에 전달 */}
           <AllergensEdit
             initialResults={initialResults}
             onSaved={() => navigate('/menu/allergens/apply')}
           />
-        </Scroll>
-      </Main>
+        </C.Scroll>
+      </C.Main>
       <BottomNav />
     </div>
   )
 }
 
 export default MenuAllergensSuccess
+
+const TitleWrapper = styled.div`
+  white-space: pre-line;
+`

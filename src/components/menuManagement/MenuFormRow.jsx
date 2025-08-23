@@ -1,6 +1,38 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+const MenuFormRow = ({ name, price, onChangeName, onChangePrice }) => {
+  return (
+    <Row style={{ borderTop: '40px' }}>
+      <Field>
+        <Label>메뉴 이름</Label>
+        <PrefixWrapper>
+          <Input
+            type='text'
+            placeholder='메뉴 이름을 입력해주세요'
+            value={name}
+            onChange={(e) => onChangeName(e.target.value)}
+          />
+        </PrefixWrapper>
+      </Field>
+      <Field>
+        <Label>가격</Label>
+        <PrefixWrapper>
+          <Prefix>₩</Prefix>
+          <Input
+            type='number'
+            placeholder='가격을 입력해주세요'
+            value={price || ''}
+            onChange={(e) => onChangePrice(e.target.value)}
+          />
+        </PrefixWrapper>
+      </Field>
+    </Row>
+  )
+}
+
+export default MenuFormRow
+
 const Row = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,35 +86,3 @@ const PrefixWrapper = styled.div`
   width: 200px;
   padding-left: 5px;
 `
-
-const MenuFormRow = ({ name, price, onChangeName, onChangePrice }) => {
-  return (
-    <Row style={{ borderTop: '40px' }}>
-      <Field>
-        <Label>메뉴 이름</Label>
-        <PrefixWrapper>
-          <Input
-            type='text'
-            placeholder='메뉴 이름을 입력해주세요'
-            value={name}
-            onChange={(e) => onChangeName(e.target.value)}
-          />
-        </PrefixWrapper>
-      </Field>
-      <Field>
-        <Label>가격</Label>
-        <PrefixWrapper>
-          <Prefix>₩</Prefix>
-          <Input
-            type='number'
-            placeholder='가격을 입력해주세요'
-            value={price || ''}
-            onChange={(e) => onChangePrice(e.target.value)}
-          />
-        </PrefixWrapper>
-      </Field>
-    </Row>
-  )
-}
-
-export default MenuFormRow

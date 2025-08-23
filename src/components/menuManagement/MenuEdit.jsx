@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import authAxios from '@/lib/authAxios'
 
-/* ---- 글자 픽셀 폭 계산 ---- */
 const getTextWidth = (
   text = ' ',
   font = '500 19px Pretendard, system-ui, -apple-system, sans-serif',
@@ -33,25 +32,6 @@ export default function MenuEdit({ initialItems = [] }) {
     setMenus(next)
   }
 
-  // 저장 클릭 시 API 호출
-  // const handleSave = async () => {
-  //   try {
-  //     const body = {
-  //       items: menus.map((m) => ({
-  //         nameKo: m.nameKo,
-  //         priceKrw: m.priceKrw,
-  //       })),
-  //     }
-  //     const res = await axios.post(`${apiUrl}/me/menus/save`, body)
-  //     console.log(res.data) // 응답 바로 사용 가능
-  //     navigate('/menu/extract/save')
-  //   } catch (err) {
-  //     console.error(err)
-  //     alert('저장 실패!')
-  //   }
-  // }
-
-  // 저장 클릭 시 API 호출
   const handleSave = () => {
     const body = {
       items: menus.map((m) => ({
@@ -60,10 +40,9 @@ export default function MenuEdit({ initialItems = [] }) {
       })),
     }
 
-    axios
+    authAxios
       .post(`${apiUrl}/me/menus/save`, body, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
-        console.log(res.data) // 연동 확인 후 삭제c
         const menuData = res.data.data.menus
         navigate('/menu/extract/save', { state: menuData })
       })
@@ -108,7 +87,6 @@ export default function MenuEdit({ initialItems = [] }) {
         </Row>
       ))}
 
-      {/* 저장 버튼 */}
       <SaveButton type='button' onClick={handleSave}>
         저장
       </SaveButton>
@@ -116,7 +94,6 @@ export default function MenuEdit({ initialItems = [] }) {
   )
 }
 
-/* ===== styles ===== */
 const Row = styled.div`
   display: grid;
   grid-template-columns: 110px 110px 80px;
@@ -134,9 +111,16 @@ const NameKo = styled.input`
   font-weight: 500;
   border: none;
   border-bottom: 1px solid #feb99d;
-  overflow: hidden;
-  white-space: nowrap;
   box-sizing: content-box;
+
+  /* 말줄임표 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:read-only {
+    cursor: default;
+  }
 `
 const PriceWrapper = styled.div`
   display: inline-flex;

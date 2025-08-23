@@ -2,10 +2,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import axios from 'axios'
+import styled from 'styled-components'
+import authAxios from '@/lib/authAxios'
 import Subtitle from '../common/Subtitle'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
-import styled from 'styled-components'
 
 function Btn({ active, children, onClick }) {
   return (
@@ -46,9 +46,8 @@ export default function CourseOption() {
 
   // 데이터 GET (시장 + 옵션)
   useEffect(() => {
-    alert('로딩 중입니다!') // 연동 후 삭제
     const lang = (i18n.language || 'en').split('-')[0]
-    axios
+    authAxios
       .get(`${apiUrl}/courses/options`, {
         headers: { 'Accept-Language': lang },
       })

@@ -1,13 +1,13 @@
 // src/pages/menu/MenuCorrectPage.jsx
 import React, { useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
-import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
-import BottomNav from '@/components/common/BottomNav'
-import Title from '@/components/signup/Title'
 import { useLocation, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
+import Header from '@/components/common/Header'
+import Title from '@/components/signup/Title'
 import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 import MenuCorrect from '@/components/menuManagement/MenuCorrect'
+import BottomNav from '@/components/common/BottomNav'
 
 const makeLocalId = () => `local_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
 
@@ -16,7 +16,6 @@ const MenuCorrectPage = () => {
   const location = useLocation()
   const menus = location.state?.menus ?? [] // MenuPage에서 넘어온 state
 
-  // 서버 원본 + 작업본
   const [original, setOriginal] = useState([])
   const [working, setWorking] = useState([])
 
@@ -70,15 +69,14 @@ const MenuCorrectPage = () => {
         priceKrw: Number(priceKrw ?? 0),
       })),
     }
-    console.log('PUT payload:', body)
     navigate('/menu/extract/save')
   }
 
   return (
     <div className='scrollable'>
-      <Header img={backIcon} title='메뉴 관리' showImg />
-      <Main>
-        <Scroll>
+      <Header title='메뉴 관리' showImg={true} />
+      <C.Main>
+        <C.Scroll>
           <TitleContainer>
             <Title text='메뉴를 수정해주세요' />
           </TitleContainer>
@@ -88,14 +86,11 @@ const MenuCorrectPage = () => {
             onDelete={handleDelete}
             onAdd={handleAdd}
           />
-          <SmallButtonContainer
-            prevLabel='취소'
-            nextLabel='적용'
-            handleSubmit={handleSubmit}
-            // disabled={!isDirty}
-          />
-        </Scroll>
-      </Main>
+          <ButtonWrapper>
+            <SmallButtonContainer prevLabel='취소' nextLabel='적용' handleSubmit={handleSubmit} />
+          </ButtonWrapper>
+        </C.Scroll>
+      </C.Main>
       <BottomNav />
     </div>
   )
@@ -106,17 +101,6 @@ export default MenuCorrectPage
 const TitleContainer = styled.div`
   padding: 38px 0 0 30px;
 `
-export const Main = styled.main`
-  height: calc(100dvh - 160px);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-export const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
+const ButtonWrapper = styled.div`
+  margin-bottom: 40px;
 `

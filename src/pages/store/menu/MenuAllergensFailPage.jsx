@@ -1,14 +1,34 @@
 import React from 'react'
-import styled from 'styled-components'
-
 import { useNavigate } from 'react-router-dom'
-
+import styled from 'styled-components'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
-import BottomNav from '@/components/common/BottomNav'
 import Warning from '@/assets/icon-warning.svg'
 import SmallLightOrangeButton from '@/components/common/SmallLightOrangeButton'
 import SmallOrangeButton from '@/components/common/SmallOrangeButton'
+import BottomNav from '@/components/common/BottomNav'
+
+const MenuAllergensFailPage = () => {
+  const navigate = useNavigate()
+  const handleBack = () => navigate('/menu/extract/save')
+  const handleRetry = () => navigate('/menu')
+  return (
+    <div>
+      <Header img={backIcon} title='메뉴 관리' showImg={false} />
+      <ComponentContainer>
+        <WarningIcon src={Warning} alt='로딩중' />
+        <FailureMsg>{`인공지능 분석이 실패했어요
+나중에 다시 시도해주세요`}</FailureMsg>
+        <ButtonContainer>
+          <SmallLightOrangeButton type='button' label='건너뛰기' onBtnClick={handleRetry} />
+          <SmallOrangeButton type='button' label='다시 시도' onBtnClick={handleBack} />
+        </ButtonContainer>
+      </ComponentContainer>
+      <BottomNav />
+    </div>
+  )
+}
+
+export default MenuAllergensFailPage
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -32,28 +52,5 @@ const FailureMsg = styled.p`
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 50px;
-  white-space: pre-line; /* \n 줄바꿈 표시 */
+  white-space: pre-line;
 `
-
-const MenuAllergensFailPage = () => {
-  const navigate = useNavigate()
-  const handleBack = () => navigate(-1)
-  const handleRetry = () => navigate('/menu')
-  return (
-    <div>
-      <Header img={backIcon} title='메뉴 관리' showImg={true} />
-      <ComponentContainer>
-        <WarningIcon src={Warning} alt='로딩중' />
-        <FailureMsg>{`인공지능 분석이 실패했어요
-나중에 다시 시도해주세요`}</FailureMsg>
-        <ButtonContainer>
-          <SmallLightOrangeButton type='button' label='건너뛰기' onBtnClick={handleRetry} />
-          <SmallOrangeButton type='button' label='다시 시도' onBtnClick={handleBack} />
-        </ButtonContainer>
-      </ComponentContainer>
-      <BottomNav />
-    </div>
-  )
-}
-
-export default MenuAllergensFailPage
