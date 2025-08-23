@@ -1,4 +1,3 @@
-// TermsAgreement.jsx
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import circleCheckOff from '@/assets/icon-circle-check-off.svg'
@@ -6,40 +5,8 @@ import checkOff from '@/assets/icon-check-off.svg'
 import circleCheckOn from '@/assets/icon-circle-check-on.svg'
 import checkOn from '@/assets/icon-check-on.svg'
 
-const TermsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 23px;
-`
-const BigTermRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 12px;
-  font-size: 20px;
-  font-weight: 400;
-`
-const TermRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding-left: 2px;
-  font-size: 18px;
-  font-weight: 400;
-`
-const CheckImage = styled.img`
-  cursor: pointer;
-`
-const ViewLink = styled.span`
-  cursor: pointer;
-  color: #b3b3b3;
-  font-size: 18px;
-  text-decoration: underline;
-`
-
 // 필수 항목 모두 선택되었는지 전달
-export default function TermsAgreement({ onRequiredChange }) {
+function TermsAgreement({ onRequiredChange }) {
   const [agreements, setAgreements] = useState({
     all: false, // 모두 선택
     term1: false, // 필수
@@ -150,3 +117,37 @@ export default function TermsAgreement({ onRequiredChange }) {
     </TermsContainer>
   )
 }
+
+export default TermsAgreement
+
+const TermsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+`
+const BigTermRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  font-size: 20px;
+  font-weight: 400;
+`
+const TermRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-left: 2px;
+  font-size: 18px;
+  font-weight: 400;
+`
+const CheckImage = styled.img`
+  cursor: pointer;
+`
+const ViewLink = styled.span`
+  cursor: pointer;
+  color: #b3b3b3;
+  font-size: 18px;
+  text-decoration: underline;
+`
