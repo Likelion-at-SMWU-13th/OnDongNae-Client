@@ -1,47 +1,15 @@
 // src/pages/menu/MenuPage.jsx
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
+import authAxios from '@/lib/authAxios'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import Title from '@/components/common/Title'
 import RegisterOptions from '@/components/menuManagement/RegisterOptions'
-import BottomNav from '@/components/common/BottomNav'
 import RegisteredMenu from '@/components/menuManagement/RegisteredMenu'
-import { authAxios } from '@/lib/authAxios'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
-
-export const Main = styled.main`
-  height: calc(100dvh - 155px);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-export const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
-`
-const RegisterMenuSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  padding: 38px 30px 50px 30px;
-  gap: 17px;
-`
-const MenuList = styled.section`
-  display: flex;
-  flex-direction: column;
-  padding: 0px 30px 0px 30px;
-  gap: 35px;
-`
-
-const LoadingComment = styled.div`
-  text-align: center;
-  padding-bottom: 30px;
-`
+import BottomNav from '@/components/common/BottomNav'
 
 function MenuPage() {
   const navigate = useNavigate()
@@ -56,13 +24,9 @@ function MenuPage() {
   }
 
   useEffect(() => {
+    const onFocus = () => fetchMenus() // 메뉴 수정 후 재렌더링
+    window.addEventListener('focus', onFocus)
     const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
-
-    if (!token) {
-      setError('로그인이 필요합니다.')
-      setLoading(false)
-      return
-    }
 
     authAxios
       .get(`${apiUrl}/me/menus`, {
@@ -79,13 +43,14 @@ function MenuPage() {
         else setError('메뉴를 불러오지 못했어요.')
       })
       .finally(() => setLoading(false))
-  }, [apiUrl])
+    return () => window.removeEventListener('focus', onFocus)
+  }, [fetchMenus])
 
   return (
     <div className='scrollable'>
-      <Header img={backIcon} title={'메뉴 관리'} showImg={true} />
-      <Main>
-        <Scroll>
+      <Header title={'메뉴 관리'} showImg={false} />
+      <C.Main>
+        <C.Scroll>
           <RegisterMenuSection>
             <Title text={'메뉴판을 등록해주세요'} />
             <RegisterOptions
@@ -112,14 +77,37 @@ function MenuPage() {
                 />
               ))}
           </MenuList>
-          {!loading && !error && menus.length > 0 && (
-            <LargeOrangeButton label='메뉴 수정' onBtnClick={handleEdit} />
-          )}{' '}
-        </Scroll>
-      </Main>
+          <ButtonWrapper>
+            {!loading && !error && menus.length > 0 && (
+              <LargeOrangeButton label='메뉴 수정' onBtnClick={handleEdit} />
+            )}{' '}
+          </ButtonWrapper>
+        </C.Scroll>
+      </C.Main>
       <BottomNav />
     </div>
   )
 }
 
 export default MenuPage
+const RegisterMenuSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 38px 30px 50px 30px;
+  gap: 17px;
+`
+const MenuList = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 0px 30px 0px 30px;
+  gap: 35px;
+`
+
+const LoadingComment = styled.div`
+  text-align: center;
+  padding-bottom: 30px;
+`
+
+const ButtonWrapper = styled.div`
+  margin-bottom: 40px;
+`

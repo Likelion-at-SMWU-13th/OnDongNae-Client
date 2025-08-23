@@ -1,27 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import styled from 'styled-components'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
-import BottomNav from '@/components/common/BottomNav'
 import Spinner from '@/assets/icon-spinner.svg'
 import SubTitle from '@/components/signup/SubTitle'
+import BottomNav from '@/components/common/BottomNav'
 
-const ComponentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-`
-const SpinnerIcon = styled.img`
-  margin: 164px 0 60px 0;
-  width: 119px;
-`
-const Loading = styled(SubTitle)`
-  font-size: 20px;
-  font-weight: 500;
-`
 const MenuExtractLoadingPage = () => {
   const { state } = useLocation()
   const navigate = useNavigate()
@@ -41,13 +25,13 @@ const MenuExtractLoadingPage = () => {
       }))
 
       navigate('/menu/extract/success', { state: { initialItems }, replace: true })
-    }, 1000) // 로딩 화면 보여줄 딜레이 (선택)
+    }, 3000)
 
     return () => clearTimeout(t)
   }, [state, navigate])
   return (
     <div>
-      <Header img={backIcon} title='메뉴 관리' showImg />
+      <Header title='메뉴 관리' showImg={true} />
       <ComponentContainer>
         <SpinnerIcon src={Spinner} alt='로딩중' />
         <Loading text='메뉴를 추출하고 있어요' />
@@ -58,3 +42,18 @@ const MenuExtractLoadingPage = () => {
 }
 
 export default MenuExtractLoadingPage
+
+const ComponentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+`
+const SpinnerIcon = styled.img`
+  margin: 164px 0 60px 0;
+  width: 119px;
+`
+const Loading = styled(SubTitle)`
+  font-size: 20px;
+  font-weight: 500;
+`

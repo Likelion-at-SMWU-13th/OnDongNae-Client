@@ -1,11 +1,9 @@
-'use client'
-
 import { useMemo, useState } from 'react'
 import styled from 'styled-components'
+import authAxios from '@/lib/authAxios'
 import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 import Allergens from './Allergens'
-import { authAxios } from '@/lib/authAxios'
-/** 한글 ↔ 영문 canonical 매핑 (백엔드 표 기준) */
+
 const KO_TO_EN = {
   '알류(계란)': 'Eggs',
   우유: 'Milk',
@@ -37,7 +35,6 @@ const EN_TO_KO = Object.fromEntries(Object.entries(KO_TO_EN).map(([k, v]) => [v,
 export default function AllergensEdit({ initialResults = [], onSaved }) {
   const apiUrl = import.meta.env.VITE_API_URL
 
-  // 초기값 정리: allergiesKo가 없고 allergiesCanonical만 있으면 한글로 역매핑해서 채움
   const normalizedInitial = useMemo(
     () =>
       (initialResults || []).map((m) => {
@@ -141,7 +138,7 @@ export default function AllergensEdit({ initialResults = [], onSaved }) {
       />
 
       <ButtonWapper>
-        <SmallButtonContainer handleSubmit={handleSave} />
+        <SmallButtonContainer prevLabel='취소' nextLabel='적용' handleSubmit={handleSave} />
       </ButtonWapper>
     </div>
   )
@@ -187,5 +184,5 @@ const SmallLightOrangeButton = styled.button`
 const ButtonWapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 30px 0 60px;
+  margin: 30px 0 60px 40px;
 `

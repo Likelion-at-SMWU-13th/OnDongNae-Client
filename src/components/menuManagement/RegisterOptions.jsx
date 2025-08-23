@@ -2,11 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import RegisterOptionCard from '@/components/menuManagement/RegisterOptionCard'
 
-const RegisterOptionCardSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`
 const RegisterOptions = ({ onUploadClick, onManualClick }) => {
   return (
     <RegisterOptionCardSection>
@@ -25,3 +20,9 @@ const RegisterOptions = ({ onUploadClick, onManualClick }) => {
 }
 
 export default RegisterOptions
+
+const RegisterOptionCardSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`

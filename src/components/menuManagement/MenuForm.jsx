@@ -1,24 +1,12 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import authAxios from '@/lib/authAxios'
+import styled from 'styled-components'
 import MenuFormRow from '@/components/menuManagement/MenuFormRow'
 import LargeLightOrangeButton from '@/components/common/LargeLightOrangeButton'
 import SmallGrayButton from '@/components/common/SmallGrayButton'
 import SmallOrangeButton from '../common/SmallOrangeButton'
-import { authAxios } from '@/lib/authAxios'
-const ButtonContainer = styled.div`
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 21px;
-`
-const SaveBtnContainer = styled.div`
-  margin-top: 130px;
-  display: flex;
-  flex-direction: row;
-  gap: 21px;
-  justify-content: center;
-`
+
 const MenuForm = () => {
   const apiUrl = import.meta.env.VITE_API_URL
   const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
@@ -41,13 +29,12 @@ const MenuForm = () => {
     const payload = {
       items: items
         .map(({ nameKo, priceKrw }) => ({ nameKo, priceKrw }))
-        .filter((it) => it.nameKo && it.priceKrw > 0), // 이름 있고 0원 초과만
+        .filter((it) => it.nameKo && it.priceKrw > 0),
     }
 
     authAxios
       .post(`${apiUrl}/me/menus/save`, payload, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
-        console.log(res.data) // 연동 확인 후 삭제
         const menuData = res.data.data.menus
         navigate('/menu/extract/save', { state: menuData })
       })
@@ -80,3 +67,18 @@ const MenuForm = () => {
 }
 
 export default MenuForm
+
+const ButtonContainer = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+`
+const SaveBtnContainer = styled.div`
+  margin-top: 50px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  gap: 21px;
+  justify-content: center;
+`

@@ -1,21 +1,17 @@
 // src/pages/menu/MenuSave.jsx
 import React from 'react'
-import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
+import styled from 'styled-components'
 
 export default function MenuSave() {
   const location = useLocation()
-  // navigate 시 전달한 state 구조: { state: menuData }
-  const menus = location.state || [] // 안전하게 fallback
+  const menus = location.state || []
 
   return (
     <div>
       {menus.map((m, idx) => (
         <Row key={idx}>
-          {/* 메뉴명 */}
           <NameKo type='text' value={m.nameKo} readOnly aria-label='메뉴 이름' />
-
-          {/* 가격 */}
           <PriceWrapper>
             <Currency>₩</Currency>
             <PriceKrw
@@ -33,7 +29,6 @@ export default function MenuSave() {
   )
 }
 
-/* ===== styles ===== */
 const Row = styled.div`
   display: grid;
   grid-template-columns: 110px 110px;

@@ -2,6 +2,26 @@ import React from 'react'
 import styled from 'styled-components'
 import hevron from '@/assets/icon-chevron-right.svg'
 
+function RegisterOptionCard({ title, desc, onClick }) {
+  return (
+    <Card onClick={onClick}>
+      <Left>
+        <div>
+          <Title>{title}</Title>
+          <Desc>{desc}</Desc>
+        </div>
+      </Left>
+      <Right>
+        <Right>
+          <img src={hevron} alt='다음' />
+        </Right>
+      </Right>
+    </Card>
+  )
+}
+
+export default RegisterOptionCard
+
 const Card = styled.button`
   width: 330px;
   height: 72px;
@@ -41,23 +61,3 @@ const Left = styled.div`
 const Right = styled.div`
   padding-right: 19.41px;
 `
-
-function RegisterOptionCard({ title, desc, onClick }) {
-  return (
-    <Card onClick={onClick}>
-      <Left>
-        <div>
-          <Title>{title}</Title>
-          <Desc>{desc}</Desc>
-        </div>
-      </Left>
-      <Right>
-        <Right>
-          <img src={hevron} alt='다음' />
-        </Right>
-      </Right>
-    </Card>
-  )
-}
-
-export default RegisterOptionCard

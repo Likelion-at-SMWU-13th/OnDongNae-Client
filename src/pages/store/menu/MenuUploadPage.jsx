@@ -1,105 +1,15 @@
 // src/pages/menu/MenuUploadPage.jsx
 import React, { useRef, useState, useEffect } from 'react'
-import styled from 'styled-components'
 import { useLocation, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import authAxios from '@/lib/authAxios'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import DoubleTitle from '@/components/common/DoubleTitle'
+import closeIcon from '@/assets/button-close.svg'
+import BtnUpload from '@/assets/icon-upload-photo.svg'
 import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 import BottomNav from '@/components/common/BottomNav'
-import BtnUpload from '@/assets/icon-upload-photo.svg'
-import closeIcon from '@/assets/button-close.svg'
-import { authAxios } from '@/lib/authAxios'
 
-// { response body
-//   "code": "OK",
-//   "message": "메뉴 추출 성공",
-//   "success": true,
-//   "data": {
-//       "storeId": 15,
-//       "items": [
-//           {
-//               "name": "라면",
-//               "priceKrw": 3500
-//           },
-//           {
-//               "name": "치즈라면",
-//               "priceKrw": 4000
-//           },
-//           {
-//               "name": "만두라면",
-//               "priceKrw": 4500
-//           },
-//           {
-//               "name": "어묵",
-//               "priceKrw": 3
-//           },
-//           {
-//               "name": "스팸주먹밥",
-//               "priceKrw": 2500
-//           },
-//           {
-//               "name": "어묵",
-//               "priceKrw": 1
-//           },
-//           {
-//               "name": "참치주먹밥",
-//               "priceKrw": 2500
-//           },
-//           {
-//               "name": "어묵탕",
-//               "priceKrw": 3500
-//           },
-//           {
-//               "name": "콜팝",
-//               "priceKrw": 2500
-//           },
-//           {
-//               "name": "슬러시",
-//               "priceKrw": 1300
-//           },
-//           {
-//               "name": "컵떡볶이",
-//               "priceKrw": 1300
-//           }
-//       ]
-//   }
-// }
-
-const Img = styled.img`
-  margin-top: 90px;
-`
-
-const ImgContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const ImageContainer = styled.div`
-  position: relative;
-  margin: 50px auto;
-  width: 296px;
-  height: 204px;
-  background: #f2f2f2;
-  overflow: hidden;
-`
-
-const MenuImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-`
-
-const CloseBtn = styled.button`
-  position: absolute;
-  top: 8px;
-  right: 25px;
-  width: 28px;
-  height: 28px;
-  border: 0;
-  background: transparent;
-`
 export default function MenuUploadPage() {
   const navigate = useNavigate()
   const fileRef = useRef(null)
@@ -164,7 +74,7 @@ export default function MenuUploadPage() {
   }
   return (
     <div>
-      <Header img={backIcon} title={'메뉴 관리'} showImg={true} />
+      <Header title={'메뉴 관리'} showImg={true} />
       <DoubleTitle
         title='메뉴판 사진을 올려주세요'
         subtitle='가게의 메뉴판이 잘 보이는 사진을 올려주세요'
@@ -210,3 +120,38 @@ export default function MenuUploadPage() {
     </div>
   )
 }
+
+const Img = styled.img`
+  margin-top: 90px;
+`
+
+const ImgContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const ImageContainer = styled.div`
+  position: relative;
+  margin: 50px auto;
+  width: 296px;
+  height: 204px;
+  background: #f2f2f2;
+  overflow: hidden;
+`
+
+const MenuImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+`
+
+const CloseBtn = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 25px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+`

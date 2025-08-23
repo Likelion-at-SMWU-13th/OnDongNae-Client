@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -49,7 +47,6 @@ export default function Allergens({ isOpen, onClose, selectedAllergens = [], onC
     <Overlay onClick={onClose}>
       <Modal onClick={(e) => e.stopPropagation()}>
         <Title>알레르기 성분</Title>
-
         <Grid>
           {ALLERGEN_LIST.map(([left, right]) => (
             <Row key={left}>
@@ -78,8 +75,6 @@ export default function Allergens({ isOpen, onClose, selectedAllergens = [], onC
     </Overlay>
   )
 }
-
-/* styles */
 const Overlay = styled.div`
   position: fixed;
   inset: 0;
