@@ -37,7 +37,7 @@ const SelectMarketPage = () => {
       <Header img={backIcon} title={'회원가입'} showImg={false} />
       <S.Main>
         <S.Scroll className='scrollable'>
-          <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
+          <ProgressBar currentStep={3} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
               <Title text={'가게가 위치한 시장을 선택해주세요'} />

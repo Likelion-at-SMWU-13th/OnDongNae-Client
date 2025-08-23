@@ -26,7 +26,7 @@ const StoreAddressPage = () => {
       <Header title={'회원가입'} showImg={false} />
       <S.Main>
         <S.Scroll>
-          <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
+          <ProgressBar currentStep={3} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
               <Title text={'가게 주소를 입력해주세요.'} />

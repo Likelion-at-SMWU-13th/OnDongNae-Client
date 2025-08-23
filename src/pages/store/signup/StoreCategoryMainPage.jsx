@@ -54,7 +54,7 @@ const StoreCategoryMainPage = () => {
       <Header title={'회원가입'} showImg={false} />
       <S.Main>
         <S.Scroll className='scrollable'>
-          <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
+          <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
               <Title text={'가게의 업종을 골라주세요.'} />

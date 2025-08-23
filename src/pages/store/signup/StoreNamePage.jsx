@@ -27,7 +27,7 @@ const StoreNamePage = () => {
       <Header title={'회원가입'} showImg={false} />
       <S.Main>
         <S.Scroll>
-          <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
+          <ProgressBar currentStep={3} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
               <Title text={'가게 이름을 입력해주세요.'} />
