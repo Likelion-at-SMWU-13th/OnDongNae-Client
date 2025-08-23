@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import Header from '@/components/common/Header'
 import BottomNav from '@/components/common/BottomNav'
-
 import ImgSection from '@/components/map/ImgSection'
 import HeaderSection from '@/components/map/HeaderSection'
 import MapSection from '@/components/map/MapSection'
@@ -16,11 +15,10 @@ import InfoTab from '@/components/map/InfoTab'
 import Loading from '@/components/common/Loading'
 
 const MyStoreInfoPage = () => {
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const [store, setStore] = useState()
   const [tab, setTab] = useState('menu') // 일단 메뉴탭 보여주기
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
 
   const apiUrl = import.meta.env.VITE_API_URL
 
@@ -32,15 +30,9 @@ const MyStoreInfoPage = () => {
           headers: { 'Accept-Language': lang },
         })
         setStore(response?.data?.data ?? null)
-        console.log(response?.data?.data)
-        setError(null)
       } catch (err) {
         if (axios.isAxiosError(err)) {
-          console.log('[me/store] status:', err.response?.status)
-          console.log('[me/store] body:', err.response?.data)
-          console.log('[me/store] headers:', err.response?.headers)
         }
-        setError(err)
       } finally {
         setIsLoading(false)
       }

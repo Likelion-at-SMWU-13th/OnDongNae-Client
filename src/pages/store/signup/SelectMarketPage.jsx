@@ -1,6 +1,5 @@
-import styled from 'styled-components'
-import * as S from '@/styles/signup/SelectMarketPage.styles'
 import React, { useState } from 'react'
+import * as S from '@/styles/signup/SelectMarketPage.styles'
 import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -23,8 +22,7 @@ const SelectMarketPage = () => {
   ]
 
   // 다음 클릭 시
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = () => {
     if (!id) {
       alert('시장을 선택해주세요.')
       return
@@ -39,7 +37,7 @@ const SelectMarketPage = () => {
       <Header img={backIcon} title={'회원가입'} showImg={false} />
       <S.Main>
         <S.Scroll className='scrollable'>
-          <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
+          <ProgressBar currentStep={3} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
               <Title text={'가게가 위치한 시장을 선택해주세요'} />

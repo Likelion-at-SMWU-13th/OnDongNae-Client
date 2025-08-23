@@ -6,8 +6,8 @@ const InputBoxKr = ({ priceKr, setPriceKr }) => {
   const { t } = useTranslation()
 
   // 금액 1000원 단위로 끊어서 보여주기
-  const formatThousands = (str) => {
-    if (str === '' || str == null) return '' // 빈값은 빈칸
+  const formatThousands = () => {
+    if (priceKr === '' || priceKr == null) return '' // 빈값은 빈칸
     return new Intl.NumberFormat('ko-KR').format(priceKr) // 1,000,000 형식
   }
 
@@ -63,7 +63,6 @@ const InputContainer = styled.div`
 `
 const Unit = styled.span`
   position: absolute;
-
   left: 20px;
   top: 50%;
   transform: translateY(-50%);

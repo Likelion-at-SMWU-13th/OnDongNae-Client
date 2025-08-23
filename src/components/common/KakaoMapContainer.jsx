@@ -27,32 +27,31 @@ import styled from 'styled-components'
 
 /** @param {KakaoMapProps} props */
 export default function KakaoMap({
-  // [뷰 설정]
+  // 기본 설정
   center = { lat: 37.5326, lng: 126.9905 }, // 기본 중심 좌표 (용산구)
-  level = 6, // 확대 레벨 (낮을수록 확대)
+  level = 6, // 확대 레벨
   style = {
     width: '100%',
     height: 'calc(100dvh - 19dvh)',
     display: 'flex',
     minHeight: '0',
-  }, // 지도의 크기 (height 꼭 지정 권장)
+  }, // 지도 크기
 
-  // [마커]
-  markers = [], // [{ id?, position:{lat,lng}, image?, data? }]
-  onMarkerClick, // (marker) => void  | 마커 클릭 시 상위로 이벤트 전달
+  // 마커
+  markers = [],
+  onMarkerClick,
 
-  // [지도 이벤트]
-  onMapClick, // (mouseEvent) => void | 지도 빈 곳 클릭
-  onIdle, // (mapInstance) => void | 지도 이동/확대 종료 후
+  // 지도 이벤트
+  onMapClick, // 지도 클릭 시,
+  onIdle, // 지도 이동/확대 종료 후
 
-  // [지도 옵션]
   draggable = true, // 드래그 가능
   scrollwheel = true, // 마우스 휠로 줌 가능
 
-  // [라벨 옵션 - 신규]
+  // 라벨 옵션
   showMarkerLabels = false,
-  getLabel, // (m) => ReactNode (예: (m)=>t(m.title))
-  labelYAnchor = 1.3, // 마커 위로 살짝 띄우기
+  getLabel,
+  labelYAnchor = 1.2,
   labelXAnchor = 0.5,
   fitToMarkers = false,
   fitSingleLevel = 3,
@@ -66,7 +65,7 @@ export default function KakaoMap({
     const kakao = typeof window !== 'undefined' ? window.kakao : null
     if (!map || !kakao || !kakao.maps || !Array.isArray(markers) || markers.length === 0) return
 
-    // 마커 1개: 중심 이동 + 지정 레벨
+    // 마커 1개: 중심 이동 + 지정 레벨로 보여주기
     if (markers.length === 1) {
       const p = markers[0].position
       map.setCenter(new kakao.maps.LatLng(p.lat, p.lng))
@@ -111,20 +110,11 @@ export default function KakaoMap({
     >
       {markers.map((m) => {
         const raw = getLabel?.(m)
-        const hasLabel =
-          raw !== null &&
-          raw !== undefined &&
-          raw !== false &&
-          (typeof raw !== 'string' || raw.trim().length > 0)
+        const hasLabel = raw != null && raw !== false && String(raw).trim() !== ''
 
         return (
           <Fragment key={m.id ?? `${m.position.lat}-${m.position.lng}`}>
-            <MapMarker
-              key={m.id ?? `${m.position.lat}-${m.position.lng}`}
-              position={m.position}
-              image={m.image}
-              onClick={() => onMarkerClick?.(m)}
-            />
+            <MapMarker position={m.position} image={m.image} onClick={() => onMarkerClick?.(m)} />
             {showMarkerLabels && getLabel && hasLabel && (
               <CustomOverlayMap position={m.position} xAnchor={labelXAnchor} yAnchor={labelYAnchor}>
                 <Label>{raw}</Label>

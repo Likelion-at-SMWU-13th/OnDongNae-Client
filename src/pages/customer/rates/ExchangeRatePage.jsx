@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/rates/ExchangeRatesPage.styles'
 import * as C from '@/styles/common/CustomerBottomNav.styles'
-import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import debounce from 'lodash.debounce' // 가격 입력 시, 매번 환율 api 호출되는 것 막기
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
-
 import InputBoxKr from '@/components/rates/InputBoxKr'
 import InputBoxConverted from '@/components/rates/InputBoxConverted'
 import RatesDescription from '@/components/rates/RatesDescription'
@@ -53,7 +50,7 @@ const ExchangeRatePage = () => {
 
   return (
     <>
-      <Header img={backIcon} title={t('bottomNav.rates')} showImg={false} />
+      <Header title={t('bottomNav.rates')} showImg={false} />
       {/* 스크롤 영역 */}
       <C.Main>
         <C.Scroll className='scrollable'>

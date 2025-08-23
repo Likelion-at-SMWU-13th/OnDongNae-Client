@@ -16,13 +16,7 @@ const DeletePopup = ({ onClose, onSubmit }) => {
           <CancelButton onClick={onClose}>취소</CancelButton>
 
           {/* 탈퇴 버튼 */}
-          <DeleteButton
-            onClick={() => {
-              onSubmit()
-            }}
-          >
-            탈퇴
-          </DeleteButton>
+          <DeleteButton onClick={onSubmit}>탈퇴</DeleteButton>
         </ButtonGroup>
       </Modal>
     </Overlay>
@@ -75,10 +69,10 @@ const ButtonGroup = styled.div`
   gap: 48px;
   margin-top: 33px;
 `
-const CancelButton = styled.button`
+
+const Button = styled.button`
   border-radius: 10px;
   border: none;
-  background: #d6d6d6;
   display: flex;
   padding: 14.5px 47.5px;
   justify-content: center;
@@ -87,16 +81,10 @@ const CancelButton = styled.button`
   font-size: 18px;
   font-weight: 600;
 `
+const CancelButton = styled(Button)`
+  background: #d6d6d6;
+`
 
-const DeleteButton = styled.button`
-  border-radius: 10px;
-  border: none;
+const DeleteButton = styled(Button)`
   background: #f08e67;
-  display: flex;
-  padding: 14.5px 47.5px;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 600;
 `

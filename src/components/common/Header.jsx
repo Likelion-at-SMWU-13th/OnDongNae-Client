@@ -3,6 +3,20 @@ import styled from 'styled-components'
 import backIcon from '@/assets/button-back.svg'
 import { useNavigate } from 'react-router-dom'
 
+function Header({ img, title, showImg }) {
+  const navigate = useNavigate()
+  return (
+    <>
+      <HeaderContainer>
+        {showImg && <Img src={backIcon} alt='뒤로가기' onClick={() => navigate(-1)} />}
+        <Title> {title}</Title>
+      </HeaderContainer>
+    </>
+  )
+}
+
+export default Header
+
 const HeaderContainer = styled.div`
   position: relative;
   display: flex;
@@ -24,17 +38,3 @@ const Title = styled.p`
   font-weight: 800;
   line-height: normal;
 `
-
-function Header({ img, title, showImg }) {
-  const navigate = useNavigate()
-  return (
-    <>
-      <HeaderContainer>
-        {showImg && <Img src={backIcon} alt='뒤로가기' onClick={() => navigate(-1)} />}
-        <Title> {title}</Title>
-      </HeaderContainer>
-    </>
-  )
-}
-
-export default Header

@@ -11,9 +11,9 @@ import MarketCategoryRow from '@/components/map/MarketCategoryRow'
 import MainCategories from '@/components/map/MainCategories'
 import SubCategories from '@/components/map/SubCategories'
 import ScrollArea from '@/components/map/ScrollArea'
-import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import KakaoMap from '@/components/common/KakaoMapContainer'
 import iconMarker from '@/assets/icon-big-mapMarker.svg'
+import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import Loading from '@/components/common/Loading'
 
 // 지도 기본값
@@ -39,7 +39,6 @@ const MainMapPage = () => {
   const [categories, setCategories] = useState([]) // 대분류 리스트
   const [subCategories, setSubCategories] = useState([]) // 소분류 리스트
   const [randomStores, setRandomStores] = useState([]) // 랜덤 가게 리스트
-  const [selectedStores, setSelectedStores] = useState([]) // 사용자 선택 가게 리스트
   const [selectedMainId, setSelectedMainId] = useState(null) // 선택된 대분류 ID (단일 선택)
   const [selectedSubIds, setSelectedSubIds] = useState([]) // 선택된 소분류 ID (복수 선택)
   const [center, setCenter] = useState(DEFAULT_CENTER) // 지도 중심 상태
@@ -56,7 +55,6 @@ const MainMapPage = () => {
 
   // 렌더링 시, 데이터 불러오기
   useEffect(() => {
-    // 'en-US' -> 'en' 형태로 변환
     const lang = (i18n.language || 'en').split('-')[0]
     setIsLoading(true)
     axios
@@ -84,7 +82,6 @@ const MainMapPage = () => {
     const hasMain = !!selectedMainId
     const hasSub = Array.isArray(selectedSubIds) && selectedSubIds.length > 0
     if (!hasMarket) {
-      setSelectedStores([])
       setStoreMarkers([])
       setActiveStoreId(null)
       return
@@ -110,7 +107,6 @@ const MainMapPage = () => {
         const result = res.data.data
         // result 배열 형태로 만들어주기
         const list = result ? (Array.isArray(result) ? result : [result]) : []
-        setSelectedStores(list)
 
         // 결과 리스트 마커로 모두 찍기
         // 마커 객체에 가게 데이터(s) 그대로 같이 들고 다닐 수 있게 설정 (data:s)
@@ -351,7 +347,6 @@ const MainMapPage = () => {
                 setSelectedMainId(null)
                 setSelectedSubIds([])
                 setSubCategories([])
-                setStoreMarkers([])
                 setActiveStoreId(null)
               }}
             />

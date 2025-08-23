@@ -4,11 +4,9 @@ import styled from 'styled-components'
 function ImgSection({ imgs = [] }) {
   const num = 4 // 그리드 4칸
   const filled = imgs.slice(0, num)
-  const [selectedImg, setSelectedImg] = useState(null) // 모달에 띄울 이미지 선택
+  const [selectedImg, setSelectedImg] = useState(null) // 이미지 선택하면 확대
+  const [failed, setFailed] = useState(Array(num).fill(false)) // 이미지 로딩 실패 여부 받기
   while (filled.length < num) filled.push(null)
-
-  // 이미지 로딩 실패 여부 받기
-  const [failed, setFailed] = useState(Array(num).fill(false))
 
   // 모달 열기
   const openModal = (src) => {
@@ -21,6 +19,7 @@ function ImgSection({ imgs = [] }) {
   const closeModal = () => {
     setSelectedImg(null)
   }
+
   const markFailed = (i) =>
     setFailed((prev) => {
       if (prev[i]) return prev
@@ -87,7 +86,7 @@ const Img = styled.img`
 const BlankImg = styled.div`
   width: 100%;
   height: 100%;
-  background: #ececec;
+  background: #f1f1f1;
 `
 
 const ModalWrapper = styled.div`

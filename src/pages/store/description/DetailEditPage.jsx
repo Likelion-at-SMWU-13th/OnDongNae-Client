@@ -1,13 +1,12 @@
 import React from 'react'
 import * as S from '@/styles/description/EditPage.styles'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import authAxios from '@/lib/authAxios'
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import BottomNav from '@/components/common/BottomNav'
 import Buttons from '@/components/description/Buttons'
-import authAxios from '@/lib/authAxios'
 
 const DetailEditPage = () => {
   const navigate = useNavigate()

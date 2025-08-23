@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-
 import InputTitle from '@/components/description/InputTitle'
 import Button from '@/components/description/Button'
 

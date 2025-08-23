@@ -9,20 +9,21 @@ function MenuTab({ items }) {
   return (
     <Container>
       {items?.map((m, i) => (
-        <Item key={i}>
-          <MenuRow>
-            <span>{m.name}</span>
-            <span>₩ {Number(m.priceKrw).toLocaleString()}</span>
-          </MenuRow>
+        <div key={i}>
+          <Item>
+            <MenuRow>
+              <span>{m.name}</span>
+              <span>₩ {Number(m.priceKrw).toLocaleString()}</span>
+            </MenuRow>
 
-          {m.allergies?.length > 0 && (
-            <AllergyRow>
-              {t('text.contains')} : {m.allergies.join(', ')}
-            </AllergyRow>
-          )}
-
-          <Divider />
-        </Item>
+            {m.allergies?.length > 0 && (
+              <AllergyRow>
+                {t('text.contains')} : {m.allergies.join(', ')}
+              </AllergyRow>
+            )}
+          </Item>
+          {i < items.length - 1 && <Divider />}
+        </div>
       ))}
 
       <WarningRow>
@@ -42,14 +43,13 @@ const Container = styled.section`
 const Divider = styled.hr`
   border: 0;
   border-top: 1px solid #eee;
-  margin: 12px 0 0;
 `
 
 const Item = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 12.5px 0;
+  padding: 15.5px 0;
 `
 
 const MenuRow = styled.div`
@@ -66,7 +66,7 @@ const AllergyRow = styled.div`
   font-weight: 400;
 `
 const WarningRow = styled.div`
-  margin-top: 17.5px;
+  margin-top: 15.5px;
   display: flex;
   flex-direction: row;
   align-items: start;
@@ -83,8 +83,7 @@ const WarningIcon = styled.img`
 
 const WarningText = styled.p`
   color: #7e7e7e;
-  font-feature-settings: 'dlig' on;
   font-size: 14px;
   font-weight: 400;
-  line-height: 21px; /* 150% */
+  line-height: 21px;
 `
