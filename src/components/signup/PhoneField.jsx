@@ -1,33 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`
-
-const Text = styled.p`
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-`
-
-const Input = styled.input`
-  width: 100%;
-  height: 49px;
-  color: black;
-  border-radius: 10px;
-  border: 2px solid #b3b3b3;
-  background: #fff;
-  padding: 14px 0 14px 20px;
-  font-size: 18px;
-
-  &::placeholder {
-    color: rgba(179, 179, 179, 1);
-  }
-`
 
 function PhoneField({
   label = '',
@@ -36,18 +8,12 @@ function PhoneField({
   onChange = (v) => {},
   required = false,
 }) {
-  // 포맷 규칙
-  // 1. 02로 시작할 때
-  // 2. 050 으로 시작할 때
-  // 3. 01로 시작할 때
-  // 4. 그 외 지역번호로 시작할 때
-
   const formatPhone = (v) => {
     const dRaw = v.replace(/\D/g, '') // 숫자만
 
     if (!dRaw) return ''
 
-    // 1. 02
+    // 1. 02로 시작
     if (dRaw.startsWith('02')) {
       // 02 + 최대 8자리 (총 10자리까지)
       const rest = dRaw.slice(2, 10)
@@ -59,7 +25,7 @@ function PhoneField({
       return `02-${rest.slice(0, 4)}-${rest.slice(4, 8)}`
     }
 
-    // 2. 050으로 시작할 때
+    // 2. 050으로 시작할 때(0507)
     if (dRaw.startsWith('050')) {
       const d = dRaw.slice(0, 12)
       if (d.length <= 4) return d
@@ -112,3 +78,31 @@ function PhoneField({
 }
 
 export default PhoneField
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
+const Text = styled.p`
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`
+
+const Input = styled.input`
+  width: 100%;
+  height: 49px;
+  color: black;
+  border-radius: 10px;
+  border: 2px solid #b3b3b3;
+  background: #fff;
+  padding: 14px 0 14px 20px;
+  font-size: 18px;
+
+  &::placeholder {
+    color: rgba(179, 179, 179, 1);
+  }
+`

@@ -21,7 +21,7 @@ const Box = styled.div`
   padding: 17px 23px 17px 14px;
 `
 
-const Title = styled.h3`
+const Title = styled.p`
   color: #000;
   font-size: 18px;
   font-weight: 500;
@@ -31,5 +31,5 @@ const Description = styled.p`
   color: #000;
   font-size: 16px;
   font-weight: 300;
-  padding-left: 28px;
+  padding-left: 20px;
 `

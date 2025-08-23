@@ -2,6 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import skipButton from '@/assets/button-skip.svg'
 
+function MenuItem({ img, text, onClick }) {
+  return (
+    // 클릭하면 페이지 이동
+    <ItemContainer onClick={onClick}>
+      <Icon src={img} alt='' />
+      <Text>{text}</Text>
+      <Arrow src={skipButton} alt='' />
+    </ItemContainer>
+  )
+}
+
+export default MenuItem
+
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -17,7 +30,6 @@ const Icon = styled.img`
   width: 43px;
   height: 43px;
   flex-shrink: 0;
-  aspect-ratio: 1/1;
 `
 
 const Text = styled.p`
@@ -30,16 +42,3 @@ const Text = styled.p`
 const Arrow = styled.img`
   padding-left: 42%;
 `
-
-function MenuItem({ img, text, onClick }) {
-  return (
-    // 클릭하면 페이지 이동
-    <ItemContainer onClick={onClick}>
-      <Icon src={img} alt=''></Icon>
-      <Text>{text}</Text>
-      <Arrow src={skipButton} alt='' />
-    </ItemContainer>
-  )
-}
-
-export default MenuItem

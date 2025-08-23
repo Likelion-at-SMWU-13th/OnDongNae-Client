@@ -121,7 +121,6 @@ const CurrencyBtn = styled.button`
   font-weight: 400;
 
   &&[data-active='true'] {
-    border-radius: 30px;
     border: 1px solid #f08e67;
     background: #f08e67;
     color: #fff;
@@ -162,9 +161,6 @@ const ResultRate = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  width: 100%;
-  border-radius: 0 0 10px 10px;
   border-right: 3px solid rgba(0, 0, 0, 0.3);
   border-left: 3px solid rgba(0, 0, 0, 0.3);
   border-bottom: 3px solid rgba(0, 0, 0, 0.3);
@@ -178,13 +174,6 @@ const ResultRate = styled.div`
     background: #f08e67;
     color: #fff;
   }
-
-  & > span {
-    font-weight: 600;
-  }
-  & > strong {
-    font-weight: 700;
-  }
 `
 const Text = styled.p`
   font-size: 16px;
@@ -193,7 +182,6 @@ const Text = styled.p`
 
 const Rate = styled.p`
   color: #fff;
-
   font-feature-settings: 'dlig' on;
   font-family: Pretendard;
   font-size: 16px;

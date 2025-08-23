@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
-
 import Logo from '@/components/onboarding/Logo'
 
 const Header = ({ onSkip }) => {
@@ -41,16 +40,14 @@ const SkipWrapper = styled.div`
 
 const Button = styled.button`
   display: inline;
-  width: auto; /* 넓이 자동 */
+  width: auto;
   height: auto;
   color: #fa6432;
-  text-align: center;
   font-size: 18px;
   font-weight: 500;
   line-height: 35px;
   border: none;
   background: none;
-  text-align: right;
 `
 
 const LogoWrapper = styled.div`

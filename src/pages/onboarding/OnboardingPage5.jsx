@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDrag } from '@use-gesture/react'
@@ -8,22 +8,19 @@ import Footer from '@/components/onboarding/Footer'
 import koru4 from '@/assets/img-koru4.svg'
 
 const OnboardingPage5 = () => {
-  const { t } = useTranslation()
   const navigate = useNavigate()
-  const [step, setStep] = useState(4)
-  const totalSteps = 5
+  const { t } = useTranslation()
 
-  const nextStep = () => setStep((prev) => (prev + 1) % totalSteps)
   const handleSkip = () => {
-    navigate('/user/map')
-  }
-
-  const handleNext = () => {
     navigate('/user/map')
   }
 
   const handlePrev = () => {
     navigate(-1)
+  }
+
+  const handleNext = () => {
+    navigate('/user/map')
   }
 
   // useDgrag 훅
@@ -54,7 +51,7 @@ const OnboardingPage5 = () => {
 
         <Img src={koru4} alt='logo' />
       </Main>
-      <Footer currentStep={step} totalSteps={totalSteps} onNext={handleNext} />
+      <Footer currentStep={4} totalSteps={5} onNext={handleNext} />
     </Container>
   )
 }
@@ -81,7 +78,7 @@ const Title = styled.p`
   color: #000;
   text-align: center;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 30px;
 `
 const Highlight = styled.span`

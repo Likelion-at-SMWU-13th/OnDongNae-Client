@@ -23,7 +23,7 @@ const Login = () => {
     axios
       .post(
         `${apiUrl}/auth/login`,
-        { id: id, password: password },
+        { id, password },
         { headers: { 'Content-Type': 'application/json' } },
       )
       .then((res) => {
@@ -45,7 +45,6 @@ const Login = () => {
   return (
     <>
       <Header img={backIcon} title={'로그인'} showImg={true} />
-
       <Logo>GoruGoru</Logo>
       <LoginForm id={id} password={password} onChangeId={setId} onChangePassword={setPassword} />
       <ButtonContainer>
@@ -62,11 +61,8 @@ export default Login
 const Logo = styled.p`
   margin: 7dvh 0 14dvh 0;
   text-align: center;
-  align-items: center;
   font-size: 30px;
-  font-style: normal;
   font-weight: 800;
-  line-height: normal;
 `
 
 const ButtonContainer = styled.div`

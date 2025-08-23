@@ -15,9 +15,6 @@ export const Scroll = styled.div`
   -webkit-overflow-scrolling: touch;
   padding-bottom: calc(env(safe-area-inset-bottom, 0));
 `
-export const Container = styled.div`
-  margin: 40px 33px 0 33px;
-`
 export const Text = styled.p`
   color: #000;
   font-size: 20px;
@@ -25,7 +22,7 @@ export const Text = styled.p`
 `
 
 export const BoxContainer = styled.div`
-  margin-top: 25px;
+  margin: 10px 33px 0 33px;
   display: flex;
   flex-direction: column;
   gap: 15px;

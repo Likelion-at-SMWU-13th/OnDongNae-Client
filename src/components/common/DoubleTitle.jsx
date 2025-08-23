@@ -1,6 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const DoubleTitle = ({ title, subtitle }) => {
+  return (
+    <TitleContainer>
+      <StyledTitle>{title}</StyledTitle>
+      <StyledSubtitle>{subtitle}</StyledSubtitle>
+    </TitleContainer>
+  )
+}
+
+export default DoubleTitle
+
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,14 +28,3 @@ const StyledSubtitle = styled.p`
   font-size: 18px;
   font-weight: 400;
 `
-
-const DoubleTitle = ({ title, subtitle }) => {
-  return (
-    <TitleContainer>
-      <StyledTitle>{title}</StyledTitle>
-      <StyledSubtitle>{subtitle}</StyledSubtitle>
-    </TitleContainer>
-  )
-}
-
-export default DoubleTitle

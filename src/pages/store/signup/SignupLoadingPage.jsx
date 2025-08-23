@@ -3,33 +3,9 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
-import spinnerIcon from '@/assets/icon-spinner.svg'
 import Loading from '@/components/common/Loading'
 
-const Container = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 36px;
-`
-
-const Img = styled.img`
-  width: 119px;
-  height: 119px;
-  flex-shrink: 0;
-  aspect-ratio: 1/1;
-`
-
-const Text = styled.p`
-  color: #000;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 500;
-`
-/* Data URL( base64 ) -> File 동기 변환 유틸  */
+/* Data URL -> File 변환 */
 function dataUrlToFile(dataUrl, filename = 'image.jpg') {
   const [header, data] = dataUrl.split(',')
   // mime 추출
@@ -45,7 +21,6 @@ function dataUrlToFile(dataUrl, filename = 'image.jpg') {
     u8arr = new Uint8Array(bstr.length)
     for (let i = 0; i < bstr.length; i++) u8arr[i] = bstr.charCodeAt(i)
   } else {
-    // URL-encoded 데이터인 경우
     const decoded = decodeURIComponent(data)
     u8arr = new TextEncoder().encode(decoded)
   }
@@ -141,7 +116,7 @@ const SignupLoadingPage = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'회원가입'} showImg={true} />
+      <Header title={'회원가입'} showImg={true} />
       <Container>
         <Loading />
       </Container>
@@ -150,3 +125,25 @@ const SignupLoadingPage = () => {
 }
 
 export default SignupLoadingPage
+
+const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+`
+
+const Img = styled.img`
+  width: 119px;
+  height: 119px;
+  flex-shrink: 0;
+`
+
+const Text = styled.p`
+  color: #000;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+`

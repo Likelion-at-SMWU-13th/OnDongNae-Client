@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { authAxios } from '@/lib/authAxios'
 import * as S from '@/styles/mystore/MyStoreEditPage.styles'
-
 import Header from '@/components/common/Header'
 import PhoneField from '@/components/signup/PhoneField'
 import PasswordField from '@/components/signup/PasswordField'

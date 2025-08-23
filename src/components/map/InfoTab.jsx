@@ -32,7 +32,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding: 20px 25px 40px 25px;
+  padding: 20.5px 25px 40px 25px;
 `
 const TextContainer = styled.div`
   display: flex;

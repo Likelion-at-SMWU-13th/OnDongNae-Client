@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDrag } from '@use-gesture/react'
@@ -8,23 +8,19 @@ import Footer from '@/components/onboarding/Footer'
 import koru3 from '@/assets/img-koru3.svg'
 
 const OnboardingPage4 = () => {
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const navigate = useNavigate()
-  const [step, setStep] = useState(3)
-  const totalSteps = 5
-
-  const nextStep = () => setStep((prev) => (prev + 1) % totalSteps)
   const handleSkip = () => {
     navigate('/user/map')
   }
 
-  const handleNext = () => {
-    navigate('/onboarding/5')
-  }
-
   const handlePrev = () => {
     navigate(-1)
+  }
+
+  const handleNext = () => {
+    navigate('/onboarding/5')
   }
 
   // useDgrag 훅
@@ -58,7 +54,7 @@ const OnboardingPage4 = () => {
           </TwoItem>
         </List>
       </Main>
-      <Footer currentStep={step} totalSteps={totalSteps} onNext={handleNext} />
+      <Footer currentStep={3} totalSteps={5} onNext={handleNext} />
     </Container>
   )
 }

@@ -2,10 +2,37 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import checkOnImg from '@/assets/icon-circle-check-on.svg'
+
+const SignupCompletePage = () => {
+  const navigate = useNavigate()
+
+  const handleSubmit = () => {
+    navigate('/login')
+  }
+  return (
+    <>
+      <Header title={'회원가입'} showImg={false} />
+      <ProgressBar currentStep={6} totalSteps={6} logoImg={smallDragon} />
+
+      <Container>
+        <Context>
+          <Img src={checkOnImg} alt='완료' />
+          <Text>
+            회원가입이 완료되었어요.
+            <br />
+            가게 프로필을 등록해주세요!
+          </Text>
+        </Context>
+        <Button onClick={handleSubmit}>확인</Button>
+      </Container>
+    </>
+  )
+}
+
+export default SignupCompletePage
 
 const Container = styled.div`
   display: flex;
@@ -53,31 +80,3 @@ const Button = styled.button`
   cursor: pointer;
   margin: 0 auto;
 `
-
-const SignupCompletePage = () => {
-  const navigate = useNavigate()
-
-  const handleSubmit = () => {
-    navigate('/login')
-  }
-  return (
-    <>
-      <Header img={backIcon} title={'회원가입'} showImg={false} />
-      <ProgressBar currentStep={6} totalSteps={6} logoImg={smallDragon} />
-
-      <Container>
-        <Context>
-          <Img src={checkOnImg} alt='완료' />
-          <Text>
-            회원가입이 완료되었어요.
-            <br />
-            가게 프로필을 등록해주세요!
-          </Text>
-        </Context>
-        <Button onClick={handleSubmit}>확인</Button>
-      </Container>
-    </>
-  )
-}
-
-export default SignupCompletePage

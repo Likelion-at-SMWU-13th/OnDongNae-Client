@@ -1,5 +1,5 @@
 {
-  "button": { "continue": "Continue", "search": "Search", "generate": "generate", "skip": "Skip" },
+  "button": { "continue": "Continue", "search": "Search", "generate": "Generate", "skip": "Skip" },
   "bottomNav": { "overview": "Overview", "map": "Map", "course": "Course", "rates": "Rates" },
   "header": { "storeDetails": "Store Details", "overview": "Overview" },
   "dropdown": {
@@ -100,10 +100,10 @@
     "with": "With",
     "atmosphere": "Atmosphere",
     "loading": "Generating your course …",
-    "regenerate": "regenerate",
+    "regenerate": "Regenerate",
     "failComment": "Failed to generate\ncourse recommendation.\n\nPlease try again",
     "share": "Share",
-    "create": "create course with AI",
+    "create": "Create course with AI",
     "option": "Please select all options."
   },
   "onboarding1": {
@@ -124,11 +124,11 @@
   "onboarding3": {
     "content1": "Let me introduce",
     "content2": "a special service inspired",
-    "content3": "by the Korean word",
-    "content4": "which means “explore every corner,",
-    "content5": "experience it all.”",
-    "content6": "This service helps you explore all the diverse",
-    "content7": "markets in Yongsan-gu thoroughly."
+    "content3": "by the Korean expression",
+    "content4": "It means",
+    "content5": "“explore every corner, experience it all.”",
+    "content6": "With GoruGoru, you can explore",
+    "content7": "the diverse markets of Yongsan-gu in depth."
   },
   "onboarding4": {
     "content1": "You can ...",

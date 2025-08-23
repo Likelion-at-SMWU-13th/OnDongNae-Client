@@ -1,10 +1,7 @@
-import styled from 'styled-components'
+import React, { useRef, useState } from 'react'
 import * as S from '@/styles/signup/StoreImagePage.styles'
-import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
@@ -79,12 +76,11 @@ const StoreImagePage = () => {
   return (
     <>
       {/* 상단 헤더*/}
-      <Header img={backIcon} title={'회원가입'} showImg={false} />
+      <Header title={'회원가입'} showImg={false} />
       {/* 스크롤 가능 영역*/}
       <S.Main>
         <S.Scroll className='scrollable'>
           <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
-
           <S.Container>
             <S.TextContainer>
               {/* 큰 제목 */}
@@ -93,7 +89,6 @@ const StoreImagePage = () => {
               <SubTitle text={'사진은 최대 4장까지 올릴 수 있어요. \n 건너뛰기 해도 괜찮아요.'} />
             </S.TextContainer>
             {/* 하단 버튼 영역: form submit으로 묶어 엔터/IME 제출 대응 */}
-
             {/* 사진 영역 */}
             <S.ImgContainer>
               {photos.length === 0 ? (
@@ -116,7 +111,6 @@ const StoreImagePage = () => {
                       </S.RemoveBtn>
                     </S.Thumb>
                   ))}
-
                   {/* 오렌지 배경: 갤러리에서 사진 선택 */}
                   {photos.length < 4 && (
                     <S.AddTile type='button' onClick={openPicker}>
@@ -125,7 +119,6 @@ const StoreImagePage = () => {
                       사진 선택
                     </S.AddTile>
                   )}
-
                   {/* 투명 배경: 2*2 자리 맞추기 위함 */}
                   {Array.from({
                     length: Math.max(0, 4 - (photos.length + (photos.length < 4 ? 1 : 0))),
@@ -135,7 +128,6 @@ const StoreImagePage = () => {
                 </S.Grid>
               )}
             </S.ImgContainer>
-
             {/* 숨겨진 파일 입력창 (실제로는 이걸 클릭해서 업로드) */}
             <input
               ref={fileInputRef}
@@ -145,8 +137,7 @@ const StoreImagePage = () => {
               onChange={onFilesSelected}
               style={{ display: 'none' }}
             />
-
-            <SmallButtonContainerSkip handleSubmit={handleSubmit}></SmallButtonContainerSkip>
+            <SmallButtonContainerSkip handleSubmit={handleSubmit} />
           </S.Container>
         </S.Scroll>
       </S.Main>

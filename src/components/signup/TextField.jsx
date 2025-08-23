@@ -1,5 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+
+function TextField({ label = '', placeholder = '', value, onChange }) {
+  return (
+    <Container>
+      <Text>{label}</Text>
+      <Input
+        type='text'
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
+        required
+      ></Input>
+    </Container>
+  )
+}
+
+export default TextField
 
 const Container = styled.div`
   display: flex;
@@ -28,20 +45,3 @@ const Input = styled.input`
     color: rgba(179, 179, 179, 1);
   }
 `
-
-function TextField({ label = '', placeholder = '', value, onChange }) {
-  return (
-    <Container>
-      <Text>{label}</Text>
-      <Input
-        type='text'
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange?.(e.target.value)}
-        required
-      ></Input>
-    </Container>
-  )
-}
-
-export default TextField

@@ -1,11 +1,7 @@
-import styled from 'styled-components'
-import * as S from '@/styles/signup/SignupUserInfoPage.styles'
-
 import React, { useState } from 'react'
+import * as S from '@/styles/signup/SignupUserInfoPage.styles'
 import { useNavigate } from 'react-router-dom'
-
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
@@ -35,10 +31,10 @@ const Signup = () => {
 
   return (
     <>
-      <Header img={backIcon} title={'회원가입'} showImg={true} />
+      <Header title={'회원가입'} showImg={true} />
       <S.Main>
         <S.Scroll className='scrollable'>
-          <ProgressBar currentStep={2} totalSteps={6} logoImg={smallDragon} />
+          <ProgressBar currentStep={1} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
               <Title text={'가입을 위한 정보를 입력해주세요.'} />
@@ -53,8 +49,7 @@ const Signup = () => {
                 required
               />
             </S.InputContainer>
-
-            <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
+            <SmallButtonContainer handleSubmit={handleSubmit} />
           </S.Container>
         </S.Scroll>
       </S.Main>

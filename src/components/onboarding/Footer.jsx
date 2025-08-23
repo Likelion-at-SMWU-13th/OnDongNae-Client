@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import imgNext from '@/assets/img-next.svg'
 
-const Footer = ({ currentStep, totalSteps, onNext }) => {
+const Footer = ({ currentStep, totalSteps }) => {
   return (
     <Container>
       <ContentContainer>
@@ -32,7 +31,6 @@ const ContentContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  position: relative;
 `
 const Dots = styled.div`
   display: flex;
@@ -43,9 +41,9 @@ const Dot = styled.div`
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: rgba(218, 218, 218, 1); /* 기본 색 */
+  background: rgba(218, 218, 218, 1);
 
   &.active {
-    background: rgba(240, 142, 103, 1); /* 활성화 색 */
+    background: rgba(240, 142, 103, 1); // 단계 넘어갈 때마다 바뀌는 색
   }
 `

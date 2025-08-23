@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { authAxios } from '@/lib/authAxios'
 import * as S from '@/styles/mystore/MyStoreWithdrawPage.styles'
 import { useNavigate } from 'react-router-dom'
-
 import Header from '@/components/common/Header'
+import DoubleTitle from '@/components/common/DoubleTitle'
 import BottomNav from '@/components/common/BottomNav'
 import TextBox from '@/components/mystore/TextBox'
 import DeletePopup from '@/components/mystore/DeletePopup'
@@ -18,7 +18,7 @@ const MyStoreWithdrawPage = () => {
 
   const handleWithdraw = async () => {
     try {
-      const response = await authAxios.delete(`${apiUrl}/me/profile`)
+      await authAxios.delete(`${apiUrl}/me/profile`)
       alert('탈퇴가 완료되었습니다.')
       navigate('/')
     } catch (error) {
@@ -31,26 +31,24 @@ const MyStoreWithdrawPage = () => {
       <Header title={'탈퇴하기'} showImg={true} />
       <S.Main>
         <S.Scroll className='scrollable'>
-          <S.Container>
-            <S.Text>GoruGoru (이하 고루고루)를 탈퇴하면,</S.Text>
-            <S.BoxContainer>
-              <TextBox
-                title='1. 회원 정보 삭제'
-                context='탈퇴 시 회원님의 개인 정보, 로그인 정보, 이용 기록, 작성하신 리뷰 및 콘텐츠 등이 모두 삭제되며 복구가 불가능합니다.'
-              />
-              <TextBox
-                title='2. 서비스 이용 불가'
-                context='탈퇴 완료 즉시 해당 계정으로 서비스 이용 및 로그인은 불가능합니다.'
-              />
-              <TextBox
-                title='3. 데이터 백업 권장'
-                context='탈퇴 전 필요한 정보는 미리 저장하거나 백업하시길 바랍니다.'
-              />
-            </S.BoxContainer>
-            <S.Button type='button' onClick={openPopup}>
-              탈퇴하기
-            </S.Button>
-          </S.Container>
+          <DoubleTitle title={'GoruGoru(이하 고루고루) 탈퇴 시,'} />
+          <S.BoxContainer>
+            <TextBox
+              title='1. 회원 정보 삭제'
+              context='탈퇴 시 회원님의 개인 정보, 로그인 정보, 이용 기록, 작성하신 리뷰 및 콘텐츠 등이 모두 삭제되며 복구가 불가능합니다.'
+            />
+            <TextBox
+              title='2. 서비스 이용 불가'
+              context='탈퇴 완료 즉시 해당 계정으로 서비스 이용 및 로그인은 불가능합니다.'
+            />
+            <TextBox
+              title='3. 데이터 백업 권장'
+              context='탈퇴 전 필요한 정보는 미리 저장하거나 백업하시길 바랍니다.'
+            />
+          </S.BoxContainer>
+          <S.Button type='button' onClick={openPopup}>
+            탈퇴하기
+          </S.Button>
         </S.Scroll>
       </S.Main>
       <BottomNav />
