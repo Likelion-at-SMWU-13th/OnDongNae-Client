@@ -2,12 +2,11 @@ import React from 'react'
 import * as S from '@/styles/description/EditPage.styles'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import authAxios from '@/lib/authAxios'
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import BottomNav from '@/components/common/BottomNav'
 import Buttons from '@/components/description/Buttons'
-import authAxios from '@/lib/authAxios'
 
 const SummaryEditPage = () => {
   const navigate = useNavigate()
@@ -35,7 +34,6 @@ const SummaryEditPage = () => {
   // patch로 수정된 내용 보내기
   // 페이지 이동
   const handleSubmit = () => {
-    const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
     const value = (comment || '').trim()
     if (!value) {
       alert('한 줄 소개를 입력해주세요.')

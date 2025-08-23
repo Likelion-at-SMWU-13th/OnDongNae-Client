@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { authAxios } from '@/lib/authAxios'
 import * as S from '@/styles/mystore/MyStoreWithdrawPage.styles'
 import { useNavigate } from 'react-router-dom'
-
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import BottomNav from '@/components/common/BottomNav'
@@ -19,7 +18,7 @@ const MyStoreWithdrawPage = () => {
 
   const handleWithdraw = async () => {
     try {
-      const response = await authAxios.delete(`${apiUrl}/me/profile`)
+      await authAxios.delete(`${apiUrl}/me/profile`)
       alert('탈퇴가 완료되었습니다.')
       navigate('/')
     } catch (error) {

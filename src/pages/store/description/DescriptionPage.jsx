@@ -1,17 +1,14 @@
 import React from 'react'
 import * as S from '@/styles/description/StoreDescriptionPage.styles'
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { authAxios } from '@/lib/authAxios'
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
 import ShortDescription from '@/components/description/ShortDescription'
 import LongDescription from '@/components/description/LongDescription'
 import BottomNav from '@/components/common/BottomNav'
-import { authAxios } from '@/lib/authAxios'
 
 const StoreDescriptionPage = () => {
-  const navigate = useNavigate()
   const [shortDesc, setShortDesc] = useState('')
   const [longDesc, setLongDesc] = useState('')
   const apiUrl = import.meta.env.VITE_API_URL
@@ -24,7 +21,7 @@ const StoreDescriptionPage = () => {
         setLongDesc(res.data.data.longDescription ?? '')
       })
       .catch((err) => console.error('[StoreDescription] failed:', err))
-  }, [apiUrl])
+  }, [])
 
   return (
     <>

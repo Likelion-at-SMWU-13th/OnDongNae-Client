@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MapStoresPage.styles'
 import * as C from '@/styles/common/CustomerBottomNav.styles'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import Header from '@/components/common/Header'
@@ -20,7 +20,6 @@ const MapStoresPage = () => {
   const [store, setStore] = useState() // url에서 id 정보 추출
   const [tab, setTab] = useState('menu') // 일단 메뉴탭 보여주기
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
 
   const apiUrl = import.meta.env.VITE_API_URL
 
@@ -33,10 +32,8 @@ const MapStoresPage = () => {
           headers: { 'Accept-Language': lang },
         })
         setStore(response?.data?.data ?? null)
-        console.log(response?.data?.data)
-        setError(null)
       } catch (err) {
-        setError(err)
+        console.error(err)
       } finally {
         setIsLoading(false)
       }

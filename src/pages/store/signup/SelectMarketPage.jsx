@@ -1,6 +1,5 @@
-import styled from 'styled-components'
-import * as S from '@/styles/signup/SelectMarketPage.styles'
 import React, { useState } from 'react'
+import * as S from '@/styles/signup/SelectMarketPage.styles'
 import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import backIcon from '@/assets/button-back.svg'
@@ -23,8 +22,7 @@ const SelectMarketPage = () => {
   ]
 
   // 다음 클릭 시
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = () => {
     if (!id) {
       alert('시장을 선택해주세요.')
       return

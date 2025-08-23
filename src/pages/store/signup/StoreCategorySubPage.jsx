@@ -1,11 +1,8 @@
-import * as S from '@/styles/signup/StoreCategoryPage.styles'
 import React, { useEffect, useState } from 'react'
+import * as S from '@/styles/signup/StoreCategoryPage.styles'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
-// 공용 컴포넌트
 import Header from '@/components/common/Header'
-import backIcon from '@/assets/button-back.svg'
 import ProgressBar from '@/components/signup/ProgressBar'
 import smallDragon from '@/assets/logo-smalldragon.svg'
 import Title from '@/components/signup/Title'
@@ -56,26 +53,18 @@ const SelectSubcategoryPage = () => {
   return (
     <>
       {/* 상단 헤더 */}
-      <Header img={backIcon} title={'회원가입'} showImg={false} />
-
+      <Header title={'회원가입'} showImg={false} />
       <S.Main>
         <S.Scroll className='scrollable'>
           <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
-
           <S.Container>
             <S.TextContainer>
-              {/* 페이지 타이틀 */}
               <Title text={'가게의 세부 업종을 골라주세요.'} />
             </S.TextContainer>
-            {/* 선택 폼 영역 */}
             <S.ButtonContainer>
-              {/* 소분류 리스트 */}
               <SelectButton options={categories} multiple value={id} onChange={setId} />
-
-              {/* 하단 버튼: 이전 / 다음 */}
             </S.ButtonContainer>
-
-            <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
+            <SmallButtonContainer handleSubmit={handleSubmit} />
           </S.Container>
         </S.Scroll>
       </S.Main>

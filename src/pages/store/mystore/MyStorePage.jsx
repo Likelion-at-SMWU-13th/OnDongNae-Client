@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import MenuItem from '@/components/mystore/MenuItem'
@@ -14,7 +13,6 @@ const MyStorePage = () => {
 
   return (
     <>
-      {/* 상단 헤더 */}
       <Header title={'나의 가게'} showImg={false} />
       <MenuList>
         <MenuItem

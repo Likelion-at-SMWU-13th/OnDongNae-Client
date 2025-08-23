@@ -12,7 +12,7 @@ const OnboardingPage1 = () => {
   const { t } = useTranslation()
 
   const handleSkip = () => {
-    navigate('/')
+    navigate('/user/map')
   }
 
   const handlePrev = () => {
