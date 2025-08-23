@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import styled from 'styled-components'
 import clockIcon from '@/assets/icon-small-clock.svg'
 import downIcon from '@/assets/icon-down-arrow.svg'
@@ -35,7 +34,7 @@ function HeaderSection({ header }) {
         </ArrowButton>
       </TimeInfo>
 
-      {/* 펼침 영역: 주간 영업시간 */}
+      {/* 화살표 누르면 영업시간 보이게 */}
       {expanded && (
         <Card>
           {(header?.weeklyHours || []).map((row, idx) => {
@@ -43,7 +42,7 @@ function HeaderSection({ header }) {
             const dayLabel = t(dayKey, { defaultValue: row?.day || '' }) // 번역 없으면 코드 그대로 표시
 
             return (
-              <Day key={idx}>
+              <Day key={row.day}>
                 <DayText>{dayLabel}</DayText>
                 {row.closed ? (
                   <ClosedText>{t('text.closed')}</ClosedText>
@@ -96,7 +95,6 @@ const Img = styled.img``
 const OpenInfo = styled.div`
   padding-left: 5px;
   color: #f08e67;
-  font-feature-settings: 'dlig' on;
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
@@ -104,7 +102,6 @@ const OpenInfo = styled.div`
 
 const CloseInfo = styled.span`
   color: #000;
-  font-feature-settings: 'dlig' on;
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
@@ -149,7 +146,6 @@ const TimeText = styled.span`
 `
 const ShortIntro = styled.p`
   color: #0d141c;
-  font-feature-settings: 'dlig' on;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;

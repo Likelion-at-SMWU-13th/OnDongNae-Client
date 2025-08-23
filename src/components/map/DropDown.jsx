@@ -54,14 +54,12 @@ const Trigger = styled.button`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  align-items: center;
   width: 100%;
   padding: 8px 20px;
   border-radius: 30px;
   border: 1px solid #f08e67;
   background: #fff;
   box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.1);
-
   font-size: 16px;
   font-weight: 400;
   text-align: center;

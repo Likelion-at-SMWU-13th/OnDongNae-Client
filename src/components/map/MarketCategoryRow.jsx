@@ -1,6 +1,29 @@
-// src/components/map/SelectedChips.jsx
 import React from 'react'
 import styled from 'styled-components'
+
+function MarketCateogoryRow({
+  marketLabel, // 시장 라벨명
+  mainLabel, // 대분류 라벨명
+  onClearMarket, // 시장 초기화
+  onClearMain, // 대분류 초기화
+}) {
+  return (
+    <Wrap>
+      <Row>
+        <MarketButton type='button' onClick={onClearMarket}>
+          {marketLabel}
+        </MarketButton>
+        {mainLabel ? (
+          <MainCategoryButton type='button' onClick={onClearMain}>
+            {mainLabel}
+          </MainCategoryButton>
+        ) : null}
+      </Row>
+    </Wrap>
+  )
+}
+
+export default MarketCateogoryRow
 
 const Wrap = styled.div`
   // DropDown과 같은 자리
@@ -29,27 +52,6 @@ const MarketButton = styled.button`
   color: #fff;
   font-size: 14px;
   box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 `
 const MainCategoryButton = styled(MarketButton)``
-
-export default function SelectedChips({
-  marketLabel, // 시장 라벨명
-  mainLabel, // 대분류 라벨명
-  onClearMarket, // 시장 초기화
-  onClearMain, // 대분류 초기화
-}) {
-  return (
-    <Wrap>
-      <Row>
-        <MarketButton type='button' onClick={onClearMarket}>
-          {marketLabel}
-        </MarketButton>
-        {mainLabel ? (
-          <MainCategoryButton type='button' onClick={onClearMain}>
-            {mainLabel}
-          </MainCategoryButton>
-        ) : null}
-      </Row>
-    </Wrap>
-  )
-}

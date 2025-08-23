@@ -43,9 +43,6 @@ const ScrollArea = ({
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  // 가게 기본 이미지 없을 때
-  const defaultSrc = (src) => (src && String(src).trim() ? src : defaultStoreImg)
-
   // 리스트 필터링
   const isAnythingSelected =
     !!selectedMainId || (Array.isArray(selectedSubIds) && selectedSubIds.length > 0)
@@ -61,6 +58,7 @@ const ScrollArea = ({
     )
   }, [isAnythingSelected, randomStores, stores, categories, selectedMainId, selectedSubIds])
 
+  // ScrollArea 계산
   const snaps = useMemo(() => {
     const arr = (snapPoints && snapPoints.length ? snapPoints : [20, 65])
       .slice()
@@ -68,13 +66,14 @@ const ScrollArea = ({
     return arr
   }, [snapPoints])
 
+  // 가장 낮은 지점과 가장 높은 지점 지정
   const minSnap = snaps[0]
   const maxSnap = snaps[snaps.length - 1]
 
   const [heightPct, setHeightPct] = useState(() => clamp(initialHeightPct, minSnap, maxSnap))
 
+  // 드래그 시작
   const dragRef = useRef({ startY: 0, startH: heightPct, dragging: false })
-
   const onPointerDown = (e) => {
     const y = e.clientY ?? e.touches?.[0]?.clientY
     if (y == null) return
@@ -83,6 +82,7 @@ const ScrollArea = ({
     window.addEventListener('pointerup', onPointerUp, { passive: true })
   }
 
+  // 드래그 중
   const onPointerMove = (e) => {
     if (!dragRef.current.dragging) return
     e.preventDefault()
@@ -92,14 +92,16 @@ const ScrollArea = ({
     setHeightPct(clamp(dragRef.current.startH + deltaPct, minSnap, maxSnap))
   }
 
+  // 드래그 종료
   const onPointerUp = () => {
     if (!dragRef.current.dragging) return
     dragRef.current.dragging = false
-    setHeightPct((v) => clamp(nearest(v, snaps), minSnap, maxSnap))
+    setHeightPct((v) => nearest(v, snaps))
     window.removeEventListener('pointermove', onPointerMove)
     window.removeEventListener('pointerup', onPointerUp)
   }
 
+  // 창 크기 바뀔 때 높이가 벗어나지 않게 조정
   useEffect(() => {
     const onResize = () => setHeightPct((v) => clamp(v, minSnap, maxSnap))
     window.addEventListener('resize', onResize)

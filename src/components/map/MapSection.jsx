@@ -1,4 +1,3 @@
-// components/map/MapSection.jsx
 import React from 'react'
 import styled from 'styled-components'
 import KakaoMapContainer from '@/components/common/KakaoMapContainer'
@@ -31,7 +30,6 @@ function MapSection({ header }) {
           style={{
             width: '100%',
             height: '100%',
-            display: 'flex',
           }}
           markers={markers}
         />
