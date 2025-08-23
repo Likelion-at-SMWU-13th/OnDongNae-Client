@@ -19,7 +19,7 @@ const Button = styled.button`
   font-size: 17px;
   font-weight: 600;
   border-radius: 10px;
-  background: #feb99d;
+  background: #f08e67;
   color: #ffffff;
   border: none;
   cursor: pointer;

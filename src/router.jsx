@@ -74,7 +74,8 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <SelectLanguagePage /> },
+      { index: true, element: <SelectLanguagePage /> }, // 메인 온보딩 페이지로 바꾸기
+      { path: 'select-language', element: <SelectLanguagePage /> },
       { path: 'login', element: <LoginPage /> },
       {
         path: 'onboarding/1',

@@ -37,7 +37,7 @@ const SelectLanguagePage = () => {
     i18n.changeLanguage(langCode)
 
     // 고객용 메인 페이지 이동
-    navigate('onboarding/1')
+    navigate('/onboarding/1')
   }
   return (
     <S.Container>
