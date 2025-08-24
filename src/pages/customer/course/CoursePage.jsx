@@ -10,10 +10,10 @@ import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 const CoursePage = () => {
   const { t } = useTranslation()
   return (
-    <div className='scrollable'>
+    <>
       <Header title={t('bottomNav.course')} showImg={false} />
       <C.Main>
-        <C.Scroll>
+        <C.Scroll className='scrollable'>
           <CourseContent />
           <ButtonWrapper>
             <LargeOrangeButton
@@ -24,7 +24,7 @@ const CoursePage = () => {
         </C.Scroll>
       </C.Main>
       <CustomerBottomNav />
-    </div>
+    </>
   )
 }
 

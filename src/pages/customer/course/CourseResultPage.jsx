@@ -67,9 +67,9 @@ const CourseResultPage = () => {
     : []
 
   return (
-    <div className='scrollable'>
+    <>
       <Header title={t('bottomNav.course')} showImg={false} />
-      <C.Main>
+      <C.Main className='scrollable'>
         <C.Scroll>
           <TitleWrapper>
             <DoubleTitle title={title} subtitle={description} />
@@ -108,7 +108,7 @@ const CourseResultPage = () => {
         </C.Scroll>
       </C.Main>
       <CustomerBottomNav />
-    </div>
+    </>
   )
 }
 

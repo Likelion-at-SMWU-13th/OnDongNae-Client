@@ -13,10 +13,10 @@ const MenuAllergensSuccess = () => {
   // 로딩 페이지에서 넘긴 데이터
   const initialResults = state?.initialResults ?? []
   return (
-    <div className='scrollable'>
+    <>
       <Header title={'메뉴 관리'} showImg={true} />
       <C.Main>
-        <C.Scroll>
+        <C.Scroll className='scrollable'>
           <TitleWrapper>
             <DoubleTitle
               title='알레르기 분석이 끝났어요'
@@ -32,7 +32,7 @@ const MenuAllergensSuccess = () => {
         </C.Scroll>
       </C.Main>
       <BottomNav />
-    </div>
+    </>
   )
 }
 

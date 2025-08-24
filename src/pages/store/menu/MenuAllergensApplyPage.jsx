@@ -19,10 +19,10 @@ const MenuAllergensApplyPage = () => {
   }, [navigate])
 
   return (
-    <div className='scrollable'>
+    <>
       <Header title='메뉴 관리' showImg={true} />
       <C.Main>
-        <C.Scroll>
+        <C.Scroll className='scrollable'>
           <ComponentContainer>
             <CheckIcon src={Check} alt='로딩완료' />
             <LoadingSuccess
@@ -33,7 +33,7 @@ const MenuAllergensApplyPage = () => {
         </C.Scroll>
       </C.Main>
       <BottomNav />
-    </div>
+    </>
   )
 }
 

@@ -9,10 +9,10 @@ import MenuForm from '@/components/menuManagement/MenuForm'
 
 const MenuManualPage = () => {
   return (
-    <div className='scrollable'>
+    <>
       <Header title='메뉴 관리' showImg={true} />
       <C.Main>
-        <C.Scroll>
+        <C.Scroll className='scrollable'>
           <TitleContainer>
             <Title text={'메뉴 이름과 가격을 입력해주세요'}></Title>
             <Subtitle text={'‘메뉴 추가’ 버튼으로 메뉴를 추가해주세요'}></Subtitle>
@@ -21,7 +21,7 @@ const MenuManualPage = () => {
         </C.Scroll>
       </C.Main>
       <BottomNav />
-    </div>
+    </>
   )
 }
 

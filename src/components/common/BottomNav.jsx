@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
-
 import icMenu from '@/assets/icon-bottomNav-menu.svg'
 import icMenuActive from '@/assets/icon-bottomNav-menu-active.svg'
 import icTime from '@/assets/icon-bottomNav-clock.svg'
@@ -48,7 +47,7 @@ const Bar = styled.section`
   transform: translateX(-50%);
   bottom: 0;
   z-index: 100;
-  padding: 17px 25px 26px 25px;
+  padding: 2dvh 35px 3dvh 35px;
   border-top: 1px solid #f2f2f5;
   background: #fff;
 `

@@ -1,5 +1,6 @@
 import React from 'react'
 import * as S from '@/styles/description/EditPage.styles'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import authAxios from '@/lib/authAxios'
@@ -58,8 +59,8 @@ const DetailEditPage = () => {
   return (
     <>
       <Header title={'가게 설명'} showImg={true} />
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <DoubleTitle
             title={'상세 소개글을 수정해주세요.'}
             subtitle={"수정 후 '저장하기' 버튼을 눌러주세요."}
@@ -68,8 +69,8 @@ const DetailEditPage = () => {
             <S.TextArea value={comment} onChange={handleChange}></S.TextArea>
           </S.Container>
           <Buttons handleSubmit={handleSubmit}></Buttons>
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
       <BottomNav />
     </>
   )
