@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import * as S from '@/styles/signup/SignupAccountInfoPage.styles'
+import * as C from '@/styles/common/SignupScroll.styles'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import Header from '@/components/common/Header'
@@ -62,8 +63,8 @@ const SignupAccountInfo = () => {
   return (
     <>
       <Header img={backIcon} title={'회원가입'} showImg={false} />
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <ProgressBar currentStep={1} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
@@ -80,8 +81,8 @@ const SignupAccountInfo = () => {
             </S.InputContainer>
             <SmallButtonContainer handleSubmit={handleSubmit}></SmallButtonContainer>
           </S.Container>
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/signup/StoreCategoryPage.styles'
+import * as C from '@/styles/common/SignupScroll.styles'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Header from '@/components/common/Header'
@@ -52,8 +53,8 @@ const StoreCategoryMainPage = () => {
   return (
     <>
       <Header title={'회원가입'} showImg={false} />
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <ProgressBar currentStep={4} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
@@ -64,8 +65,8 @@ const StoreCategoryMainPage = () => {
             </S.ButtonContainer>
             <SmallButtonContainer handleSubmit={handleSubmit} />
           </S.Container>
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
     </>
   )
 }

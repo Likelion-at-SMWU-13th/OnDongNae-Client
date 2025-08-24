@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import * as S from '@/styles/signup/StoreKeywordPage.styles'
+import * as C from '@/styles/common/SignupScroll.styles'
 import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import ProgressBar from '@/components/signup/ProgressBar'
@@ -30,8 +31,8 @@ const StoreKeywordPage2 = () => {
   return (
     <>
       <Header title={'회원가입'} showImg={false} />
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <ProgressBar currentStep={5} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
@@ -47,8 +48,8 @@ const StoreKeywordPage2 = () => {
             </S.InputContainer>
             <SmallButtonContainerSkip handleSubmit={handleSubmit} />
           </S.Container>
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
     </>
   )
 }

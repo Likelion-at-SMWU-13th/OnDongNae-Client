@@ -6,7 +6,7 @@ import circleCheckOn from '@/assets/icon-circle-check-on.svg'
 import checkOn from '@/assets/icon-check-on.svg'
 
 // 필수 항목 모두 선택되었는지 전달
-function TermsAgreement({ onRequiredChange }) {
+function TermsAgreement({ onRequiredChange, onViewClick }) {
   const [agreements, setAgreements] = useState({
     all: false, // 모두 선택
     term1: false, // 필수
@@ -49,7 +49,7 @@ function TermsAgreement({ onRequiredChange }) {
 
   const handleView = (key) => {
     // 약관 팝업창 보여주기
-    alert(`${key} 약관 내용을 보여주세요`)
+    onViewClick?.(key)
   }
 
   return (

@@ -3,11 +3,11 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 69px 38px 40px 30px;
+  margin: 4.5dvh 38px 7dvh 30px;
 `
 
 export const TextArea = styled.textarea`
-  height: 262px;
+  height: 40dvh;
   padding: 47px 17px;
   border-radius: 10px;
   border: 2px solid #f08e67;
