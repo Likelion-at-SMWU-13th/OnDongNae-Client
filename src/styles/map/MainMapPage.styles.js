@@ -4,6 +4,7 @@ import styled from 'styled-components'
 export const MapContainer = styled.div`
   position: relative;
   width: 100%;
+  height: calc(100dvh - 19dvh);
 `
 
 export const Overlay = styled.div`
@@ -19,8 +20,6 @@ export const Overlay = styled.div`
   align-items: center;
   background: transparent; /* 흰 배경 제거 */
 
-  /* 맵 클릭을 막지 않으려면 pointer-events 제어.
-     래퍼는 통과시키고 실제 자식들만 이벤트 받게 함 */
   pointer-events: none;
   > * {
     pointer-events: auto;
