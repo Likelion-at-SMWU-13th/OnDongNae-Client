@@ -7,7 +7,7 @@ export default function MenuSave({ menus = [] }) {
     <div>
       {menus.map((m, idx) => (
         <Row key={idx}>
-          <NameKo type='text' value={m.nameKo} readOnly aria-label='메뉴 이름' />
+          <NameKo title={m.nameKo}>{m.nameKo}</NameKo>{' '}
           <PriceWrapper>
             <Currency>₩</Currency>
             <PriceKrw
@@ -32,18 +32,15 @@ const Row = styled.div`
   justify-items: start;
   padding: 44px 0 0 30px;
 `
-
-const NameKo = styled.input`
+const NameKo = styled.span`
+  display: inline-block;
   max-width: 120px;
-  min-width: 20px;
-  width: auto;
-  color: #000000;
+  color: #000;
   font-size: 19px;
   font-weight: 500;
-  border: none;
-  overflow: hidden;
   white-space: nowrap;
-  box-sizing: content-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const PriceWrapper = styled.div`
