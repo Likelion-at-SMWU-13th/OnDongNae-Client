@@ -33,8 +33,15 @@ export const CellBtn = styled.button`
   border-radius: 10px;
   background: #fff;
   border: 1px solid #f08e67;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  text-align: center;
+  line-height: 30px;
+
   &:disabled {
     opacity: 0.4;
+    color: #888;
   }
 `
 const Checkbox = styled.input.attrs({ type: 'checkbox' })`

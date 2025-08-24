@@ -32,7 +32,7 @@ export default function HoursTable() {
     }
   }, [apiUrl])
 
-  if (loading) return null // 필요하면 로딩 UI 넣어도 됨
+  if (loading) return null
   if (error) return <div style={{ padding: '30px' }}>{error}</div>
   if (!hoursData || !Array.isArray(hoursData.items) || hoursData.items.length === 0) {
     return (
