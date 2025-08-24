@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { authAxios } from '@/lib/authAxios'
 import * as S from '@/styles/mystore/MyStoreWithdrawPage.styles'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
@@ -29,8 +30,8 @@ const MyStoreWithdrawPage = () => {
   return (
     <>
       <Header title={'탈퇴하기'} showImg={true} />
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <DoubleTitle title={'GoruGoru(이하 고루고루) 탈퇴 시,'} />
           <S.BoxContainer>
             <TextBox
@@ -49,8 +50,8 @@ const MyStoreWithdrawPage = () => {
           <S.Button type='button' onClick={openPopup}>
             탈퇴하기
           </S.Button>
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
       <BottomNav />
       {isOpen && <DeletePopup onClose={closePopup} onSubmit={handleWithdraw} />}
     </>

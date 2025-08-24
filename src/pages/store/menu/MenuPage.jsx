@@ -52,10 +52,10 @@ function MenuPage() {
   }, [fetchMenus])
 
   return (
-    <div className='scrollable'>
+    <>
       <Header title={'메뉴 관리'} showImg={false} />
       <C.Main>
-        <C.Scroll>
+        <C.Scroll className='scrollable'>
           <RegisterMenuSection>
             <Title text={'메뉴판을 등록해주세요'} />
             <RegisterOptions
@@ -91,7 +91,7 @@ function MenuPage() {
         </C.Scroll>
       </C.Main>
       <BottomNav />
-    </div>
+    </>
   )
 }
 

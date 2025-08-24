@@ -25,19 +25,17 @@ export default function MenuExtractSuccessPage() {
 
   return (
     <>
-      <div className='scrollable'>
-        <Header title='메뉴 관리' showImg={true} />
-        <C.Main>
-          <C.Scroll>
-            <DoubleTitle
-              title='메뉴 추출이 끝났어요'
-              subtitle='수정 버튼을 누르면 내용을 바꿀 수 있어요.'
-            />
-            <MenuEdit initialItems={initialItems} />
-          </C.Scroll>
-        </C.Main>
-        <BottomNav />
-      </div>
+      <Header title='메뉴 관리' showImg={true} />
+      <C.Main>
+        <C.Scroll className='scrollable'>
+          <DoubleTitle
+            title='메뉴 추출이 끝났어요'
+            subtitle='수정 버튼을 누르면 내용을 바꿀 수 있어요.'
+          />
+          <MenuEdit initialItems={initialItems} />
+        </C.Scroll>
+      </C.Main>
+      <BottomNav />
     </>
   )
 }

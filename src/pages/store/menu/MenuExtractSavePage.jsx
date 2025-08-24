@@ -31,10 +31,10 @@ const MenuExtractSave = () => {
       })
   }
   return (
-    <div className='scrollable'>
+    <>
       <Header title={'메뉴 관리'} showImg={true} />
       <C.Main>
-        <C.Scroll>
+        <C.Scroll className='scrollable'>
           <DoubleTitle
             title='메뉴판이 저장되었어요'
             subtitle='메뉴판을 확인하고 하단의 버튼을 눌러주세요'
@@ -46,7 +46,7 @@ const MenuExtractSave = () => {
         </C.Scroll>
       </C.Main>
       <BottomNav />
-    </div>
+    </>
   )
 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import * as S from '@/styles/description/StoreDescriptionPage.styles'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import { useState, useEffect } from 'react'
 import { authAxios } from '@/lib/authAxios'
 import Header from '@/components/common/Header'
@@ -26,8 +27,8 @@ const StoreDescriptionPage = () => {
   return (
     <>
       <Header title={'가게 설명'} showImg={false} />
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <DoubleTitle
             title={'작성하신 키워드로 \n AI가 소개글을 만들었어요.'}
             subtitle={'수정하고 싶다면 ‘수정하기’ 버튼을 눌러주세요.'}
@@ -38,8 +39,8 @@ const StoreDescriptionPage = () => {
             {/* 세부 설명 */}
             <LongDescription text={longDesc} />
           </S.Container>
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
       <BottomNav />
     </>
   )

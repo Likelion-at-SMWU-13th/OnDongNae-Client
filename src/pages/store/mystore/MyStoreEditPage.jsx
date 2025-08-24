@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { authAxios } from '@/lib/authAxios'
 import * as S from '@/styles/mystore/MyStoreEditPage.styles'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 import Header from '@/components/common/Header'
 import PhoneField from '@/components/signup/PhoneField'
 import PasswordField from '@/components/signup/PasswordField'
@@ -69,8 +70,8 @@ const MyInfoEditPage = () => {
   return (
     <>
       <Header title={'정보 수정'} showImg={true} />
-      <S.Main>
-        <S.Scroll className='scrollable'>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <S.FieldContainer>
             <PhoneField
               label='휴대폰 번호'
@@ -103,8 +104,8 @@ const MyInfoEditPage = () => {
           <S.ButtonContainer>
             <SmallButtonContainer handleSubmit={handleSubmit} prevLabel='취소' nextLabel='저장' />
           </S.ButtonContainer>
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
       <BottomNav />
     </>
   )

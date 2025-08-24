@@ -73,10 +73,10 @@ const MenuCorrectPage = () => {
   }
 
   return (
-    <div className='scrollable'>
+    <>
       <Header title='메뉴 관리' showImg={true} />
       <C.Main>
-        <C.Scroll>
+        <C.Scroll className='scrollable'>
           <TitleContainer>
             <Title text='메뉴를 수정해주세요' />
           </TitleContainer>
@@ -92,7 +92,7 @@ const MenuCorrectPage = () => {
         </C.Scroll>
       </C.Main>
       <BottomNav />
-    </div>
+    </>
   )
 }
 

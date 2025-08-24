@@ -114,10 +114,10 @@ export default function CourseDetailPage() {
   const { title = '', description = '' } = data
 
   return (
-    <div className='scrollable'>
+    <>
       <Header title={t('bottomNav.course')} showImg={true} />
       <C.Main>
-        <C.Scroll>
+        <C.Scroll className='scrollable'>
           <TitleWrapper>
             <DoubleTitle title={title} subtitle={description} />
           </TitleWrapper>
@@ -159,7 +159,7 @@ export default function CourseDetailPage() {
         </C.Scroll>
       </C.Main>
       <CustomerBottomNav />
-    </div>
+    </>
   )
 }
 
