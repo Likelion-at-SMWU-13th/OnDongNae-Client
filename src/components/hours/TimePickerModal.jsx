@@ -79,9 +79,26 @@ const Row = styled.div`
 `
 const Sel = styled.select`
   padding: 8px 12px;
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #000000;
   border: solid 1px #f08e67;
   border-radius: 10px;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  &:focus {
+    outline: none;
+    border-color: #f08e67;
+    box-shadow: 0 0 0 2px rgba(240, 142, 103, 0.3);
+  }
+`
+const Option = styled.option`
+  font-size: 16px;
+  font-weight: 500;
+  color: #2d2d2d;
 `
 const TimeBtn = styled.button`
   padding: 10px 18px;

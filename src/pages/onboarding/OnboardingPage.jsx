@@ -29,7 +29,7 @@ export default function OnboardingPage() {
 
 const Content = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   background-color: #fa6432;
   display: flex;
   flex-direction: column;
@@ -45,6 +45,7 @@ const Logo = styled.img`
   height: 139px;
   margin-left: 58px;
   align-items: center;
+  top: 33%;
   opacity: 0;
   animation: fadeIn 1.5s forwards;
 

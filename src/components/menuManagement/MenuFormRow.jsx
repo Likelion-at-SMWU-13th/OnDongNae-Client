@@ -50,8 +50,8 @@ const Prefix = styled.span`
   font-size: 18px;
   font-weight: 400;
   line-height: 21px;
-  padding-left: 20px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 `
 const Field = styled.div`
   display: flex;
@@ -81,8 +81,11 @@ const Input = styled.input`
 
 const PrefixWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  padding-left: 5px;
   border-bottom: 1px solid #f08e67;
   width: 200px;
   padding-left: 5px;
+  margin-right: 30px;
 `
