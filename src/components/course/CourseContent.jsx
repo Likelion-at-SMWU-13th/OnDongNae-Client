@@ -38,7 +38,7 @@ export default function CourseContent() {
 
   return (
     <>
-      <Title>{t('bottomNav.course')}</Title>
+      <Title>{t('course.suggestCourse')}</Title>
       <ContentWrapper>
         {courses.map(
           ({ id: courseId, courseTitle, courseDescription, mainImageUrl, storeNames }) => (

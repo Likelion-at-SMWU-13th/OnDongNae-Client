@@ -104,7 +104,8 @@
     "failComment": "Failed to generate\ncourse recommendation.\n\nPlease try again",
     "share": "Share",
     "create": "Create course with AI",
-    "option": "Please select all options."
+    "option": "Please select all options.",
+    "suggestCourse": "Suggested Courses"
   },
   "onboarding1": {
     "title": "Hello, I’m Koru.",

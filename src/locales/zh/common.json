@@ -105,7 +105,8 @@
     "failComment": "无法生成推荐路线。\n\n请再试一次。",
     "share": "分享",
     "create": "通过人工智能接受路线推荐\nAI推荐路线",
-    "option": "请先选择所有选项。"
+    "option": "请先选择所有选项。",
+    "suggestCourse": "推荐课程"
   },
   "onboarding1": {
     "title": "你好，我是Koru。",
