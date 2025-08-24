@@ -18,7 +18,7 @@ const OverviewInfoPage1 = () => {
     <div>
       <Header title={t('header.overview')} showImg={true} />
       <C.Main>
-        <C.Scroll>
+        <C.Scroll className='scrollable'>
           <MarketImg src={marketImage} alt='' />
           <TitleWrapper>{t('overview.YongmunMarket')}</TitleWrapper>
           <InfoWrapper>

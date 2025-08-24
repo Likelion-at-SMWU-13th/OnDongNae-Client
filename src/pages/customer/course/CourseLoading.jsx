@@ -1,26 +1,23 @@
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import Header from '@/components/common/Header'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useLocation } from 'react-router-dom'
-import React, { useState, useEffect } from 'react'
+import authAxios from '@/lib/authAxios'
+import Header from '@/components/common/Header'
 import Spinner from '@/assets/icon-spinner.svg'
 import SubTitle from '@/components/signup/SubTitle'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
-import axios from 'axios'
 
 const CourseLoading = () => {
   const { t, i18n } = useTranslation()
   const { state } = useLocation()
   const API_URL = import.meta.env.VITE_API_URL
-  //   const [courses, setCourses] = useState([])
   const navigate = useNavigate()
-  console.log(state) // 연동 후 삭제
-  // { marketId: 5, withOptionId: 2, atmosphereOptionId: 9 }
 
   useEffect(() => {
     const lang = (i18n.language || 'en').split('-')[0]
 
-    axios
+    authAxios
       .post(`${API_URL}/courses/recommend`, state, {
         headers: { 'Accept-Language': lang },
       })

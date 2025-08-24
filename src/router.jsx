@@ -65,9 +65,9 @@ import OverviewInfo5 from './pages/customer/overview/OverviewInfoPage5.jsx'
 import ExchangeRatePage from './pages/customer/rates/ExchangeRatePage'
 //course
 import CoursePage from './pages/customer/course/CoursePage.jsx'
-import CourseAI from './pages/customer/course/CourseAI'
+import CourseAIPage from './pages/customer/course/CourseAIPage'
 import CourseLoading from './pages/customer/course/CourseLoading'
-import CourseFail from './pages/customer/course/CourseFail'
+import CourseFailPage from './pages/customer/course/CourseFailPage'
 import CourseResultPage from './pages/customer/course/CourseResultPage'
 import CourseDetailPage from './pages/customer/course/CourseDetailPage'
 const router = createBrowserRouter([
@@ -289,7 +289,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'user/course/AI',
-        element: <CourseAI />,
+        element: <CourseAIPage />,
       },
       {
         path: 'user/course/AI/loading',
@@ -297,7 +297,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/user/course/AI/fail',
-        element: <CourseFail />,
+        element: <CourseFailPage />,
       },
       {
         path: '/user/course/result',
