@@ -184,5 +184,5 @@ const SmallLightOrangeButton = styled.button`
 const ButtonWapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 30px 0 60px 40px;
+  margin: 30px 0 40px 0;
 `
