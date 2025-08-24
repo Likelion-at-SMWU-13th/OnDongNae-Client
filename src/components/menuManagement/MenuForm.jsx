@@ -35,8 +35,19 @@ const MenuForm = () => {
     authAxios
       .post(`${apiUrl}/me/menus/save`, payload, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
-        const menuData = res.data.data.menus
-        navigate('/menu/extract/save', { state: menuData })
+        const responseData = res.data?.data
+        if (!responseData) {
+          console.error('No payload', res.data)
+          alert('저장 응답을 확인하지 못했어요.')
+          return
+        }
+
+        navigate('/menu/extract/save', {
+          state: {
+            menus: responseData.menus,
+            canExtractAllergy: responseData.canExtractAllergy,
+          },
+        })
       })
       .catch((err) => {
         console.error(err)

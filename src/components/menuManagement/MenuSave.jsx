@@ -1,12 +1,8 @@
 // src/pages/menu/MenuSave.jsx
 import React from 'react'
-import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-export default function MenuSave() {
-  const location = useLocation()
-  const menus = location.state || []
-
+export default function MenuSave({ menus = [] }) {
   return (
     <div>
       {menus.map((m, idx) => (
@@ -20,7 +16,6 @@ export default function MenuSave() {
               pattern='[0-9]*'
               value={m.priceKrw}
               readOnly
-              aria-label='가격'
             />
           </PriceWrapper>
         </Row>

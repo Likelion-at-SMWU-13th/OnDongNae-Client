@@ -3,29 +3,6 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { authAxios } from '@/lib/authAxios'
 
-const DAY_KO = {
-  MON: '월요일',
-  TUE: '화요일',
-  WED: '수요일',
-  THU: '목요일',
-  FRI: '금요일',
-  SAT: '토요일',
-  SUN: '일요일',
-}
-
-const TitleWrapper = styled.div`
-  padding: 38px 30px 20px 30px;
-  width: 390px;
-  font-size: 25px;
-  font-weight: 600;
-`
-
-const HourTableWrapper = styled.div`
-  display: flex;
-  padding: 0 0 27px 30px;
-  gap: 30px;
-`
-
 export default function HoursTable() {
   const apiUrl = import.meta.env.VITE_API_URL
   const [hoursData, setHoursData] = useState(null)
@@ -58,7 +35,17 @@ export default function HoursTable() {
   if (loading) return null // 필요하면 로딩 UI 넣어도 됨
   if (error) return <div style={{ padding: '30px' }}>{error}</div>
   if (!hoursData || !Array.isArray(hoursData.items) || hoursData.items.length === 0) {
-    return <div style={{ padding: '30px' }}>설정된 영업시간이 없어요.</div>
+    return (
+      <>
+        <TitleWrapper>
+          <span>{hoursData.storeName}</span>
+          <span>의 영업시간이에요</span>
+        </TitleWrapper>
+        <div style={{ paddingLeft: '30px', fontSize: '18px', fontWeight: 400 }}>
+          아직 설정된 영업시간이 없어요.
+        </div>
+      </>
+    )
   }
 
   return (
@@ -77,3 +64,25 @@ export default function HoursTable() {
     </div>
   )
 }
+const DAY_KO = {
+  MON: '월요일',
+  TUE: '화요일',
+  WED: '수요일',
+  THU: '목요일',
+  FRI: '금요일',
+  SAT: '토요일',
+  SUN: '일요일',
+}
+
+const TitleWrapper = styled.div`
+  padding: 38px 30px 20px 30px;
+  width: 390px;
+  font-size: 25px;
+  font-weight: 600;
+`
+
+const HourTableWrapper = styled.div`
+  display: flex;
+  padding: 0 0 27px 30px;
+  gap: 30px;
+`

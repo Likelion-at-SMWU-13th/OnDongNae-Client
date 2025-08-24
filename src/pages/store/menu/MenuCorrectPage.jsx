@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import * as C from '@/styles/common/CustomerBottomNav.styles'
+import authAxios from '@/lib/authAxios'
 import Header from '@/components/common/Header'
 import Title from '@/components/signup/Title'
 import SmallButtonContainer from '@/components/common/SmallButtonContainer'
@@ -62,6 +63,8 @@ const MenuCorrectPage = () => {
   }, [original, working])
 
   const handleSubmit = () => {
+    const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken') || ''
+    const apiUrl = import.meta.env.VITE_API_URL
     const body = {
       items: working.map(({ menuId, nameKo, priceKrw }) => ({
         menuId: menuId ?? null,
@@ -69,7 +72,16 @@ const MenuCorrectPage = () => {
         priceKrw: Number(priceKrw ?? 0),
       })),
     }
-    navigate('/menu/extract/save')
+    authAxios
+      .put(`${apiUrl}/me/menus`, body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        navigate('/menu')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   return (

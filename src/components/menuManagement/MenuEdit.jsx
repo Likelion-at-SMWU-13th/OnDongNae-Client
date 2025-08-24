@@ -41,10 +41,24 @@ export default function MenuEdit({ initialItems = [] }) {
     }
 
     authAxios
-      .post(`${apiUrl}/me/menus/save`, body, { headers: { Authorization: `Bearer ${token}` } })
+      .post(`${apiUrl}/me/menus/save`, body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
-        const menuData = res.data.data.menus
-        navigate('/menu/extract/save', { state: menuData })
+        // 서버 응답: { code, message, success, data: { menus: [...], canExtractAllergy: boolean } }
+        const payload = res.data?.data
+        if (!payload) {
+          console.error('No payload', res.data)
+          alert('저장 응답을 확인하지 못했어요.')
+          return
+        }
+        // 저장 화면으로 전달
+        navigate('/menu/extract/save', {
+          state: {
+            menus: payload.menus,
+            canExtractAllergy: payload.canExtractAllergy, // boolean
+          },
+        })
       })
       .catch((err) => {
         console.error(err)
@@ -82,7 +96,7 @@ export default function MenuEdit({ initialItems = [] }) {
           </PriceWrapper>
 
           <SmallLightOrangeButton type='button' onClick={() => handleEdit(idx)}>
-            {editIndex === idx ? '편집' : '수정'}
+            {editIndex === idx ? '완료' : '수정'}
           </SmallLightOrangeButton>
         </Row>
       ))}

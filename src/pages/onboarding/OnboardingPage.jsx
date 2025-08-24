@@ -60,7 +60,7 @@ const ServiceName = styled.p`
   text-align: center;
   font-size: 80px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 0.9;
   white-space: pre-line;
   margin-top: 20px;
   opacity: 0;

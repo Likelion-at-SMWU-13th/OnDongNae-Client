@@ -9,10 +9,6 @@ import BottomNav from '@/components/common/BottomNav'
 const HoursPage = () => {
   const navigator = useNavigate()
 
-  const ButtonWrapper = styled.div`
-    display: flex;
-    margin: 71px auto 0 auto;
-  `
   return (
     <div>
       <Header title='영업 시간' showImg={false} />
@@ -26,3 +22,8 @@ const HoursPage = () => {
 }
 
 export default HoursPage
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  margin: 71px auto 0 auto;
+`

@@ -41,7 +41,7 @@ function MenuPage() {
         else setError('메뉴를 불러오지 못했어요.')
       })
       .finally(() => setLoading(false))
-  }, [apiUrl])
+  }, [])
 
   useEffect(() => {
     setLoading(true)
