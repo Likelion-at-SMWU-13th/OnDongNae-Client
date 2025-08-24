@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import Header from '@/components/common/Header'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
+import Header from '@/components/common/Header'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 import CourseOption from '@/components/course/CourseOption'
+
 const CourseAI = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
@@ -28,30 +30,14 @@ const CourseAI = () => {
   return (
     <div>
       <Header title={t('bottomNav.course')} showImg={true} />
-      <Main>
-        <Scroll>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <CourseOption />
-        </Scroll>
-      </Main>
+        </C.Scroll>
+      </C.Main>
       <CustomerBottomNav />
     </div>
   )
 }
 
 export default CourseAI
-
-export const Main = styled.main`
-  height: calc(100dvh - 155px);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-export const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
-`

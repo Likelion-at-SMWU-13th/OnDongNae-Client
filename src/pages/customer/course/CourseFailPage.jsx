@@ -1,10 +1,10 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from '@/components/common/Header'
 import warning from '@/assets/icon-warning.svg'
-import { useTranslation } from 'react-i18next'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
-import { useNavigate } from 'react-router-dom'
 
 const CourseFail = () => {
   const { t } = useTranslation()

@@ -77,7 +77,7 @@ const DAY_KO = {
 const TitleWrapper = styled.div`
   padding: 38px 30px 20px 30px;
   width: 390px;
-  font-size: 25px;
+  font-size: 23px;
   font-weight: 600;
 `
 

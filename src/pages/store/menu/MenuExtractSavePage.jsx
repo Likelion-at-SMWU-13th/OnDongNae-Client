@@ -47,7 +47,6 @@ const MenuExtractSave = () => {
             subtitle='메뉴판을 확인하고 하단의 버튼을 눌러주세요'
           />
           <MenuSave menus={menus} />
-
           <ButtonWrapper>
             {!allergesApply && (
               <LargeOrangeButton label='메뉴관리로 돌아가기' onBtnClick={handleTab} />

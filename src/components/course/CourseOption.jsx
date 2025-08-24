@@ -79,15 +79,15 @@ export default function CourseOption() {
   return (
     <div>
       {/* Market */}
-      <div style={{ padding: '22px 40px 0 40px', marginBottom: '8px' }}>
-        <Subtitle text={t('course.selectMarket')} />
+      <div>
+        <SubtitleText>{t('course.selectMarket')}</SubtitleText>
       </div>
       <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           padding: '0 40px',
-          marginBottom: '40px',
+          marginBottom: '20px',
         }}
       >
         {markets.map((m) => (
@@ -102,15 +102,15 @@ export default function CourseOption() {
       </div>
 
       {/* With (1~7) */}
-      <div style={{ padding: '0 40px', marginBottom: '8px' }}>
-        <Subtitle text={t('course.with')} />
+      <div>
+        <SubtitleText>{t('course.with')}</SubtitleText>
       </div>
       <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           padding: '0 40px',
-          marginBottom: '40px',
+          marginBottom: '20px',
         }}
       >
         {withOptions.map((w) => (
@@ -125,15 +125,15 @@ export default function CourseOption() {
       </div>
 
       {/* Atmosphere (8~13) */}
-      <div style={{ padding: '0 40px', marginBottom: '8px' }}>
-        <Subtitle text={t('course.atmosphere')} />
+      <div>
+        <SubtitleText>{t('course.atmosphere')}</SubtitleText>
       </div>
       <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           padding: '0 40px',
-          marginBottom: '40px',
+          marginBottom: '100px',
         }}
       >
         {atmosphereOptions.map((a) => (
@@ -160,4 +160,18 @@ export default function CourseOption() {
 const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 40px;
+`
+const SubtitleText = styled.p`
+  display: flex;
+  text-align: left;
+  padding: 20px 0 5px 39px;
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px; /* 129.412% */
+  letter-spacing: -0.408px;
 `
