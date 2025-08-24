@@ -61,7 +61,6 @@ export default function CourseContent() {
 
 const Title = styled.p`
   padding: 20px 0 20px 29px;
-  color: #000;
   font-feature-settings: 'dlig' on;
   font-size: 18px;
   font-style: normal;
@@ -71,7 +70,7 @@ const Title = styled.p`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
   align-items: center;
 `
 const Card = styled.div`
@@ -79,10 +78,12 @@ const Card = styled.div`
   min-height: 143px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: #fdd8ca;
+  background: #ffffff;
+  border: solid 2px #f8c4b6;
   text-align: left;
   padding: 10px 19px 10px 14px;
   cursor: pointer;
+  transition: 0.5s ease;
   &:hover {
     background: #f8c4b6;
   }
@@ -99,11 +100,11 @@ const CourseTitle = styled.div`
   letter-spacing: -0.408px;
 `
 const CourseDescription = styled.div`
-  color: #000;
+  color: #323232;
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 22px; /* 157.143% */
 `
 const CommentTxt = styled.div`
@@ -113,7 +114,7 @@ const CommentTxt = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 10px;
-  color: #000;
+  color: #717171;
   font-size: 13px;
   font-weight: 400;
   line-height: 22px; /* 169.231% */
@@ -130,6 +131,7 @@ const StoreImg = styled.img`
   height: 90px;
   object-fit: cover;
   flex-shrink: 0;
+  border-radius: 10px;
 `
 const Empty = styled.p`
   padding: 24px 16px;
