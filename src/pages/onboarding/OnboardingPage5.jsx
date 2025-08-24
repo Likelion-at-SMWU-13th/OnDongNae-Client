@@ -10,11 +10,11 @@ import koru4 from '@/assets/img-koru4.svg'
 const fadeIn = keyframes`
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateX(10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 `
 
