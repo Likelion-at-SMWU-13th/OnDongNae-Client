@@ -3,6 +3,7 @@ import App from './App'
 
 //onboarding
 import SelectLanguagePage from './pages/onboarding/SelectLanguagePage'
+import OnboardingPage from './pages/onboarding/OnboardingPage'
 import OnboardingPage1 from './pages/onboarding/OnboardingPage1'
 import OnboardingPage2 from './pages/onboarding/OnboardingPage2'
 import OnboardingPage3 from './pages/onboarding/OnboardingPage3'
@@ -74,9 +75,13 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <SelectLanguagePage /> }, // 메인 온보딩 페이지로 바꾸기
+      { index: true, element: <OnboardingPage /> }, // 메인 온보딩 페이지로 바꾸기
       { path: 'select-language', element: <SelectLanguagePage /> },
       { path: 'login', element: <LoginPage /> },
+      {
+        path: 'onboarding',
+        element: <OnboardingPage />,
+      },
       {
         path: 'onboarding/1',
         element: <OnboardingPage1 />,
