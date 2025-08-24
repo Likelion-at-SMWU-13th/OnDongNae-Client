@@ -2,10 +2,21 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDrag } from '@use-gesture/react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Header from '@/components/onboarding/Header'
 import Footer from '@/components/onboarding/Footer'
 import koru1 from '@/assets/img-koru1.svg'
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`
 
 const OnboardingPage1 = () => {
   const navigate = useNavigate()
@@ -61,6 +72,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100dvh;
+  animation: ${fadeIn} 0.5s ease-out;
 `
 
 const Main = styled.div`
