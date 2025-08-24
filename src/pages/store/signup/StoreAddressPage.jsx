@@ -1,4 +1,5 @@
 import * as S from '@/styles/signup/StoreAddressPage.styles.js'
+import * as C from '@/styles/common/SignupScroll.styles'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '@/components/common/Header'
@@ -24,8 +25,8 @@ const StoreAddressPage = () => {
   return (
     <>
       <Header title={'회원가입'} showImg={false} />
-      <S.Main>
-        <S.Scroll>
+      <C.Main>
+        <C.Scroll className='scrollable'>
           <ProgressBar currentStep={3} totalSteps={6} logoImg={smallDragon} />
           <S.Container>
             <S.TextContainer>
@@ -40,8 +41,8 @@ const StoreAddressPage = () => {
             </S.InputContainer>
             <SmallButtonContainer handleSubmit={handleSubmit} />
           </S.Container>
-        </S.Scroll>
-      </S.Main>
+        </C.Scroll>
+      </C.Main>
     </>
   )
 }

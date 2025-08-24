@@ -8,7 +8,7 @@ export const Container = styled.div`
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 40px 44px 32px 30px;
+  margin: 5dvh 44px 3.75dvh 30px;
   gap: 15px;
 `
 
@@ -43,7 +43,7 @@ export const AddImage = styled.img`
 
 // 그리드 설정
 export const Grid = styled.div`
-  /* ✅ 2열 고정 + 셀 크기 120×120로 고정 */
+  /* 2열 고정 + 셀 크기 120×120로 고정 */
   display: grid;
   grid-template-columns: repeat(2, 120px);
   grid-auto-rows: 120px;
@@ -117,21 +117,4 @@ export const Spacer = styled.div`
   aspect-ratio: 1 / 1;
   border-radius: 10px;
   background: transparent;
-`
-
-export const Main = styled.main`
-  height: calc(var(--vh, 1vh) * 100); /* 화면 높이 채우기 */
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-`
-
-export const Scroll = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1; /* 남은 공간을 차지 */
-  min-height: 0; /* 내부에 overflow가 먹히게 하는 핵심 */
-  /* overflow-y는 전역 .scrollable에서 적용됨 */
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 80px);
 `

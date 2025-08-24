@@ -54,25 +54,20 @@ const Img = styled.img`
   width: 96px;
   height: 96px;
   flex-shrink: 0;
-  aspect-ratio: 1/1;
 `
 
 const Text = styled.p`
   color: #000;
   text-align: center;
   font-size: 20px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
 `
 
 const Button = styled.button`
   width: 82.56%;
   padding: 12.28px 0;
   font-size: 18px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
   border-radius: 10px;
   background-color: #fa6432;
   color: #fff;

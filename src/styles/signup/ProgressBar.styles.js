@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const WholeBar = styled.div`
   position: relative;
-  width: 88%;
-  margin: 43px auto 0;
+  width: 83%;
+  margin: 11% auto 0;
 `
 
 export const BackBar = styled.div`
