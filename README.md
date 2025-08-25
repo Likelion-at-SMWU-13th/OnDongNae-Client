@@ -60,10 +60,6 @@ GoruGoru는 **용산구 전통시장의 활력을 되살리고, 지역 경제 �
 ### 🛠 기술 스택
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
 
-<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/> <img src="https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"/>
-<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
-<img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
-
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"> <img src="https://img.shields.io/badge/discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"> 
 
 </br>
@@ -84,19 +80,5 @@ pages
  ┃ ┣ menu                 ← 메뉴 관리 탭
  ┃ ┣ mystore              ← 나의 가게 탭
  ┃ ┗ signup               ← 회원가입 및 로그인
-```
-
-```
-OnDongNae-Server/src/main/java/com/example/ondongnae
-├── allergy/               ← 알레르기 정보 관련 도메인
-├── category/              ← 카테고리 조회 도메인
-├── course/                ← 코스 추출 관련 도메인
-├── currency/              ← 환율 API 관련 도메인
-├── global/                ← 이미지 저장, 번역 등 공통 기능 관련 도메인
-├── map/                   ← 지도 데이터 관련 도메인
-├── market/                ← 시장 데이터 관련 도메인
-├── member/                ← 회원가입, 로그인, 사용자 정보 관련 도메인
-├── menu                   ← 메뉴 관련 도메인
-└── store                  ← 가게 관련 도메인
 ```
 </br>
