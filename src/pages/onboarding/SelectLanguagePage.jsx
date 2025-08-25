@@ -48,7 +48,21 @@ const SelectLanguagePage = () => {
             <S.TextContainer>
               <S.Title>GoruGoru</S.Title>
             </S.TextContainer>
-            <LanguageButton options={languages} value={selectedId} onChange={setSelectedId} />
+            <LanguageButton
+              options={languages}
+              value={selectedId}
+              onChange={(id) => {
+                setSelectedId(id)
+
+                const selected = languages.find((lang) => lang.id === id)
+                if (selected) {
+                  i18n.changeLanguage(selected.code)
+                  setTimeout(() => {
+                    navigate('/onboarding/1')
+                  }, 1300)
+                }
+              }}
+            />{' '}
             <S.Navigation type='button' onClick={handleStore}>
               <S.Icon src={navigationIcon} alt='' />
               <S.Text>소상공인으로 계속하기</S.Text>
