@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '@/styles/map/MainMapPage.styles'
+
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
