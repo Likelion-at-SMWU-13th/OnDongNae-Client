@@ -26,7 +26,9 @@
     "allergyWarning": "アレルギー情報は AI が生成したもので、正確でない場合があります。店舗へご確認ください。",
     "closes": "閉店",
     "opens": "開店",
-    "closedToday": "本日休業"
+    "closedToday": "本日休業",
+    "loading": "読み込み中…",
+    "maploading": "地図を読み込めませんでした。"
   },
   "day": {
     "MON": "月曜日",

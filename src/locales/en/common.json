@@ -25,7 +25,9 @@
     "allergyWarning": "Allergy information is AI-generated and may not be accurate. Please verify with the store directly.",
     "closes": "Closes",
     "opens": "Opens",
-    "closedToday": "Closed today"
+    "closedToday": "Closed today",
+    "loading": "Loading...",
+    "maploading": "Failed to load the map."
   },
   "day": {
     "MON": "Monday",

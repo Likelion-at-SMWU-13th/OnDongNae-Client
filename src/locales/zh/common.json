@@ -19,14 +19,15 @@
     "menu": "菜单",
     "info": "信息",
     "noInfo": "暂无信息",
-
     "description": "说明",
     "contact": "联系方式",
     "address": "地址",
     "allergyWarning": "过敏原信息由 AI 生成，可能不准确，请直接向店家确认。",
     "closes": "营业至",
     "opens": "开门",
-    "closedToday": "今天不营业"
+    "closedToday": "今天不营业",
+    "loading": "加载中…",
+    "maploading": "地图加载失败。"
   },
   "day": {
     "MON": "星期一",

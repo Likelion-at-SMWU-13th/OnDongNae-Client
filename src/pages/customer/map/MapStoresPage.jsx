@@ -43,7 +43,7 @@ const MapStoresPage = () => {
   if (isLoading) {
     return (
       <S.LoadingOverlay>
-        <Loading />
+        <Loading text={t('text.loading')} />
       </S.LoadingOverlay>
     )
   }

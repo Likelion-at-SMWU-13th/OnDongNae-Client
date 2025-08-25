@@ -70,7 +70,7 @@ const MainMapPage = () => {
       })
       .catch((error) => {
         console.log(error)
-        alert('데이터 불러오기에 실패했습니다.')
+        alert(t('text.maploading'))
       })
       .finally(() => {
         setIsLoading(false) // API 요청 완료 시 로딩 상태 해제
@@ -376,7 +376,7 @@ const MainMapPage = () => {
       <CustomerBottomNav />
       {isLoading && (
         <S.LoadingOverlay>
-          <Loading />
+          <Loading text={t('text.loading')} />
         </S.LoadingOverlay>
       )}
     </>

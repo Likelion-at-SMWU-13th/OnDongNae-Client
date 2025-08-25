@@ -118,7 +118,7 @@ const SignupLoadingPage = () => {
     <>
       <Header title={'회원가입'} showImg={true} />
       <Container>
-        <Loading />
+        <Loading text={'회원가입 진행 중...'} />
       </Container>
     </>
   )
