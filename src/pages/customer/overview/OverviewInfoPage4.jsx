@@ -78,7 +78,7 @@ const OverviewInfoPage4 = () => {
 export default OverviewInfoPage4
 
 const MarketImg = styled.img`
-  width: 390px;
+  width: 100%;
   height: 218px;
   flex-shrink: 0;
 `
@@ -123,7 +123,7 @@ const InfoTitle = styled.div`
   line-height: 24px; /* 150% */
 `
 const InfoContent = styled.div`
-  margin: 2px 25px 0 25px;
+  margin: 2px 25px 40px 25px;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px; /* 171.429% */
