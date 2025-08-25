@@ -12,8 +12,8 @@ function MenuTab({ items }) {
         <div key={i}>
           <Item>
             <MenuRow>
-              <span>{m.name}</span>
-              <span>₩ {Number(m.priceKrw).toLocaleString()}</span>
+              <Name>{m.name}</Name>
+              <Price>₩ {Number(m.priceKrw).toLocaleString()}</Price>
             </MenuRow>
 
             {m.allergies?.length > 0 && (
@@ -55,9 +55,21 @@ const Item = styled.div`
 const MenuRow = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 8px;
   color: #000;
   font-size: 16px;
   font-weight: 500;
+`
+const Name = styled.span`
+  min-width: 0; // 줄바꿈 허용
+  word-break: keep-all;
+`
+
+const Price = styled.span`
+  justify-self: end;
+  white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 `
 
 const AllergyRow = styled.div`
