@@ -105,7 +105,9 @@ const Content = styled.p`
   font-size: 16px;
   font-weight: 400;
 `
-const Img = styled.img`
+const Img = styled.img.attrs({
+  loading: 'lazy',
+})`
   margin: 0 auto;
   margin-top: auto;
   margin-bottom: 5.52dvh;

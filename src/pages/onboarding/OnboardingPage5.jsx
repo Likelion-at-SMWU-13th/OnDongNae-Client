@@ -99,7 +99,9 @@ const Highlight = styled.span`
   font-weight: 700;
   line-height: 30px;
 `
-const Img = styled.img`
+const Img = styled.img.attrs({
+  loading: 'lazy',
+})`
   margin: 0 auto;
   margin-top: auto;
   margin-bottom: 13.44dvh;
