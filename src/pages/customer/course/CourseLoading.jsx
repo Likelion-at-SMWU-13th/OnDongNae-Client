@@ -3,10 +3,7 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useLocation } from 'react-router-dom'
 import authAxios from '@/lib/authAxios'
-import Header from '@/components/common/Header'
-import Spinner from '@/assets/icon-spinner.svg'
-import SubTitle from '@/components/signup/SubTitle'
-import CustomerBottomNav from '@/components/common/CustomerBottomNav'
+import Loading from '@/components/common/Loading'
 
 const CourseLoading = () => {
   const { t, i18n } = useTranslation()
@@ -33,23 +30,8 @@ const CourseLoading = () => {
 
   return (
     <div>
-      <Header title={t('bottomNav.course')} showImg={false} />
-      <ContentWrapper>
-        <SpinnerIcon src={Spinner} alt='로딩중' />
-        <SubTitle text={t('course.loading')} />
-      </ContentWrapper>
-      <CustomerBottomNav />
+      <Loading text={t('course.loading')} />
     </div>
   )
 }
 export default CourseLoading
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-const SpinnerIcon = styled.img`
-  margin: 164px 0 40px 0;
-  width: 119px;
-`

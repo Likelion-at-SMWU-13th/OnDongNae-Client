@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import authAxios from '@/lib/authAxios'
 import SmallButtonContainer from '@/components/common/SmallButtonContainer'
 import Allergens from './Allergens'
+import Loading from '@/components/common/Loading'
 
 const KO_TO_EN = {
   '알류(계란)': 'Eggs',
@@ -34,6 +35,7 @@ const EN_TO_KO = Object.fromEntries(Object.entries(KO_TO_EN).map(([k, v]) => [v,
 
 export default function AllergensEdit({ initialResults = [], onSaved }) {
   const apiUrl = import.meta.env.VITE_API_URL
+  const [loading, setLoading] = useState(false)
 
   const normalizedInitial = useMemo(
     () =>
@@ -79,6 +81,7 @@ export default function AllergensEdit({ initialResults = [], onSaved }) {
 
   // 저장: 영문 canonical로 전송
   const handleSave = async () => {
+    if (loading) return // 중복 클릭 방지
     const menuAllergies = menus.reduce((acc, m) => {
       acc[String(m.menuId)] = Array.isArray(m.allergiesCanonical) ? m.allergiesCanonical : []
       return acc
@@ -106,8 +109,12 @@ export default function AllergensEdit({ initialResults = [], onSaved }) {
     } catch (err) {
       console.error('save ERR:', err?.response?.status, err?.response?.data)
       alert('저장 실패!')
+    } finally {
+      setLoading(false)
     }
   }
+  // 로딩 중이면 스피너만 보여주기
+  if (loading) return <Loading text='메뉴를 저장하고 있어요' />
 
   return (
     <div>
