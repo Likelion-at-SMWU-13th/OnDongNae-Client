@@ -375,9 +375,9 @@ const MainMapPage = () => {
       {/* 하단바 */}
       <CustomerBottomNav />
       {isLoading && (
-        <S.LoadingOverlay>
+        <>
           <Loading text={t('text.loading')} />
-        </S.LoadingOverlay>
+        </>
       )}
     </>
   )

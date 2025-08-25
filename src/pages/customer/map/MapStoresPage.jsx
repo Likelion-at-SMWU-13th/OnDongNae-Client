@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import * as S from '@/styles/map/MapStoresPage.styles'
 import * as C from '@/styles/common/CustomerBottomNav.styles'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -42,9 +41,9 @@ const MapStoresPage = () => {
   }, [storeId, i18n.language, apiUrl])
   if (isLoading) {
     return (
-      <S.LoadingOverlay>
+      <>
         <Loading text={t('text.loading')} />
-      </S.LoadingOverlay>
+      </>
     )
   }
 

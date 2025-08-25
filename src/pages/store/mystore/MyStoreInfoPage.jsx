@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import * as S from '@/styles/map/MapStoresPage.styles'
 import * as C from '@/styles/common/CustomerBottomNav.styles'
 import { authAxios } from '@/lib/authAxios'
 import { useTranslation } from 'react-i18next'
@@ -43,9 +42,9 @@ const MyStoreInfoPage = () => {
   // 로딩 상태일 때 UI
   if (isLoading) {
     return (
-      <S.LoadingOverlay>
+      <>
         <Loading />
-      </S.LoadingOverlay>
+      </>
     )
   }
 
