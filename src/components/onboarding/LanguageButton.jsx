@@ -25,7 +25,8 @@ function LanguageButton({ options = [], value, onChange }) {
 export default LanguageButton
 
 const List = styled.div`
-  width: 80%;
+  width: 60%;
+  margin-top: 3dvh;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -35,17 +36,18 @@ const List = styled.div`
 
 // 개별 언어 버튼
 const Button = styled.button`
-  padding: 1.6dvh 0;
-  border-radius: 10px;
+  padding: 1.3dvh 0;
+  border-radius: 30px;
   border: 2px solid #e4e4e4;
   background: #fff;
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 400;
   color: #000;
   cursor: pointer;
 
   /* 선택된 상태 */
+  transition: 0.5s ease;
   &.selected {
     color: #fff;
     border: 2px solid #f08e67;

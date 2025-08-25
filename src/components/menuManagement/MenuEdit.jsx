@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import authAxios from '@/lib/authAxios'
+import Loading from '@/components/common/Loading'
 
 const getTextWidth = (
   text = ' ',
@@ -16,6 +17,7 @@ const getTextWidth = (
 }
 
 export default function MenuEdit({ initialItems = [] }) {
+  const [loading, setLoading] = useState(false)
   const [menus, setMenus] = useState(initialItems)
   const [editIndex, setEditIndex] = useState(null)
   const apiUrl = import.meta.env.VITE_API_URL
@@ -33,6 +35,9 @@ export default function MenuEdit({ initialItems = [] }) {
   }
 
   const handleSave = () => {
+    if (loading) return // 중복 클릭 방지
+    setLoading(true)
+
     const body = {
       items: menus.map((m) => ({
         nameKo: m.nameKo,
@@ -47,24 +52,26 @@ export default function MenuEdit({ initialItems = [] }) {
       .then((res) => {
         // 서버 응답: { code, message, success, data: { menus: [...], canExtractAllergy: boolean } }
         const payload = res.data?.data
-        if (!payload) {
-          console.error('No payload', res.data)
-          alert('저장 응답을 확인하지 못했어요.')
-          return
-        }
-        // 저장 화면으로 전달
         navigate('/menu/extract/save', {
           state: {
             menus: payload.menus,
             canExtractAllergy: payload.canExtractAllergy, // boolean
           },
         })
+
+        // 저장 화면으로 전달
       })
       .catch((err) => {
         console.error(err)
         alert('저장 실패!')
       })
+      .finally(() => {
+        setLoading(false)
+      })
   }
+
+  // 로딩 중이면 스피너만 보여주기
+  if (loading) return <Loading text='메뉴를 저장하고 있어요' />
 
   return (
     <div>
@@ -107,7 +114,6 @@ export default function MenuEdit({ initialItems = [] }) {
     </div>
   )
 }
-
 const Row = styled.div`
   display: grid;
   grid-template-columns: 110px 110px 80px;

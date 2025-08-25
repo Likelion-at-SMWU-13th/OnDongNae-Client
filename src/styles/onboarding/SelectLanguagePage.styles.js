@@ -8,20 +8,20 @@ export const Wrapper = styled.div`
   margin-top: 8dvh;
 `
 export const Img = styled.img`
-  width: 10dvh;
+  width: 11.5dvh;
   flex-shrink: 0;
   aspect-ratio: 1/1;
 `
 export const TextContainer = styled.div`
-  margin-top: 3.1dvh;
+  margin-top: 5dvh;
 `
 
 export const Title = styled.p`
   color: #000;
   text-align: center;
   font-feature-settings: 'dlig' on;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 37px;
+  font-weight: 600;
 `
 export const Main = styled.div`
   width: 100%;
@@ -39,6 +39,7 @@ export const Navigation = styled.button`
   border: none;
   cursor: pointer;
   margin-bottom: 8dvh;
+  margin-top: 2dvh;
 `
 export const Icon = styled.img`
   width: 3dvh;
@@ -51,13 +52,13 @@ export const Text = styled.p`
   text-align: center;
   font-feature-settings: 'dlig' on;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
 `
 
 export const ContinueButton = styled.button`
-  width: 80%;
+  width: 50%;
   height: 41px;
-  border-radius: 10px;
+  border-radius: 50px;
   background: #f08e67;
 
   color: #fff;
@@ -73,6 +74,7 @@ export const Container = styled.main`
   display: flex;
   flex-direction: column;
   min-height: 0;
+  margin-top: 6.28dvh;
 `
 
 export const Scroll = styled.div`

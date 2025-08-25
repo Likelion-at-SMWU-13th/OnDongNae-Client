@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import Header from '@/components/common/Header'
-import Spinner from '@/assets/icon-spinner.svg'
+import Loading from '@/components/common/Loading'
 import SubTitle from '@/components/signup/SubTitle'
-import BottomNav from '@/components/common/BottomNav'
 
 const MenuExtractLoadingPage = () => {
   const { state } = useLocation()
@@ -30,30 +28,10 @@ const MenuExtractLoadingPage = () => {
     return () => clearTimeout(t)
   }, [state, navigate])
   return (
-    <div>
-      <Header title='메뉴 관리' showImg={true} />
-      <ComponentContainer>
-        <SpinnerIcon src={Spinner} alt='로딩중' />
-        <Loading text='메뉴를 추출하고 있어요' />
-      </ComponentContainer>
-      <BottomNav />
-    </div>
+    <>
+      <Loading text='메뉴를 추출하고 있어요' />
+    </>
   )
 }
 
 export default MenuExtractLoadingPage
-
-const ComponentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-`
-const SpinnerIcon = styled.img`
-  margin: 164px 0 60px 0;
-  width: 119px;
-`
-const Loading = styled(SubTitle)`
-  font-size: 20px;
-  font-weight: 500;
-`

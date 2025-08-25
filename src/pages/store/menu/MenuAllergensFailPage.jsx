@@ -13,7 +13,7 @@ const MenuAllergensFailPage = () => {
   const handleRetry = () => navigate('/menu')
   return (
     <div>
-      <Header img={backIcon} title='메뉴 관리' showImg={false} />
+      <Header title='메뉴 관리' showImg={true} />
       <ComponentContainer>
         <WarningIcon src={Warning} alt='로딩중' />
         <FailureMsg>{`인공지능 분석이 실패했어요
@@ -45,7 +45,7 @@ const ComponentContainer = styled.div`
   align-items: center;
 `
 const WarningIcon = styled.img`
-  margin: 164px 0 60px 0;
+  margin: 164px 0 47px 0;
   width: 119px;
 `
 const FailureMsg = styled.p`
