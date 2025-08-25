@@ -29,7 +29,7 @@ GoruGoru는 **용산구 전통시장의 활력을 되살리고, 지역 경제 �
 </br>
 
 ### 𝗣𝗿𝗼𝗷𝗲𝗰𝘁 𝗺𝗼𝘁𝗶𝘃𝗮𝘁𝗶𝗼𝗻
-<img height="1080" alt="문제" src="https://github.com/user-attachments/assets/8a9e1fa5-f9eb-4e86-8736-d3022c3afb4a" />
+<img height="1080" alt="image" src="https://github.com/user-attachments/assets/48b13597-29dd-4961-b06d-8273a0c5eb5e" />
 
 
 </br></br>
