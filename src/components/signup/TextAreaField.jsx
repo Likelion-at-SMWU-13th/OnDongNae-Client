@@ -22,14 +22,14 @@ const TextArea = styled.textarea`
   border-radius: 10px;
   border: 1px solid #e4e4e4;
   background: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1.4;
   box-sizing: border-box;
   resize: none;
 
   &::placeholder {
     color: #7c7c7c;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 400;
   }
 `

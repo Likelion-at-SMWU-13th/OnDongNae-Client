@@ -8,6 +8,6 @@ const InputTitle = ({ text }) => {
 export default InputTitle
 
 const Title = styled.p`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
 `

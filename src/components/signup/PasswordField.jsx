@@ -41,7 +41,7 @@ const Container = styled.div`
 `
 
 const Text = styled.p`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 400;
   margin: 0;
 `
@@ -59,7 +59,7 @@ const PasswordContainer = styled.div`
 // 입력창 스타일
 const Input = styled.input`
   color: black;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
   padding: 13.5px 20px;
   border: none;

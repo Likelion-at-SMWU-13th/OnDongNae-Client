@@ -25,7 +25,7 @@ const Container = styled.div`
 `
 
 const Text = styled.p`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -39,7 +39,7 @@ const Input = styled.input`
   border: 2px solid #b3b3b3;
   background: #fff;
   padding: 14px 20px;
-  font-size: 18px;
+  font-size: 1.125rem;
 
   &::placeholder {
     color: rgba(179, 179, 179, 1);

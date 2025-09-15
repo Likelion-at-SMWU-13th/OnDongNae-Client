@@ -36,7 +36,7 @@ const Comment = styled.div`
   padding: 17px 19px 17px 15px;
   color: #000;
   font-feature-settings: 'dlig' on;
-  font-size: 17px;
+  font-size: 1.0625rem;
   font-weight: 400;
   line-height: 21px; /* 116.667% */
 `

@@ -58,7 +58,7 @@ const CloseImg = styled.img`
   height: 30px;
 `
 const Message = styled.p`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
   margin-top: 77px;
 `
@@ -78,7 +78,7 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   color: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
 `
 const CancelButton = styled(Button)`

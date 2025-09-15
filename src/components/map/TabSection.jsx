@@ -34,7 +34,7 @@ const TabBtn = styled.button`
   padding: 8px 0;
   cursor: pointer;
   color: #000;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 700;
 `
 

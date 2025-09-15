@@ -34,7 +34,7 @@ const Icon = styled.img`
 
 const Text = styled.p`
   color: #000;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
   padding-left: 10%;
 `

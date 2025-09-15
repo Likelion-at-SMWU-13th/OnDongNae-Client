@@ -11,7 +11,7 @@ export default LargeWhiteButton
 const Button = styled.button`
   width: 82.56%;
   padding: 10.28px 0;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   border-radius: 10px;
   background-color: #fff;

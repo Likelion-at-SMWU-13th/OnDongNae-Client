@@ -102,7 +102,7 @@ const Row = styled.div`
 
 const Title = styled.div`
   color: #000;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
 `
 
@@ -117,7 +117,7 @@ const CurrencyBtn = styled.button`
   border: 1px solid #b3b3b3;
   color: #000;
   background: #fff;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
 
   &&[data-active='true'] {
@@ -138,7 +138,7 @@ const Unit = styled.span`
   top: 50%;
   transform: translateY(-50%);
   color: rgba(0, 0, 0, 0.6);
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
   line-height: 21px;
 `
@@ -149,7 +149,7 @@ const Input = styled.input`
   border: 2px solid #e4e4e4;
   padding-left: 46px;
   background: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
   line-height: 21px;
 `
@@ -176,7 +176,7 @@ const ResultRate = styled.div`
   }
 `
 const Text = styled.p`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
 `
 
@@ -184,7 +184,7 @@ const Rate = styled.p`
   color: #fff;
   font-feature-settings: 'dlig' on;
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 21px; /* 131.25% */

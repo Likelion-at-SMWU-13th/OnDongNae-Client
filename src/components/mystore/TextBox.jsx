@@ -23,13 +23,13 @@ const Box = styled.div`
 
 const Title = styled.p`
   color: #000;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 500;
 `
 
 const Description = styled.p`
   color: #000;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 300;
   padding-left: 20px;
 `

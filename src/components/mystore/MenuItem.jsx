@@ -46,13 +46,13 @@ const TxtContainer = styled.div`
 
 const Text = styled.p`
   color: #000;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
 `
 
 const SmallText = styled.p`
   color: #5b5b5b;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 400;
   line-height: 21px;
 `

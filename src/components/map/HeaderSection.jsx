@@ -72,14 +72,14 @@ const Section = styled.section`
 
 const Name = styled.h2`
   color: #000;
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 700;
 `
 
 const KorName = styled.span`
   margin-left: 5px;
   color: #000;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
 `
 
@@ -95,14 +95,14 @@ const Img = styled.img``
 const OpenInfo = styled.div`
   padding-left: 5px;
   color: #f08e67;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 21px;
 `
 
 const CloseInfo = styled.span`
   color: #000;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 21px;
 `
@@ -129,7 +129,7 @@ const Card = styled.div`
 const Day = styled.div`
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 22px;
 `
 
@@ -146,7 +146,7 @@ const TimeText = styled.span`
 `
 const ShortIntro = styled.p`
   color: #0d141c;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 24px;
 `

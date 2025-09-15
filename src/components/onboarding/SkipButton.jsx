@@ -17,7 +17,7 @@ const Button = styled.button`
   height: auto;
   color: #fa6432;
   text-align: center;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 35px;
   border: none;

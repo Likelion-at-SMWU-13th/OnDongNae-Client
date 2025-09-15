@@ -60,7 +60,7 @@ const Trigger = styled.button`
   border: 1px solid #f08e67;
   background: #fff;
   box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   text-align: center;
   cursor: pointer;
@@ -104,7 +104,7 @@ const ItemList = styled.ul`
 `
 
 const Item = styled.li`
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #222;
   padding: 5px 0;
   text-align: center;
