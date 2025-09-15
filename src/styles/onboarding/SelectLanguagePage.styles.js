@@ -20,7 +20,7 @@ export const Title = styled.p`
   color: #000;
   text-align: center;
   font-feature-settings: 'dlig' on;
-  font-size: 37px;
+  font-size: 2.3125rem;
   font-weight: 600;
 `
 export const Main = styled.div`
@@ -51,7 +51,7 @@ export const Text = styled.p`
   color: #000;
   text-align: center;
   font-feature-settings: 'dlig' on;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
 `
 
@@ -64,7 +64,7 @@ export const ContinueButton = styled.button`
   color: #fff;
   text-align: center;
   font-feature-settings: 'dlig' on;
-  font-size: 25px;
+  font-size: 1.5625rem;
   font-weight: 400;
   border: none;
   cursor: pointer;

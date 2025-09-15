@@ -61,7 +61,7 @@ export default Login
 const Logo = styled.p`
   margin: 7dvh 0 14dvh 0;
   text-align: center;
-  font-size: 30px;
+  font-size: 1.875rem;
   font-weight: 800;
 `
 

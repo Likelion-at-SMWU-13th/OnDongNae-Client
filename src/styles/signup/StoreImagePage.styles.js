@@ -102,7 +102,7 @@ export const AddTile = styled.button`
 
   text-align: center;
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
