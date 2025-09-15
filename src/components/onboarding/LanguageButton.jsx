@@ -25,13 +25,12 @@ function LanguageButton({ options = [], value, onChange }) {
 export default LanguageButton
 
 const List = styled.div`
-  width: 60%;
-  margin-top: 3dvh;
+  width: 65%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  gap: 3.4dvh;
+  gap: 3.5dvh;
 `
 
 // 개별 언어 버튼

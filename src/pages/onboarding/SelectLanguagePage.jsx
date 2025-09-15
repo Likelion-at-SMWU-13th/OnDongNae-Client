@@ -45,9 +45,7 @@ const SelectLanguagePage = () => {
         <S.Wrapper>
           <S.Img src={globalIcon} alt='Global' />
           <S.Main>
-            <S.TextContainer>
-              <S.Title>GoruGoru</S.Title>
-            </S.TextContainer>
+            <S.Title>GoruGoru</S.Title>
             <LanguageButton
               options={languages}
               value={selectedId}
