@@ -10,7 +10,7 @@ export default Logo
 const LogoTxt = styled.p`
   color: #fa6432;
   text-align: center;
-  font-size: 35px;
+  font-size: 2.1875rem;
   font-style: normal;
   font-weight: 900;
   line-height: 35px;

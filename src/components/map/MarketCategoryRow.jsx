@@ -50,7 +50,7 @@ const MarketButton = styled.button`
   border: none;
   background: #f08e67;
   color: #fff;
-  font-size: 14px;
+  font-size: 0.875rem;
   box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 `

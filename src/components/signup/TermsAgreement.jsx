@@ -131,7 +131,7 @@ const BigTermRow = styled.div`
   align-items: center;
   gap: 10px;
   padding-bottom: 12px;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 400;
 `
 const TermRow = styled.div`
@@ -139,7 +139,7 @@ const TermRow = styled.div`
   align-items: center;
   gap: 11px;
   padding-left: 2px;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
 `
 const CheckImage = styled.img`
@@ -148,6 +148,6 @@ const CheckImage = styled.img`
 const ViewLink = styled.span`
   cursor: pointer;
   color: #b3b3b3;
-  font-size: 18px;
+  font-size: 1.125rem;
   text-decoration: underline;
 `

@@ -55,7 +55,7 @@ const Contents = styled.div`
 `
 const Title = styled.div`
   color: #000;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
 `
 const InputContainer = styled.div`
@@ -67,7 +67,7 @@ const Unit = styled.span`
   top: 50%;
   transform: translateY(-50%);
   color: rgba(0, 0, 0, 0.6);
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
   line-height: 21px;
 `
@@ -78,7 +78,7 @@ const Input = styled.input`
   border: 2px solid #e4e4e4;
   padding-left: 46px;
   background: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
   line-height: 21px;
 `

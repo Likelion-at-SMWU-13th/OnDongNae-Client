@@ -212,7 +212,7 @@ const Handle = styled.div`
 const Title = styled.p`
   margin: 12px 0 0;
   color: #323232;
-  font-size: 23px;
+  font-size: 1.4375rem;
   font-weight: 600;
 `
 
@@ -248,7 +248,7 @@ const Card = styled.button`
 const StoreName = styled.p`
   color: #1a0f0f;
   font-feature-settings: 'dlig' on;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 500;
   line-height: 28px;
   margin: 0 0 2px 0;
@@ -263,7 +263,7 @@ const StoreInfo = styled.div`
   align-items: center;
   gap: 6px;
   color: #838383;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   margin-bottom: 6px;
   white-space: nowrap;
@@ -289,7 +289,7 @@ const InfoRow = styled.div`
   gap: 6px;
   color: #000;
   font-feature-settings: 'dlig' on;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   margin-bottom: 10px;
 
@@ -314,7 +314,7 @@ const Empty = styled.div`
   padding: 28px 8px;
   color: #999;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
 `
 
 // 카드 사이 구분선

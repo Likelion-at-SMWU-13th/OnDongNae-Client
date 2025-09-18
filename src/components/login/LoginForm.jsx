@@ -34,7 +34,7 @@ const LoginContainer = styled.div`
 
 const Input = styled.input`
   color: black;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   padding: 13px 20px;
   border: none;

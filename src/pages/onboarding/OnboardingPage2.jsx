@@ -100,7 +100,7 @@ const Main = styled.div`
 const Title = styled.p`
   color: #000;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
 `
 
@@ -114,7 +114,7 @@ const ContentContainer = styled.div`
 const Content = styled.p`
   color: #000;
   text-align: center;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   gap: 0.5dvh;
 `

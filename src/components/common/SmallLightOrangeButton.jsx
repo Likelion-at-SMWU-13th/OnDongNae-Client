@@ -15,7 +15,7 @@ export default SmallLightOrangeButton
 const Button = styled.button`
   width: 127px;
   padding: 14.5px 0;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   border-radius: 10px;
   background-color: #feb99d;

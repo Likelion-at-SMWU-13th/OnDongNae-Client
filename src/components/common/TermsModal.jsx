@@ -51,7 +51,7 @@ const Header = styled.div`
 `
 
 const Title = styled.p`
-  font-size: 17px;
+  font-size: 1.0625rem;
   font-weight: 600;
 `
 
@@ -63,6 +63,6 @@ const CloseButton = styled.img`
 
 const Content = styled.div`
   white-space: pre-wrap;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 400;
 `

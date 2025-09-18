@@ -144,6 +144,6 @@ const Img = styled.img`
 const Text = styled.p`
   color: #000;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
 `

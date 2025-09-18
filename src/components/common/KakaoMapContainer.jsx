@@ -134,7 +134,7 @@ const Label = styled.div`
   border: 1px solid #fb8750;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   color: #1a0f0f;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   white-space: nowrap;
   transform: translateY(-4px);

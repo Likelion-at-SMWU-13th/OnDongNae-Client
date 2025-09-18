@@ -7,12 +7,14 @@ import backIcon from '@/assets/button-back.svg'
 import LoginForm from '@/components/login/LoginForm'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
 import LargeWhiteButton from '@/components/common/LargeWhiteButton'
+import { useAuth } from '@/contexts/AuthContext'
 
 const Login = () => {
   const navigate = useNavigate()
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
   const apiUrl = import.meta.env.VITE_API_URL
+  const { login } = useAuth()
 
   useEffect(() => {
     localStorage.setItem('i18nextLng', 'ko')
@@ -27,11 +29,8 @@ const Login = () => {
         { headers: { 'Content-Type': 'application/json' } },
       )
       .then((res) => {
-        localStorage.setItem('accessToken', res.data.data.accessToken)
-        localStorage.setItem('refreshToken', res.data.data.refreshToken)
-
-        // axios 기본 헤더에 등록 -> 이후 요청은 자동으로 Bearer 토큰이 붙음
-        axios.defaults.headers.common.Authorization = `Bearer ${res.data.data.accessToken}`
+        const { accessToken, refreshToken } = res.data.data
+        login(accessToken, refreshToken)
 
         // 소상공인 홈 화면 이동 navigate 함수 추가
         navigate('/menu')
@@ -61,7 +60,7 @@ export default Login
 const Logo = styled.p`
   margin: 7dvh 0 14dvh 0;
   text-align: center;
-  font-size: 30px;
+  font-size: 1.875rem;
   font-weight: 800;
 `
 

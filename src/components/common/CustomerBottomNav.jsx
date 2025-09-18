@@ -71,7 +71,7 @@ const Item = styled.div`
   justify-content: center;
   gap: 5px;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: #b1b1b1;
   user-select: none;

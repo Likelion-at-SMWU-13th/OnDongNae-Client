@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Text = styled.p`
   color: #000;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 400;
 `
 
@@ -21,7 +21,7 @@ export const Button = styled.button`
   padding: 13.5px 32px;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   margin: 40px auto 52px auto;
 `

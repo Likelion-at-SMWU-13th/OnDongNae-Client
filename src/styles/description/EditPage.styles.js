@@ -15,7 +15,7 @@ export const TextArea = styled.textarea`
   box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.1);
   color: #000;
   font-feature-settings: 'dlig' on;
-  font-size: 17px;
+  font-size: 1.0625rem;
   font-weight: 400;
   line-height: 21px; /* 116.667% */
   white-space: pre-line;

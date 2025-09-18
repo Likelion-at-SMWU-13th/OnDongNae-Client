@@ -8,7 +8,7 @@ function Title({ text }) {
 export default Title
 
 const Text = styled.p`
-  font-size: 23px;
+  font-size: 1.4375rem;
   font-weight: 600;
   white-space: pre-line;
 `

@@ -59,14 +59,14 @@ const Img = styled.img`
 const Text = styled.p`
   color: #000;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
 `
 
 const Button = styled.button`
   width: 82.56%;
   padding: 12.28px 0;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   border-radius: 10px;
   background-color: #f08e67;

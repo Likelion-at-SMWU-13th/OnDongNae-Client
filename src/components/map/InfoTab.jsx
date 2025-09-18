@@ -42,13 +42,13 @@ const TextContainer = styled.div`
 
 const Title = styled.div`
   color: #000;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
 `
 
 const Text = styled.div`
   color: #000;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
 `
 

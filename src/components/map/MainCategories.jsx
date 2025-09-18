@@ -48,7 +48,7 @@ const CategoryItem = styled.button`
   background: #fff;
   box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.1);
   color: #000;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
 
   &.filled {

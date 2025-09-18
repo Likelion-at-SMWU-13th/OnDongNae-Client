@@ -28,7 +28,7 @@ const Content = styled.div`
 const Text = styled.p`
   text-align: center;
   color: #000;
-  font-size: 19px;
+  font-size: 1.1875rem;
   font-weight: 500;
   margin-top: 5dvh;
 `

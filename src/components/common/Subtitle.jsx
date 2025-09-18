@@ -8,6 +8,6 @@ function Subtitle({ text }) {
 export default Subtitle
 
 const StyledSubtitle = styled.p`
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
 `

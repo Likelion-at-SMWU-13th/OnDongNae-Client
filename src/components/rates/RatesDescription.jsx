@@ -21,7 +21,7 @@ const TextContainer = styled.div`
 `
 const Text = styled.p`
   color: rgba(0, 0, 0, 0.8);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 300;
   line-height: 21px; /* 150% */
 `

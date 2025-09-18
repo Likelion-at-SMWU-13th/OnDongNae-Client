@@ -59,7 +59,7 @@ const Logo = styled.img`
 const ServiceName = styled.p`
   color: #fff;
   text-align: center;
-  font-size: 80px;
+  font-size: 5rem;
   font-weight: 700;
   line-height: 0.9;
   white-space: pre-line;

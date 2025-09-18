@@ -57,7 +57,7 @@ const MenuRow = styled.div`
   justify-content: space-between;
   gap: 8px;
   color: #000;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
 `
 const Name = styled.span`
@@ -74,7 +74,7 @@ const Price = styled.span`
 
 const AllergyRow = styled.div`
   color: #000;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
 `
 const WarningRow = styled.div`
@@ -95,7 +95,7 @@ const WarningIcon = styled.img`
 
 const WarningText = styled.p`
   color: #7e7e7e;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 21px;
 `
