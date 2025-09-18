@@ -111,7 +111,7 @@ const Img = styled.img.attrs({
   margin: 0 auto;
   margin-top: auto;
   margin-bottom: 5.52dvh;
-  width: 161.699px;
-  height: 243px;
+  height: 30.52dvh;
+
   flex-shrink: 0;
 `
