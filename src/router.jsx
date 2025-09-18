@@ -69,6 +69,9 @@ import CourseLoading from './pages/customer/course/CourseLoading'
 import CourseFailPage from './pages/customer/course/CourseFailPage'
 import CourseResultPage from './pages/customer/course/CourseResultPage'
 import CourseDetailPage from './pages/customer/course/CourseDetailPage'
+// 로그인 필요한 페이지 처리 위한 컴포넌트
+import ProtectedRoute from './components/common/ProtectedRoute'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -158,90 +161,7 @@ const router = createBrowserRouter([
         path: 'signup/complete',
         element: <SignupCompletePage />,
       },
-      {
-        path: 'menu',
-        element: <MenuPage />,
-      },
-      {
-        path: 'menu/manual',
-        element: <MenuMenualPage />,
-      },
-      {
-        path: 'menu/upload',
-        element: <MenuUploadPage />,
-      },
-      {
-        path: '/menu/extract/loading',
-        element: <MenuExtractLoadingPage />,
-      },
-      {
-        path: '/menu/extract/success',
-        element: <MenuExtractSuccessPage />,
-      },
-      {
-        path: '/menu/extract/save',
-        element: <MenuExtractSavePage />,
-      },
-      {
-        path: '/menu/extract/fail',
-        element: <MenuExtractFailPage />,
-      },
-      {
-        path: '/menu/allergens/loading',
-        element: <MenuAllergensLoadingPage />,
-      },
-      {
-        path: '/menu/allergens/fail',
-        element: <MenuAllergensFailPage />,
-      },
-      {
-        path: '/menu/allergens/success',
-        element: <MenuAllergensSuccessPage />,
-      },
-      {
-        path: '/menu/allergens/apply',
-        element: <MenuAllergensApplyPage />,
-      },
-      {
-        path: '/menu/correct',
-        element: <MenuCorrectPage />,
-      },
-      {
-        path: '/hours',
-        element: <HoursPage />,
-      },
-      {
-        path: '/hours/edit',
-        element: <HoursEditPage />,
-      },
-      {
-        path: '/store/description',
-        element: <DescriptionPage />,
-      },
-      {
-        path: '/store/description/summary-edit',
-        element: <SummaryEditPage />,
-      },
-      {
-        path: '/store/description/detail-edit',
-        element: <DetailEditPage />,
-      },
-      {
-        path: 'store/mystore',
-        element: <MyStorePage />,
-      },
-      {
-        path: 'store/mystore/info',
-        element: <MyStoreInfoPage />,
-      },
-      {
-        path: 'store/mystore/edit',
-        element: <MyStoreEditPage />,
-      },
-      {
-        path: 'store/mystore/withdraw',
-        element: <MyStoreWithdrawPage />,
-      },
+
       {
         path: '/user/map',
         element: <MainMapPage />,
@@ -301,6 +221,96 @@ const router = createBrowserRouter([
       {
         path: '/user/course/detail/:courseId',
         element: <CourseDetailPage />,
+      },
+      {
+        // 로그인 필요한 페이지
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: 'menu',
+            element: <MenuPage />,
+          },
+          {
+            path: 'menu/manual',
+            element: <MenuMenualPage />,
+          },
+          {
+            path: 'menu/upload',
+            element: <MenuUploadPage />,
+          },
+          {
+            path: '/menu/extract/loading',
+            element: <MenuExtractLoadingPage />,
+          },
+          {
+            path: '/menu/extract/success',
+            element: <MenuExtractSuccessPage />,
+          },
+          {
+            path: '/menu/extract/save',
+            element: <MenuExtractSavePage />,
+          },
+          {
+            path: '/menu/extract/fail',
+            element: <MenuExtractFailPage />,
+          },
+          {
+            path: '/menu/allergens/loading',
+            element: <MenuAllergensLoadingPage />,
+          },
+          {
+            path: '/menu/allergens/fail',
+            element: <MenuAllergensFailPage />,
+          },
+          {
+            path: '/menu/allergens/success',
+            element: <MenuAllergensSuccessPage />,
+          },
+          {
+            path: '/menu/allergens/apply',
+            element: <MenuAllergensApplyPage />,
+          },
+          {
+            path: '/menu/correct',
+            element: <MenuCorrectPage />,
+          },
+          {
+            path: '/hours',
+            element: <HoursPage />,
+          },
+          {
+            path: '/hours/edit',
+            element: <HoursEditPage />,
+          },
+          {
+            path: '/store/description',
+            element: <DescriptionPage />,
+          },
+          {
+            path: '/store/description/summary-edit',
+            element: <SummaryEditPage />,
+          },
+          {
+            path: '/store/description/detail-edit',
+            element: <DetailEditPage />,
+          },
+          {
+            path: 'store/mystore',
+            element: <MyStorePage />,
+          },
+          {
+            path: 'store/mystore/info',
+            element: <MyStoreInfoPage />,
+          },
+          {
+            path: 'store/mystore/edit',
+            element: <MyStoreEditPage />,
+          },
+          {
+            path: 'store/mystore/withdraw',
+            element: <MyStoreWithdrawPage />,
+          },
+        ],
       },
     ],
   },
