@@ -25,7 +25,6 @@ import StoreKeywordPage1 from './pages/store/signup/StoreKeywordPage1'
 import StoreKeywordPage2 from './pages/store/signup/StoreKeywordPage2'
 import SignupLoadingPage from './pages/store/signup/SignupLoadingPage'
 import SignupCompletePage from './pages/store/signup/SignupCompletePage'
-import StoreHomePage from './pages/store/signup/StoreHomePage'
 // menu
 import MenuPage from './pages/store/menu/MenuPage.jsx'
 import MenuMenualPage from './pages//store/menu/MenuManualPage'
@@ -158,10 +157,6 @@ const router = createBrowserRouter([
       {
         path: 'signup/complete',
         element: <SignupCompletePage />,
-      },
-      {
-        path: 'store/home',
-        element: <StoreHomePage />,
       },
       {
         path: 'menu',
