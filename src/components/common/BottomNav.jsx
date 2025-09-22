@@ -41,7 +41,7 @@ const BottomNav = () => {
 export default BottomNav
 
 const Bar = styled.section`
-  width: min(100vw, 390px);
+  width: min(100vw, 440px);
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
