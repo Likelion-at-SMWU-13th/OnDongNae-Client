@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import onboarding from '@/assets/logo-onboardong.png'
+import onboarding from '@/assets/logo-gorugoru.svg'
 
 export default function OnboardingPage() {
   const navigate = useNavigate()
@@ -32,6 +32,7 @@ const Content = styled.div`
   height: 100dvh;
   background-color: #fa6432;
   display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
 
@@ -43,8 +44,8 @@ const Logo = styled.img`
   display: flex;
   width: 291px;
   height: 139px;
-  margin-left: 58px;
   align-items: center;
+  justify-content: center;
   top: 33%;
   opacity: 0;
   animation: fadeIn 1.5s forwards;

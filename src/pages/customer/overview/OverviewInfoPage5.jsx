@@ -124,7 +124,7 @@ const InfoTitle = styled.div`
   line-height: 24px; /* 150% */
 `
 const InfoContent = styled.div`
-  margin: 2px 25px 40px 25px;
+  margin: 2px 25px 0 25px;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px; /* 171.429% */
