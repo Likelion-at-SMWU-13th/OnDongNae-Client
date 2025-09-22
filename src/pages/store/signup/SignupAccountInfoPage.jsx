@@ -20,6 +20,7 @@ const SignupAccountInfo = () => {
   const [loginId, setloginId] = useState('')
   const [pw1, setPw1] = useState('')
   const [pw2, setPw2] = useState('')
+  const isLetterPlusNumber = (str) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/.test(str) // 비밀번호 확인
   const apiUrl = import.meta.env.VITE_API_URL
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -38,6 +39,9 @@ const SignupAccountInfo = () => {
     if (pw1 !== pw2) {
       alert('비밀번호가 일치하지 않아요.')
       return
+    }
+    if (!isLetterPlusNumber(pw1)) {
+      alert('영어와 숫자를 조합해서 비밀번호를 입력해주세요.')
     }
     // 연동
     axios
