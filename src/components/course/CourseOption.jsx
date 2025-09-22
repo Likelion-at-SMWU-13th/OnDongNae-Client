@@ -1,11 +1,11 @@
 // CourseRecommend.jsx
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import authAxios from '@/lib/authAxios'
-import Subtitle from '../common/Subtitle'
 import LargeOrangeButton from '@/components/common/LargeOrangeButton'
+import LoadingSpinner from '@/components/common/Loading'
 
 function Btn({ active, children, onClick }) {
   return (
@@ -36,6 +36,8 @@ export default function CourseOption() {
   const { t, i18n } = useTranslation()
   const [markets, setMarkets] = useState([])
   const [options, setOptions] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [sel, setSel] = useState({
     marketId: null,
     withOptionId: null,
@@ -47,18 +49,27 @@ export default function CourseOption() {
   // 데이터 GET (시장 + 옵션)
   useEffect(() => {
     const lang = (i18n.language || 'en').split('-')[0]
+    setLoading(true)
+    setError(null)
     authAxios
       .get(`${apiUrl}/courses/options`, {
         headers: { 'Accept-Language': lang },
       })
       .then((res) => {
-        setMarkets(res.data?.data?.market)
-        setOptions(res.data?.data?.option)
+        setMarkets(Array.isArray(res.data?.data?.market) ? res.data.data.market : [])
+        setOptions(Array.isArray(res.data?.data?.option) ? res.data.data.option : [])
       })
       .catch((err) => {
-        console.error(err)
+        setError(t('course.fail') || '불러오는 데에 실패했습니다')
+      })
+      .finally(() => {
+        setLoading(false)
       })
   }, [])
+
+  if (loading) return <LoadingSpinner text={t('course.connect')} />
+  if (error) return <Empty>{error}</Empty>
+  if (!markets.length && !options.length) return <Empty>{t('course.fail')}</Empty>
 
   // 옵션 분리: With(1~7), Atmosphere(8~13)
   const withOptions = useMemo(() => options.filter((o) => o.id >= 1 && o.id <= 7), [options])
@@ -174,4 +185,10 @@ const SubtitleText = styled.p`
   font-weight: 600;
   line-height: 22px; /* 129.412% */
   letter-spacing: -0.408px;
+`
+const Empty = styled.p`
+  padding: 24px 16px;
+  color: #777;
+  font-size: 14px;
+  text-align: center;
 `

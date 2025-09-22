@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import authAxios from '@/lib/authAxios'
+import LoadingSpinner from '@/components/common/Loading'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -25,16 +26,16 @@ export default function CourseContent() {
         const list = Array.isArray(res.data?.data) ? res.data.data : []
         setCourses(list)
       } catch (e) {
-        console.error(e)
+        setError(t('course.fail') || '불러오는 데에 실패했습니다')
       } finally {
         setLoading(false)
       }
     })()
   }, [])
 
-  if (loading) return <Empty>불러오는 중…</Empty>
+  if (loading) return <LoadingSpinner text={t('course.connect')} />
   if (error) return <Empty>{error}</Empty>
-  if (!courses.length) return <Empty>코스가 없습니다.</Empty>
+  if (!courses.length) return <Empty>{t('course.fail')}</Empty>
 
   return (
     <>
