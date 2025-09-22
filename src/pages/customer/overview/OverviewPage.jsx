@@ -29,6 +29,7 @@ const OverviewPage = () => {
           onStoreClick={(item) => {
             navigate(`/user/overview/info/${item?.id ?? ''}`)
           }}
+          bottomOffset={70}
         />
       </MapContainer>
       <CustomerBottomNav />
@@ -50,7 +51,7 @@ const Page = styled.div`
 const MapContainer = styled.div`
   position: relative;
   width: 100%;
-  height: calc(100dvh - 19dvh);
+  flex: 1;
   min-height: 0;
   overflow: hidden;
   z-index: 0;

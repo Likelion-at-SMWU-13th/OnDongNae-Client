@@ -148,7 +148,12 @@ const ScrollArea = ({
       </DragHeader>
 
       {/* 리스트 스크롤 영역은 그대로 */}
-      <List>
+      <List
+        style={{
+          // 외부 하단바 높이를 넘겨줌(없으면 0)
+          ['--bottom-offset']: `${bottomOffset || 0}px`,
+        }}
+      >
         {/* 카드 데이터 소스는 MARKETS로 전환 */}
         {MARKETS.length === 0 && <Empty>{t('text.notice')}</Empty>}
 
@@ -218,7 +223,7 @@ const List = styled.div`
   flex: 1 1 auto;
   min-height: 0;
   margin-top: 11px;
-  padding: 0 24px 16px 24px;
+  padding: 0 24px calc(16px + var(--bottom-offset, 0px) + env(safe-area-inset-bottom, 0px));
   overflow-y: auto;
 
   -ms-overflow-style: none;
@@ -298,5 +303,7 @@ const Empty = styled.div`
 
 const CardDivider = styled.div`
   position: relative;
-  margin-bottom: 27px;
+  &:not(:last-child) {
+    margin-bottom: 27px;
+  }
 `
