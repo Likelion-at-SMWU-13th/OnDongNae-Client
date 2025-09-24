@@ -172,6 +172,7 @@ const ScrollArea = ({
 
 export default ScrollArea
 
+/* ===== 스타일 ===== */
 const Sheet = styled.div`
   position: absolute;
   left: 0;
@@ -185,11 +186,13 @@ const Sheet = styled.div`
   overflow: hidden;
   z-index: 20;
 `
+
 const DragHeader = styled.div`
   padding: 15px 30px 0 30px;
   cursor: grab;
   touch-action: none;
 `
+
 const Handle = styled.div`
   width: 80px;
   height: 5px;
@@ -197,6 +200,7 @@ const Handle = styled.div`
   background: rgba(0, 0, 0, 0.4);
   margin: 0 auto 8px auto;
 `
+
 const Title = styled.p`
   color: #1a0f0f;
   font-feature-settings: 'dlig' on;
@@ -204,9 +208,10 @@ const Title = styled.p`
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 28px;
+  line-height: 28px; /* 155.556% */
   margin-top: 20px;
 `
+
 const List = styled.div`
   display: flex;
   flex-direction: column;
@@ -223,6 +228,8 @@ const List = styled.div`
   }
   -webkit-overflow-scrolling: touch;
 `
+
+/* 카드 */
 const Card = styled.button`
   margin-top: 9px;
   width: 100%;
@@ -232,24 +239,29 @@ const Card = styled.button`
   cursor: pointer;
   padding: 0;
 `
+
+/* 행 레이아웃: 이미지 왼쪽, 텍스트 오른쪽 */
 const Row = styled.div`
   display: flex;
   gap: 16px;
   align-items: flex-start;
 `
+
+/* 이미지: 100x66, shrink 금지 */
 const StoreImg = styled.img`
   width: 100px;
   height: 66px;
   flex-shrink: 0;
   object-fit: cover;
-  margin: 5px 0 0 0;
 `
+
+/* 텍스트 영역 */
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0;
-  padding: 0;
 `
+
+/* 이름(nameKey) 스타일 */
 const StoreName = styled.p`
   color: #1a0f0f;
   font-feature-settings: 'dlig' on;
@@ -258,10 +270,14 @@ const StoreName = styled.p`
   font-weight: 500;
   line-height: 28px; /* 150% */
   margin: 0;
+
+  /* 한 줄 말줄임 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `
+
+/* 설명(description) 스타일 */
 const StoreDesc = styled.p`
   width: 235px;
   color: #1a0f0f;
@@ -269,15 +285,17 @@ const StoreDesc = styled.p`
   font-size: 14px;
   font-style: normal;
   font-weight: 300;
-  line-height: 21px;
+  line-height: 21px; /* 150% */
   margin: 0;
 `
+
 const Empty = styled.div`
   padding: 28px 8px;
   color: #999;
   text-align: center;
   font-size: 14px;
 `
+
 const CardDivider = styled.div`
   position: relative;
   margin-bottom: 27px;

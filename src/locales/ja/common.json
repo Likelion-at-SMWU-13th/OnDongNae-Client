@@ -106,11 +106,9 @@
     "regenerate": "生成する",
     "failComment": "コースの推薦を生成できませんでした。\n\nもう一度お試しください。",
     "share": "共有する",
-    "create": "AIで新規コース作成",
+    "create": "通过人工智能接受路人工知能で市場コースを作成\nAIで市場コースを作成线推荐 ",
     "option": "すべてのオプションを選択してください。",
-    "suggestCourse": "おすすめのコース",
-    "connect": "読み込み中です...",
-    "fail": "読み込みに失敗しました"
+    "suggestCourse": "おすすめのコース"
   },
   "onboarding1": {
     "title": "こんにちは、Koruです。",

@@ -107,9 +107,7 @@
     "share": "Share",
     "create": "Create course with AI",
     "option": "Please select all options.",
-    "suggestCourse": "Suggested Courses",
-    "connect": "Loading…",
-    "fail": "Failed to load"
+    "suggestCourse": "Suggested Courses"
   },
   "onboarding1": {
     "title": "Hello, I’m Koru.",

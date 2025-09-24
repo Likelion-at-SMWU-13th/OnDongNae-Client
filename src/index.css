@@ -108,8 +108,7 @@ html {
 body {
   width: 100%;
   margin: 0 auto;
-  min-width: 320px;
-  max-width: 440px;
+  max-width: 390px;
   background-color: rgba(255, 255, 255, 1);
   position: relative;
   min-height: 100dvh;

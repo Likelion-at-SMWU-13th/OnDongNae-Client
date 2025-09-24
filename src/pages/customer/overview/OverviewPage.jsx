@@ -68,7 +68,7 @@ const markers = [
     image: {
       src: mapMaker,
       size: { width: 28, height: 28 },
-      options: { offset: { x: 14, y: 40 } },
+      options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
   {
@@ -78,7 +78,7 @@ const markers = [
     image: {
       src: mapMaker,
       size: { width: 28, height: 28 },
-      options: { offset: { x: 14, y: 40 } },
+      options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
   {
@@ -88,7 +88,7 @@ const markers = [
     image: {
       src: mapMaker,
       size: { width: 28, height: 28 },
-      options: { offset: { x: 14, y: 40 } },
+      options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
   {
@@ -98,7 +98,7 @@ const markers = [
     image: {
       src: mapMaker,
       size: { width: 28, height: 28 },
-      options: { offset: { x: 14, y: 40 } },
+      options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
   {
@@ -108,7 +108,7 @@ const markers = [
     image: {
       src: mapMaker,
       size: { width: 28, height: 28 },
-      options: { offset: { x: 14, y: 40 } },
+      options: { offset: { x: 20, y: 40 } }, // (선택) 클릭 좌표 기준점
     },
   },
 ]
