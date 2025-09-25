@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import * as S from '@/styles/map/MainMapPage.styles'
 
 import { useTranslation } from 'react-i18next'
@@ -46,13 +46,7 @@ const MainMapPage = () => {
   const [level, setLevel] = useState(DEFAULT_LEVEL) // 지도 확대 정도
   const [storeMarkers, setStoreMarkers] = useState([]) // 가게 마커 배열
   const [activeStoreId, setActiveStoreId] = useState(null) // 클릭된 가게 라벨
-
   const [isLoading, setIsLoading] = useState(true) // 초기 로딩 + 필터링 로딩
-
-  // 대분류 이름 받아오기
-  const activeMainName = selectedMainId
-    ? categories.find((c) => String(c.mainCategoryId) === String(selectedMainId))?.mainCategoryName
-    : ''
 
   // 렌더링 시, 데이터 불러오기
   useEffect(() => {
@@ -127,7 +121,6 @@ const MainMapPage = () => {
       })
       .catch((err) => {
         console.log(err)
-        setSelectedStores([])
         setStoreMarkers([]) // 시장 마커는 유지
         setActiveStoreId(null) // 라벨 초기화
       })
@@ -135,6 +128,33 @@ const MainMapPage = () => {
         setIsLoading(false) // 필터링 완료 (성공/실패 여부와 관계없이)
       })
   }, [market?.value, selectedMainId, selectedSubIds, i18n.language])
+
+  // 대분류 이름 받아오기
+  const activeMainName = useMemo(
+    () =>
+      selectedMainId
+        ? categories.find((c) => String(c.mainCategoryId) === String(selectedMainId))
+            ?.mainCategoryName
+        : '',
+    [categories, selectedMainId],
+  )
+
+  // 시장 목록 배열 만들기
+  const marketOptions = useMemo(
+    () => markets.map((m) => ({ label: m.name, value: m.id })),
+    [markets],
+  )
+
+  // 화면에 보여줄 가게 목록
+  const allList = useMemo(
+    () => (market?.value ? storeMarkers.map((m) => m.data) : randomStores),
+    [market?.value, randomStores, storeMarkers],
+  )
+
+  const scrollList = useMemo(
+    () => (activeStoreId ? allList.filter((s) => String(s.id) === String(activeStoreId)) : allList),
+    [activeStoreId, allList],
+  )
 
   // 이벤트 핸들러
   // 검색창에 검색 시, 해당 가게의 마커 찍기 + ScrollArea에 보여주기
@@ -253,16 +273,8 @@ const MainMapPage = () => {
     setLevel(3)
   }
 
-  // 최종 ScrollArea에 띄울 리스트 계산
-  // 시장 미선택: 랜덤 가게
-  // 카테고리 선택: 현재 지도에 있는 마커 띄우고, 마커 클릭하면 해당 가게 하나만 보여주기
-  const allList = market?.value ? storeMarkers.map((m) => m.data) : randomStores
-  const scrollList = activeStoreId
-    ? allList.filter((s) => String(s.id) === String(activeStoreId))
-    : allList
-
   return (
-    <>
+    <S.Page>
       {/* 헤더 */}
       <Header title={t('bottomNav.map')} showImg={false} />
       <S.MapContainer>
@@ -308,6 +320,7 @@ const MainMapPage = () => {
             }
           }}
           isLoading={isLoading}
+          bottomOffset={85}
         />
 
         {/* 카카오맵 */}
@@ -379,7 +392,7 @@ const MainMapPage = () => {
           <Loading text={t('text.loading')} />
         </>
       )}
-    </>
+    </S.Page>
   )
 }
 
