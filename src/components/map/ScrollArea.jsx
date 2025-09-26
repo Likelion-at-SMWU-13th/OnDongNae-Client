@@ -237,7 +237,7 @@ const List = styled.div`
 /* 카드 */
 const Card = styled.button`
   margin-top: 12px;
-  width: 100%;
+  width: 95%;
   height: 212px;
   text-align: left;
   background: #fff;
@@ -247,7 +247,6 @@ const Card = styled.button`
 
 const StoreName = styled.p`
   color: #1a0f0f;
-  font-feature-settings: 'dlig' on;
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 28px;
