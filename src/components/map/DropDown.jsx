@@ -89,7 +89,7 @@ const ItemList = styled.ul`
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 322px;
+  width: 90%;
   padding: 10px 20px;
   list-style: none;
   display: flex;

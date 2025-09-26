@@ -13,8 +13,7 @@ const ProtectedRoute = () => {
     // isLoggedIn이 false면, 로그인 페이지로 강제 이동
     // 로그인 후에, 다시 로그인 페이지로 돌아오지 않게 replace 옵션 주기
     alert('로그인이 필요한 페이지입니다.')
-    // return <Navigate to='/login' replace > 로 바꿔줘야 함
-    return <Outlet />
+    return <Navigate to='/login' replace />
   }
 }
 
