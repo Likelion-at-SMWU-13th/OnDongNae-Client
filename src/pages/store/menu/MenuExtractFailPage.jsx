@@ -40,5 +40,5 @@ const FailureMsg = styled.p`
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 50px;
-  white-space: pre-line; /* \n 줄바꿈 표시 */
+  white-space: pre-line;
 `

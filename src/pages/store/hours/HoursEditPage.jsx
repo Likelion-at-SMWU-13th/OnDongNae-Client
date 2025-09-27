@@ -47,9 +47,9 @@ const Btn = styled.button`
 `
 
 const Content = styled.div`
-  flex: 1; /* Header+DoubleTitle+BottomNav 제외하고 남은 영역 */
-  overflow-y: auto; /* 세로 스크롤 */
-  padding-bottom: 95px; /* BottomNav 높이만큼 여백 */
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 95px;
 `
 
 const HoursEditPage = () => {
