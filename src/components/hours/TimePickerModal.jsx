@@ -1,128 +1,197 @@
 // src/components/hours/TimePickerModal.jsx
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import Picker from 'react-mobile-picker'
+
+const SCROLL_MS = 200
 
 export default function TimePickerModal({
   title = '시간 선택',
-  value, // { hour, minute }
-  onChange, // (next) => void
+  value, // { hour: '00'~'24', minute: '00'~'59' } (24시는 '00'만)
+  onChange, // (next: {hour, minute}) => void
   onCancel, // () => void
   onConfirm, // () => void
+  accentColor = '#F08E67',
+  backdropDark = 'rgba(0,0,0,0.45)',
+  minuteStep = 5,
 }) {
-  const { hour, minute } = value
+  const safe = useMemo(() => normalize(value), [value?.hour, value?.minute])
 
-  // 00..24 (24시는 분을 00만 허용)
-  const hourOptions = Array.from({ length: 25 }, (_, i) => String(i).padStart(2, '0'))
-  const minuteOptions =
-    hour === '24' ? ['00'] : Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'))
+  // 내부 선택 상태는 Picker의 요구 형태({ hour, minute }) 그대로 사용
+  const [pickerValue, setPickerValue] = useState({
+    hour: safe.hour,
+    minute: safe.minute,
+  })
 
-  const handleHourChange = (h) => {
-    if (h === '24' && minute !== '00') {
-      onChange({ ...value, hour: h, minute: '00' })
-    } else {
-      onChange({ ...value, hour: h })
+  // 외부 value 변경 → 내부 동기화
+  useEffect(() => {
+    setPickerValue({ hour: safe.hour, minute: safe.minute })
+  }, [safe.hour, safe.minute])
+
+  // 옵션 생성
+  const hourOptions = useMemo(() => Array.from({ length: 25 }, (_, i) => pad2(i)), [])
+  const minuteOptions = useMemo(
+    () => (pickerValue.hour === '24' ? ['00'] : Array.from({ length: 60 }, (_, i) => pad2(i))),
+    [pickerValue.hour],
+  )
+
+  // Picker 변경 처리
+  const handlePickerChange = (next, changedColumn) => {
+    // next: { hour, minute }
+    let { hour, minute } = next
+    if (changedColumn === 'hour' && hour === '24') {
+      minute = '00' // 24시는 분 고정
     }
+    const normalized = normalize({ hour, minute })
+    setPickerValue(normalized)
+    onChange?.(normalized) // 즉시 상위에 반영(기존 연동 유지)
+  }
+
+  const handleConfirm = () => {
+    onChange?.(normalize(pickerValue))
+    onConfirm?.()
   }
 
   return (
-    <Backdrop onClick={onCancel}>
+    <Backdrop $bg={backdropDark} onClick={onCancel}>
       <Sheet onClick={(e) => e.stopPropagation()}>
-        <div style={{ fontWeight: 600, fontSize: '18px', padding: '8px 10px' }}>{title}</div>
-        <Row>
-          <Sel value={hour} onChange={(e) => handleHourChange(e.target.value)}>
-            {hourOptions.map((v) => (
-              <option key={v}>{v}</option>
-            ))}
-          </Sel>
-          <Hours>시</Hours>
-          <Sel value={minute} onChange={(e) => onChange({ ...value, minute: e.target.value })}>
-            {minuteOptions.map((v) => (
-              <option key={v}>{v}</option>
-            ))}
-          </Sel>
-          <Mins>분</Mins>
-        </Row>
-        <Row style={{ justifyContent: 'space-between' }}>
-          <BackBtn onClick={onCancel}>취소</BackBtn>
-          <TimeBtn onClick={onConfirm}>확인</TimeBtn>
-        </Row>
+        <Header>
+          <HeadBtn $muted onClick={onCancel}>
+            취소
+          </HeadBtn>
+          <Title>{title}</Title>
+          <HeadBtn $accent={accentColor} onClick={handleConfirm}>
+            확인
+          </HeadBtn>
+        </Header>
+
+        <Body>
+          <PickerWrap $accent={accentColor}>
+            <Picker
+              value={pickerValue}
+              onChange={handlePickerChange}
+              wheelMode='normal' // 기본 휠 모드 (라이브러리 기본값)
+              height={180} // 전체 픽커 높이
+              itemHeight={36} // 항목 높이
+              className='timepicker'
+              scrollDuration={SCROLL_MS}
+            >
+              <Picker.Column name='hour'>
+                {hourOptions.map((h) => (
+                  <Picker.Item key={h} value={h}>
+                    {h}
+                  </Picker.Item>
+                ))}
+              </Picker.Column>
+
+              {/* 가운데 콜론 */}
+              <Colon>:</Colon>
+
+              <Picker.Column name='minute'>
+                {minuteOptions.map((m) => (
+                  <Picker.Item key={m} value={m}>
+                    {m}
+                  </Picker.Item>
+                ))}
+              </Picker.Column>
+            </Picker>
+          </PickerWrap>
+
+          {/* 선택 라인 하이라이트 */}
+          <CenterBar $accent={accentColor} />
+        </Body>
       </Sheet>
     </Backdrop>
   )
 }
 
+/* ---------- utils ---------- */
+const pad2 = (v) => String(v).padStart(2, '0')
+function normalize(v = {}) {
+  const h = pad2(v.hour ?? '00')
+  const m = pad2(v.minute ?? '00')
+  return h === '24' ? { hour: '24', minute: '00' } : { hour: h, minute: m }
+}
+
+/* ---------- styled ---------- */
 const Backdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
+  background: ${({ $bg }) => $bg};
   z-index: 1000;
 `
 const Sheet = styled.div`
   width: 320px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  padding-top: 20px;
-  justify-content: center;
-`
-const Sel = styled.select`
-  padding: 8px 12px;
-  font-size: 17px;
-  font-weight: 500;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #262626;
   color: #000000;
-  border: solid 1px #f08e67;
-  border-radius: 10px;
-  background-color: #fff;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
+`
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px;
+  background: #ffffff;
+`
+const Title = styled.div`
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.9;
+`
+const HeadBtn = styled.button`
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  color: ${({ $muted, $accent }) => ($muted ? '#b3b3b3' : $accent || '#F08E67')};
+`
+const Body = styled.div`
+  position: relative;
+  padding: 16px 14px 18px;
+  background: #ffffff;
+`
+const PickerWrap = styled.div`
+  position: relative;
+  .timepicker {
+    margin: 0 auto;
+    width: 100%;
+  }
 
-  &:focus {
-    outline: none;
-    border-color: #f08e67;
-    box-shadow: 0 0 0 2px rgba(240, 142, 103, 0.3);
+  /* 라이브러리 기본 클래스 커스터마이즈(버전별 클래스가 다를 수 있어 최소 오버라이드) */
+  .timepicker .rmc-picker-column-item {
+    font-size: 20px;
+    color: #cfcfcf;
+  }
+  .timepicker .rmc-picker-column-item--selected {
+    color: ${({ $accent }) => $accent};
+    font-weight: 800;
   }
 `
-const Option = styled.option`
-  font-size: 16px;
-  font-weight: 500;
-  color: #2d2d2d;
+const Colon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  opacity: 0.7;
 `
-const TimeBtn = styled.button`
-  padding: 10px 18px;
-  border: none;
-  border-radius: 10px;
-  background-color: #f08e67;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  margin-right: 10px;
-`
-const BackBtn = styled.button`
-  padding: 10px 18px;
-  border: none;
-  border-radius: 10px;
-  font-size: 15px;
-  color: #fff;
-  background-color: #d6d6d6;
-  font-weight: 600;
-  margin-left: 10px;
-`
-const Mins = styled.p`
-  font-size: 15px;
-`
-const Hours = styled.p`
-  font-size: 15px;
+const CenterBar = styled.div`
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 77, 0, 0.2);
+  outline: 2px solid ${({ $accent }) => $accent};
+  outline-offset: -2px;
+  pointer-events: none;
 `
