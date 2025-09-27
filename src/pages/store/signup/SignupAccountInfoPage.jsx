@@ -42,6 +42,7 @@ const SignupAccountInfo = () => {
     }
     if (!isLetterPlusNumber(pw1)) {
       alert('영어와 숫자를 조합해서 비밀번호를 입력해주세요.')
+      return
     }
     // 연동
     axios
