@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import usePreloadImages from '@/hooks/usePreloadImages'
 import styled from 'styled-components'
 import onboarding from '@/assets/logo-gorugoru.svg'
-import onboarding from '@/assets/logo-onboardong.png'
 import koru1 from '@/assets/img-koru1.svg'
 
 export default function OnboardingPage() {
