@@ -8,6 +8,9 @@ export default function usePreloadImages(srcs = []) {
 
     const imgs = srcs.map((src) => {
       const img = new Image()
+      img.decoding = 'async'
+      img.fetchPriority = 'low'
+      img.src = src
       return img
     })
 
