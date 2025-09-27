@@ -2,10 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDrag } from '@use-gesture/react'
+import usePreloadImages from '@/hooks/usePreloadImages'
 import styled, { keyframes } from 'styled-components'
 import Header from '@/components/onboarding/Header'
 import Footer from '@/components/onboarding/Footer'
 import koru2 from '@/assets/img-koru2.svg'
+import koru3 from '@/assets/img-koru1.svg'
 
 const fadeIn = keyframes`
   from {
@@ -21,6 +23,7 @@ const fadeIn = keyframes`
 const OnboardingPage3 = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  usePreloadImages([koru3])
 
   const handleSkip = () => {
     navigate('/user/map')
