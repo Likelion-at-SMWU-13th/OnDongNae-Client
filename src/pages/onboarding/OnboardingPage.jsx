@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import usePreloadImages from '@/hooks/usePreloadImages'
 import styled from 'styled-components'
 import onboarding from '@/assets/logo-gorugoru.svg'
+import koru1 from '@/assets/img-koru1.svg'
 
 export default function OnboardingPage() {
   const navigate = useNavigate()
   const [fading, setFading] = useState(false)
+  usePreloadImages([koru1])
 
   useEffect(() => {
     const showTimer = setTimeout(() => {

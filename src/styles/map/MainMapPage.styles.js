@@ -1,10 +1,16 @@
 import styled from 'styled-components'
 
+export const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+`
+
 /* 오버레이 기준점*/
 export const MapContainer = styled.div`
   position: relative;
-  width: 100%;
-  height: calc(100dvh - 19dvh);
+  flex: 1;
+  min-height: 0;
 `
 
 export const Overlay = styled.div`
