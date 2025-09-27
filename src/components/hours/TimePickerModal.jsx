@@ -3,8 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import Picker from 'react-mobile-picker'
 
-const SCROLL_MS = 200
-
+const SCROLL_MS = 2000
 export default function TimePickerModal({
   title = '시간 선택',
   value, // { hour: '00'~'24', minute: '00'~'59' } (24시는 '00'만)
@@ -30,10 +29,11 @@ export default function TimePickerModal({
 
   // 옵션 생성
   const hourOptions = useMemo(() => Array.from({ length: 25 }, (_, i) => pad2(i)), [])
-  const minuteOptions = useMemo(
-    () => (pickerValue.hour === '24' ? ['00'] : Array.from({ length: 60 }, (_, i) => pad2(i))),
-    [pickerValue.hour],
-  )
+  const minuteOptions = useMemo(() => {
+    if (pickerValue.hour === '24') return ['00']
+    const step = 5 // ← 5분 간격
+    return Array.from({ length: 60 / step }, (_, i) => pad2(i * step))
+  }, [pickerValue.hour])
 
   // Picker 변경 처리
   const handlePickerChange = (next, changedColumn) => {
@@ -72,7 +72,7 @@ export default function TimePickerModal({
               onChange={handlePickerChange}
               wheelMode='normal' // 기본 휠 모드 (라이브러리 기본값)
               height={180} // 전체 픽커 높이
-              itemHeight={36} // 항목 높이
+              itemHeight={45} // 항목 높이
               className='timepicker'
               scrollDuration={SCROLL_MS}
             >
@@ -192,6 +192,5 @@ const CenterBar = styled.div`
   border-radius: 8px;
   background: rgba(255, 77, 0, 0.2);
   outline: 2px solid ${({ $accent }) => $accent};
-  outline-offset: -2px;
   pointer-events: none;
 `
