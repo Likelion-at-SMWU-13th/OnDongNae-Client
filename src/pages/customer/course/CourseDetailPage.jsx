@@ -11,13 +11,13 @@ import CustomerBottomNav from '@/components/common/CustomerBottomNav'
 export default function CourseDetailPage() {
   const { t, i18n } = useTranslation()
   const navigate = useNavigate()
-  const { courseId } = useParams() // /courses/:courseId
+  const { courseId } = useParams()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
 
   const apiUrl = import.meta.env.VITE_API_URL
-  const PUBLIC_ORIGIN = import.meta.env.VITE_PUBLIC_SITE_URL ?? window.location.origin
-  const shareUrl = `${PUBLIC_ORIGIN}/courses/${courseId}`
+  const PUBLIC_ORIGIN = 'https://gorugoru.vercel.app'
+  const shareUrl = `${PUBLIC_ORIGIN}/user/course/detail/${courseId}`
 
   const handleStoreMove = (storeId) => {
     if (!storeId) return
@@ -46,7 +46,6 @@ export default function CourseDetailPage() {
         }
 
         const json = await res.json()
-        console.log('Course detail response:', json)
         if (mounted) setData(json?.data ?? null)
       } catch (err) {
         console.log(err)
@@ -56,7 +55,8 @@ export default function CourseDetailPage() {
       }
     })()
     return () => (mounted = false)
-  }, [courseId, apiUrl])
+  }, [courseId, apiUrl, i18n.language])
+
   const stores = useMemo(() => {
     const arr = data?.recommendedCourseStores
     if (!Array.isArray(arr)) return []
@@ -124,12 +124,9 @@ export default function CourseDetailPage() {
           <CourseWrapper>
             {stores.map((store, idx) => (
               <Row
-                key={store.order ?? `${store.name}-${idx}`}
-                onClick={() => handleStoreMove(store.id)} // ✅ 여기서 store.id 전달
-                style={{ cursor: 'pointer' }} // (선택) 클릭 가능한 느낌
-                role='button' // (선택) 접근성
-                tabIndex={0} // (선택) 키보드 포커스
-                onKeyDown={(e) => e.key === 'Enter' && handleStoreMove(store.id)} // (선택)
+                key={store.id}
+                onClick={() => handleStoreMove(store.id)}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleStoreMove(store.id)}
               >
                 <TimelineCell $isFirst={idx === 0} $isLast={idx === stores.length - 1}>
                   <Dot>{store.order}</Dot>
@@ -173,11 +170,16 @@ const CourseWrapper = styled.div`
   flex-direction: column;
   padding: 0 24px;
 `
-const Row = styled.div`
+// ✅ 3. .attrs를 사용해 접근성 속성을 기본으로 추가하고, cursor 스타일 적용
+const Row = styled.div.attrs(() => ({
+  role: 'button',
+  tabIndex: 0,
+}))`
   display: grid;
   grid-template-columns: 28px 1fr;
   column-gap: 12px;
   align-items: stretch;
+  cursor: pointer;
   &:last-child {
     padding-bottom: 0;
   }
@@ -267,6 +269,7 @@ const ButtonContainer = styled.div`
   padding-top: 34px;
   padding-bottom: 39px;
 `
+// ✅ 4. 버튼에도 cursor 스타일 추가
 const RegenerateBtn = styled.button`
   width: 125px;
   height: 43px;
@@ -276,6 +279,7 @@ const RegenerateBtn = styled.button`
   font-size: 16px;
   font-weight: 500;
   border: none;
+  cursor: pointer;
 `
 const ShareBtn = styled.button`
   width: 125px;
@@ -286,4 +290,5 @@ const ShareBtn = styled.button`
   font-size: 16px;
   font-weight: 500;
   border: none;
+  cursor: pointer;
 `
