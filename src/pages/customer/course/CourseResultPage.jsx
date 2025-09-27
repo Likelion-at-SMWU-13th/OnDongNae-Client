@@ -14,9 +14,7 @@ const CourseResultPage = () => {
 
   // state 구조분해
   const { id = '', title = '', description = '', recommendedCourseStores = [] } = state ?? {}
-
-  const origin = import.meta.env.VITE_API_URL ?? window.location.origin
-  const shareUrl = `${origin}/courses/${id}`
+  const shareUrl = `https://gorugoru.vercel.app/user/course/detail/${id}`
   const handleShare = async () => {
     if (!id) {
       alert(t('course.shareUnavailable') || '공유할 코스 정보를 찾을 수 없습니다.')
