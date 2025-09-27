@@ -60,7 +60,7 @@ const OnboardingPage5 = () => {
           <Highlight>GoruGoru!</Highlight>
         </Title>
 
-        <Img src={koru4} alt='logo' />
+        <Img src={koru4} alt='logo' loading='eager' decoding='async' fetchpriority='high' />
       </Main>
       <Footer currentStep={4} totalSteps={5} onNext={handleNext} />
     </Container>

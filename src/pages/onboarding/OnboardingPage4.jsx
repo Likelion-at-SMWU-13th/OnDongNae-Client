@@ -7,7 +7,7 @@ import styled, { keyframes } from 'styled-components'
 import Header from '@/components/onboarding/Header'
 import Footer from '@/components/onboarding/Footer'
 import koru3 from '@/assets/img-koru3.svg'
-import koru4 from '@/assets/img-koru3.svg'
+import koru4 from '@/assets/img-koru4.svg'
 
 const fadeIn = keyframes`
   from {

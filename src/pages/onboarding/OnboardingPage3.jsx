@@ -76,7 +76,7 @@ const OnboardingPage3 = () => {
             {t('onboarding3.content7')}
           </Content>
         </ContentContainer>
-        <Img src={koru2} alt='logo' />
+        <Img src={koru2} alt='logo' loading='eager' decoding='async' fetchpriority='high' />
       </Main>
       <Footer currentStep={2} totalSteps={5} onNext={handleNext} />
     </Container>
