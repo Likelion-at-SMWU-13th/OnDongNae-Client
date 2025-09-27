@@ -1,20 +1,45 @@
-// CourseResultPage.jsx
 import styled from 'styled-components'
+import { useState, useEffect } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+
 import Header from '@/components/common/Header'
 import DoubleTitle from '@/components/common/DoubleTitle'
-import * as C from '@/styles/common/CustomerBottomNav.styles'
-import { useTranslation } from 'react-i18next'
-import { useLocation, useNavigate } from 'react-router-dom'
 import CustomerBottomNav from '@/components/common/CustomerBottomNav'
+import * as C from '@/styles/common/CustomerBottomNav.styles'
 
 const CourseResultPage = () => {
   const { t } = useTranslation()
-  const { state } = useLocation()
   const navigate = useNavigate()
+  const { courseId } = useParams() // URL 파라미터에서 courseId 추출
+  const { state: initialState } = useLocation() // state는 초기 데이터로만 활용
 
-  // state 구조분해
-  const { id = '', title = '', description = '', recommendedCourseStores = [] } = state ?? {}
+  // 컴포넌트 내부에서 사용할 상태(state) 선언
+  const [courseData, setCourseData] = useState(initialState)
+  const [isLoading, setIsLoading] = useState(!initialState)
+
+  useEffect(() => {
+    // state가 없이 페이지에 진입한 경우 (새로고침, 직접 접속) 데이터를 불러옴
+    if (!initialState && courseId) {
+      const fetchCourseData = async () => {
+        try {
+          setIsLoading(true)
+          console.log(`'${courseId}'로 코스 데이터를 불러옵니다.`)
+        } catch (error) {
+          console.error('코스 데이터를 불러오는 데 실패했습니다.', error)
+          setCourseData(null) // 실패 시 null 처리
+        } finally {
+          setIsLoading(false)
+        }
+      }
+      fetchCourseData()
+    }
+  }, [initialState, courseId])
+
+  // courseData를 기반으로 변수 구조분해 할당 (안정성 강화)
+  const { id = '', title = '', description = '', recommendedCourseStores = [] } = courseData ?? {}
   const shareUrl = `https://gorugoru.vercel.app/user/course/detail/${id}`
+
   const handleShare = async () => {
     if (!id) {
       alert(t('course.shareUnavailable') || '공유할 코스 정보를 찾을 수 없습니다.')
@@ -41,25 +66,27 @@ const CourseResultPage = () => {
         console.error('URL 복사 실패: ', e)
       }
     } else {
+      // UX 개선: prompt 대신 복사할 수 있는 UI를 보여주는 것을 권장
       prompt(t('course.copyManually') || '이 링크를 복사하세요:', shareUrl)
     }
   }
 
-  // 데이터 없을 때
-  if (!state) {
+  const handleStoreMove = (storeId) => {
+    if (!storeId) return
+    navigate(`/user/map/store/${storeId}`)
+  }
+
+  // 데이터 로딩 중 또는 데이터가 없을 때의 UI
+  if (isLoading || !courseData) {
     return (
       <div>
         <Header title={t('bottomNav.course')} showImg={true} />
-        <Empty>{t('course.failComment')}</Empty>
+        <Empty>{isLoading ? '코스 정보를 불러오는 중입니다...' : t('course.failComment')}</Empty>
         <CustomerBottomNav />
       </div>
     )
   }
 
-  const handleStoreMove = (storeId) => {
-    if (!storeId) return // 안전 장치
-    navigate(`/user/map/store/${storeId}`)
-  }
   const stores = Array.isArray(recommendedCourseStores)
     ? [...recommendedCourseStores].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
     : []
@@ -75,8 +102,11 @@ const CourseResultPage = () => {
           <CourseWrapper>
             {stores.map((store, idx) => (
               <Row
-                key={store.order ?? `${store.name}-${idx}`}
+                key={store.id} // 안정적인 고유 id를 key로 사용
                 onClick={() => handleStoreMove(store.id)}
+                role='button' // 접근성 향상
+                tabIndex='0' // 접근성 향상
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleStoreMove(store.id)}
               >
                 <TimelineCell $isFirst={idx === 0} $isLast={idx === stores.length - 1}>
                   <Dot>{store.order}</Dot>
@@ -127,6 +157,8 @@ const Row = styled.div`
   grid-template-columns: 28px 1fr;
   column-gap: 12px;
   align-items: stretch;
+  cursor: pointer; // 클릭 가능함을 시각적으로 표시
+
   &:last-child {
     padding-bottom: 0;
   }
@@ -206,6 +238,7 @@ const Empty = styled.p`
   padding: 24px 16px;
   color: #777;
   font-size: 14px;
+  text-align: center;
 `
 const ButtonContainer = styled.div`
   display: flex;
@@ -225,6 +258,7 @@ const RegenerateBtn = styled.button`
   font-size: 16px;
   font-weight: 500;
   border: none;
+  cursor: pointer;
 `
 const ShareBtn = styled.button`
   width: 125px;
@@ -235,4 +269,5 @@ const ShareBtn = styled.button`
   font-size: 16px;
   font-weight: 500;
   border: none;
+  cursor: pointer;
 `
